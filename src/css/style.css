@@ -7,8 +7,12 @@ body {
 #content {
 	padding: 15px;
 	transition: margin-left 0.7s;
-	overflow: hidden;
+	margin-left: 250px;
 	width: 100%;
+}
+
+#menu {
+	width: 250px;
 }
 .slide a {
 	color: #000;

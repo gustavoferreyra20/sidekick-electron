@@ -9,13 +9,11 @@ if (process.env.NODE_ENV !== 'PRODUCTION'){
     })
 }
 
-let mainWindow;
-
 app.on('ready', () => {
-    mainwindow = new BrowserWindow({
+    mainWindow = new BrowserWindow({
         autoHideMenuBar: true
     })
-    mainwindow.loadURL(url.format({
+    mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, 'views/index.html'),
         protocol: 'file',
         slashes: true

@@ -11,7 +11,9 @@ if (process.env.NODE_ENV !== 'PRODUCTION'){
 
 app.on('ready', () => {
     mainWindow = new BrowserWindow({
-        autoHideMenuBar: true
+        autoHideMenuBar: true,
+        'minHeight': 500,
+        'minWidth': 700
     })
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, 'views/index.html'),

@@ -6,14 +6,6 @@ body {
 	background-color: #263238;
 	color: white;
 }
-#content {
-	padding: 15px;
-	margin-left: 95px;
-	width: 100%;
-}
-.navbar-custom{
-    background-color:black;
-}
 #menu {
 	width: 70px;
 	background-color: #00E575;
@@ -34,6 +26,9 @@ ul, li {
 
 li.right{
     float: right;
+}
+#content{
+	margin-left: 80px;
 }
 
 

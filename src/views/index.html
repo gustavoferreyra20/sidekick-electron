@@ -1,37 +1,60 @@
 <!DOCTYPE html>
 <html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+
 <head>
   <title>SideKick</title>
   <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
+<body ng-app="myApp">
 
-  <div id="content">
+ <div>
 
     <ul id="menu" class="navbar-nav mr-0">
       <li class="nav-item">
-        <a href="#" class="item"><img src="../img/home.png" alt="home" style="width:50px;height:50px;"></a>
+        <a href="#/!" class="item"><img src="../img/home.png" alt="home" style="width:50px;height:50px;"></a>
       </li> 
       <li class="nav-item">
-        <a href="#" class="item"><img src="../img/gamepad.png" alt="gamepad" style="width:50px;height:50px;"></a>
+        <a href="#!games" class="item"><img src="../img/gamepad.png" alt="gamepad" style="width:50px;height:50px;"></a>
       </li>
       <li class="nav-item">
-        <a href="#" class="item"><img src="../img/coments.png" alt="coments" style="width:50px;height:50px;"></a>
+        <a href="#!comments" class="item"><img src="../img/comments.png" alt="comments" style="width:50px;height:50px;"></a>
       </li> 
       <li class="nav-item">
-        <a href="#" class="item"><img src="../img/user.png" alt="user" style="width:50px;height:50px;"></a>
+        <a href="#!user" class="item"><img src="../img/user.png" alt="user" style="width:50px;height:50px;"></a>
       </li>
       <li class="nav-item">
-        <a href="#" class="item"><img src="../img/config.png" alt="config" style="width:50px;height:50px;"></a>
+        <a href="#!config" class="item"><img src="../img/config.png" alt="config" style="width:50px;height:50px;"></a>
       </li>   
     </ul>
-
-
-    <h1>Content</h1>
-
   </div>
 
+  <div id="content" ng-view></div>
+
+  <script>
+    var app = angular.module("myApp", ["ngRoute"]);
+    app.config(function($routeProvider) {
+        $routeProvider
+        .when("/", {
+            templateUrl : "section/home.html"
+        })
+        .when("/games", {
+            templateUrl : "section/games.html"
+        })
+        .when("/comments", {
+            templateUrl : "section/comments.html"
+        })
+        .when("/user", {
+            templateUrl : "section/user.html"
+        })
+        .when("/config", {
+            templateUrl : "section/config.html"
+        });
+    });
+    </script>
+  
 </body>
 </html>

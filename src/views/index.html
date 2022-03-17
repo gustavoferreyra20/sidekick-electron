@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+<html ng-app="myApp">
 
 <head>
   <title>SideKick</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>510
   <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+  <script src="../script.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="../css/style.css">
 </head>
-<body ng-app="myApp">
-
+<body>
+<script src="../app.js"></script>
  <div>
 
     <ul id="menu" class="navbar-nav mr-0">
@@ -31,30 +32,8 @@
       </li>   
     </ul>
   </div>
-
+  
   <div id="content" ng-view></div>
-
-  <script>
-    var app = angular.module("myApp", ["ngRoute"]);
-    app.config(function($routeProvider) {
-        $routeProvider
-        .when("/", {
-            templateUrl : "section/home.html"
-        })
-        .when("/games", {
-            templateUrl : "section/games.html"
-        })
-        .when("/comments", {
-            templateUrl : "section/comments.html"
-        })
-        .when("/user", {
-            templateUrl : "section/user.html"
-        })
-        .when("/config", {
-            templateUrl : "section/config.html"
-        });
-    });
-    </script>
   
 </body>
 </html>

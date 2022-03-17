@@ -1,4 +1,4 @@
-const {app, BrowserWindow} = require('electron');
+const {app, BrowserWindow, Menu} = require('electron');
 
 const url = require('url');
 const path = require('path');
@@ -11,7 +11,7 @@ if (process.env.NODE_ENV !== 'PRODUCTION'){
 
 app.on('ready', () => {
     mainWindow = new BrowserWindow({
-        autoHideMenuBar: true,
+        //autoHideMenuBar: true,
         'minHeight': 500,
         'minWidth': 700
     })
@@ -21,4 +21,23 @@ app.on('ready', () => {
         slashes: true
     }))
 
+    const mainMenu = Menu.buildFromTemplate(templateMenu);
+    Menu.setApplicationMenu(mainMenu);
+
 });
+
+const templateMenu = [
+    {
+        label: 'Devtools',
+        submenu: [
+            {
+                label: 'Show/Hide Dev Tools',
+                click(item, focusedWindow){
+                    focusedWindow.toggleDevTools();
+                }
+            },
+            {
+                role:'reload'
+            }
+        ]
+    }]

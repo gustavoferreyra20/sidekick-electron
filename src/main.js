@@ -3,7 +3,7 @@ const { BrowserWindow, Menu } = require("electron");
 let window;
 
 function hello() {
-    console.log('Hello World')
+    console.log('Hello World from main')
 }
 
 function createWindow() {

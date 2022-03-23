@@ -12,6 +12,7 @@
   "dependencies": {
     "electron": "^17.1.2",
     "electron-reload": "^2.0.0-alpha.1",
+    "mysql": "^2.18.1",
     "promise-mysql": "^5.1.0"
   }
 }

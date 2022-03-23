@@ -1,16 +1,22 @@
+var { ipcRenderer } = require('electron');
 var testingdb = document.getElementById('testingdb')
 
-/*
-const { remote } = require('electron')
-const main = remote.require('../main')
+var testContent = document.getElementById('test')
 
-main.hello()
+testingdb.addEventListener('submit', async (e) => {
+    try {
+        e.preventDefault();
+    
+        const test = {
+          content: testContent.value
+        };
+    
+        await ipcRenderer.send('createTest-action', test);;
 
-*/
-console.log("Hello World")
-testingdb.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    console.log("Hello World from buttom")
+      } catch (error) {
+        console.log(error);
+      }
 })
+
+
 

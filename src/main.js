@@ -1,12 +1,26 @@
-const { BrowserWindow, Menu } = require("electron");
+const { BrowserWindow, ipcMain, Menu } = require("electron");
+const { getConnection } = require("./database");
 
 let window;
 
-function hello() {
-    console.log('Hello World from main')
-}
+const createTest = async (test) => {
+  try {
+    const conn = await getConnection();
+    await conn.query("INSERT INTO test SET ?", test);
+
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 
 function createWindow() {
+  
+    ipcMain.on('createTest-action', (event, arg) => {
+      createTest(arg);
+      //console.log(arg);
+    });
+
     window = new BrowserWindow({
       //autoHideMenuBar: true,
       'minHeight': 500,
@@ -14,9 +28,7 @@ function createWindow() {
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
-        enableRemoteModule: true,
       },
-  
     });
     
     const mainMenu = Menu.buildFromTemplate(templateMenu);
@@ -42,6 +54,6 @@ function createWindow() {
     }]
 
   module.exports = {
-    createWindow,
-    hello
+    createWindow
   };
+

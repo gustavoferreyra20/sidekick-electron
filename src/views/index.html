@@ -16,26 +16,46 @@
 
     <ul id="menu" class="navbar-nav mr-0">
       <li class="nav-item">
-        <a href="#/!" class="item"><img src="../img/home.png" alt="home" style="width:50px;height:50px;"></a>
+        <a href="#/!" class="item"><img src="../img/Home1.png" alt="home" style="width:50px;height:50px;"></a>
       </li> 
       <li class="nav-item">
-        <a href="#!games" class="item"><img src="../img/gamepad.png" alt="gamepad" style="width:50px;height:50px;"></a>
+        <a href="#!plays" class="item"><img src="../img/Plays3.png" alt="plays" style="width:50px;height:50px;"></a>
       </li>
       <li class="nav-item">
-        <a href="#!comments" class="item"><img src="../img/comments.png" alt="comments" style="width:50px;height:50px;"></a>
+        <a href="#!messages" class="item"><img src="../img/Messages2.png" alt="messages" style="width:50px;height:50px;"></a>
       </li> 
       <li class="nav-item">
-        <a href="#!user" class="item"><img src="../img/user.png" alt="user" style="width:50px;height:50px;"></a>
+        <a href="#!profile" class="item"><img src="../img/Profile.png" alt="profile" style="width:50px;height:50px;"></a>
       </li>
       <li class="nav-item">
-        <a href="#!config" class="item"><img src="../img/config.png" alt="config" style="width:50px;height:50px;"></a>
+        <a href="#!settings" class="item"><img src="../img/Settings4.png" alt="settings" style="width:50px;height:50px;"></a>
       </li>   
     </ul>
   </div>
   
   <div id="content" ng-view></div>
 
-</form>
+  <script>
+    var app = angular.module("myApp", ["ngRoute"]);
+    app.config(function($routeProvider) {
+        $routeProvider
+        .when("/", {
+            templateUrl : "section/home.html"
+        })
+        .when("/plays", {
+            templateUrl : "section/plays.html"
+        })
+        .when("/messages", {
+            templateUrl : "section/messages.html"
+        })
+        .when("/profile", {
+            templateUrl : "section/profile.html"
+        })
+        .when("/settings", {
+            templateUrl : "section/settings.html"
+        });
+    });
+    </script>
   
 </body>
 </html>

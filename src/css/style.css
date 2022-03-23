@@ -1,14 +1,24 @@
 @import url('https://fonts.googleapis.com/css?family=Alegreya+Sans:800');
 
+/*
+Paleta de colores:
+Gris oscuro: 	#3e3c3d
+Gris: 			#494649
+Gris claro: 	#535053
+Verde oscuro: 	#0eaa61
+Verde : 		#11d077
+Verde claro: 	#1ded8c
+*/
+
 body {
 	font-family: 'Alegreya Sans', sans-serif;
 	overflow-x: hidden;
-	background-color: #263238;
+	background-color: #494649;
 	color: white;
 }
 #menu {
 	width: 70px;
-	background-color: #00E575;
+	background-color: #3e3c3d;
 	position: fixed;
 	z-index: 1;
 	top: 0;

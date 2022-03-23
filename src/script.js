@@ -5,18 +5,21 @@ var app = angular.module("myApp", ["ngRoute"]);
             templateUrl : "section/home.html",
             controller: "homeCtrl"
         })
-        .when("/games", {
-            templateUrl : "section/games.html",
+        .when("/plays", {
+            templateUrl : "section/plays.html",
             controller: "gameCtrl"
         })
-        .when("/comments", {
-            templateUrl : "section/comments.html"
+        .when("/messages", {
+            templateUrl : "section/messages.html"
         })
-        .when("/user", {
-            templateUrl : "section/user.html"
+        .when("/profile", {
+            templateUrl : "section/profile.html"
         })
-        .when("/config", {
-            templateUrl : "section/config.html"
+        .when("/setings", {
+            templateUrl : "section/settings.html"
+        })
+        .when("/appearance", {
+            templateUrl : "section/appearance.html"
         });
     });
 

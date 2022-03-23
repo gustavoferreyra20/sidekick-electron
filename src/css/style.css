@@ -13,11 +13,12 @@ Verde claro: 	#1ded8c
 body {
 	font-family: 'Alegreya Sans', sans-serif;
 	overflow-x: hidden;
-	background-color: #494649;
+	background-color: #535053;
 	color: white;
+	margin-left: 40px;
 }
 #menu {
-	width: 70px;
+	width: 86px;
 	background-color: #3e3c3d;
 	position: fixed;
 	z-index: 1;
@@ -41,11 +42,19 @@ li.right{
 	margin-left: 80px;
 }
 
+#menu-secondary {
+	width: 162px;
+	background-color: #494649;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 86px;
+	bottom: 0;
+}
 
-
-
-
-
+#div-body-secondary{
+	margin-left: 140px;
+}
 
 
 

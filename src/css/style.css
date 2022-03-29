@@ -29,10 +29,27 @@ li.right{
 }
 #content{
 	margin-left: 80px;
+	margin-right: 10px;
 }
-
-
-
+.card{
+	background-color: black;
+	border-color: #00E575;
+}
+.card img{
+	background-color: white;
+}
+  .score.red {
+	color: red;
+  }
+  .score.orange {
+	color: orange;
+  }
+  
+  .score.green {
+	color: green;
+  }
+  
+  
 
 
 

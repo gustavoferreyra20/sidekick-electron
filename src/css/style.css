@@ -1,14 +1,24 @@
 @import url('https://fonts.googleapis.com/css?family=Alegreya+Sans:800');
 
+/* PALETA DE COLORES
+
+GRIS OSCURO		::	#3e3c3d
+GRIS			::	#494649
+GRIS CLARO		::	#535053
+VERDE OSCURO	::	#0eaa61
+VERDE			::	#11d077
+VERDE CLARO		::	#1ded8c
+*/
+
 body {
 	font-family: 'Alegreya Sans', sans-serif;
 	overflow-x: hidden;
-	background-color: #263238;
+	background-color: #494649;
 	color: white;
 }
 #menu {
 	width: 70px;
-	background-color: #00E575;
+	background-color: #535053;
 	position: fixed;
 	z-index: 1;
 	top: 0;
@@ -32,26 +42,57 @@ li.right{
 	margin-right: 10px;
 }
 .card{
-	background-color: black;
-	border-color: #00E575;
+	box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, .2);
+	background-color: #494649;
+	margin: 20px;
 }
+
+.card-plays{
+	background-color: #3e3c3d;
+	border-color: #1ded8c;
+	margin: 15px;
+}
+
 .card img{
 	background-color: white;
 }
-  .score.red {
+
+.score.red {
 	color: red;
   }
-  .score.orange {
+
+.score.orange {
 	color: orange;
   }
   
-  .score.green {
+.score.green {
 	color: green;
   }
   
-  
+.hr-main{
+	border: 0; 
+	height: 1px;
+	background: #1ded8c;
+	margin-left: 50px;
+	margin-right: 50px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 
+}
 
+.card-deck{
+	margin: 20px;
+
+}
+
+.vl {
+	border-left: 6px solid #1ded8c;
+	height: 500px;
+	position: absolute;
+	left: 50%;
+	margin-left: -3px;
+	top: 0;
+  }
 
 
 

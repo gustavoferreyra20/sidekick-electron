@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 07-04-2022 a las 22:40:42
+-- Tiempo de generación: 13-04-2022 a las 01:16:05
 -- Versión del servidor: 10.4.10-MariaDB
 -- Versión de PHP: 7.3.12
 
@@ -188,10 +188,18 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
+  `password` varchar(100) NOT NULL,
   `descripcion` varchar(280) DEFAULT NULL,
-  `img` varchar(45) NOT NULL,
+  `img` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id_usuario`, `nombre`, `email`, `password`, `descripcion`, `img`) VALUES
+(1, 'user1', 'user1@gmail.com', '12345', NULL, NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

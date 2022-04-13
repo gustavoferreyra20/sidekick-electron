@@ -1,7 +1,7 @@
-const { createWindow } = require("./main");
+const { loginWindow } = require("./main");
 const { app } = require("electron");
 
 require('electron-reload')(__dirname);
 
 app.allowRendererProcessReuse = true;
-app.whenReady().then(createWindow);
+app.whenReady().then(loginWindow);

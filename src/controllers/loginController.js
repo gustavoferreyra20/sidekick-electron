@@ -1,4 +1,5 @@
-const { ipcRenderer } = require('electron')
+const { ipcRenderer }= require("electron");
+const { getConnection } = require("../../database");
 
 let btnlogin;
 let email; 
@@ -13,6 +14,28 @@ window.onload = function() {
     
    const obj = {email:email.value, password:password.value }
 
-    ipcRenderer.invoke("login", obj)
+   validatelogin(obj)
   }
 }
+
+const validatelogin = async (obj) => {
+  try {
+    const conn = await getConnection();
+    const { email, password } = obj 
+    const sql = "SELECT * FROM usuario WHERE email=? AND password=?"
+    await conn.query(sql, [email, password], (error, results, fields) => {
+      if(error){ console.log(error);}
+  
+      if(results.length > 0){
+        ipcRenderer.invoke("login", obj)
+         
+       }else{
+         console.log("Datos incorrectos")
+       }
+      
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+ 

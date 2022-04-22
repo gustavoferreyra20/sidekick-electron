@@ -7,37 +7,72 @@
   <link rel="stylesheet" href="../../css/style.css">
   <script src="../../controllers/loginController.js"></script>
 </head>
-<body id="loginPage">
+<body>
 
     <div class="row justify-content-center">
         <div class="col-12 col-lg-4">
             <div class="card p-3 bloque">
-                <div class="card-body ">
-                <form action="" method="">
-                        <h1 class="text-center pb-4" id="white">Iniciar sesión</h1>
+                <div class="card-body page active" id="loginDiv">
+                <form >
+                    <h1 class="text-center pb-4">Iniciar sesión</h1>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" name="email" id="email"
+                            placeholder="Ingrese su Email" value="" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" class="form-control" name="password" id="password"
+                            placeholder="**********" value="" required>
+                    </div>
+                    <button id="login" class="btn btn-block btn-primary" >Iniciar sesión</button>
+                    </form>
+                    <form>
+                    <br>
+                    <h2 class="text-center pb-4">Todavia no te registraste?</h2>
+                    <button class="btn btn-block btn-primary" href="registrationDiv" onclick="toggle(this);" >Registrarse</button>
+                    </form>
+                </div>
+                <div class="card-body page" id="registrationDiv" > 
+                        <h1 class="text-center pb-4">Registrar usuario</h1>
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" name="nombre" id="nombre"
+                                placeholder="Ingrese su nombre" value="" required>
+                        </div>
                         
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="text" class="form-control" name="email" id="email"
-                                placeholder="Ingrese su Email" value="" required>
+                                placeholder="Ingrese su email" value="" required>
                         </div>
-    
+
                         <div class="form-group">
-                            <label for="password">Contraseña</label>
+                        <label for="password">Contraseña</label>
                             <input type="password" class="form-control" name="password" id="password"
                                 placeholder="**********" value="" required>
+                                <p id="imagenHelp" class="form-text text-muted">Su contraseña debe contener <b class="text-danger">8</b> caracteres como mímimo.</p>
                         </div>
-                        <button id="login" class="btn btn-block btn-primary">Iniciar sesión</button>
-                        </form>
-                        <form action="index.php?seccion=login&registrarse=true" method="">
+
+                        <div class="form-group">
+                            <label for="password">Repetir Contraseña</label>
+                                <input type="password" class="form-control" name="passwordRepeat" id="passwordRepeat"
+                                    placeholder="**********" value="" required>
+                            </div>
+
+                        <button id="registration" class="btn btn-block btn-primary" >Registrarse</button>
+                    </form>
+                    <form>
                         <br>
-                        <h2 class="text-center pb-4" id="white">Todavia no te registraste?</h2>
-                        <button id="registration" class="btn btn-block btn-primary">Registrarse</button>
+                        <h2 class="text-center pb-4">Ya tienes una cuenta?</h2>
+                        <button class="btn btn-block btn-primary" href="loginDiv" onclick="toggle(this);" >Iniciar sesión</button>
                         </form>
                 </div>
             </div>      
         </div>
     </div>
-  
+    
 </body>
 </html>

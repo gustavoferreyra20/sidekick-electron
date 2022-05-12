@@ -18,7 +18,7 @@ body {
 }
 #menu {
 	width: 70px;
-	background-color: #535053;
+	background-color: #3e3c3d;
 	position: fixed;
 	z-index: 1;
 	top: 0;
@@ -45,16 +45,50 @@ li.right{
 	box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, .2);
 	background-color: #494649;
 	margin: 20px;
+	margin-bottom: 0px !important;
+
 }
 
 .card-plays{
-	background-color: #3e3c3d;
-	border-color: #1ded8c;
-	margin: 15px;
+	background-color: #535053;
+	margin-top: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-bottom: 0px;
+	min-width: 500px;
+	min-height: 180px;
+	max-width: 500px;
+	max-height: 180px;
 }
 
-.card img{
+.card-plays-footer{
+margin-top: 10px;
+max-height: 30px;
+min-height: 30px;
+}
+
+.text-plays-card-footer{
+	margin: 2px  !important; 
+	text-align: left;
+	font-size: 14px;
+	position: absolute;
+	bottom: 1px;
+	}
+
+.card-plays-img{
+	margin: 10px;
+	width: auto;
+	height: auto;
+	position: absolute;
+	top: 0px;
+}
+
+.card-img{
 	background-color: white;
+}
+
+.card-text-plays{
+	height: 70px;
 }
 
 .score.red {
@@ -94,13 +128,39 @@ li.right{
 	top: 0;
   }
 
+  .backg-primary {
+	background-color: #494649;
+  }
 
+.liveplay-img{
+	height: 128px;
+	width: 128px;
+	margin: 10px;
+	position: absolute;
+}
 
+.onlinefriends-img{
+	height: 128px;
+	width: 128px;
+	margin: 10px;
+	position: absolute;
+}
 
+.card-friends{
+	background-color: #535053;
+}
 
-
-
-
+.card-friends{
+	background-color: #535053;
+	margin-top: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-bottom: 0px;
+	min-width: 500px;
+	min-height: 180px;
+	max-width: 500px;
+	max-height: 180px;
+}
 
 
 

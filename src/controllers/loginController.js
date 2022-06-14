@@ -1,6 +1,6 @@
 const { ipcRenderer }= require("electron");
 const { getConnection } = require("../../database");
-const bcrypt = require('bcrypt');
+const bcryptjs = require('bcryptjs');
 
 let nombre;
 let email; 
@@ -28,8 +28,7 @@ window.onload = function() {
     email = document.getElementById("registrationForm").elements["email"]
     password = document.getElementById("registrationForm").elements["password"]
     const obj = {nombre:nombre.value, email:email.value, password:password.value }
- 
-    registerUser(obj).then(validatelogin(obj))
+    registerUser(obj)
   });
 
   btnToogle.onclick = function(e){
@@ -42,8 +41,9 @@ window.onload = function() {
 
 async function registerUser(obj){
     try {
-        if(obj.password.length > 8){
-          saveUser(obj)
+        if(obj.password.length >= 8){
+          await saveUser(obj)
+          location.reload()
         } else {
           console.log("Contraseña demasiado corta")
         }
@@ -60,8 +60,8 @@ function toggleDisplay(className, displayState){
 }
 
 async function saveUser(obj){
-    const salt = await bcrypt.genSalt();
-    password = await bcrypt.hash(obj.password, salt)
+    const salt = await bcryptjs.genSalt();
+    password = await bcryptjs.hash(obj.password, salt)
     const conn = await getConnection();
     const sql = "INSERT INTO usuarios (nombre, email, password) values ('" + obj.nombre + "', '" + obj.email + "', '" + password + "')";
     await conn.query(sql);
@@ -75,7 +75,7 @@ async function validatelogin(obj){
       if(error){ console.log(error);}
   
       if(result.length > 0){
-        if(bcrypt.compare(obj.password, result[0].password)){
+        if(bcryptjs.compare(obj.password, result[0].password)){
           ipcRenderer.invoke("login", obj)
         }else{
           console.log("Datos incorrectos")

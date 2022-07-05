@@ -1,6 +1,7 @@
 const { ipcRenderer }= require("electron");
 const { getConnection } = require("../../database");
 const bcryptjs = require('bcryptjs');
+var popup = require('popups');
 
 let nombre;
 let email; 
@@ -22,13 +23,18 @@ window.onload = function() {
     validatelogin(obj)
   });
 
-  registrationForm.addEventListener('submit', () => {
+  registrationForm.addEventListener('submit', async () => {
     event.preventDefault()
     nombre = document.getElementById("registrationForm").elements["nombre"]
     email = document.getElementById("registrationForm").elements["email"]
     password = document.getElementById("registrationForm").elements["password"]
     const obj = {nombre:nombre.value, email:email.value, password:password.value }
-    registerUser(obj)
+    if(obj.password.length >= 8){
+      await saveUser(obj)
+      location.reload()
+    } else {
+      console.log("Contraseña demasiado corta")
+    }
   });
 
   btnToogle.onclick = function(e){
@@ -38,19 +44,6 @@ window.onload = function() {
         document.getElementById(href).style.display = 'block';    
    }
 }
-
-async function registerUser(obj){
-    try {
-        if(obj.password.length >= 8){
-          await saveUser(obj)
-          location.reload()
-        } else {
-          console.log("Contraseña demasiado corta")
-        }
-    } catch (error) {
-      console.log(error);
-    }
-};
  
 function toggleDisplay(className, displayState){
   var elements = document.getElementsByClassName(className)
@@ -71,19 +64,21 @@ async function validatelogin(obj){
   try {
     const conn = await getConnection();
     const sql = "SELECT password FROM usuarios WHERE email=?"
+    
     await conn.query(sql, [obj.email], (error, result) => {
+     
       if(error){ console.log(error);}
   
-      if(result.length > 0){
-        if(bcryptjs.compare(obj.password, result[0].password)){
-          ipcRenderer.invoke("login", obj)
-        }else{
-          console.log("Datos incorrectos")
-        }
-         
-       }else{
-         console.log("Datos incorrectos")
-       }
+      if( result.length == 0 || ! (bcryptjs.compareSync(obj.password, result[0].password) )){
+        popup.window({
+          mode: "alert",
+          additionalButtonHolderClass: 'form-group',
+          additionalButtonOkClass: "btn btn-block btn-primary",
+          content: "<div class= form-group>Usuario y/o contraseña incorrectas</div>"
+      });
+      }else{
+        ipcRenderer.invoke("login", obj)
+      }
       
     });
   } catch (error) {

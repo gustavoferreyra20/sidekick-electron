@@ -1,5 +1,5 @@
 const { app, BrowserWindow, ipcMain, Menu } = require("electron");
-
+require('dotenv').config();
 require('electron-reload')(__dirname);
 
 let window;

@@ -29,11 +29,13 @@ window.onload = function() {
     email = document.getElementById("registrationForm").elements["email"]
     password = document.getElementById("registrationForm").elements["password"]
     const obj = {nombre:nombre.value, email:email.value, password:password.value }
-    if(obj.password.length >= 8){
+    if(await checkEmail(obj.email) > 0){
+      alertPopup("Usuario existente")
+    }else if(obj.password.length < 8){
+      alertPopup("Contraseña demasiado corta")
+    } else {
       await saveUser(obj)
       location.reload()
-    } else {
-      console.log("Contraseña demasiado corta")
     }
   });
 
@@ -65,17 +67,12 @@ async function validatelogin(obj){
     const conn = await getConnection();
     const sql = "SELECT password FROM usuarios WHERE email=?"
     
-    await conn.query(sql, [obj.email], (error, result) => {
+    conn.query(sql, [obj.email], (error, result) => {
      
       if(error){ console.log(error);}
   
       if( result.length == 0 || ! (bcryptjs.compareSync(obj.password, result[0].password) )){
-        popup.window({
-          mode: "alert",
-          additionalButtonHolderClass: 'form-group',
-          additionalButtonOkClass: "btn btn-block btn-primary",
-          content: "<div class= form-group>Usuario y/o contraseña incorrectas</div>"
-      });
+        alertPopup("Usuario y/o contraseña incorrectas")
       }else{
         ipcRenderer.invoke("login", obj)
       }
@@ -85,3 +82,24 @@ async function validatelogin(obj){
     console.log(error);
   }
 };
+
+async function checkEmail(email){
+  const conn = await getConnection();
+  const sql = "SELECT * FROM usuarios where email = '" + email +"' ";
+  return new Promise((resolve, reject) => {
+    conn.query(sql, [email], (error, result) => {
+      if(error){ console.log(error);}
+      resolve(result.length)
+      
+    });
+  })
+}
+
+function alertPopup(msg){
+  popup.window({
+    mode: "alert",
+    additionalButtonHolderClass: 'form-group',
+    additionalButtonOkClass: "btn btn-block btn-primary",
+    content: "<div class= form-group>" + msg + "</div>"
+});
+}

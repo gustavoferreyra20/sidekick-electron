@@ -1,10 +1,10 @@
-const { app, BrowserWindow, ipcMain, Menu } = require("electron");
+const { app, BrowserWindow, ipcMain, Menu, session } = require("electron");
 require('dotenv').config();
 require('electron-reload')(__dirname);
 
 let window;
 
-function createWindow(obj) {
+function mainWindow(args) {
 
     window = new BrowserWindow({
       //autoHideMenuBar: true,
@@ -15,11 +15,31 @@ function createWindow(obj) {
         contextIsolation: false,
       },
     });
-    
+
     const mainMenu = Menu.buildFromTemplate(templateMenu);
+
     Menu.setApplicationMenu(mainMenu);
 
+    const cookie = { 
+      url: 'http://localhost/',
+      name: 'jwt',
+      value: args
+    }
+     
+  session.defaultSession.cookies.set(cookie)
+    .then(() => {
+      // success
+    }, (error) => {
+      console.error(error)
+    })
+    session.defaultSession.cookies.get({})
+    .then((cookies) => {
+      console.log(cookies)
+    }).catch((error) => {
+      console.log(error)
+    })
     window.loadFile("views/index.html");
+
   }
   
   function loginWindow () {
@@ -30,12 +50,14 @@ function createWindow(obj) {
      webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
+      partition: 'persist:MyAppSomethingUnique'
     },
    })
-  
+
    const mainMenu = Menu.buildFromTemplate(templateMenu);
    Menu.setApplicationMenu(mainMenu);
    winlogin.loadFile('views/section/login.html')
+
   }
   
   const templateMenu = [
@@ -54,8 +76,9 @@ function createWindow(obj) {
         ]
     }]
 
-  ipcMain.handle('login', (event, obj) => {
-    createWindow(obj)
+  ipcMain.handle('login', (event, args) => {
+    
+    mainWindow(args)
     winlogin.close()
   });
 

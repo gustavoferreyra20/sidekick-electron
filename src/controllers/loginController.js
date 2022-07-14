@@ -1,9 +1,9 @@
 const { ipcRenderer }= require("electron");
 const { getConnection } = require("../../database");
 const bcryptjs = require('bcryptjs');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 var popup = require('popups');
-console.log(process.env.DB_HOST)
+
 let nombre;
 let email; 
 let password;
@@ -68,18 +68,24 @@ async function validatelogin(obj){
     const conn = await getConnection();
     const sql = "SELECT * FROM usuarios WHERE email=?"
     
-    conn.query(sql, [obj.email], (error, result) => {
+    conn.query(sql, [obj.email], (error, results) => {
      
       if(error){ console.log(error);}
   
-      if( result[0].password.length == 0 || ! (bcryptjs.compareSync(obj.password, result[0].password) )){
+      if( results[0].password.length == 0 || ! (bcryptjs.compareSync(obj.password, results[0].password) )){
         alertPopup("Usuario y/o contraseña incorrectas")
       }else{
-        const id = result[0].id
+        const id = results[0].id
         const token = jwt.sign({id:id}, process.env.JWT_SECRET, {
           expiresIn: process.env.JWT_TIME_EXPIRES
         })
-        ipcRenderer.invoke("login")
+
+        const cookiesoptions = {
+        expires: new Date (Date.now () +process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
+        httponly: true
+        }
+        
+        ipcRenderer.invoke("login", token)
       }
       
     });
@@ -92,9 +98,9 @@ async function checkEmail(email){
   const conn = await getConnection();
   const sql = "SELECT * FROM usuarios where email = '" + email +"' ";
   return new Promise((resolve, reject) => {
-    conn.query(sql, [email], (error, result) => {
+    conn.query(sql, [email], (error, results) => {
       if(error){ console.log(error);}
-      resolve(result.length)
+      resolve(results.length)
       
     });
   })
@@ -108,15 +114,3 @@ function alertPopup(msg){
     content: "<div class= form-group>" + msg + "</div>"
 });
 }
-
-/*
-      if( result.length == 0 || ! (bcryptjs.compareSync(obj.password, result[0].password) )){
-        alertPopup("Usuario y/o contraseña incorrectas")
-      }else{
-        const id = result[0].id
-        const token = jwt.sign({id:id}, process.env.JWT_SECRET, {
-          expiresIn: process.env.JWT_TIME_EXPIRES
-        })
-        console.log("Token: " +token+" para el usuario: "+obj.email)
-        ipcRenderer.invoke("login", obj)
-      }*/

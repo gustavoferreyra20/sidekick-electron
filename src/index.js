@@ -20,7 +20,7 @@ function mainWindow(args) {
 
     Menu.setApplicationMenu(mainMenu);
 
-    creatCookie(args)
+    createCookie(args)
 
     session.defaultSession.cookies.get({name:  'jwt'})
     .then((cookies) => {
@@ -39,8 +39,7 @@ function mainWindow(args) {
      resizable: false,*/
      webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false,
-      partition: 'persist:MyAppSomethingUnique'
+      contextIsolation: false
     },
    })
 
@@ -72,7 +71,7 @@ function mainWindow(args) {
     winlogin.close()
   });
 
-  function creatCookie(args){
+  function createCookie(args){
     const cookie = { 
       url: 'http://localhost/',
       name: 'jwt',

@@ -32,8 +32,7 @@ window.onload = function() {
     }else if(obj.password.length < 8){
       alertPopup("Contraseña demasiado corta")
     } else {
-      await authController.saveUser(obj)
-      location.reload()
+      await authController.saveUser(obj).then(saveUserPopup("Usuario registrado con exito", function (){ (location.reload())}))      
     }
   });
 
@@ -58,5 +57,20 @@ function alertPopup(msg){
     additionalButtonHolderClass: 'form-group',
     additionalButtonOkClass: "btn btn-block btn-primary",
     content: "<div class= form-group>" + msg + "</div>"
+});
+}
+
+function saveUserPopup(msg, action){
+  popup.window({
+    mode: "alert",
+    additionalButtonHolderClass: 'form-group',
+    additionalButtonOkClass: "btn btn-block btn-primary",
+    content: "<div class= form-group>" + msg + "</div>",
+    onSubmit: function(){
+      action() 
+    },
+    onClose: function(){
+      action() 
+    }
 });
 }

@@ -13,7 +13,7 @@ exports.login = async function (obj){
          
           if(error){ console.log(error);}
       
-          if( results[0].password.length == 0 || ! (bcryptjs.compareSync(obj.password, results[0].password) )){
+          if( results.length == 0 || ! (bcryptjs.compareSync(obj.password, results[0].password) )){
             alertPopup("Usuario y/o contraseña incorrectas")
           }else{
             const id = results[0].id

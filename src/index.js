@@ -20,19 +20,9 @@ function mainWindow(args) {
 
     Menu.setApplicationMenu(mainMenu);
 
-    const cookie = { 
-      url: 'http://localhost/',
-      name: 'jwt',
-      value: args
-    }
-     
-  session.defaultSession.cookies.set(cookie)
-    .then(() => {
-      // success
-    }, (error) => {
-      console.error(error)
-    })
-    session.defaultSession.cookies.get({})
+    creatCookie(args)
+
+    session.defaultSession.cookies.get({name:  'jwt'})
     .then((cookies) => {
       console.log(cookies)
     }).catch((error) => {
@@ -82,5 +72,20 @@ function mainWindow(args) {
     winlogin.close()
   });
 
+  function creatCookie(args){
+    const cookie = { 
+      url: 'http://localhost/',
+      name: 'jwt',
+      value: args,
+      expirationDate: 99999999999999
+    }
+     
+  session.defaultSession.cookies.set(cookie)
+    .then(() => {
+      // success
+    }, (error) => {
+      console.error(error)
+    })
+  }
 
 app.whenReady().then(loginWindow);

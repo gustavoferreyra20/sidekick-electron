@@ -1,7 +1,4 @@
-const { ipcRenderer }= require("electron");
-const { getConnection } = require("../../database");
-const bcryptjs = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const authController = require('../../controllers/authController');
 var popup = require('popups');
 
 let nombre;
@@ -21,7 +18,7 @@ window.onload = function() {
     email = document.getElementById("loginForm").elements["email"]
     password = document.getElementById("loginForm").elements["password"]
     const obj = {email:email.value, password:password.value }
-    validatelogin(obj)
+    authController.login(obj)
   });
 
   registrationForm.addEventListener('submit', async () => {
@@ -30,12 +27,12 @@ window.onload = function() {
     email = document.getElementById("registrationForm").elements["email"]
     password = document.getElementById("registrationForm").elements["password"]
     const obj = {nombre:nombre.value, email:email.value, password:password.value }
-    if(await checkEmail(obj.email) > 0){
+    if(await authController.checkEmail(obj.email) > 0){
       alertPopup("Usuario existente")
     }else if(obj.password.length < 8){
       alertPopup("Contraseña demasiado corta")
     } else {
-      await saveUser(obj)
+      await authController.saveUser(obj)
       location.reload()
     }
   });
@@ -53,57 +50,6 @@ function toggleDisplay(className, displayState){
   for (var i = 0; i < elements.length; i++){
       elements[i].style.display = displayState;
   }
-}
-
-async function saveUser(obj){
-    const salt = await bcryptjs.genSalt();
-    password = await bcryptjs.hash(obj.password, salt)
-    const conn = await getConnection();
-    const sql = "INSERT INTO usuarios (nombre, email, password) values ('" + obj.nombre + "', '" + obj.email + "', '" + password + "')";
-    await conn.query(sql);
-}
-
-async function validatelogin(obj){
-  try {
-    const conn = await getConnection();
-    const sql = "SELECT * FROM usuarios WHERE email=?"
-    
-    conn.query(sql, [obj.email], (error, results) => {
-     
-      if(error){ console.log(error);}
-  
-      if( results[0].password.length == 0 || ! (bcryptjs.compareSync(obj.password, results[0].password) )){
-        alertPopup("Usuario y/o contraseña incorrectas")
-      }else{
-        const id = results[0].id
-        const token = jwt.sign({id:id}, process.env.JWT_SECRET, {
-          expiresIn: process.env.JWT_TIME_EXPIRES
-        })
-
-        const cookiesoptions = {
-        expires: new Date (Date.now () +process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
-        httponly: true
-        }
-        
-        ipcRenderer.invoke("login", token)
-      }
-      
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-async function checkEmail(email){
-  const conn = await getConnection();
-  const sql = "SELECT * FROM usuarios where email = '" + email +"' ";
-  return new Promise((resolve, reject) => {
-    conn.query(sql, [email], (error, results) => {
-      if(error){ console.log(error);}
-      resolve(results.length)
-      
-    });
-  })
 }
 
 function alertPopup(msg){

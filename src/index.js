@@ -1,10 +1,11 @@
 const { app, BrowserWindow, ipcMain, Menu, session } = require("electron");
+const authController = require('./controllers/authController');
 require('dotenv').config();
 require('electron-reload')(__dirname);
 
 let window;
 
-function mainWindow(args) {
+function mainWindow() {
 
     window = new BrowserWindow({
       //autoHideMenuBar: true,
@@ -19,15 +20,6 @@ function mainWindow(args) {
     const mainMenu = Menu.buildFromTemplate(templateMenu);
 
     Menu.setApplicationMenu(mainMenu);
-
-    createCookie(args)
-
-    session.defaultSession.cookies.get({name:  'jwt'})
-    .then((cookies) => {
-      console.log(cookies)
-    }).catch((error) => {
-      console.log(error)
-    })
     window.loadFile("views/index.html");
 
   }
@@ -48,6 +40,28 @@ function mainWindow(args) {
    winlogin.loadFile('views/section/login.html')
 
   }
+
+  async function loadingWindow () {
+    var cookie = await getCookie('jwt')
+    winload = new BrowserWindow({
+/*      width: 400,
+     height: 630,
+     resizable: false, */
+     webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false
+    },
+   })
+
+   const mainMenu = Menu.buildFromTemplate(templateMenu);
+   Menu.setApplicationMenu(mainMenu);
+   winload.loadFile('views/section/loading.html')
+
+   winload.webContents.on('did-finish-load', () => {
+    winload.webContents.send('cookie', cookie)
+  })
+
+  }
   
   const templateMenu = [
     {
@@ -66,9 +80,31 @@ function mainWindow(args) {
     }]
 
   ipcMain.handle('login', (event, args) => {
-    
-    mainWindow(args)
+    createCookie(args)
+    process.env.JWT_COOKIE = args
+    mainWindow()
     winlogin.close()
+  });
+
+  ipcMain.handle('noCookie', (event, args) => {
+    loginWindow()
+    winload.close()
+  });
+
+  ipcMain.handle('authUser', (event, args) => { 
+    process.env.JWT_COOKIE = args
+    mainWindow()
+    winload.close()
+  });
+
+  ipcMain.handle('logout', (event, args) => {  
+    session.defaultSession.cookies.remove('http://localhost/', 'jwt')
+    .then(() => {
+      loginWindow()
+      window.close()
+    }, (error) => {
+      console.error(error)
+    })
   });
 
   function createCookie(args){
@@ -87,4 +123,15 @@ function mainWindow(args) {
     })
   }
 
-app.whenReady().then(loginWindow);
+  function getCookie(cookieName){
+    return new Promise((resolve, reject) => {
+      session.defaultSession.cookies.get({name:  'jwt'})
+    .then((cookies) => {
+      resolve( cookies)
+    }).catch((error) => {
+      console.log(error)
+    })
+    })
+    
+  }
+app.whenReady().then(loadingWindow);

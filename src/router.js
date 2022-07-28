@@ -1,3 +1,5 @@
+const authController = require('../controllers/authController');
+
 var app = angular.module("myApp", ["ngRoute"]);
     app.config(function($routeProvider) {
         $routeProvider
@@ -16,7 +18,11 @@ var app = angular.module("myApp", ["ngRoute"]);
             templateUrl : "section/user.html"
         })
         .when("/config", {
-            templateUrl : "section/config.html"
+            templateUrl : "section/config.html",
+            controller: "configCtrl"
+        })
+        .when("/loading", {
+            templateUrl : "section/loadng.html"
         });
     });
 
@@ -29,6 +35,12 @@ var app = angular.module("myApp", ["ngRoute"]);
     app.controller('gameCtrl', ['$scope', function($scope) {
 
         dynamicallyLoadScript("../Controllers/gameController.js")
+    
+    }]);
+
+    app.controller('configCtrl', ['$scope', function($scope) {
+
+        dynamicallyLoadScript("../Controllers/configController.js")
     
     }]);
 

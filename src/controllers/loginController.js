@@ -12,7 +12,6 @@ window.onload = function() {
   loginForm = document.getElementById('loginForm');
   registrationForm = document.getElementById("registrationForm")
   btnToogle = document.getElementById("toggle")
-
   loginForm.addEventListener('submit', () => {
     event.preventDefault()
     email = document.getElementById("loginForm").elements["email"]

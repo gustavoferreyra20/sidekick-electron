@@ -11,6 +11,10 @@ var app = angular.module("myApp", ["ngRoute"]);
             templateUrl : "section/games.html",
             controller: "gameCtrl"
         })
+        .when("/add", {
+            templateUrl : "section/add.html",
+            controller: "addCtrl"
+        })
         .when("/comments", {
             templateUrl : "section/comments.html"
         })
@@ -35,6 +39,12 @@ var app = angular.module("myApp", ["ngRoute"]);
     app.controller('gameCtrl', ['$scope', function($scope) {
 
         dynamicallyLoadScript("../Controllers/gameController.js")
+    
+    }]);
+
+    app.controller('addCtrl', ['$scope', function($scope) {
+
+        dynamicallyLoadScript("../Controllers/addController.js")
     
     }]);
 

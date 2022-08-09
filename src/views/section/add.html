@@ -2,11 +2,46 @@
     <div class="row justify-content-center">
         <div class="col-12 col-lg-4">
             <div class="card p-3 bloque">
-                <div class="card-body page active" id="logoutDiv">
-                <form id="logoutForm" method="POST">
+                <div class="card-body page active" id="addDiv">
+                <form id="addForm" method="POST">
                     <h1 class="text-center pb-4">Crear anuncio</h1>
                     
-                    <button class="btn btn-block btn-primary" id="logout" >Crear anuncio</button>
+                    <div class="form-group">
+                        <label for="title">Título:</label>
+                        <input type="text" class="form-control" name="title" id="title"
+                            placeholder="Ingrese el título" value="" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="games">Juegos:</label>
+                        <br>
+                        <select class="custom-select" id="games">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                          </select>
+                          <br>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="usersRequire">Usuarios requeridos:</label>
+                        <br>
+                        <select class="custom-select">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                          </select>
+                          <br>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="usersRequire">Descripcion del anuncio:</label>
+                        <textarea id="description" name="description" rows="4" cols="20" maxlength="280">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos officia dolore quod accusantium ipsa, fugiat velit corrupti nemo consequuntur accusamus ducimus, repellat quibusdam voluptatem quidem unde ipsam. Officiis, necessitatibus eveniet.</textarea>
+                        <br>
+                    </div>
+
+
+                    <button class="btn btn-block btn-primary" id="add" >Crear anuncio</button>
                     </form>
                 </div>
             </div>      

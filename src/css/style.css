@@ -193,6 +193,9 @@ min-height: 30px;
 	100% { transform: rotate(360deg); }
   }
 
+  textarea {
+	resize: none;
+  }
 
 
 

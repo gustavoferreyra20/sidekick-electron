@@ -1,7 +1,3 @@
-var { ipcRenderer } = require('electron');
-var testingdb = document.getElementById('testingdb')
-
-var testContent = document.getElementById('test')
 var els = document.getElementsByClassName('score');
 
 for (var i = 0; i < els.length; i++) {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 28-07-2022 a las 01:41:39
+-- Tiempo de generación: 11-08-2022 a las 22:43:59
 -- Versión del servidor: 10.4.10-MariaDB
 -- Versión de PHP: 7.3.12
 
@@ -33,13 +33,24 @@ CREATE TABLE IF NOT EXISTS `anuncio` (
   `id_anuncio` int(11) NOT NULL AUTO_INCREMENT,
   `id_usuarioPropietario` int(11) NOT NULL,
   `id_juego` int(11) NOT NULL,
+  `plataforma` int(11) NOT NULL,
   `usuariosRequeridos` int(11) NOT NULL,
-  `usuariosActuales` int(11) NOT NULL,
+  `usuariosActuales` int(11) NOT NULL DEFAULT 1,
   `titulo` varchar(45) NOT NULL,
   `descripcion` varchar(280) NOT NULL,
   `creacion` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id_anuncio`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `anuncio`
+--
+
+INSERT INTO `anuncio` (`id_anuncio`, `id_usuarioPropietario`, `id_juego`, `plataforma`, `usuariosRequeridos`, `usuariosActuales`, `titulo`, `descripcion`, `creacion`) VALUES
+(1, 66, 2, 4, 2, 1, 'example', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos officia dolore quod accusantium ipsa, fugiat velit corrupti nemo consequuntur accusamus ducimus, repellat quibusdam voluptatem quidem unde ipsam. Officiis, necessitatibus eveniet.', '2022-08-11 03:00:00'),
+(2, 66, 1, 1, 1, 1, 'example2', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos officia dolore quod accusantium ipsa, fugiat velit corrupti nemo consequuntur accusamus ducimus, repellat quibusdam voluptatem quidem unde ipsam. Officiis, necessitatibus eveniet.', '2022-08-11 22:23:34'),
+(3, 66, 2, 4, 3, 1, 'example3', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos officia dolore quod accusantium ipsa, fugiat velit corrupti nemo consequuntur accusamus ducimus, repellat quibusdam voluptatem quidem unde ipsam. Officiis, necessitatibus eveniet.', '2022-08-11 22:27:20'),
+(4, 66, 1, 2, 3, 1, 'example4', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos officia dolore quod accusantium ipsa, fugiat velit corrupti nemo consequuntur accusamus ducimus, repellat quibusdam voluptatem quidem unde ipsam. Officiis, necessitatibus eveniet.', '2022-08-11 22:42:43');
 
 -- --------------------------------------------------------
 
@@ -100,10 +111,19 @@ CREATE TABLE IF NOT EXISTS `genero_juego` (
 DROP TABLE IF EXISTS `juego`;
 CREATE TABLE IF NOT EXISTS `juego` (
   `id_juego` int(11) NOT NULL AUTO_INCREMENT,
-  `titulo` varchar(45) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
   `img` varchar(45) NOT NULL,
   PRIMARY KEY (`id_juego`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `juego`
+--
+
+INSERT INTO `juego` (`id_juego`, `nombre`, `img`) VALUES
+(1, 'Fortnite', ''),
+(2, 'CSGO', ''),
+(3, 'MultiVersus', '');
 
 -- --------------------------------------------------------
 
@@ -133,7 +153,18 @@ CREATE TABLE IF NOT EXISTS `plataforma` (
   `nombre` varchar(45) NOT NULL,
   `img` varchar(45) NOT NULL,
   PRIMARY KEY (`id_plataforma`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `plataforma`
+--
+
+INSERT INTO `plataforma` (`id_plataforma`, `nombre`, `img`) VALUES
+(1, 'PlayStation 4', ''),
+(2, 'PlayStation 5', ''),
+(3, 'XBOX', ''),
+(4, 'Steam', ''),
+(5, 'Epic', '');
 
 -- --------------------------------------------------------
 
@@ -146,6 +177,22 @@ CREATE TABLE IF NOT EXISTS `plataforma_juego` (
   `id_juego` int(11) NOT NULL,
   `id_plataforma` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `plataforma_juego`
+--
+
+INSERT INTO `plataforma_juego` (`id_juego`, `id_plataforma`) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(2, 4),
+(3, 1),
+(3, 2),
+(3, 3),
+(3, 4),
+(3, 5);
 
 -- --------------------------------------------------------
 
@@ -197,7 +244,7 @@ CREATE TABLE IF NOT EXISTS `tokens` (
 --
 
 INSERT INTO `tokens` (`session`, `token`, `user`, `expire`) VALUES
-('06168240661b0cede862d458982b291e87b5cebd', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTg5NzI0Njd9.1kMxKZ7qY08wKX4ChAA_BcRVWMNmnG_qe6eYEM6L1qw', '6a3ec20a130b55bbea3b8c324c2b68f422dffde1', '2022-10-26');
+('6ed99bef624b40088329805a80da193dbe46614a', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjAyNTc3NDF9.-vB8fSy9rB7ZgkEyfM5apW8U4F-TqDXxMSJs4ghfv6k', 'e89a417d12a0059e38b443c71f9e100d768b1d5e', '2022-11-09');
 
 -- --------------------------------------------------------
 

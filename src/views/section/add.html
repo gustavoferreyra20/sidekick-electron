@@ -3,7 +3,7 @@
         <div class="col-12 col-lg-4">
             <div class="card p-3 bloque">
                 <div class="card-body page active" id="addDiv">
-                <form id="addForm" method="POST">
+                <form id="addForm" method="POST" onsubmit="saveAd(this)">
                     <h1 class="text-center pb-4">Crear anuncio</h1>
                     
                     <div class="form-group">
@@ -15,7 +15,7 @@
                     <div class="form-group">
                         <label for="games">Juegos:</label>
                         <br>
-                        <select class="custom-select" id="games" onchange="setPlatforms(this)">
+                        <select class="custom-select" id="games" onchange="setPlatforms(this)" required>
                           </select>
                           <br>
                     </div>
@@ -23,7 +23,7 @@
                     <div class="form-group">
                         <label for="platform">Plataforma:</label>
                         <br>
-                        <select class="custom-select" id="platform">
+                        <select class="custom-select" id="platform" required>
                             <option disabled selected>Selecciona un juego</option>
                           </select>
                           <br>
@@ -32,8 +32,8 @@
                     <div class="form-group">
                         <label for="usersRequire">Usuarios requeridos:</label>
                         <br>
-                        <select class="custom-select">
-                            <option value="1">1</option>
+                        <select class="custom-select" id="usersRequire">
+                            <option value="1" selected>1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                           </select>
@@ -41,13 +41,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="usersRequire">Descripcion del anuncio:</label>
+                        <label for="description">Descripcion del anuncio:</label>
                         <textarea id="description" name="description" rows="4" cols="20" maxlength="280">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos officia dolore quod accusantium ipsa, fugiat velit corrupti nemo consequuntur accusamus ducimus, repellat quibusdam voluptatem quidem unde ipsam. Officiis, necessitatibus eveniet.</textarea>
                         <br>
                     </div>
 
 
-                    <button class="btn btn-block btn-primary" id="add" >Crear anuncio</button>
+                    <button class="btn btn-block btn-primary" id="add">Crear anuncio</button>
                     </form>
                 </div>
             </div>      

@@ -14,7 +14,7 @@ async function getGames(){
   }
 
   function setOptions(arrOptionsCollection){
-    arrOptions.push("<option disabled selected>Selecciona un juego</option>");
+    arrOptions.push("<option value='"+"' disabled selected>Selecciona un juego</option>");
     for (var i=0, n = arrOptionsCollection.length; i < n; i++) { // looping over the options
         if (arrOptionsCollection[i]) {
             arrOptions.push("<option value='" + arrOptionsCollection[i].id_juego + "'>" + arrOptionsCollection[i].nombre + "</option>");
@@ -42,6 +42,18 @@ async function getGames(){
     arrOptions = []; 
       
     });
+  }
+
+  async function saveAd(ad){
+    conn = await getConnection();
+    date = new Date(Date.now())
+    sql = "INSERT INTO anuncio (id_usuarioPropietario, id_juego, plataforma, usuariosRequeridos, titulo, descripcion) values (66, '" + ad.games.value + "', '" +ad.platform.value + "', '"+ad.usersRequire.value + "', '" + ad.title.value + "', '" + ad.description.value + "' )";
+
+    conn.query(sql, (error, results) => {
+
+      if(error){ console.log(error);}
+
+    }); 
   }
 
   getGames().then(

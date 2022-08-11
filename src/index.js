@@ -1,5 +1,4 @@
 const { app, BrowserWindow, ipcMain, Menu, session } = require("electron");
-const authController = require('./controllers/authController');
 require('dotenv').config();
 require('electron-reload')(__dirname);
 

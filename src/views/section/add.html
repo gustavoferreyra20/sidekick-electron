@@ -15,7 +15,16 @@
                     <div class="form-group">
                         <label for="games">Juegos:</label>
                         <br>
-                        <select class="custom-select" id="games">
+                        <select class="custom-select" id="games" onchange="setPlatforms(this)">
+                          </select>
+                          <br>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="platform">Plataforma:</label>
+                        <br>
+                        <select class="custom-select" id="platform">
+                            <option disabled selected>Selecciona un juego</option>
                           </select>
                           <br>
                     </div>

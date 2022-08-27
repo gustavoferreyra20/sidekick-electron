@@ -17,6 +17,7 @@ function mainWindow() {
     });
 
     const mainMenu = Menu.buildFromTemplate(templateMenu);
+    window.webContents.openDevTools()
 
     Menu.setApplicationMenu(mainMenu);
     window.loadFile("views/index.html");

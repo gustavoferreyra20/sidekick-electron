@@ -4,6 +4,7 @@ const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const {promisify} = require('util')
 const crypto = require('crypto');
+const { resolve } = require("path");
 
 exports.login = async function (obj){
     try {
@@ -17,7 +18,7 @@ exports.login = async function (obj){
           if( results.length == 0 || ! (bcryptjs.compareSync(obj.password, results[0].password) )){
             alertPopup("Usuario y/o contraseña incorrectas")
           }else{
-            const id = results[0].id
+            const id = results[0].id_usuario
             const session = crypto.randomBytes(20).toString('hex');
             const userToken = jwt.sign({id:id}, process.env.JWT_SECRET)
             const userHash = crypto.randomBytes(20).toString('hex');
@@ -86,3 +87,17 @@ exports.logout = async function (){
     if(error){ console.log(error);}
     })
 }
+
+exports.geLoggedtUser = async function (){
+  const conn = await getConnection(); 
+  const myArray = process.env.JWT_COOKIE.split("|");
+  const decodificada = await promisify(jwt.verify)(myArray[1], process.env.JWT_SECRET)
+  return new Promise((resolve, reject) => {   
+    conn.query('SELECT id_usuario, nombre, email, descripcion, img FROM usuarios WHERE id_usuario = ?', [decodificada.id], (error, results)=>{
+      if(error){ console.log(error);}
+      user = {id_usuario:results[0].id_usuario, nombre:results[0].nombre, email:results[0].email, descripcion:results[0].descripcion, img:results[0].img }
+      resolve(user) 
+    })
+  });
+}
+

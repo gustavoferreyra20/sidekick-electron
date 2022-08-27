@@ -1,4 +1,5 @@
 const authController = require('../controllers/authController');
+const { ipcRenderer }= require("electron");
 
 var app = angular.module("myApp", ["ngRoute"]);
     app.config(function($routeProvider) {

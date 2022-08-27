@@ -1,5 +1,5 @@
 const authController = require('../../controllers/authController');
-var popup = require('popups');
+const popupController = require('../../controllers/popupController');
 
 let nombre;
 let email; 
@@ -27,11 +27,11 @@ window.onload = function() {
     password = document.getElementById("registrationForm").elements["password"]
     const obj = {nombre:nombre.value, email:email.value, password:password.value }
     if(await authController.checkEmail(obj.email) > 0){
-      alertPopup("Usuario existente")
+      popupController.alert("Usuario existente")
     }else if(obj.password.length < 8){
-      alertPopup("Contraseña demasiado corta")
+      popupController.alert("Contraseña demasiado corta")
     } else {
-      await authController.saveUser(obj).then(saveUserPopup("Usuario registrado con exito", function (){ (location.reload())}))      
+      await authController.saveUser(obj).then(popupController.saveUser("Usuario registrado con exito", function (){ (location.reload())}))      
     }
   });
 
@@ -48,28 +48,4 @@ function toggleDisplay(className, displayState){
   for (var i = 0; i < elements.length; i++){
       elements[i].style.display = displayState;
   }
-}
-
-function alertPopup(msg){
-  popup.window({
-    mode: "alert",
-    additionalButtonHolderClass: 'form-group',
-    additionalButtonOkClass: "btn btn-block btn-primary",
-    content: "<div class= form-group>" + msg + "</div>"
-});
-}
-
-function saveUserPopup(msg, action){
-  popup.window({
-    mode: "alert",
-    additionalButtonHolderClass: 'form-group',
-    additionalButtonOkClass: "btn btn-block btn-primary",
-    content: "<div class= form-group>" + msg + "</div>",
-    onSubmit: function(){
-      action() 
-    },
-    onClose: function(){
-      action() 
-    }
-});
 }

@@ -1,4 +1,6 @@
 const authController = require('../controllers/authController');
+const popupController = require('../controllers/popupController');
+
 const { ipcRenderer }= require("electron");
 
 var app = angular.module("myApp", ["ngRoute"]);

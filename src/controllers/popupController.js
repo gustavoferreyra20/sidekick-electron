@@ -9,7 +9,7 @@ exports.alert = function (msg){
   });
   }
   
-  exports.saveUser = function (msg, action){
+exports.action = function (msg, action){
     popup.window({
       mode: "alert",
       additionalButtonHolderClass: 'form-group',

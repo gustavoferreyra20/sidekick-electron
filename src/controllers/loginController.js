@@ -31,7 +31,7 @@ window.onload = function() {
     }else if(obj.password.length < 8){
       popupController.alert("Contraseña demasiado corta")
     } else {
-      await authController.saveUser(obj).then(popupController.saveUser("Usuario registrado con exito", function (){ (location.reload())}))      
+      await authController.saveUser(obj).then(popupController.action("Usuario registrado con exito", function (){ (location.reload())}))      
     }
   });
 

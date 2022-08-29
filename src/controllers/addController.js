@@ -53,6 +53,7 @@ async function getGames(){
     conn.query(sql, (error, results) => {
 
       if(error){ console.log(error);}
+      popupController.action("Anuncio creado con exito", function (){ (location.reload())})
 
     }); 
   }
@@ -60,6 +61,7 @@ async function getGames(){
   getGames().then(
     function(response) {setOptions(response)}
   )
+
 
 
 

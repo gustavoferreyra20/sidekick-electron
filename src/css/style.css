@@ -30,6 +30,16 @@ body {
 	margin: 10px 10px;
 }
 
+#rightSection {
+	width: 200px;
+	background-color: #3e3c3d;
+	position: fixed;
+	text-align: center;
+	top: 0;
+	right: 0;
+	bottom: 0;
+}
+
 ul, li {
     display:inline
 }
@@ -39,7 +49,7 @@ li.right{
 }
 #content{
 	margin-left: 80px;
-	margin-right: 10px;
+	margin-right: 200px;
 }
 .card{
 	box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, .2);
@@ -157,15 +167,12 @@ min-height: 30px;
 
 .card-friends{
 	background-color: #535053;
-	margin-top: 20px;
-	margin-left: 20px;
-	margin-right: 20px;
-	margin-bottom: 0px;
-	min-width: 500px;
-	min-height: 180px;
-	max-width: 500px;
-	max-height: 180px;
 }
+
+.card-image{
+	height: 300px;
+	width:auto; 
+ }
 
 .loader {
 	position: absolute;
@@ -198,7 +205,7 @@ min-height: 30px;
   }
 
   .games-grid img{
-	padding: 20px;
+	padding: 10px;
   }
 
 

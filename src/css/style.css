@@ -197,6 +197,11 @@ min-height: 30px;
 	resize: none;
   }
 
+  .games-grid img{
+	padding: 20px;
+  }
+
+
 
 
 

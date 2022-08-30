@@ -1,14 +1,15 @@
-var els = document.getElementsByClassName('score');
+var arrOptions = [];
 
-for (var i = 0; i < els.length; i++) {
-  var cell = els[i];
-  if (cell.textContent <= 20 ) {
-    cell.classList.add('red')
-  } else if(cell.textContent <= 60) {
-    cell.classList.add('orange');
-  } else if(cell.textContent <= 100) {
-    cell.classList.add('green');
+async function setGames(games){
+    
+    for (var i=0, n = games.length; i < n; i++) { // looping over the options
+      arrOptions.push("<img src='" + games[i].img + "' class=img-fluid alt='" + games[i].nombre + "'></div>");
+      document.getElementById("games").innerHTML = arrOptions.join('');
+  }
+  arrOptions = []; 
+    
 }
-}
 
-
+listController.getLatest('juego', 3).then(
+  function(response) {setGames(response)}
+)

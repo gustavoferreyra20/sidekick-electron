@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 11-08-2022 a las 22:43:59
+-- Tiempo de generación: 30-08-2022 a las 00:41:22
 -- Versión del servidor: 10.4.10-MariaDB
 -- Versión de PHP: 7.3.12
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `anuncio` (
   `descripcion` varchar(280) NOT NULL,
   `creacion` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id_anuncio`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `anuncio`
@@ -48,9 +48,8 @@ CREATE TABLE IF NOT EXISTS `anuncio` (
 
 INSERT INTO `anuncio` (`id_anuncio`, `id_usuarioPropietario`, `id_juego`, `plataforma`, `usuariosRequeridos`, `usuariosActuales`, `titulo`, `descripcion`, `creacion`) VALUES
 (1, 66, 2, 4, 2, 1, 'example', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos officia dolore quod accusantium ipsa, fugiat velit corrupti nemo consequuntur accusamus ducimus, repellat quibusdam voluptatem quidem unde ipsam. Officiis, necessitatibus eveniet.', '2022-08-11 03:00:00'),
-(2, 66, 1, 1, 1, 1, 'example2', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos officia dolore quod accusantium ipsa, fugiat velit corrupti nemo consequuntur accusamus ducimus, repellat quibusdam voluptatem quidem unde ipsam. Officiis, necessitatibus eveniet.', '2022-08-11 22:23:34'),
-(3, 66, 2, 4, 3, 1, 'example3', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos officia dolore quod accusantium ipsa, fugiat velit corrupti nemo consequuntur accusamus ducimus, repellat quibusdam voluptatem quidem unde ipsam. Officiis, necessitatibus eveniet.', '2022-08-11 22:27:20'),
-(4, 66, 1, 2, 3, 1, 'example4', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos officia dolore quod accusantium ipsa, fugiat velit corrupti nemo consequuntur accusamus ducimus, repellat quibusdam voluptatem quidem unde ipsam. Officiis, necessitatibus eveniet.', '2022-08-11 22:42:43');
+(8, 75, 1, 4, 1, 1, 'testing popup', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos officia dolore quod accusantium ipsa, fugiat velit corrupti nemo consequuntur accusamus ducimus, repellat quibusdam voluptatem quidem unde ipsam. Officiis, necessitatibus eveniet.', '2022-08-27 23:15:44'),
+(6, 66, 1, 1, 1, 1, 'testing get user', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos officia dolore quod accusantium ipsa, fugiat velit corrupti nemo consequuntur accusamus ducimus, repellat quibusdam voluptatem quidem unde ipsam. Officiis, necessitatibus eveniet.', '2022-08-27 22:46:39');
 
 -- --------------------------------------------------------
 
@@ -121,9 +120,9 @@ CREATE TABLE IF NOT EXISTS `juego` (
 --
 
 INSERT INTO `juego` (`id_juego`, `nombre`, `img`) VALUES
-(1, 'Fortnite', ''),
-(2, 'CSGO', ''),
-(3, 'MultiVersus', '');
+(1, 'Fortnite', '../img/games/Fortnite.jpg'),
+(2, 'CSGO', '../img/games/CSGO.jpg'),
+(3, 'MultiVersus', '../img/games/MultiVersus.jpg');
 
 -- --------------------------------------------------------
 
@@ -244,7 +243,7 @@ CREATE TABLE IF NOT EXISTS `tokens` (
 --
 
 INSERT INTO `tokens` (`session`, `token`, `user`, `expire`) VALUES
-('6ed99bef624b40088329805a80da193dbe46614a', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjAyNTc3NDF9.-vB8fSy9rB7ZgkEyfM5apW8U4F-TqDXxMSJs4ghfv6k', 'e89a417d12a0059e38b443c71f9e100d768b1d5e', '2022-11-09');
+('baf262b5b445d33a8bb1c97198495cb71f1fe476', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzUsImlhdCI6MTY2MTY0MjQ3NH0.rwoc5TDsHvtcaSScvcdTTcokzT9woMPIogquqqBxCKQ', 'c29873cd736dd5e02cb949b3fd478a6cd4aafc54', '2022-11-25');
 
 -- --------------------------------------------------------
 
@@ -261,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `descripcion` varchar(280) DEFAULT NULL,
   `img` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=MyISAM AUTO_INCREMENT=75 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -300,7 +299,8 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre`, `email`, `password`, `descripcio
 (70, 'ryan2', 'ryan2@gmail.com', '$2a$10$I7hSQ/HlJ2.MgaPN7Ccx.eAqQzXRkFYhyCTigO.p5xnRSC9oNcziy', NULL, NULL),
 (71, 'harry', 'harry@gmail.com', '$2a$10$N7m/36dQ0xP4SPTuOJct..dO9EirrEQvlyA8MbJr10WDhMa9jIK1a', NULL, NULL),
 (72, 'walter', 'walter@gmail.com', '$2a$10$SrK/o2SqhSCNCfu7VeD45O4pWfgCBiyjqHL1QiVh7gzw6aox9aCmm', NULL, NULL),
-(73, 'topa', 'topa@gmail.com', '$2a$10$Y7uNjZt.Waohle8zph6YJumrdAtoVwT8ARdgMQN.2ccoC5NoNsAZe', NULL, NULL);
+(73, 'topa', 'topa@gmail.com', '$2a$10$Y7uNjZt.Waohle8zph6YJumrdAtoVwT8ARdgMQN.2ccoC5NoNsAZe', NULL, NULL),
+(75, 'brad', 'brad@gmail.com', '$2a$10$/1HYP0a/1iOSQ3MeReA4J.Lrfs6XPbYLzbkvK6Etyll4kCy6py2A2', NULL, NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

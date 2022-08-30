@@ -38,7 +38,7 @@ async function getGames(){
         }
     }
 
-    document.getElementById("platform").innerHTML = arrOptions.join();
+    document.getElementById("platform").innerHTML = arrOptions.join('');
     arrOptions = []; 
       
     });

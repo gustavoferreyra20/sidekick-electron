@@ -209,6 +209,69 @@ min-height: 30px;
   }
 
 
+.product-image{width: 100%}
+.dot{height: 7px;width: 7px;margin-left: 6px;margin-right: 6px;margin-top: 3px;background-color: #1ded8c;border-radius: 50%;display: inline-block}
+.spec-1{color: #938787;font-size: 15px}
+h5{font-weight: 400}
+
+.post{
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	margin-bottom: 20px;
+}
 
 
 
+.line {
+    height: 1px;
+    background-color: #1ded8c;
+    width: 100%;
+    margin: 35px 0px;
+}
+
+
+.user-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.btn-pink {
+    background-color: #1ded8c;
+    color: #fff;
+    height: 70px;
+    padding: 20px 30px;
+    margin-top: 15px;
+}
+
+.btn-pink:hover {
+    background-color: green;
+}
+
+.image-bg {
+    width: 100px;
+}
+
+.fit-image {
+    object-fit: cover;
+    width: 100%;
+}
+
+
+#game {
+	width: fit-content;
+	padding-right: 10px;
+	height:auto;
+	float: left;
+  }     
+  
+  #description {
+	width: 500px;
+	height: 100px;
+	float:left;
+
+  }
+
+  .ss{
+	display: inline-block;
+  }

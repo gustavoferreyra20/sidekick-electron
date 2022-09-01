@@ -1,4 +1,4 @@
-var arrOptions = [];
+/* var arrOptions = [];
 
 async function setGames(games){
     
@@ -13,3 +13,4 @@ async function setGames(games){
 listController.getLatest('juego', 3).then(
   function(response) {setGames(response)}
 )
+ */

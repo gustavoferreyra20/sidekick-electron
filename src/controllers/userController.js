@@ -1,8 +1,6 @@
 const { ipcRenderer }= require("electron");
 const { getConnection } = require("../database");
 const bcryptjs = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const {promisify} = require('util')
 const crypto = require('crypto');
 const { resolve } = require("path");
 
@@ -88,13 +86,11 @@ exports.logout = async function (){
     })
 }
 
-exports.geLoggedtUser = async function (){
+exports.getUser = async function (id){
   const conn = await getConnection(); 
-  const myArray = process.env.JWT_COOKIE.split("|");
-  const decodificada = await promisify(jwt.verify)(myArray[1], process.env.JWT_SECRET)
   return new Promise((resolve, reject) => {   
-    conn.query('SELECT id_usuario, nombre, email, descripcion, img FROM usuarios WHERE id_usuario = ?', [decodificada.id], (error, results)=>{
-      if(error){ console.log(error);}
+    conn.query('SELECT id_usuario, nombre, email, descripcion, img FROM usuarios WHERE id_usuario = ?', [id], (error, results)=>{
+      if(error){ console.log(id);}
       user = {id_usuario:results[0].id_usuario, nombre:results[0].nombre, email:results[0].email, descripcion:results[0].descripcion, img:results[0].img }
       resolve(user) 
     })

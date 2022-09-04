@@ -1,11 +1,11 @@
-const authController = require('../../controllers/authController');
+const userController = require('../../controllers/userController');
 const { ipcRenderer }= require("electron");
 
 window.onload = function() { 
     ipcRenderer.on('cookie', (event, cookie) => {
 
       if(cookie.length > 0){
-        authController.isAuthenticated(cookie)
+        userController.isAuthenticated(cookie)
       }else{
         ipcRenderer.invoke("noCookie")
       }

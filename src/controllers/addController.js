@@ -1,4 +1,6 @@
 var { getConnection } = require("../database");
+var jwt = require('jsonwebtoken');
+var {promisify} = require('util');
 var arrOptions = [];
 
 async function getGames(){
@@ -46,16 +48,18 @@ async function getGames(){
 
   async function saveAd(ad){
     conn = await getConnection();
-    const user = await authController.geLoggedtUser()
+    const myArray = process.env.JWT_COOKIE.split("|");
+    const decodificada = await promisify(jwt.verify)(myArray[1], process.env.JWT_SECRET)
+    const user = await userController.getUser(decodificada.id)
     date = new Date(Date.now())
     sql = "INSERT INTO anuncio (id_usuarioPropietario, id_juego, plataforma, usuariosRequeridos, titulo, descripcion) values ('" + user.id_usuario + "', '" + + ad.games.value + "', '" +ad.platform.value + "', '"+ad.usersRequire.value + "', '" + ad.title.value + "', '" + ad.description.value + "' )";
-
     conn.query(sql, (error, results) => {
 
       if(error){ console.log(error);}
       popupController.action("Anuncio creado con exito", function (){ (location.reload())})
 
-    }); 
+    });  
+
   }
 
   getGames().then(

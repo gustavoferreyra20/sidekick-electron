@@ -1,4 +1,4 @@
-const authController = require('../../controllers/authController');
+const userController = require('../../controllers/userController');
 const popupController = require('../../controllers/popupController');
 
 let nombre;
@@ -17,7 +17,7 @@ window.onload = function() {
     email = document.getElementById("loginForm").elements["email"]
     password = document.getElementById("loginForm").elements["password"]
     const obj = {email:email.value, password:password.value }
-    authController.login(obj)
+    userController.login(obj)
   });
 
   registrationForm.addEventListener('submit', async () => {
@@ -26,12 +26,12 @@ window.onload = function() {
     email = document.getElementById("registrationForm").elements["email"]
     password = document.getElementById("registrationForm").elements["password"]
     const obj = {nombre:nombre.value, email:email.value, password:password.value }
-    if(await authController.checkEmail(obj.email) > 0){
+    if(await userController.checkEmail(obj.email) > 0){
       popupController.alert("Usuario existente")
     }else if(obj.password.length < 8){
       popupController.alert("Contraseña demasiado corta")
     } else {
-      await authController.saveUser(obj).then(popupController.action("Usuario registrado con exito", function (){ (location.reload())}))      
+      await userController.saveUser(obj).then(popupController.action("Usuario registrado con exito", function (){ (location.reload())}))      
     }
   });
 

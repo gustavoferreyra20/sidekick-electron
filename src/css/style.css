@@ -263,4 +263,9 @@ h5{font-weight: 400}
 	padding-right: 10px;
 	height:fit-content;
 	float: left;
-  }     
+  }    
+  
+  .rightContent img{
+	padding-bottom: 10px;
+
+  }

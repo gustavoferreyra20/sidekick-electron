@@ -1,6 +1,6 @@
 const authController = require('../controllers/authController');
 const popupController = require('../controllers/popupController');
-const listController = require("../controllers/listController");
+const itemController = require("../controllers/itemController");
 
 const { ipcRenderer }= require("electron");
 

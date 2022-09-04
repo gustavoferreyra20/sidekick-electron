@@ -236,7 +236,7 @@ h5{font-weight: 400}
     cursor: pointer;
 }
 
-.btn-pink {
+.btn-post {
     background-color: #1ded8c;
     color: #fff;
     height: 70px;
@@ -244,7 +244,7 @@ h5{font-weight: 400}
     margin-top: 15px;
 }
 
-.btn-pink:hover {
+.btn-post:hover {
     background-color: green;
 }
 
@@ -259,19 +259,8 @@ h5{font-weight: 400}
 
 
 #game {
-	width: fit-content;
+	width: auto;
 	padding-right: 10px;
-	height:auto;
+	height:fit-content;
 	float: left;
   }     
-  
-  #description {
-	width: 500px;
-	height: 100px;
-	float:left;
-
-  }
-
-  .ss{
-	display: inline-block;
-  }

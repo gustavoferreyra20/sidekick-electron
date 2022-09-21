@@ -1,3 +1,3 @@
-itemController.getLatest('anuncio', 3).then(
-  function(response) {itemController.loadAds(response)}
+itemController.getLatest('posts').then(
+ // function(response) {itemController.loadPosts(response)}
 )

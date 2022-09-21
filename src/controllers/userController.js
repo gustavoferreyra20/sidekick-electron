@@ -1,13 +1,14 @@
-const { ipcRenderer }= require("electron");
+const { ipcRenderer, net }= require("electron");
 const { getConnection } = require("../database");
 const bcryptjs = require('bcryptjs');
 const crypto = require('crypto');
 const { resolve } = require("path");
+var jwt = require('jsonwebtoken');
 
 exports.login = async function (obj){
     try {
         const conn = await getConnection();
-        const sql = "SELECT * FROM usuarios WHERE email=?"
+        const sql = "SELECT * FROM users WHERE email=?"
         
         conn.query(sql, [obj.email], (error, results) => {
          
@@ -45,22 +46,26 @@ exports.saveUser = async function (obj){
     await conn.query(sql);
 }
 
+// check if the cookie match with an user in db
 exports.isAuthenticated = async function (cookie){
-  const conn = await getConnection(); 
   const myArray = cookie[0].value.split("|");
   const session = myArray[0];
   const token = myArray[1];
-  const sql = "SELECT user FROM tokens WHERE session = '" + session + "' AND token = '" + token + "'";
-  return new Promise((resolve, reject) => {
-    if (cookie){
-      conn.query(sql, (error, results)=>{
+  const url = process.env.SIDEKICK_API + 'tokens?session='+ session + '&token='+ token
+  fetch(url, { method: 'GET' }).then((response) => {
+    return response.json();
+  })
+  .then((data) => {
+    if(data.length > 0){
       ipcRenderer.invoke("authUser", cookie[0].value)
-      if(error){ console.log(error);}
-      resolve(results)
-      })
-
+    }else{
+      //Cookie expired in database
+      ipcRenderer.invoke("noCookie")
     }
-  });
+  })
+  .catch(function(error) {
+    console.log(error);
+  }); 
 };
 
 exports.checkEmail = async function (email){
@@ -80,10 +85,11 @@ exports.logout = async function (){
   const myArray = process.env.JWT_COOKIE.split("|");
   const session = myArray[0];
   const token = myArray[1];
-  const sql = "DELETE FROM tokens WHERE session = '" + session + "' AND token = '" + token + "'";
-  conn.query(sql, (error, results)=>{
-    if(error){ console.log(error);}
-    })
+  const url = process.env.SIDEKICK_API + 'tokens/bo?session='+ session + '&token='+ token;
+  await fetch(url, { method: 'DELETE' }).catch(function(error) {
+    console.log(error);
+  }); 
+
 }
 
 exports.getUser = async function (id){

@@ -6,18 +6,14 @@ const { resolve } = require("path");
 var jwt = require('jsonwebtoken');
 
 exports.login = async function (obj){
-    try {
         const conn = await getConnection();
-        const sql = "SELECT * FROM users WHERE email=?"
-        
-        conn.query(sql, [obj.email], (error, results) => {
-         
-          if(error){ console.log(error);}
-      
-          if( results.length == 0 || ! (bcryptjs.compareSync(obj.password, results[0].password) )){
-            alertPopup("Usuario y/o contraseña incorrectas")
-          }else{
-            const id = results[0].id_usuario
+        const url = process.env.SIDEKICK_API + 'users/bo?email='+ obj.email + '&password='+ obj.password
+        fetch(url, { method: 'GET' }).then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          if(data.length > 0){
+            const id = data[0].id_user
             const session = crypto.randomBytes(20).toString('hex');
             const userToken = jwt.sign({id:id}, process.env.JWT_SECRET)
             const userHash = crypto.randomBytes(20).toString('hex');
@@ -30,20 +26,37 @@ exports.login = async function (obj){
             });
 
             ipcRenderer.invoke("login", value)
-          }
-          
-        });
-      } catch (error) {
-        console.log(error);
-      }
+          }else{
+            alertPopup("Usuario y/o contraseña incorrectas")
+          } 
+        })
+        .catch(function(error) {
+          popupController.alert("Usuario y/o contraseña incorrectas")
+        }); 
+        
 }
 
 exports.saveUser = async function (obj){
-  const salt = await bcryptjs.genSalt();
-    password = await bcryptjs.hash(obj.password, salt)
-    const conn = await getConnection();
-    const sql = "INSERT INTO usuarios (nombre, email, password) values ('" + obj.nombre + "', '" + obj.email + "', '" + password + "')";
-    await conn.query(sql);
+    const url = process.env.SIDEKICK_API + 'users';
+
+    let data = {
+      name: obj.name,
+      email: obj.email,
+      password:  obj.password
+    }
+
+    let fetchData = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        'Content-Type': 'application/json; charset=UTF-8'
+      })
+    }
+
+    fetch(url, fetchData)
+    .catch(function(error) {
+      console.log(error);
+    }); 
 }
 
 // check if the cookie match with an user in db
@@ -69,19 +82,26 @@ exports.isAuthenticated = async function (cookie){
 };
 
 exports.checkEmail = async function (email){
-  const conn = await getConnection();
-  const sql = "SELECT * FROM usuarios where email=?";
-  return new Promise((resolve, reject) => {
-    conn.query(sql, [email], (error, results) => {
-      if(error){ console.log(error);}
-      resolve(results.length)
-      
-    });
+  return new Promise((resolve, reject) =>{
+    const url = process.env.SIDEKICK_API + 'users/bo?';
+    const params = new URLSearchParams({
+      email: email
+    })
+    
+    fetch(url + params, { method: 'GET' }).then((response) => {
+      return response.json();
+    })
+  .then((data) => {
+    resolve(data.length > 0)
   })
+  .catch(function(error) {
+    console.log(error);
+  });
+  })
+  
 }
 
 exports.logout = async function (){
-  const conn = await getConnection(); 
   const myArray = process.env.JWT_COOKIE.split("|");
   const session = myArray[0];
   const token = myArray[1];

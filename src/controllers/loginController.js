@@ -22,11 +22,11 @@ window.onload = function() {
 
   registrationForm.addEventListener('submit', async () => {
     event.preventDefault()
-    nombre = document.getElementById("registrationForm").elements["nombre"]
+    userName = document.getElementById("registrationForm").elements["userName"]
     email = document.getElementById("registrationForm").elements["email"]
     password = document.getElementById("registrationForm").elements["password"]
-    const obj = {nombre:nombre.value, email:email.value, password:password.value }
-    if(await userController.checkEmail(obj.email) > 0){
+    const obj = {name:userName.value, email:email.value, password:password.value }
+    if(await userController.checkEmail(obj.email)){
       popupController.alert("Usuario existente")
     }else if(obj.password.length < 8){
       popupController.alert("Contraseña demasiado corta")

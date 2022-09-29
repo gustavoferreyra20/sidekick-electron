@@ -1,7 +1,7 @@
 const { getConnection } = require("../database");
 //const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
-exports.getLatest = async function (items){
+exports.getItems = async function (items){
   const url = process.env.SIDEKICK_API + items;
   return new Promise((resolve, reject) => {
     resolve(fetch(url).then(res => res.text()) )
@@ -10,19 +10,17 @@ exports.getLatest = async function (items){
 
   }
 
-  exports.loadGames = async function (){
-    const url = process.env.SIDEKICK_API + 'games';
+  exports.loadGames = async function (games){
     var arrOptions = [];
-    var games = JSON.parse(await fetch(url).then(res => res.text()));
+    var games = JSON.parse(games);
     for (var i=0, n = games.length; i < n; i++) { // looping over the options
       arrOptions.push("<img src='" + games[i].img + "' class=img-fluid alt='" + games[i].nombre + "'>");
       document.getElementById("games").innerHTML = arrOptions.join('');
   }
   }
 
-  exports.loadPosts = async function (){
-    const url = process.env.SIDEKICK_API + 'posts';
-    var posts = JSON.parse(await fetch(url).then(res => res.text()));
+  exports.loadPosts = async function (posts){
+    var posts = JSON.parse(posts);
     var arrOptions = [];
     var html;
     var user;

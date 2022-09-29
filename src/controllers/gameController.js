@@ -1,3 +1,3 @@
-itemController.getLatest('juego', 3).then(
+itemController.getItems('games').then(
   function(response) {itemController.loadGames(response)}
 )

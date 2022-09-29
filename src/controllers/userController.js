@@ -91,26 +91,6 @@ exports.isAuthenticated = async function (cookie){
   }); 
 };
 
-exports.checkEmail = async function (email){
-  return new Promise((resolve, reject) =>{
-    const url = process.env.SIDEKICK_API + 'users/bo?';
-    const params = new URLSearchParams({
-      email: email
-    })
-    
-    fetch(url + params, { method: 'GET' }).then((response) => {
-      return response.json();
-    })
-  .then((data) => {
-    resolve(data.length > 0)
-  })
-  .catch(function(error) {
-    console.log(error);
-  });
-  })
-  
-}
-
 exports.logout = async function (){
   const myArray = process.env.JWT_COOKIE.split("|");
   const session = myArray[0];
@@ -122,14 +102,21 @@ exports.logout = async function (){
 
 }
 
-exports.getUser = async function (id){
-  const conn = await getConnection(); 
-  return new Promise((resolve, reject) => {   
-    conn.query('SELECT id_usuario, nombre, email, descripcion, img FROM usuarios WHERE id_usuario = ?', [id], (error, results)=>{
-      if(error){ console.log(id);}
-      user = {id_usuario:results[0].id_usuario, nombre:results[0].nombre, email:results[0].email, descripcion:results[0].descripcion, img:results[0].img }
-      resolve(user) 
+exports.getUser = async function (condition){
+  return new Promise((resolve, reject) =>{
+    const url = process.env.SIDEKICK_API + 'users/bo?';
+    const params = new URLSearchParams(condition)
+    
+    fetch(url + params, { method: 'GET' }).then((response) => {
+      return response.json();
     })
+  .then((data) => {
+    resolve(data)
+  })
+  .catch(function(error) {
+    console.log(error);
   });
+  })
+  
 }
 

@@ -25,13 +25,17 @@ window.onload = function() {
     userName = document.getElementById("registrationForm").elements["userName"]
     email = document.getElementById("registrationForm").elements["email"]
     password = document.getElementById("registrationForm").elements["password"]
-    const obj = {name:userName.value, email:email.value, password:password.value }
-    if(await userController.checkEmail(obj.email)){
+    const newUser = {name:userName.value, email:email.value, password:password.value }
+    let conditions = {
+      email: email.value
+    }
+    existentUser = await userController.getUser(conditions)
+    if(existentUser.length > 0){
       popupController.alert("Usuario existente")
-    }else if(obj.password.length < 8){
+    }else if(newUser.password.length < 8){
       popupController.alert("Contraseña demasiado corta")
     } else {
-      await userController.saveUser(obj).then(popupController.action("Usuario registrado con exito", function (){ (location.reload())}))      
+      await userController.saveUser(newUser).then(popupController.action("Usuario registrado con exito", function (){ (location.reload())}))      
     }
   });
 

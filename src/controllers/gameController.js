@@ -31,5 +31,4 @@ getAllGames().then(
 module.exports = {
 	getAllGames,
 	loadGames
-
 };

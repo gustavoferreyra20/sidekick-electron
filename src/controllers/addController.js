@@ -16,22 +16,16 @@ var arrOptions = [];
   }
 
   async function setPlatforms(game){
-    conn = await getConnection();
-    sql = "SELECT P.* FROM plataforma P INNER JOIN plataforma_juego PJ ON P.id_plataforma=PJ.id_plataforma WHERE PJ.id_juego=" + game.value;
-    conn.query(sql, (error, results) => {
-
-      if(error){ console.log(error);}
-      
-      for (var i=0, n = results.length; i < n; i++) { // looping over the options
-        if (results[i]) {
-            arrOptions.push("<option value='" + results[i].id_plataforma + "'>" + results[i].nombre + "</option>");
+    var platforms = await platformController.getPlatformsByGame(game.value)     
+     for (var i=0, n = platforms.length; i < n; i++) { // looping over the options
+        if (platforms[i]) {
+            arrOptions.push("<option value='" + platforms[i].id_platform + "'>" + platforms[i].name + "</option>");
         }
-    }
+    } 
 
     document.getElementById("platform").innerHTML = arrOptions.join('');
     arrOptions = []; 
       
-    });
   }
 
   async function saveAd(ad){

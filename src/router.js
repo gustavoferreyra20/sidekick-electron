@@ -2,6 +2,7 @@ const userController = require('../controllers/userController');
 const popupController = require('../controllers/popupController');
 const gameController = require("../controllers/gameController");
 const postController = require("../controllers/postController");
+const platformController = require("../controllers/platformController");
 
 
 const { ipcRenderer }= require("electron");

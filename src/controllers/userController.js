@@ -2,7 +2,7 @@ const { ipcRenderer }= require("electron");
 const crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 
-exports.login = async function (obj){
+async function login(obj){
         const url = process.env.SIDEKICK_API + 'users/bo?email='+ obj.email + '&password='+ obj.password
         fetch(url, { method: 'GET' }).then((response) => {
           return response.json();
@@ -43,7 +43,7 @@ exports.login = async function (obj){
         
 }
 
-exports.saveUser = async function (obj){
+async function saveUser(obj){
     const url = process.env.SIDEKICK_API + 'users';
 
     let data = {
@@ -67,7 +67,7 @@ exports.saveUser = async function (obj){
 }
 
 // check if the cookie match with an user in db
-exports.isAuthenticated = async function (cookie){
+async function isAuthenticated(cookie){
   const myArray = cookie[0].value.split("|");
   const session = myArray[0];
   const token = myArray[1];
@@ -88,7 +88,7 @@ exports.isAuthenticated = async function (cookie){
   }); 
 };
 
-exports.logout = async function (){
+async function logout(){
   const myArray = process.env.JWT_COOKIE.split("|");
   const session = myArray[0];
   const token = myArray[1];
@@ -99,7 +99,7 @@ exports.logout = async function (){
 
 }
 
-exports.getUser = async function (condition){
+async function getUser(condition){
   return new Promise((resolve, reject) =>{
     const url = process.env.SIDEKICK_API + 'users/bo?';
     const params = new URLSearchParams(condition)
@@ -117,3 +117,10 @@ exports.getUser = async function (condition){
   
 }
 
+module.exports = {
+	login,
+	saveUser,
+  isAuthenticated,
+  logout,
+  getUser
+};

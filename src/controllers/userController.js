@@ -6,31 +6,41 @@ const { resolve } = require("path");
 var jwt = require('jsonwebtoken');
 
 exports.login = async function (obj){
-        const conn = await getConnection();
         const url = process.env.SIDEKICK_API + 'users/bo?email='+ obj.email + '&password='+ obj.password
         fetch(url, { method: 'GET' }).then((response) => {
           return response.json();
         })
         .then((data) => {
-          if(data.length > 0){
+            // create the cookie
             const id = data[0].id_user
             const session = crypto.randomBytes(20).toString('hex');
             const userToken = jwt.sign({id:id}, process.env.JWT_SECRET)
             const userHash = crypto.randomBytes(20).toString('hex');
-            const value = session + "|" + userToken+ "|" + userHash
+            const localToken = session + "|" + userToken+ "|" + userHash
             const expire = new Date(Date.now()+process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000)
+            const url = process.env.SIDEKICK_API + 'tokens';
+           
+            let token = {
+              session: session,
+              token: userToken,
+              user:  userHash,
+              expire: expire.toISOString().slice(0, 10)
+            }
+        
+            let fetchData = {
+              method: 'POST',
+              body: JSON.stringify(token),
+              headers: new Headers({
+                'Content-Type': 'application/json; charset=UTF-8'
+              })
+            }
+            console.log(fetchData)
+            fetch(url, fetchData);
 
-            const sql = "INSERT INTO tokens (session, token, user, expire) values ('" + session + "', '" +userToken + "', '" + userHash + "', '" +expire.toISOString().slice(0, 10) + "')";
-            conn.query(sql, [obj.email], (error, results) => {
-              if(error){ console.log(error);}
-            });
-
-            ipcRenderer.invoke("login", value)
-          }else{
-            alertPopup("Usuario y/o contraseña incorrectas")
-          } 
+            ipcRenderer.invoke("login", localToken)
         })
         .catch(function(error) {
+          console.log(error);
           popupController.alert("Usuario y/o contraseña incorrectas")
         }); 
         

@@ -1,3 +1,3 @@
-itemController.getItems('posts').then(
-    function(response) {itemController.loadPosts(response)}
+postController.getAllPosts().then(
+    function(response) {postController.loadPosts(response)}
   )

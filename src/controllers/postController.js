@@ -1,26 +1,21 @@
-const { getConnection } = require("../database");
-//const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-
-exports.getItems = async function (items){
-  const url = process.env.SIDEKICK_API + items;
-  return new Promise((resolve, reject) => {
-    resolve(fetch(url).then(res => res.text()) )
-  }) 
-
-
+async function getAllPosts (){
+    return new Promise((resolve, reject) =>{
+      const url = process.env.SIDEKICK_API + 'posts';
+      
+      fetch(url, { method: 'GET' }).then((response) => {
+        return response.json();
+      })
+    .then((data) => {
+      resolve(data)
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+    })
+    
   }
-
-  exports.loadGames = async function (games){
-    var arrOptions = [];
-    var games = JSON.parse(games);
-    for (var i=0, n = games.length; i < n; i++) { // looping over the options
-      arrOptions.push("<img src='" + games[i].img + "' class=img-fluid alt='" + games[i].nombre + "'>");
-      document.getElementById("games").innerHTML = arrOptions.join('');
-  }
-  }
-
-  exports.loadPosts = async function (posts){
-    var posts = JSON.parse(posts);
+  
+  async function loadPosts (posts){
     var arrOptions = [];
     var html;
     var user;
@@ -58,4 +53,9 @@ exports.getItems = async function (items){
     resolve(arrOptions)
   }) 
   }
-
+  
+  module.exports = {
+    getAllPosts,
+    loadPosts
+  
+  };

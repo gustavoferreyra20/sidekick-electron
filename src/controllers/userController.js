@@ -1,8 +1,5 @@
-const { ipcRenderer, net }= require("electron");
-const { getConnection } = require("../database");
-const bcryptjs = require('bcryptjs');
+const { ipcRenderer }= require("electron");
 const crypto = require('crypto');
-const { resolve } = require("path");
 var jwt = require('jsonwebtoken');
 
 exports.login = async function (obj){

@@ -1,6 +1,7 @@
 const userController = require('../controllers/userController');
 const popupController = require('../controllers/popupController');
-const itemController = require("../controllers/itemController");
+const gameController = require("../controllers/gameController");
+const postController = require("../controllers/postController");
 
 
 const { ipcRenderer }= require("electron");
@@ -66,6 +67,6 @@ var app = angular.module("myApp", ["ngRoute"]);
         document.head.appendChild(script);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
     }
 
-    itemController.getItems('games').then(
-        function(response) {itemController.loadGames(response)}
+    gameController.getAllGames().then(
+        function(response) {gameController.loadGames(response)}
       )

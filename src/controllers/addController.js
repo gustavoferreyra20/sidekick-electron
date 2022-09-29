@@ -3,23 +3,11 @@ var jwt = require('jsonwebtoken');
 var {promisify} = require('util');
 var arrOptions = [];
 
-async function getGames(){
-    conn = await getConnection();
-    sql = "SELECT * FROM juego";
-    return new Promise((resolve, reject) => {
-      conn.query(sql, (error, results) => {
-        if(error){ console.log(error);}
-        resolve(results)
-        
-      });
-    })
-  }
-
-  function setOptions(arrOptionsCollection){
+  function setOptions(games){
     arrOptions.push("<option value='"+"' disabled selected>Selecciona un juego</option>");
-    for (var i=0, n = arrOptionsCollection.length; i < n; i++) { // looping over the options
-        if (arrOptionsCollection[i]) {
-            arrOptions.push("<option value='" + arrOptionsCollection[i].id_juego + "'>" + arrOptionsCollection[i].nombre + "</option>");
+    for (var i=0, n = games.length; i < n; i++) { // looping over the options
+        if (games[i]) {
+            arrOptions.push("<option value='" + games[i].id_game + "'>" + games[i].name + "</option>");
         }
     }
 
@@ -62,10 +50,9 @@ async function getGames(){
 
   }
 
-  getGames().then(
+  gameController.getAllGames().then(
     function(response) {setOptions(response)}
   )
-
 
 
 

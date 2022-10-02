@@ -3,12 +3,13 @@ const popupController = require('../controllers/popupController');
 const gameController = require("../controllers/gameController");
 const postController = require("../controllers/postController");
 const platformController = require("../controllers/platformController");
+const tokenController = require("../controllers/tokenController");
 const { ipcRenderer }= require("electron");
 
 var userToken;
 
 ipcRenderer.on('cookie-data', async (event, cookie) => {
-    userToken = JSON.parse(cookie[0].value)
+    userToken = JSON.parse(cookie[0].value);
   })
 
 var app = angular.module("myApp", ["ngRoute"]);

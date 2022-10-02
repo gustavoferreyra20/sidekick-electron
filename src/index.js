@@ -113,7 +113,7 @@ async function mainWindow() {
     const cookie = { 
       url: 'http://localhost/',
       name: 'jwt',
-      value: args,
+      value: JSON.stringify(args),
       expirationDate: 99999999999999
     }
      

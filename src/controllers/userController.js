@@ -1,6 +1,4 @@
 const { ipcRenderer }= require("electron");
-const crypto = require('crypto');
-var jwt = require('jsonwebtoken');
 
 async function login(obj){
         const url = process.env.SIDEKICK_API + 'users/bo?email='+ obj.email + '&password='+ obj.password
@@ -9,29 +7,10 @@ async function login(obj){
         })
         .then((data) => {
             // create the cookie
-            const id = data[0].id_user
-            const session = crypto.randomBytes(20).toString('hex');
-            const userToken = jwt.sign({id:id}, process.env.JWT_SECRET);
-            const expire = new Date(Date.now()+process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000);
-            const localToken = session + "|" + userToken + "|" + expire
-            const url = process.env.SIDEKICK_API + 'tokens';
-           
-            let token = {
-              session: session,
-              token: userToken,
-              expire: expire.toISOString().slice(0, 10)
-            }
-        
-            let fetchData = {
-              method: 'POST',
-              body: JSON.stringify(token),
-              headers: new Headers({
-                'Content-Type': 'application/json; charset=UTF-8'
-              })
-            }
-            fetch(url, fetchData);
-
-            ipcRenderer.invoke("login", JSON.stringify(token))
+            tokenController.createToken(data).then((response) => {
+              console.log(response)
+              ipcRenderer.invoke("login", response)
+            })
         })
         .catch(function(error) {
           console.log(error);
@@ -83,12 +62,8 @@ async function isAuthenticated(cookie){
   }); 
 };
 
-async function logout(jwt){
-  const url = process.env.SIDEKICK_API + 'tokens/bo?session='+ jwt.session + '&token='+ jwt.token;
-  await fetch(url, { method: 'DELETE' }).catch(function(error) {
-    console.log(error);
-  });  
-
+async function logout(token){
+  tokenController.deleteToken(token)
 }
 
 async function getUser(condition){

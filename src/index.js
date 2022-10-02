@@ -4,8 +4,8 @@ require('electron-reload')(__dirname);
 
 let window;
 
-function mainWindow() {
-
+async function mainWindow() {
+  var cookie = await getCookie('jwt')
     window = new BrowserWindow({
       //autoHideMenuBar: true,
       minHeight: 500,
@@ -19,6 +19,10 @@ function mainWindow() {
     const mainMenu = Menu.buildFromTemplate(templateMenu);
     window.webContents.openDevTools()
 
+    window.webContents.on('did-finish-load', () => {
+      window.webContents.send('cookie-data', cookie)
+    })
+    
     Menu.setApplicationMenu(mainMenu);
     window.loadFile("views/index.html");
 
@@ -79,10 +83,9 @@ function mainWindow() {
         ]
     }]
 
-  ipcMain.handle('login', (event, args) => {
+  ipcMain.handle('login', async (event, args) => {
     createCookie(args)
-    process.env.JWT_COOKIE = args
-    mainWindow()
+    await mainWindow()
     winlogin.close()
   });
 
@@ -91,9 +94,8 @@ function mainWindow() {
     winload.close()
   });
 
-  ipcMain.handle('authUser', (event, args) => { 
-    process.env.JWT_COOKIE = args
-    mainWindow()
+  ipcMain.handle('authUser', async (event, args) => { 
+    await mainWindow()
     winload.close()
   });
 
@@ -125,7 +127,7 @@ function mainWindow() {
 
   function getCookie(cookieName){
     return new Promise((resolve, reject) => {
-      session.defaultSession.cookies.get({name:  'jwt'})
+      session.defaultSession.cookies.get({name:  cookieName})
     .then((cookies) => {
       resolve( cookies)
     }).catch((error) => {

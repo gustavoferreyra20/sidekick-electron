@@ -1,3 +1,3 @@
 function btnLogout() {
-    userController.logout().then(ipcRenderer.invoke("logout"))
+    userController.logout(userToken).then(ipcRenderer.invoke("logout"))
   }

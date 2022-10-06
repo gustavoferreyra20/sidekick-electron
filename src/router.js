@@ -6,10 +6,11 @@ const platformController = require("../controllers/platformController");
 const tokenController = require("../controllers/tokenController");
 const { ipcRenderer }= require("electron");
 
-var userToken;
 
-ipcRenderer.on('cookie-data', async (event, cookie) => {
-    userToken = JSON.parse(cookie[0].value);
+var userSession;
+
+ipcRenderer.on('userSession-data', async (event, cookie) => {
+    userSession = JSON.parse(cookie[0].value);
   })
 
 var app = angular.module("myApp", ["ngRoute"]);
@@ -76,3 +77,8 @@ var app = angular.module("myApp", ["ngRoute"]);
     gameController.getAllGames().then(
         function(response) {gameController.loadGames(response)}
       )
+
+      function processReceivedData (data) {
+        usersession.push(data);
+    }
+    

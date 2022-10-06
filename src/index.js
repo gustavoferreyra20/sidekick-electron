@@ -5,7 +5,7 @@ require('electron-reload')(__dirname);
 let window;
 
 async function mainWindow() {
-  var cookie = await getCookie('jwt')
+  var userSession = await getCookie('userSession')
     window = new BrowserWindow({
       //autoHideMenuBar: true,
       minHeight: 500,
@@ -20,7 +20,7 @@ async function mainWindow() {
     window.webContents.openDevTools()
 
     window.webContents.on('did-finish-load', () => {
-      window.webContents.send('cookie-data', cookie)
+      window.webContents.send('userSession-data', userSession)
     })
     
     Menu.setApplicationMenu(mainMenu);
@@ -46,7 +46,7 @@ async function mainWindow() {
   }
 
   async function loadingWindow () {
-    var cookie = await getCookie('jwt')
+    var userSession = await getCookie('userSession')
     winload = new BrowserWindow({
 /*      width: 400,
      height: 630,
@@ -62,7 +62,7 @@ async function mainWindow() {
    winload.loadFile('views/section/loading.html')
 
    winload.webContents.on('did-finish-load', () => {
-    winload.webContents.send('cookie', cookie)
+    winload.webContents.send('userSession', userSession)
   })
 
   }
@@ -112,7 +112,7 @@ async function mainWindow() {
   function createCookie(args){
     const cookie = { 
       url: 'http://localhost/',
-      name: 'jwt',
+      name: 'userSession',
       value: JSON.stringify(args),
       expirationDate: 99999999999999
     }

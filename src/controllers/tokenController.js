@@ -1,9 +1,8 @@
 const crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 
-async function createToken(args){
+async function createToken(id){
     return new Promise((resolve, reject) =>{
-    const id = args[0].id_user
     const session = crypto.randomBytes(20).toString('hex');
     const userToken = jwt.sign({id:id}, process.env.JWT_SECRET);
     const expire = new Date(Date.now()+process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000);

@@ -7,9 +7,10 @@ async function login(obj){
         })
         .then((data) => {
             // create the cookie
-            tokenController.createToken(data).then((response) => {
-              console.log(response)
-              ipcRenderer.invoke("login", response)
+            let userSession = data[0];
+            tokenController.createToken(userSession.id_user).then((response) => {
+              userSession.token = response;
+              ipcRenderer.invoke("login", userSession)
             })
         })
         .catch(function(error) {
@@ -43,15 +44,14 @@ async function saveUser(obj){
 }
 
 // check if the cookie match with an user in db
-async function isAuthenticated(cookie){
-  const jsCookie = JSON.parse(cookie[0].value)
-  const url = process.env.SIDEKICK_API + 'tokens?session='+ jsCookie.session + '&token='+ jsCookie.token
+async function isAuthenticated(token){
+  const url = process.env.SIDEKICK_API + 'tokens?session='+ token.session + '&token='+ token.token
   fetch(url, { method: 'GET' }).then((response) => {
     return response.json();
   })
   .then((data) => {
     if(data.length > 0){
-      ipcRenderer.invoke("authUser", cookie[0].value)
+      ipcRenderer.invoke("authUser", token)
     }else{
       //Cookie expired in database
       ipcRenderer.invoke("noCookie")

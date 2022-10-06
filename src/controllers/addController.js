@@ -1,6 +1,3 @@
-var { getConnection } = require("../database");
-var jwt = require('jsonwebtoken');
-var {promisify} = require('util');
 var arrOptions = [];
 
   function setOptions(games){
@@ -29,19 +26,33 @@ var arrOptions = [];
   }
 
   async function saveAd(ad){
-    conn = await getConnection();
-    const myArray = process.env.JWT_COOKIE.split("|");
-    const decodificada = await promisify(jwt.verify)(myArray[1], process.env.JWT_SECRET)
-    const user = await userController.getUser(decodificada.id)
-    date = new Date(Date.now())
-    sql = "INSERT INTO anuncio (id_usuarioPropietario, id_juego, plataforma, usuariosRequeridos, titulo, descripcion) values ('" + user.id_usuario + "', '" + + ad.games.value + "', '" +ad.platform.value + "', '"+ad.usersRequire.value + "', '" + ad.title.value + "', '" + ad.description.value + "' )";
-    conn.query(sql, (error, results) => {
-
-      if(error){ console.log(error);}
-      popupController.action("Anuncio creado con exito", function (){ (location.reload())})
-
-    });  
-
+      const url = process.env.SIDEKICK_API + 'posts';
+      let data = {
+        id_user: userSession.id_user,
+        id_game: ad.games.value,
+        id_platform:  ad.platform.value,
+        requiredUsers: ad.usersRequire.value,
+        actualUsers: 1,
+        title:  ad.title.value,
+        description: ad.description.value
+      }
+  
+      let fetchData = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: new Headers({
+          'Content-Type': 'application/json; charset=UTF-8'
+        })
+      }
+  
+      fetch(url, fetchData)
+      .then(() => {
+        // create the cookie
+        popupController.action("Anuncio creado con exito", function (){ (location.reload())})
+    })
+      .catch(function(error) {
+        console.log(error);
+      }); 
   }
 
   gameController.getAllGames().then(

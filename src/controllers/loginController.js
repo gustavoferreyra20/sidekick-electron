@@ -25,8 +25,9 @@ window.onload = function() {
     event.preventDefault()
     userName = document.getElementById("registrationForm").elements["userName"]
     email = document.getElementById("registrationForm").elements["email"]
+    description = document.getElementById("registrationForm").elements["description"]
     password = document.getElementById("registrationForm").elements["password"]
-    const newUser = {name:userName.value, email:email.value, password:password.value }
+    const newUser = {name:userName.value, email:email.value, description:description.value, password:password.value }
     let conditions = {
       email: email.value
     }

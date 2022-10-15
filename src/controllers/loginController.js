@@ -2,7 +2,6 @@ const userController = require('../../controllers/userController');
 const popupController = require('../../controllers/popupController');
 const tokenController = require("../../controllers/tokenController");
 
-let nombre;
 let email; 
 let password;
 let loginForm; 
@@ -13,6 +12,7 @@ window.onload = function() {
   loginForm = document.getElementById('loginForm');
   registrationForm = document.getElementById("registrationForm")
   btnToogle = document.getElementById("toggle")
+
   loginForm.addEventListener('submit', () => {
     event.preventDefault()
     email = document.getElementById("loginForm").elements["email"]
@@ -27,19 +27,26 @@ window.onload = function() {
     email = document.getElementById("registrationForm").elements["email"]
     description = document.getElementById("registrationForm").elements["description"]
     password = document.getElementById("registrationForm").elements["password"]
-    const newUser = {name:userName.value, email:email.value, description:description.value, password:password.value }
+    file = document.getElementById("registrationForm").elements["file"]
+
     let conditions = {
       email: email.value
     }
     existentUser = await userController.getUser(conditions)
+
     if(existentUser.length > 0){
       popupController.alert("Usuario existente")
-    }else if(newUser.password.length < 8){
+    }else if(password.value.length < 8){
       popupController.alert("Contraseña demasiado corta")
     } else {
-      await userController.saveUser(newUser).then(popupController.action("Usuario registrado con exito", function (){ (location.reload())}))      
+      saveUserImage(file).then((res) =>{
+        return newUser = {name:userName.value, email:email.value, description:description.value, password:password.value, img:res.path }
+      }).then((res) =>{
+        userController.saveUser(res)
+        .then(popupController.action("Usuario registrado con exito", function (){ (location.reload())}))
+      })
     }
-  });
+  })
 
   btnToogle.onclick = function(e){
         e.preventDefault();
@@ -54,4 +61,23 @@ function toggleDisplay(className, displayState){
   for (var i = 0; i < elements.length; i++){
       elements[i].style.display = displayState;
   }
+}
+
+async function saveUserImage(file){
+  return new Promise((resolve, reject) =>{
+  const endpoint = process.env.SIDEKICK_API + 'imageupload';
+  const formData = new FormData () ;
+  formData.append("file", file.files[0]) ;
+  
+  fetch(endpoint, {
+    method: "POST",
+    body: formData
+  })
+  .then((response) => {
+    return response.json();
+  })
+  .then((data) => {
+    resolve(data)
+  }).catch(console.error)
+})
 }

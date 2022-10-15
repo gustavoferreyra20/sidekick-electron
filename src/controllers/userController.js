@@ -27,7 +27,8 @@ async function saveUser(obj){
       name: obj.name,
       email: obj.email,
       description: obj.description,
-      password:  obj.password
+      password:  obj.password,
+      img: obj.img
     }
 
     let fetchData = {

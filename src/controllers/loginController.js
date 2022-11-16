@@ -1,6 +1,7 @@
 const userController = require('../../controllers/userController');
 const popupController = require('../../controllers/popupController');
 const tokenController = require("../../controllers/tokenController");
+const axios = require("axios");
 
 let email; 
 let password;
@@ -65,19 +66,18 @@ function toggleDisplay(className, displayState){
 
 async function saveUserImage(file){
   return new Promise((resolve, reject) =>{
-  const endpoint = process.env.SIDEKICK_API + 'imageupload';
+  // endpoint
+  const url = process.env.SIDEKICK_API + 'imageupload';
   const formData = new FormData () ;
   formData.append("file", file.files[0]) ;
   
-  fetch(endpoint, {
-    method: "POST",
-    body: formData
-  })
-  .then((response) => {
-    return response.json();
-  })
-  .then((data) => {
-    resolve(data)
+  axios({
+    method: "post",
+    url: url,
+    data: formData})
+  .then((res) => {
+    console.log(res)
+    resolve(res.data)
   }).catch(console.error)
 })
 }

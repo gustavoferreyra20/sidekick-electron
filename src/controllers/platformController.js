@@ -1,13 +1,12 @@
+const axios = require("axios");
+
 async function getPlatformsByGame(id_game){
   return new Promise((resolve, reject) =>{
-    const url = process.env.SIDEKICK_API + 'platforms/join?id_game=';
+    const url = process.env.SIDEKICK_API + 'platforms/join?id_game=' + id_game;
 
-    fetch(url + id_game, { method: 'GET' }).
-    then((response) => {
-        return response.json();
-      })
-    .then((data) => {
-      resolve(data)
+    axios.get(url)
+    .then((res) => {
+      resolve(res.data)
     })
     .catch(function(error) {
       console.log(error);

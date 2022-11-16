@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 var jwt = require('jsonwebtoken');
+const axios = require('axios');
 
 async function createToken(id){
     return new Promise((resolve, reject) =>{
@@ -14,20 +15,10 @@ async function createToken(id){
       expire: expire.toISOString().slice(0, 10)
     }
 
-    let fetchData = {
-      method: 'POST',
-      body: JSON.stringify(token),
-      headers: new Headers({
-        'Content-Type': 'application/json; charset=UTF-8'
-      })
-    }
-    fetch(url, fetchData).then((response) => {
-        return response.json();
-      })
+    axios.post(url, token)
     .then(() => {
         resolve(token)
-    }      
-    )
+    })
     .catch(function(error) {
       console.log(error);
     });;
@@ -37,9 +28,10 @@ async function createToken(id){
 
 async function deleteToken(args){
     const url = process.env.SIDEKICK_API + 'tokens/bo?session='+ args.session + '&token='+ args.token;
-  await fetch(url, { method: 'DELETE' }).catch(function(error) {
-    console.log(error);
-  });  
+    await axios.delete(url)
+    .catch(function(error) {
+      console.log(error);
+    });; 
 
 }
 

@@ -37,15 +37,7 @@ var arrOptions = [];
         description: ad.description.value
       }
   
-      let fetchData = {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: new Headers({
-          'Content-Type': 'application/json; charset=UTF-8'
-        })
-      }
-  
-      fetch(url, fetchData)
+      axios.post(url, data)
       .then(() => {
         // create the cookie
         popupController.action("Anuncio creado con exito", function (){ (location.reload())})

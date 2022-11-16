@@ -1,13 +1,12 @@
 const { ipcRenderer }= require("electron");
+const axios = require("axios");
 
 async function login(obj){
         const url = process.env.SIDEKICK_API + 'users/bo?email='+ obj.email + '&password='+ obj.password
-        fetch(url, { method: 'GET' }).then((response) => {
-          return response.json();
-        })
-        .then((data) => {
+        axios.get(url)
+        .then((res) => {
             // create the cookie
-            let userSession = data[0];
+            let userSession = res.data[0];
             tokenController.createToken(userSession.id_user).then((response) => {
               userSession.token = response;
               ipcRenderer.invoke("login", userSession)
@@ -31,15 +30,7 @@ async function saveUser(obj){
       img: obj.img
     }
 
-    let fetchData = {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: new Headers({
-        'Content-Type': 'application/json; charset=UTF-8'
-      })
-    }
-
-    fetch(url, fetchData)
+    axios.post(url, data)
     .catch(function(error) {
       console.log(error);
     }); 
@@ -48,11 +39,10 @@ async function saveUser(obj){
 // check if the cookie match with an user in db
 async function isAuthenticated(token){
   const url = process.env.SIDEKICK_API + 'tokens?session='+ token.session + '&token='+ token.token
-  fetch(url, { method: 'GET' }).then((response) => {
-    return response.json();
-  })
-  .then((data) => {
-    if(data.length > 0){
+  
+  axios.get(url)
+  .then((res) => {
+    if(res.data.length > 0){
       ipcRenderer.invoke("authUser", token)
     }else{
       //Cookie expired in database
@@ -73,16 +63,14 @@ async function getUser(condition){
     const url = process.env.SIDEKICK_API + 'users/bo?';
     const params = new URLSearchParams(condition)
     
-    fetch(url + params, { method: 'GET' }).then((response) => {
-      return response.json();
+    axios.get(url + params)
+    .then((res) => {
+      resolve(res.data)
     })
-  .then((data) => {
-    resolve(data)
-  })
-  .catch(function(error) {
-    console.log(error);
-  });
-  })
+    .catch(function(error) {
+      console.log(error);
+    });
+    })
   
 }
 

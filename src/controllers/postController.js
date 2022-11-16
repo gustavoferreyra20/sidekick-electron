@@ -1,12 +1,13 @@
+const axios = require("axios");
+
 async function getAllPosts (){
     return new Promise((resolve, reject) =>{
-      const url = process.env.SIDEKICK_API + 'posts';
+    
+    const url = process.env.SIDEKICK_API + 'posts';
       
-      fetch(url, { method: 'GET' }).then((response) => {
-        return response.json();
-      })
-    .then((data) => {
-      resolve(data)
+    axios.get(url)
+    .then((res) => {
+      resolve(res.data);
     })
     .catch(function(error) {
       console.log(error);

@@ -2,16 +2,14 @@ async function getAllGames (){
   return new Promise((resolve, reject) =>{
     const url = process.env.SIDEKICK_API + 'games';
     
-    fetch(url, { method: 'GET' }).then((response) => {
-      return response.json();
+    axios.get(url)
+    .then((res) => {
+      resolve(res.data)
     })
-  .then((data) => {
-    resolve(data)
-  })
-  .catch(function(error) {
-    console.log(error);
-  });
-  })
+    .catch(function(error) {
+      console.log(error);
+    });
+    })
   
 }
 

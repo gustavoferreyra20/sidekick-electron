@@ -34,8 +34,8 @@ window.onload = function() {
       email: email.value
     }
     existentUser = await userController.getUser(conditions)
-
-    if(existentUser.length > 0){
+    saveUserImage(file)
+   /*  if(existentUser.length > 0){
       popupController.alert("Usuario existente")
     }else if(password.value.length < 8){
       popupController.alert("Contraseña demasiado corta")
@@ -46,7 +46,7 @@ window.onload = function() {
         userController.saveUser(res)
         .then(popupController.action("Usuario registrado con exito", function (){ (location.reload())}))
       })
-    }
+    } */
   })
 
   btnToogle.onclick = function(e){
@@ -70,14 +70,16 @@ async function saveUserImage(file){
   const url = process.env.SIDEKICK_API + 'imageupload';
   const formData = new FormData () ;
   formData.append("file", file.files[0]) ;
-  
-  axios({
-    method: "post",
-    url: url,
-    data: formData})
-  .then((res) => {
-    console.log(res)
-    resolve(res.data)
-  }).catch(console.error)
+
+  fetch(url, {
+    method: "POST",
+    body: formData
+  })
+  .then((response) => {
+    return response.json();
+  })
+  .then((data) => {
+    resolve(data)
+  }).catch(console.error) 
 })
 }

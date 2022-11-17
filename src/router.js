@@ -1,3 +1,4 @@
+const axios = require("axios");
 const userController = require('../controllers/userController');
 const popupController = require('../controllers/popupController');
 const gameController = require("../controllers/gameController");
@@ -5,7 +6,6 @@ const postController = require("../controllers/postController");
 const platformController = require("../controllers/platformController");
 const tokenController = require("../controllers/tokenController");
 const { ipcRenderer }= require("electron");
-const axios = require("axios");
 
 var userSession;
 
@@ -24,9 +24,9 @@ var app = angular.module("myApp", ["ngRoute"]);
             templateUrl : "section/games.html",
             controller: "gameCtrl"
         })
-        .when("/add", {
-            templateUrl : "section/add.html",
-            controller: "addCtrl"
+        .when("/newPost", {
+            templateUrl : "section/newPost.html",
+            controller: "postCtrl"
         })
         .when("/comments", {
             templateUrl : "section/comments.html"
@@ -55,9 +55,9 @@ var app = angular.module("myApp", ["ngRoute"]);
     
     }]);
 
-    app.controller('addCtrl', ['$scope', function($scope) {
+    app.controller('postCtrl', ['$scope', function($scope) {
 
-        dynamicallyLoadScript("../Controllers/addController.js")
+        dynamicallyLoadScript("../Controllers/postController.js")
     
     }]);
 

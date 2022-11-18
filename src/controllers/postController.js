@@ -24,7 +24,8 @@ async function getAllPosts (){
     let conditions = {
       id_user: posts[i].id_user
     }
-    user = await userController.getUser(conditions)
+    user = await userController.getUser(conditions);
+    game = await gameController.getGame({id_game: posts[i].id_game})
     html = `
       <div class="container-fluid py-5 mx-auto p-3 post">
       <div class="row justify-content-start px-3">
@@ -42,7 +43,7 @@ async function getAllPosts (){
     </div>
     <div class="line"></div>
     <div class="row ml-auto">
-        <img id="game" class="img-responsive rounded product-image" src="../img/games/MultiVersus.jpg">
+        <img id="game" class="img-responsive rounded product-image" alt="` + game[0].name +`" src="` + game[0].img +`">
         <p class="col">` + posts[i].description +`</p>
     </div>
     </div>

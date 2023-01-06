@@ -59,60 +59,7 @@ li.right{
 
 }
 
-.card-plays{
-	background-color: #535053;
-	margin-top: 20px;
-	margin-left: 20px;
-	margin-right: 20px;
-	margin-bottom: 0px;
-	min-width: 500px;
-	min-height: 180px;
-	max-width: 500px;
-	max-height: 180px;
-}
 
-.card-plays-footer{
-margin-top: 10px;
-max-height: 30px;
-min-height: 30px;
-}
-
-.text-plays-card-footer{
-	margin: 2px  !important; 
-	text-align: left;
-	font-size: 14px;
-	position: absolute;
-	bottom: 1px;
-	}
-
-.card-plays-img{
-	margin: 10px;
-	width: auto;
-	height: auto;
-	position: absolute;
-	top: 0px;
-}
-
-.card-img{
-	background-color: white;
-}
-
-.card-text-plays{
-	height: 70px;
-}
-
-.score.red {
-	color: red;
-  }
-
-.score.orange {
-	color: orange;
-  }
-  
-.score.green {
-	color: green;
-  }
-  
 .hr-main{
 	border: 0; 
 	height: 1px;
@@ -123,21 +70,6 @@ min-height: 30px;
 	margin-bottom: 20px;
 
 }
-
-.card-deck{
-	margin: 20px;
-
-}
-
-.vl {
-	border-left: 6px solid #1ded8c;
-	height: 500px;
-	position: absolute;
-	left: 50%;
-	margin-left: -3px;
-	top: 0;
-  }
-
 
   .backg-primary {
 	background-color: #494649;
@@ -160,19 +92,6 @@ min-height: 30px;
 	margin: 10px;
 	position: absolute;
 }
-
-.card-friends{
-	background-color: #535053;
-}
-
-.card-friends{
-	background-color: #535053;
-}
-
-.card-image{
-	height: 300px;
-	width:auto; 
- }
 
 .loader {
 	position: absolute;
@@ -215,6 +134,7 @@ min-height: 30px;
 h5{font-weight: 400}
 
 .post{
+	background-color: #3e3c3d;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	margin-bottom: 20px;
 }
@@ -239,9 +159,6 @@ h5{font-weight: 400}
 .btn-post {
     background-color: #1ded8c;
     color: #fff;
-    height: 70px;
-    padding: 20px 30px;
-    margin-top: 15px;
 }
 
 .btn-post:hover {

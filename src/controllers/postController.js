@@ -17,7 +17,7 @@ async function getAllPosts (){
   }
   
   async function loadPosts (posts){
-    var arrOptions = [];
+
     var html;
     var user;
     for (var i=0, n = posts.length; i < n; i++) { // looping over the options
@@ -39,13 +39,14 @@ async function getAllPosts (){
               <span></span><br></span><span>Cazador de trofeos </span><span class="dot"></span><span>PS4<br></span>
             </div>
         </div>
-        <div class="col-sm-12  col-lg-2 btn btn-post ml-auto">Unirse</div>
     </div>
     <div class="line"></div>
     <div class="row ml-auto">
         <img id="game" class="img-responsive rounded product-image" alt="` + game[0].name +`" src="` + game[0].img +`">
         <p class="col">` + posts[i].description +`</p>
     </div>
+    <br>
+    <div class="col-sm-12  col-lg-12 btn btn-post">Unirse</div>
     </div>
       `;
       arrOptions.push(html);
@@ -54,31 +55,6 @@ async function getAllPosts (){
   return new Promise((resolve, reject) => {
     resolve(arrOptions)
   }) 
-  }
-  
-  function setOptions(games){
-    arrOptions.push("<option value='"+"' disabled selected>Selecciona un juego</option>");
-    for (var i=0, n = games.length; i < n; i++) { // looping over the options
-        if (games[i]) {
-            arrOptions.push("<option value='" + games[i].id_game + "'>" + games[i].name + "</option>");
-        }
-    }
-
-    document.getElementById("games").innerHTML = arrOptions.join();
-    arrOptions = []; 
-  }
-
-  async function setPlatforms(game){
-    var platforms = await platformController.getPlatformsByGame(game.value)     
-     for (var i=0, n = platforms.length; i < n; i++) { // looping over the options
-        if (platforms[i]) {
-            arrOptions.push("<option value='" + platforms[i].id_platform + "'>" + platforms[i].name + "</option>");
-        }
-    } 
-
-    document.getElementById("platform").innerHTML = arrOptions.join('');
-    arrOptions = []; 
-      
   }
 
   async function savePost(post){
@@ -95,19 +71,16 @@ async function getAllPosts (){
   
       axios.post(url, data)
       .then(() => {
-        // create the cookie
         popupController.action("Anuncio creado con exito", function (){ (location.reload())})
-    })
+      })
       .catch(function(error) {
         console.log(error);
       }); 
   }
-
-  gameController.getAllGames().then(
-    function(response) {setOptions(response)}
-  )
+  
   module.exports = {
     getAllPosts,
-    loadPosts
+    loadPosts,
+    savePost
   
   };

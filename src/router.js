@@ -5,6 +5,8 @@ const gameController = require("../controllers/gameController");
 const postController = require("../controllers/postController");
 const platformController = require("../controllers/platformController");
 const tokenController = require("../controllers/tokenController");
+const modeController = require("../controllers/modeController");
+const utils = require("../controllers/utils");
 const { ipcRenderer }= require("electron");
 
 var userSession;
@@ -26,7 +28,7 @@ var app = angular.module("myApp", ["ngRoute"]);
         })
         .when("/newPost", {
             templateUrl : "section/newPost.html",
-            controller: "postCtrl"
+            controller: "newPCtrl"
         })
         .when("/comments", {
             templateUrl : "section/comments.html"
@@ -64,6 +66,12 @@ var app = angular.module("myApp", ["ngRoute"]);
     app.controller('configCtrl', ['$scope', function($scope) {
 
         dynamicallyLoadScript("../Controllers/configController.js")
+    
+    }]);
+
+    app.controller('newPCtrl', ['$scope', function($scope) {
+
+        dynamicallyLoadScript("../Controllers/newPostController.js")
     
     }]);
 

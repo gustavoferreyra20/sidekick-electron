@@ -1,17 +1,25 @@
 var arrOptions = [];
 
-postController.getAllPosts().then(
+postController.getPosts().then(
     function(response) {postController.loadPosts(response)}
   )
 
 
   async function setPlatforms(){
-    await platformController.getOptions(null, true);  
+    platformController.getOptions(null, true);  
   }
 
   async function setModes(){
-    await modeController.getOptions(true);  
+    modeController.getOptions(true);  
   }
 
+  async function setGames(){
+    gameController.getOptions(true);  
+  }
+
+  async function searchPost(post){
+  }
+  
   setPlatforms();
   setModes();
+  setGames();

@@ -3,17 +3,17 @@
   <hr class="hr-main">
   <div class="container mt-5 mb-5">
 
-    <form>
+    <form id="searchPostForm" method="POST" onsubmit="searchPost(this)">
   
       <div class="form-row">
 
-        <div class="form-group col-md-3">
-          <input type="text" class="form-control" id="inputGame" placeholder="Search Game...">
-        </div>
-
+          <div class="form-group col-md-3">
+            <select class="custom-select" id="game" required>
+        </select>
+      </div>
+    
         <div class="form-group col-md-3">
                 <select class="custom-select" id="platform" required>
-              <option disabled selected>Selecciona un juego</option>
             </select>
           </div>
 
@@ -22,10 +22,12 @@
           </select>
     </div>
     
-    <div class="col-auto col-md-3">
-        <button type="submit" class="btn btn-post">Submit</button>
+    <div class="col-auto col-md-3 col-sm-12">
+        <button type="submit" class="btn btn-post col-12">Buscar</button>
     </div>
      
+  </div>
+
     </form>
     
     <div id="ads"></div>

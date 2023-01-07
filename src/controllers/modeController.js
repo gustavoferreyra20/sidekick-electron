@@ -1,9 +1,13 @@
 const axios = require("axios");
 var arrOptions = [];
 
-async function getModes(){
+async function getModes(args = null){
   return new Promise((resolve, reject) =>{
-    const url = process.env.SIDEKICK_API + 'modes';
+    var url = process.env.SIDEKICK_API + 'modes';
+
+    if(args !== null){
+      url = url + '/bo?' + args;
+    }
 
     axios.get(url)
     .then((res) => {

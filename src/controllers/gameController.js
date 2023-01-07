@@ -39,16 +39,23 @@ async function loadGames (games){
   arrOptions = [];
 }
 
-function getOptionsByGame(games){
-  arrOptions.push("<option value='"+"' disabled selected>Selecciona un juego</option>");
-  for (var i=0, n = games.length; i < n; i++) { // looping over the options
-      if (games[i]) {
-          arrOptions.push("<option value='" + games[i].id_game + "'>" + games[i].name + "</option>");
-      }
-  }
+async function getOptions(any = false){
 
-  document.getElementById("games").innerHTML = arrOptions.join();
+  var games = await this.getAllGames();
+
+  if (any){
+    arrOptions.push("<option value='all'>Cualquier juego</option>");
+  }
+  
+   for (var i=0, n = games.length; i < n; i++) { // looping over the options
+      if (games[i]) {
+          arrOptions.push("<option value='" + games[i].id_game + "'>" + utils.capitalizeFirstLetter(games[i].name) + "</option>");
+      }
+  } 
+
+  document.getElementById("game").innerHTML = arrOptions.join('');
   arrOptions = []; 
+    
 }
 
 getAllGames().then(
@@ -59,5 +66,5 @@ module.exports = {
 	getAllGames,
   getGame,
 	loadGames,
-  getOptionsByGame
+  getOptions
 };

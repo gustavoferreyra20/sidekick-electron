@@ -15,9 +15,13 @@ async function getPlatformsByGame(id_game){
   })
 }
 
-async function getPlatforms(){
+async function getPlatforms(args = null){
   return new Promise((resolve, reject) =>{
-    const url = process.env.SIDEKICK_API + 'platforms';
+    var url = process.env.SIDEKICK_API + 'platforms';
+
+    if(args !== null){
+      url = url + '/bo?' + args;
+    }
 
     axios.get(url)
     .then((res) => {

@@ -5,8 +5,13 @@ postController.getPosts().then(
   )
 
 
-  async function setPlatforms(){
-    platformController.getOptions(null, true);  
+  async function setPlatforms(game = 'all'){
+    if(game != 'all'){
+      platformController.getOptions(game.value, true);  
+    }else{
+      platformController.getOptions(null, true);  
+    }
+   
   }
 
   async function setModes(){
@@ -18,6 +23,23 @@ postController.getPosts().then(
   }
 
   async function searchPost(post){
+    let params = '';
+
+    if(post.game.value != 'any'){
+      params = params + 'id_game=' + post.game.value + '&';
+    }
+
+    if(post.platform.value != 'any'){
+      params = params + 'id_platform='+ post.platform.value + '&';
+    }
+
+    if(post.mode.value != 'any'){
+      params = params + 'id_mode='+ post.mode.value;
+    }
+
+    postController.getPosts(params).then(
+      function(response) {postController.loadPosts(response)}
+    )
   }
   
   setPlatforms();

@@ -3,11 +3,11 @@ async function setPlatforms(game){
   }
 
   async function setModes(){
-    modeController.getOptions(true);  
+    modeController.getOptions(false);  
   }
   
   async function setGames(){
-    gameController.getOptions(true);  
+    gameController.getOptions(false);  
   }
   async function savePost(post){
     postController.savePost(post)

@@ -24,7 +24,7 @@ async function getOptions(any = false){
   var modes = await this.getModes();
 
   if (any){
-    arrOptions.push("<option value='all'>Cualquier modo</option>");
+    arrOptions.push("<option value='any'>Cualquier modo</option>");
   }
   
    for (var i=0, n = modes.length; i < n; i++) { // looping over the options

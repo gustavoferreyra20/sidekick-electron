@@ -38,7 +38,7 @@ async function getOptions(game = null, any = false){
   var platforms = (game === null) ? await this.getPlatforms() : await this.getPlatformsByGame(game);
 
   if (any){
-    arrOptions.push("<option value='all'>Cualquier plataforma</option>");
+    arrOptions.push("<option value='any'>Cualquier plataforma</option>");
   }
   
    for (var i=0, n = platforms.length; i < n; i++) { // looping over the options

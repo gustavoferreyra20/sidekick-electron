@@ -44,7 +44,7 @@ async function getOptions(any = false){
   var games = await this.getAllGames();
 
   if (any){
-    arrOptions.push("<option value='all'>Cualquier juego</option>");
+    arrOptions.push("<option value='any'>Cualquier juego</option>");
   }
   
    for (var i=0, n = games.length; i < n; i++) { // looping over the options

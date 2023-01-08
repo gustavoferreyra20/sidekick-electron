@@ -6,6 +6,7 @@ const postController = require("../controllers/postController");
 const platformController = require("../controllers/platformController");
 const tokenController = require("../controllers/tokenController");
 const modeController = require("../controllers/modeController");
+const reviewController = require("../controllers/reviewController");
 const utils = require("../controllers/utils");
 const { ipcRenderer }= require("electron");
 
@@ -33,8 +34,9 @@ var app = angular.module("myApp", ["ngRoute"]);
         .when("/comments", {
             templateUrl : "section/comments.html"
         })
-        .when("/user", {
-            templateUrl : "section/user.html"
+        .when("/profile", {
+            templateUrl : "section/profile.html",
+            controller: "profileCtrl"
         })
         .when("/config", {
             templateUrl : "section/config.html",
@@ -63,6 +65,12 @@ var app = angular.module("myApp", ["ngRoute"]);
     
     }]);
 
+    app.controller('profileCtrl', ['$scope', function($scope) {
+
+        dynamicallyLoadScript("../Controllers/profileController.js")
+    
+    }]);
+
     app.controller('configCtrl', ['$scope', function($scope) {
 
         dynamicallyLoadScript("../Controllers/configController.js")
@@ -82,9 +90,12 @@ var app = angular.module("myApp", ["ngRoute"]);
         document.head.appendChild(script);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
     }
 
-    gameController.getAllGames().then(
-        function(response) {gameController.loadGames(response)}
-      )
+    window.onload = function() { 
+        gameController.getAllGames().then(
+            function(response) {gameController.loadGames(response)}
+          )
+    
+        }    
 
       function processReceivedData (data) {
         usersession.push(data);

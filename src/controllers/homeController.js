@@ -5,9 +5,13 @@ postController.getPosts().then(
   )
 
 
-  async function setPlatforms(game = 'all'){
-    if(game != 'all'){
-      platformController.getOptions(game.value, true);  
+  async function setPlatforms(game = null){
+    if(game != null ){
+      if(game.value != 'any'){
+        platformController.getOptions(game.value, true);  
+      }else{
+        platformController.getOptions(null, true);  
+      }
     }else{
       platformController.getOptions(null, true);  
     }

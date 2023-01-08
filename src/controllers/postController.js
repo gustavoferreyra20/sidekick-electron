@@ -23,16 +23,12 @@ async function getPosts (args = null){
   }
   
   async function loadPosts (posts){
-
-    var html;
-    var user;
     for (var i=0, n = posts.length; i < n; i++) { // looping over the options
 
-    let conditions = {
-      id_user: posts[i].id_user
-    }
-
-    user = await userController.getUser(conditions);
+    user = await userController.getUser({id_user: posts[i].id_user});
+    reviewStats = await reviewController.getAvg({id_reviewedUser: user[0].id_user});
+    abilityScore = (reviewStats[0].abilityScore === undefined ) ? 0 : Math.round(reviewStats[0].abilityScore);
+    karmaScore = (reviewStats[0].karmaScore === undefined ) ? 0 : Math.round(reviewStats[0].karmaScore);
     game = await gameController.getGame({id_game: posts[i].id_game});
     platform = await platformController.getPlatforms('id_platform=' + posts[i].id_platform);
     mode = await modeController.getModes('id_mode=' + posts[i].id_mode);
@@ -42,13 +38,14 @@ async function getPosts (args = null){
       <div class="row justify-content-start px-3">
 
       <div class="col-sm-3 col-lg-2 col-xl-1 text-right">
-            <img class="user-img fit-image" src="../img/icons/user.png">
+            <img class="user-img fit-image" src="../img/icons/profile.png">
         </div>
 
         <div class="col-sm-7 col-lg-8 col-xl-9 text-left">
         <div class="mt-1 mb-1 spec-1">
           <span>` + user[0].name + `</span>
-          <span></span><br></span><span>` + utils.capitalizeFirstLetter(mode[0].name) + `</span><span class="dot"></span><span>` + platform[0].name + `<br></span>
+          <br></span><span>` + utils.capitalizeFirstLetter(mode[0].name) + `</span><span class="dot"></span><span>` + platform[0].name + `</span><span class="dot"></span>
+          <span>Habilidad: </span><span id="ability">` + abilityScore + `</span><span class="dot"></span><span>Karma: <span id="karma">` + abilityScore + `</span><br></span>
         </div>
       </div>
         <div class="col-sm-2 text-right">
@@ -98,15 +95,12 @@ async function getPosts (args = null){
   }
   
   function noPost(){
-    html = `
-    <p>
-No se encontraron resultados
-  <p>
-    `;
+    html = '<p>No se encontraron resultados<p>';
     arrOptions.push(html);
     document.getElementById("ads").innerHTML = arrOptions.join('');
     arrOptions = []; 
   }
+
   module.exports = {
     getPosts,
     loadPosts,

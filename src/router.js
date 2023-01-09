@@ -8,6 +8,7 @@ const tokenController = require("../controllers/tokenController");
 const modeController = require("../controllers/modeController");
 const reviewController = require("../controllers/reviewController");
 const utils = require("../controllers/utils");
+const applicationController = require("../controllers/applicationController");
 const { ipcRenderer }= require("electron");
 
 var userSession;

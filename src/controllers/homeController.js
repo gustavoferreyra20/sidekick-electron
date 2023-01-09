@@ -45,6 +45,16 @@ postController.getPosts().then(
       function(response) {postController.loadPosts(response)}
     )
   }
+
+  async function newApplication(id_post, id_userApplicant){
+    event.preventDefault();
+    let data = {
+      id_post: id_post,
+      id_userApplicant: id_userApplicant
+    }
+    
+    applicationController.saveApplication(data);
+  }
   
   setPlatforms();
   setModes();

@@ -62,7 +62,7 @@ async function getPosts (args = null){
           <p class="col">` + posts[i].description + `</p>
       </div>
       <br>
-      <button type="submit" class="col-sm-12  col-lg-12 btn btn-post">Unirse</button>
+      <button type="submit" class="col-sm-12  col-lg-12 btn btn-post" onclick="newApplication(` + posts[i].id_post + `,` + userSession.id_user + `)">Unirse</button>
     </div>
       `;
       arrOptions.push(html);

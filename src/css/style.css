@@ -59,6 +59,19 @@ li.right{
 
 }
 
+.nav-item.current{
+    border-radius: 50px;
+    -webkit-box-shadow: 2px 2px 5px 0px #1ded8c;
+    -moz-box-shadow: 2px 2px 5px 0px #1ded8c;
+    box-shadow: 2px 2px 5px 0px #1ded8c;
+}
+
+.nav-item:hover {
+	border-radius: 50px;
+    -webkit-box-shadow: 2px 2px 5px 0px #1ded8c;
+    -moz-box-shadow: 2px 2px 5px 0px #1ded8c;
+    box-shadow: 2px 2px 5px 0px #1ded8c;
+  }
 
 .hr-main{
 	border: 0; 

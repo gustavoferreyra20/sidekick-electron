@@ -1,31 +1,5 @@
 var arrOptions = [];
 
-postController.getPosts().then(
-    function(response) {postController.loadPosts(response)}
-  )
-
-
-  async function setPlatforms(game = null){
-    if(game != null ){
-      if(game.value != 'any'){
-        platformController.getOptions(game.value, true);  
-      }else{
-        platformController.getOptions(null, true);  
-      }
-    }else{
-      platformController.getOptions(null, true);  
-    }
-   
-  }
-
-  async function setModes(){
-    modeController.getOptions(true);  
-  }
-
-  async function setGames(){
-    gameController.getOptions(true);  
-  }
-
   async function searchPost(post){
     let params = '';
 
@@ -56,6 +30,5 @@ postController.getPosts().then(
     applicationController.saveApplication(data);
   }
   
-  setPlatforms();
   setModes();
   setGames();

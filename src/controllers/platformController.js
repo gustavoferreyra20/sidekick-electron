@@ -35,22 +35,22 @@ async function getPlatforms(args = null){
 
 async function getOptions(game = null, any = false){
 
+  var options = []
   var platforms = (game === null) ? await this.getPlatforms() : await this.getPlatformsByGame(game);
 
   if (any){
-    arrOptions.push("<option value='any'>Cualquier plataforma</option>");
+    options.push({value: "any", name: "Cualquier plataforma"});
   }
   
    for (var i=0, n = platforms.length; i < n; i++) { // looping over the options
       if (platforms[i]) {
-          arrOptions.push("<option value='" + platforms[i].id_platform + "'>" + platforms[i].name + "</option>");
+        options.push({value: platforms[i].id_game, name: utils.capitalizeFirstLetter(platforms[i].name)});
       }
   } 
 
-  document.getElementById("platform").innerHTML = arrOptions.join('');
-  arrOptions = []; 
-    
+  return options;
 }
+
 
 
     module.exports = {

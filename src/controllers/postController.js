@@ -25,50 +25,21 @@ async function getPosts (args = null){
   async function loadPosts (posts){
     for (var i=0, n = posts.length; i < n; i++) { // looping over the options
 
-    user = await userController.getUser({id_user: posts[i].id_user});
-    reviewStats = await reviewController.getAvg({id_reviewedUser: user[0].id_user});
-    abilityScore = (reviewStats[0].abilityScore === undefined ) ? 0 : Math.round(reviewStats[0].abilityScore);
-    karmaScore = (reviewStats[0].karmaScore === undefined ) ? 0 : Math.round(reviewStats[0].karmaScore);
-    game = await gameController.getGame({id_game: posts[i].id_game});
-    platform = await platformController.getPlatforms('id_platform=' + posts[i].id_platform);
-    mode = await modeController.getModes('id_mode=' + posts[i].id_mode);
-    html = `
-    <div class="container-fluid mx-auto p-3 post">
+      user = await userController.getUser({id_user: posts[i].id_user});
+      reviewStats = await reviewController.getAvg({id_reviewedUser: user[0].id_user});
+      posts[i].abilityScore = (reviewStats[0].abilityScore === undefined ) ? 0 : Math.round(reviewStats[0].abilityScore);
+      posts[i].karmaScore = (reviewStats[0].karmaScore === undefined ) ? 0 : Math.round(reviewStats[0].karmaScore);
+      game = await gameController.getGame({id_game: posts[i].id_game});
+      platform = await platformController.getPlatforms('id_platform=' + posts[i].id_platform);
+      mode = await modeController.getModes('id_mode=' + posts[i].id_mode);
 
-      <div class="row justify-content-start px-3">
-
-      <div class="col-sm-3 col-lg-2 col-xl-1 text-right">
-            <img class="user-img fit-image" src="../img/icons/profile.png">
-        </div>
-
-        <div class="col-sm-7 col-lg-8 col-xl-9 text-left">
-        <div class="mt-1 mb-1 spec-1">
-          <span>` + user[0].name + `</span>
-          <br></span><span>` + utils.capitalizeFirstLetter(mode[0].name) + `</span><span class="dot"></span><span>` + platform[0].name + `</span><span class="dot"></span>
-          <span>Habilidad: </span><span id="ability">` + abilityScore + `</span><span class="dot"></span><span>Karma: <span id="karma">` + abilityScore + `</span><br></span>
-        </div>
-      </div>
-        <div class="col-sm-2 text-right">
-        <h2>` + posts[i].actualUsers + `/` + posts[i].requiredUsers + `</h2>
-    
-        </div>
-      </div>
-
-      <div class="line"></div>
-        
-      <div class="row ml-auto">
-      <h2 class="col-12">` + posts[i].title + `</h2>
-          <img class="img-responsive rounded product-image postGame" alt="` + game[0].name + `" src="` + game[0].img + `">
-          <p class="col">` + posts[i].description + `</p>
-      </div>
-      <br>
-      <button type="submit" class="col-sm-12  col-lg-12 btn btn-post" onclick="newApplication(` + posts[i].id_post + `,` + userSession.id_user + `)">Unirse</button>
-    </div>
-      `;
-      arrOptions.push(html);
-      document.getElementById("ads").innerHTML = arrOptions.join('');
-  } 
-  arrOptions = []; 
+      posts[i].userName = user[0].name;
+      posts[i].mode = utils.capitalizeFirstLetter(mode[0].name);
+      posts[i].platform = platform[0].name;
+      posts[i].gameName = game[0].name;
+      posts[i].gameImg = game[0].img;
+      } 
+    return posts;
   
   }
 
@@ -97,7 +68,7 @@ async function getPosts (args = null){
   function noPost(){
     html = '<p>No se encontraron resultados<p>';
     arrOptions.push(html);
-    document.getElementById("ads").innerHTML = arrOptions.join('');
+    document.getElementById("posts").innerHTML = arrOptions.join('');
     arrOptions = []; 
   }
 

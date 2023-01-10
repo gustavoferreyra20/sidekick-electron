@@ -50,13 +50,94 @@ var app = angular.module("myApp", ["ngRoute"]);
 
     app.controller('homeCtrl', ['$scope', function($scope) {
 
-        dynamicallyLoadScript("../Controllers/homeController.js")
+          postController.getPosts().then(
+            function(response){
+                postController.loadPosts(response).then(function(posts){
+                    $scope.posts = posts;
+                    $scope.$applyAsync();
+                })
+            }
+          )
+          
+          gameController.getOptions(true).then(function(response){
+            $scope.gameOptions = response;
+            $scope.gameSelected = $scope.gameOptions[0];
+            $scope.setPlatforms()
+            
+          });
+
+          modeController.getOptions(true).then(function(response){
+            $scope.modeOptions = response;
+            $scope.modeSelected = $scope.modeOptions[0];
+            
+            $scope.$applyAsync();
+          });
+
+          $scope.setPlatforms = function(arg = null){
+            var game;
+
+            if(arg != null){
+              game = (arg.value != 'any') ? arg.value : null;
+            }else{
+              game = arg;
+            }
+
+            platformController.getOptions(game, true).then(function(response){
+              $scope.platformOptions = response;
+              $scope.platformSelected = $scope.platformOptions[0];
+              
+              $scope.$applyAsync();
+            }); 
+           
+          }; 
+          
+          $scope.searchPost = function(game, platform, mode){
+            let params = '';
+
+            if(game.value != 'any'){
+              params = params + 'id_game=' + game.value + '&';
+            }
+        
+            if(platform.value != 'any'){
+              params = params + 'id_platform='+ platform.value + '&';
+            }
+        
+            if(mode.value != 'any'){
+              params = params + 'id_mode='+ mode.value;
+            }
+        
+            postController.getPosts(params).then(
+              function(response){
+                  postController.loadPosts(response).then(function(response){
+                      $scope.posts = response;
+                      $scope.$applyAsync();
+                  })
+              }
+            )
+           
+          };  
     
     }]);
 
     app.controller('gameCtrl', ['$scope', function($scope) {
 
-        dynamicallyLoadScript("../Controllers/gameController.js")
+        gameController.getAllGames().then(
+            function(response){
+                var games = [];
+
+                for (var i=0, n = response.length; i < n; i++) { // looping over the options
+                    var game = {
+                        img:  response[i].img,
+                        name: response[i].name,
+                      };
+
+                      games.push(game);
+                }
+
+                $scope.games = games;
+                $scope.$applyAsync();
+            }
+        )
     
     }]);
 
@@ -67,8 +148,27 @@ var app = angular.module("myApp", ["ngRoute"]);
     }]);
 
     app.controller('profileCtrl', ['$scope', function($scope) {
+        
+        userController.getUser({id_user: userSession.id_user}).then(
+            function(user) {
+                
+                reviewController.getAvg({id_reviewedUser: user[0].id_user}).then(
+                    function(response) {
+                      //var name = document.getElementById("name");
+                      var profile = {
+                        name: user[0].name,
+                        description: user.description,
+                        ability: (response[0].abilityScore === undefined ) ? 0 : Math.round(response[0].abilityScore),
+                        karma: (response[0].karmaScore === undefined ) ? 0 : Math.round(response[0].karmaScore)
+                      };
 
-        dynamicallyLoadScript("../Controllers/profileController.js")
+                      $scope.profile = profile;
+                      $scope.$applyAsync();
+        
+                    }
+                  )
+            }
+          )
     
     }]);
 
@@ -92,10 +192,7 @@ var app = angular.module("myApp", ["ngRoute"]);
     }
 
     window.onload = function() { 
-        gameController.getAllGames().then(
-            function(response) {gameController.loadGames(response)}
-          )
-    
+  
           const navImages = document.querySelectorAll('.nav-item');
             for (let i = 0; i < navImages.length; i++) {
                 

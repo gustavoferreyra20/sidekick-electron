@@ -43,8 +43,8 @@
   <div id="rightSection">
     <h4 class="d-flex justify-content-center mt-2">Popular Games</h4>
     <hr class="hr-main">
-  <div class="container-fluid">
-    <div class="row justify-content-center mt-2 rightContent" id="games">
+    <div class="games-grid" id="games" ng-controller="gameCtrl">
+      <img data-ng-src={{game.img}} class="img-fluid" alt={{game.name}}  ng-repeat="game in games">
       
     </div>
   </div>

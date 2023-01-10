@@ -41,21 +41,20 @@ async function loadGames (games){
 
 async function getOptions(any = false){
 
+  var options = []
   var games = await this.getAllGames();
 
   if (any){
-    arrOptions.push("<option value='any'>Cualquier juego</option>");
+    options.push({value: "any", name: "Cualquier juego"});
   }
   
    for (var i=0, n = games.length; i < n; i++) { // looping over the options
       if (games[i]) {
-          arrOptions.push("<option value='" + games[i].id_game + "'>" + utils.capitalizeFirstLetter(games[i].name) + "</option>");
+        options.push({value: games[i].id_game, name: utils.capitalizeFirstLetter(games[i].name)});
       }
   } 
 
-  document.getElementById("game").innerHTML = arrOptions.join('');
-  arrOptions = []; 
-    
+  return options;
 }
 
 getAllGames().then(

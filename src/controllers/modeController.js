@@ -21,21 +21,20 @@ async function getModes(args = null){
 
 async function getOptions(any = false){
 
+  var options = []
   var modes = await this.getModes();
 
   if (any){
-    arrOptions.push("<option value='any'>Cualquier modo</option>");
+    options.push({value: "any", name: "Cualquier mode"});
   }
   
    for (var i=0, n = modes.length; i < n; i++) { // looping over the options
       if (modes[i]) {
-          arrOptions.push("<option value='" + modes[i].id_mode + "'>" + utils.capitalizeFirstLetter(modes[i].name) + "</option>");
+        options.push({value: modes[i].id_mode, name: utils.capitalizeFirstLetter(modes[i].name)});
       }
   } 
 
-  document.getElementById("mode").innerHTML = arrOptions.join('');
-  arrOptions = []; 
-    
+  return options;
 }
 
     module.exports = {

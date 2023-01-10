@@ -2,44 +2,43 @@
     <div class="row justify-content-center">
             <div class="card bloque">
                 <div class="card-body page active" id="newPostDiv">
-                <form id="newPostForm" method="POST" onsubmit="savePost(this)">
+                <form id="newPostForm" method="POST" ng-submit="createPost(form, gameSelected, platformSelected, modeSelected)">
                     <h1 class="text-center pb-4">Crear anuncio</h1>
                     
                     <div class="form-group">
                         <label for="title">Título:</label>
                         <input type="text" class="form-control" name="title" id="title"
-                            placeholder="Ingrese el título" value="" maxlength="45" required>
+                            placeholder="Ingrese el título" value="" maxlength="45" required ng-model="form.title">
                     </div>
 
                     <div class="form-group">
                         <label for="games">Juegos:</label>
                         <br>
-                        <select class="custom-select" id="game" onchange="setPlatforms(this)" required>
-                          </select>
+                        <select class="custom-select" ng-model="gameSelected" required ng-options="option as option.name for option in gameOptions track by option.value" ng-change="setPlatforms(gameSelected)">
+                        </select>
                           <br>
                     </div>
 
                     <div class="form-group">
                         <label for="platform">Plataforma:</label>
                         <br>
-                        <select class="custom-select" id="platform" required>
-                            <option disabled selected>Selecciona un juego</option>
-                          </select>
+                        <select class="custom-select" ng-model="platformSelected" required ng-options="option as option.name for option in platformOptions track by option.value">
+                        </select>
                           <br>
                     </div>
                     
                     <div class="form-group">
                         <label for="platform">Modo de juego:</label>
                         <br>
-                        <select class="custom-select" id="mode" required>
-                          </select>
+                        <select class="custom-select" ng-model="modeSelected" required ng-options="option as option.name for option in modeOptions track by option.value">
+                        </select>
                     </div>
 
                     <div class="form-group">
                         <label for="usersRequire">Usuarios requeridos:</label>
                         <br>
-                        <select class="custom-select" id="usersRequire">
-                            <option value="1" selected>1</option>
+                        <select class="custom-select" id="usersRequire" ng-model="form.userRequire" ng-init="form.userRequire='1'">
+                            <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                           </select>
@@ -48,7 +47,7 @@
 
                     <div class="form-group">
                         <label for="description">Descripcion del anuncio:</label>
-                        <textarea id="description" name="description" rows="4" maxlength="280" class="col-12">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos officia dolore quod accusantium ipsa, fugiat velit corrupti nemo consequuntur accusamus ducimus, repellat quibusdam voluptatem quidem unde ipsam. Officiis, necessitatibus eveniet.</textarea>
+                        <textarea id="description" name="description" rows="4" maxlength="280" class="col-12" ng-model="form.description" placeholder="Description"></textarea>
                         <br>
                     </div>
 

@@ -50,12 +50,12 @@ async function getPosts (args = null){
         id_game: post.game.value,
         id_platform:  post.platform.value,
         id_mode:  post.mode.value,
-        requiredUsers: post.usersRequire.value,
+        requiredUsers: post.userRequire,
         actualUsers: 0,
-        title:  post.title.value,
-        description: post.description.value
+        title:  post.title,
+        description: (post.description != null) ? post.description : ''
       }
-  
+
       axios.post(url, data)
       .then(() => {
         popupController.action("Anuncio creado con exito", function (){ (location.reload())})

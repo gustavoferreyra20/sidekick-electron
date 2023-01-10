@@ -1,5 +1,4 @@
 const axios = require("axios");
-var arrOptions = [];
 
 async function getModes(args = null){
   return new Promise((resolve, reject) =>{

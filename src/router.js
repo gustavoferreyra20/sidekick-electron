@@ -54,6 +54,7 @@ var app = angular.module("myApp", ["ngRoute"]);
             function(response){
                 postController.loadPosts(response).then(function(posts){
                     $scope.posts = posts;
+
                     $scope.$applyAsync();
                 })
             }
@@ -62,8 +63,9 @@ var app = angular.module("myApp", ["ngRoute"]);
           gameController.getOptions(true).then(function(response){
             $scope.gameOptions = response;
             $scope.gameSelected = $scope.gameOptions[0];
-            $scope.setPlatforms()
-            
+
+            $scope.setPlatforms();
+            $scope.$applyAsync();
           });
 
           modeController.getOptions(true).then(function(response){
@@ -141,12 +143,6 @@ var app = angular.module("myApp", ["ngRoute"]);
     
     }]);
 
-    app.controller('postCtrl', ['$scope', function($scope) {
-
-        dynamicallyLoadScript("../Controllers/postController.js")
-    
-    }]);
-
     app.controller('profileCtrl', ['$scope', function($scope) {
         
         userController.getUser({id_user: userSession.id_user}).then(
@@ -174,22 +170,50 @@ var app = angular.module("myApp", ["ngRoute"]);
 
     app.controller('configCtrl', ['$scope', function($scope) {
 
-        dynamicallyLoadScript("../Controllers/configController.js")
+      $scope.btnLogout = function(){
+        userController.logout(userSession.token).then(ipcRenderer.invoke("logout"))
+       
+      };  
     
     }]);
 
     app.controller('newPCtrl', ['$scope', function($scope) {
 
-        dynamicallyLoadScript("../Controllers/newPostController.js")
-    
-    }]);
+      gameController.getOptions(false).then(function(response){
+        $scope.gameOptions = response;
+        $scope.gameSelected = $scope.gameOptions[0];
+        
+        $scope.setPlatforms();
+        $scope.$applyAsync();
+      });
 
-    function dynamicallyLoadScript(url) {
-        var script = document.createElement("script");  // create a script DOM node
-        script.src = url;  // set its src to the provided URL
+      modeController.getOptions(false).then(function(response){
+        $scope.modeOptions = response;
+        $scope.modeSelected = $scope.modeOptions[0];
+        
+        $scope.$applyAsync();
+      });
+
+      $scope.setPlatforms = function(arg = null){
+        game = (arg != null) ? arg.value : null;
+
+        platformController.getOptions(game, false).then(function(response){
+          $scope.platformOptions = response;
+          $scope.platformSelected = $scope.platformOptions[0];
+          
+          $scope.$applyAsync();
+        }); 
        
-        document.head.appendChild(script);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
-    }
+      }; 
+    
+      $scope.createPost = function(form, game, platform, mode){
+       form.game = game;
+       form.platform = platform;
+       form.mode = mode;
+       
+       postController.savePost(form);
+      };  
+    }]);
 
     window.onload = function() { 
   
@@ -204,7 +228,4 @@ var app = angular.module("myApp", ["ngRoute"]);
 
         }    
 
-      function processReceivedData (data) {
-        usersession.push(data);
-    }
     

@@ -1,6 +1,3 @@
-const axios = require("axios");
-var arrOptions = [];
-
 async function getPlatformsByGame(id_game){
   return new Promise((resolve, reject) =>{
     const url = process.env.SIDEKICK_API + 'platforms/join?id_game=' + id_game;
@@ -44,7 +41,7 @@ async function getOptions(game = null, any = false){
   
    for (var i=0, n = platforms.length; i < n; i++) { // looping over the options
       if (platforms[i]) {
-        options.push({value: platforms[i].id_game, name: utils.capitalizeFirstLetter(platforms[i].name)});
+        options.push({value: platforms[i].id_platform, name: utils.capitalizeFirstLetter(platforms[i].name)});
       }
   } 
 

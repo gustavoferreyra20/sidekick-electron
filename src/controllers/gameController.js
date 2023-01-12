@@ -31,14 +31,6 @@ async function getGame (condition){
   
 }
 
-async function loadGames (games){
-    for (var i=0, n = games.length; i < n; i++) { // looping over the options
-      arrOptions.push("<img src='" + games[i].img + "' class=img-fluid alt='" + games[i].name + "'>");
-      document.getElementById("games").innerHTML = arrOptions.join('');
-  }
-  arrOptions = [];
-}
-
 async function getOptions(any = false){
 
   var options = []
@@ -57,13 +49,8 @@ async function getOptions(any = false){
   return options;
 }
 
-getAllGames().then(
-  function(response) {loadGames(response)}
-)
-
 module.exports = {
 	getAllGames,
   getGame,
-	loadGames,
   getOptions
 };

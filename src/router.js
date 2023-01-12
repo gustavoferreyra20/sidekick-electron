@@ -10,6 +10,7 @@ const reviewController = require("../controllers/reviewController");
 const utils = require("../controllers/utils");
 const applicationController = require("../controllers/applicationController");
 const { ipcRenderer }= require("electron");
+const { rmSync } = require("original-fs");
 
 var userSession;
 
@@ -32,8 +33,9 @@ var app = angular.module("myApp", ["ngRoute"]);
             templateUrl : "section/newPost.html",
             controller: "newPCtrl"
         })
-        .when("/comments", {
-            templateUrl : "section/comments.html"
+        .when("/applications", {
+            templateUrl : "section/applications.html",
+            controller: "applicationCtrl"
         })
         .when("/profile", {
             templateUrl : "section/profile.html",
@@ -93,7 +95,7 @@ var app = angular.module("myApp", ["ngRoute"]);
            
           }; 
           
-          $scope.searchPost = function(game, platform, mode){
+          $scope.btnSearchPost = function(game, platform, mode){
             let params = '';
 
             if(game.value != 'any'){
@@ -117,6 +119,10 @@ var app = angular.module("myApp", ["ngRoute"]);
               }
             )
            
+          };
+          
+          $scope.btnSubmitApplication = function(id_post){
+            applicationController.saveApplication({id_post: id_post, id_user: userSession.id_user});     
           };  
     
     }]);
@@ -213,6 +219,27 @@ var app = angular.module("myApp", ["ngRoute"]);
        
        postController.savePost(form);
       };  
+    }]);
+
+
+    app.controller('applicationCtrl', ['$scope', function($scope) {
+     applicationController.getApplicationsByUser(userSession.id_user).then(function(res){
+      var posts = [];
+
+      for (let i = 0; i < res.length; i++) { // looping over the options
+        postController.getPosts('id_post= ' + res[i].id_post).then(function(response){
+            posts.push(response[0])
+             if(posts.length === res.length){
+              $scope.posts = posts;
+              $scope.$applyAsync();
+            } 
+        });       
+      }
+
+      
+      
+
+  });
     }]);
 
     window.onload = function() { 

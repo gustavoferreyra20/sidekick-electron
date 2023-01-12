@@ -207,3 +207,7 @@ input::file-selector-button {
     line-height: 1.5;
     border-radius: 0.25rem;
 }
+
+button.active {
+	background-color: #0eaa61 !important;
+  }

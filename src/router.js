@@ -223,23 +223,39 @@ var app = angular.module("myApp", ["ngRoute"]);
 
 
     app.controller('applicationCtrl', ['$scope', function($scope) {
-     applicationController.getApplicationsByUser(userSession.id_user).then(function(res){
-      var posts = [];
 
-      for (let i = 0; i < res.length; i++) { // looping over the options
-        postController.getPosts('id_post= ' + res[i].id_post).then(function(response){
-            posts.push(response[0])
-             if(posts.length === res.length){
-              $scope.posts = posts;
-              $scope.$applyAsync();
-            } 
-        });       
-      }
+    showSentApp();
 
-      
-      
+    $scope.showSentApp = function(){showSentApp()};
 
-  });
+    $scope.showReceivedApp = function(){
+
+      applicationController.getApplicationsByUsersPosts(userSession.id_user).then(function(posts){
+        console.log(posts)
+
+        $scope.posts = posts;
+        $scope.applications = [];
+        $scope.$applyAsync();
+      })
+    
+    }; 
+
+    function showSentApp(){
+      applicationController.getApplications('id_user=' + userSession.id_user).then(function(res){
+        var app = [];
+
+        for (let i = 0; i < res.length; i++) { // looping over the options
+          postController.getPosts('id_post= ' + res[i].id_post).then(function(response){
+            app.push(response[0])
+              if(app.length === res.length){
+                $scope.applications = app;
+                $scope.posts = [];
+                $scope.$applyAsync();
+              } 
+          });       
+        }  
+    });
+    }
     }]);
 
     window.onload = function() { 
@@ -253,6 +269,4 @@ var app = angular.module("myApp", ["ngRoute"]);
                 });
             }
 
-        }    
-
-    
+        }        

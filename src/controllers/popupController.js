@@ -23,3 +23,19 @@ exports.action = function (msg, action){
       }
   });
   }
+
+  exports.confirm = function (msg, actionConfirm){
+    popup.confirm({
+      window: "confirm",
+      additionalButtonHolderClass: 'form-group',
+      additionalButtonOkClass: "btn btn-block btn-primary",
+      additionalButtonCancelClass: "btn btn-block btn-danger",
+      content: "<div class= form-group>" + msg + "</div>",
+      labelOk:     'Si',
+      labelCancel: 'No',
+      onSubmit: function() {
+        actionConfirm();
+      }
+  });
+  }  
+ 

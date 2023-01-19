@@ -72,8 +72,17 @@ async function getPosts (args = null){
     arrOptions = []; 
   }
 
+  async function removePost(id_post){
+    const url = process.env.SIDEKICK_API + 'posts/bo?id_post='+ id_post;
+    await axios.delete(url)
+    .catch(function(error) {
+      console.log(error);
+    });; 
+  }
+
   module.exports = {
     getPosts,
     loadPosts,
-    savePost  
+    savePost,
+    removePost  
   };

@@ -228,16 +228,12 @@ var app = angular.module("myApp", ["ngRoute"]);
 
     $scope.showSentApp = function(){showSentApp()};
 
-    $scope.showReceivedApp = function(){
+    $scope.showReceivedApp = function(){showReceivedApp()}; 
 
-      applicationController.getApplicationsByUsersPosts(userSession.id_user).then(function(posts){
-        console.log(posts)
+    $scope.changeStatus = function(id_application, status){
 
-        $scope.posts = posts;
-        $scope.applications = [];
-        $scope.$applyAsync();
-      })
-    
+      applicationController.setStatus(id_application, status)
+      .then(showReceivedApp());
     }; 
 
     function showSentApp(){
@@ -256,6 +252,24 @@ var app = angular.module("myApp", ["ngRoute"]);
         }  
     });
     }
+
+    function showReceivedApp(){
+      applicationController.getApplicationsByUsersPosts(userSession.id_user).then(function(posts){
+
+        $scope.posts = posts;
+        $scope.applications = [];
+        $scope.$applyAsync();
+      })
+    }
+
+    $scope.btnCancelApplication = function(id_post){
+      popupController.confirm("Seguro desea eliminar la solicitud?", function (){ (applicationController.removeApplication(id_post, userSession.id_user).then(showSentApp()))})
+    }
+
+    $scope.btnDeletePost = function(id_post){
+      popupController.confirm("Seguro desea eliminar el post?", function (){ (postController.removePost(id_post).then(showReceivedApp()))})
+    }
+
     }]);
 
     window.onload = function() { 

@@ -42,8 +42,37 @@ async function getApplicationsByUsersPosts(id_user){
   })
 }
 
+async function removeApplication(id_post, id_user){
+  const url = process.env.SIDEKICK_API + 'applications/bo?id_post='+ id_post + '&id_user='+ id_user;
+  await axios.delete(url)
+  .catch(function(error) {
+    console.log(error);
+  });; 
+}
+
+async function setStatus(id_application, status){
+
+let data = {
+  cond: {
+    id_application: id_application
+  },
+  values: {
+    status: status
+  }
+}
+
+  const url = process.env.SIDEKICK_API + 'applications';
+  await axios.put(url, data)
+  .then(result => console.log(result))
+  .catch(function(error) {
+    console.log(error);
+  }); 
+}
+
   module.exports = {
     getApplications,
     saveApplication,
-    getApplicationsByUsersPosts
+    getApplicationsByUsersPosts,
+    removeApplication,
+    setStatus
   };

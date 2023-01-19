@@ -53,7 +53,7 @@
     
           <div class="line"></div>
             
-          <div class="container-fluid mx-auto p-3 post" ng-repeat="user in post.users">
+          <div class="container-fluid mx-auto p-3 post" ng-repeat="user in post.users" ng-show="{{user.applications.status !== 'rejected'}}">
   
             <div class="row justify-content-start px-3 pl-0">
       
@@ -63,17 +63,23 @@
             <div class="line"></div>
               
             <br>
-            <div class="col-auto col-md-6 col-sm-6">
-              <button type="submit" class="btn btn-post col-12" ng-click="acceptUser(user.id_user)">Aceptar</button>
+              <div class="col-auto col-md-6 col-sm-6" ng-show="{{user.applications.status == 'pending'}}">
+                <button type="submit" class="btn btn-post col-12" ng-click="changeStatus(user.applications.id_application,  'accepted')">Aceptar</button>
+              </div>
+      
+              <div class="col-auto col-md-6 col-sm-6" ng-show="{{user.applications.status == 'pending'}}">
+                <button type="submit" class="btn btn-danger col-12" ng-click="changeStatus(user.applications.id_application, 'rejected')">Rechazar</button>
+              </div>
+
+            <div class="col-12" ng-show="{{user.applications.status == 'accepted'}}">
+              <br>
+              <button type="submit" class="btn btn-danger col-12" ng-click="rateUser(user.id_user)">Calificar</button>
             </div>
-    
-            <div class="col-auto col-md-6 col-sm-6">
-              <button type="submit" class="btn btn-danger col-12" ng-click="rejectUser(user.id_user)">Rechazar</button>
-            </div>
+
             </div>
           </div>
 
-          <button type="submit" class="col-sm-12  col-lg-12 btn btn-danger" ng-click="deletePost(post.id_post)">Eliminar post</button>
+          <button type="submit" class="col-sm-12  col-lg-12 btn btn-danger" ng-click="btnDeletePost(post.id_post)">Eliminar post</button>
         </div>
   
       

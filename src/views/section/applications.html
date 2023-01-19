@@ -56,7 +56,10 @@
           <div class="container-fluid mx-auto p-3 post" ng-repeat="user in post.users" ng-show="{{user.applications.status !== 'rejected'}}">
   
             <div class="row justify-content-start px-3 pl-0">
-      
+              <div class="col-sm-3 col-lg-2 col-xl-1 text-right">
+                <img class="user-img fit-image" src="../img/icons/profile.png">
+            </div>
+            
               <h2>{{user.name}}</h2>
     
       
@@ -73,7 +76,7 @@
 
             <div class="col-12" ng-show="{{user.applications.status == 'accepted'}}">
               <br>
-              <button type="submit" class="btn btn-danger col-12" ng-click="rateUser(user.id_user)">Calificar</button>
+              <button type="submit" class="btn btn-primary col-12" ng-click="rateUser(user.id_user)">Calificar</button>
             </div>
 
             </div>

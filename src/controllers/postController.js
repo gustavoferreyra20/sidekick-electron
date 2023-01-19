@@ -26,7 +26,7 @@ async function getPosts (args = null){
     for (var i=0, n = posts.length; i < n; i++) { // looping over the options
 
       user = await userController.getUser({id_user: posts[i].id_user});
-      reviewStats = await reviewController.getAvg({id_reviewedUser: user[0].id_user});
+      reviewStats = await reviewController.getAvg({id_user: user[0].id_user});
       posts[i].abilityScore = (reviewStats[0].abilityScore === undefined ) ? 0 : Math.round(reviewStats[0].abilityScore);
       posts[i].karmaScore = (reviewStats[0].karmaScore === undefined ) ? 0 : Math.round(reviewStats[0].karmaScore);
       game = await gameController.getGame({id_game: posts[i].id_game});

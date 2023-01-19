@@ -154,9 +154,9 @@ var app = angular.module("myApp", ["ngRoute"]);
         userController.getUser({id_user: userSession.id_user}).then(
             function(user) {
                 
-                reviewController.getAvg({id_reviewedUser: user[0].id_user}).then(
+                reviewController.getAvg({id_user: user[0].id_user}).then(
                     function(response) {
-                      //var name = document.getElementById("name");
+
                       var profile = {
                         name: user[0].name,
                         description: user.description,
@@ -171,6 +171,15 @@ var app = angular.module("myApp", ["ngRoute"]);
                   )
             }
           )
+
+        reviewController.getReviews({id_user: userSession.id_user}).then(
+          function(reviews){
+            $scope.reviews = reviews;
+            $scope.$applyAsync();
+          }
+          )
+
+
     
     }]);
 

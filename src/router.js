@@ -96,20 +96,20 @@ var app = angular.module("myApp", ["ngRoute"]);
           }; 
           
           $scope.btnSearchPost = function(game, platform, mode){
-            let params = '';
+            let params = {};
 
             if(game.value != 'any'){
-              params = params + 'id_game=' + game.value + '&';
+              params.id_game = game.value;
             }
         
             if(platform.value != 'any'){
-              params = params + 'id_platform='+ platform.value + '&';
+              params.id_platform = platform.value;
             }
         
             if(mode.value != 'any'){
-              params = params + 'id_mode='+ mode.value;
+              params.id_mode = mode.value;
             }
-        
+
             postController.getPosts(params).then(
               function(response){
                   postController.loadPosts(response).then(function(response){
@@ -246,11 +246,11 @@ var app = angular.module("myApp", ["ngRoute"]);
     }; 
 
     function showSentApp(){
-      applicationController.getApplications('id_user=' + userSession.id_user).then(function(res){
+      applicationController.getApplications({id_user: userSession.id_user}).then(function(res){
         var app = [];
 
         for (let i = 0; i < res.length; i++) { // looping over the options
-          postController.getPosts('id_post= ' + res[i].id_post).then(function(response){
+          postController.getPosts({id_post: res[i].id_post}).then(function(response){
             app.push(response[0])
               if(app.length === res.length){
                 $scope.applications = app;

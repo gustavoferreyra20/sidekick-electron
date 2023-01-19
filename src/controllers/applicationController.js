@@ -13,9 +13,10 @@ async function saveApplication(data){
 async function getApplications(args = null){
   return new Promise((resolve, reject) =>{
     var url = process.env.SIDEKICK_API + 'applications';
+    const params = new URLSearchParams(args)
 
     if(args !== null){
-      url = url + '/bo?' + args;
+      url = url + '/bo?' + params;
     }
 
     axios.get(url)

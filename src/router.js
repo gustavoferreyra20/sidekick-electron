@@ -122,7 +122,15 @@ var app = angular.module("myApp", ["ngRoute"]);
           };
           
           $scope.btnSubmitApplication = function(id_post){
-            applicationController.saveApplication({id_post: id_post, id_user: userSession.id_user});     
+            applicationController.getApplications({id_post: id_post, id_user: userSession.id_user})
+            .then((res) => {
+              if(res[0]){
+                popupController.alert("Ya existe una solicitud pendiente");
+              }else{
+                applicationController.saveApplication({id_post: id_post, id_user: userSession.id_user});     
+              }
+             
+            })  
           };  
     
     }]);
@@ -247,13 +255,11 @@ var app = angular.module("myApp", ["ngRoute"]);
 
     function showSentApp(){
       applicationController.getApplications({id_user: userSession.id_user}).then(function(res){
-        var app = [];
-
         for (let i = 0; i < res.length; i++) { // looping over the options
           postController.getPosts({id_post: res[i].id_post}).then(function(response){
-            app.push(response[0])
-              if(app.length === res.length){
-                $scope.applications = app;
+            res[i].post = response[0];
+              if(i + 1 ==  res.length ){
+                $scope.applications = res;
                 $scope.posts = [];
                 $scope.$applyAsync();
               } 

@@ -3,7 +3,7 @@ async function saveApplication(data){
 
     axios.post(url, data)
     .then(() => {
-      popupController.alert("Solicitud enviada")
+      popupController.alert("Solicitud enviada");
     })
     .catch(function(error) {
       console.log(error);
@@ -64,7 +64,6 @@ let data = {
 
   const url = process.env.SIDEKICK_API + 'applications';
   await axios.put(url, data)
-  .then(result => console.log(result))
   .catch(function(error) {
     console.log(error);
   }); 

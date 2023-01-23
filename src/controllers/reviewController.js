@@ -11,11 +11,6 @@ async function getReviews (condition = null){
   .then((res) => {
     resolve(res.data);
   })
-  .catch(function(error) {
-    if(error.response.status == 404){
-      noPost();
-    }
-  });
   })
   
 }

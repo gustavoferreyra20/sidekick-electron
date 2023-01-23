@@ -13,11 +13,6 @@ async function getPosts (args = null){
     .then((res) => {
       resolve(res.data);
     })
-    .catch(function(error) {
-      if(error.response.status == 404){
-        noPost();
-      }
-    });
     })
     
   }
@@ -63,13 +58,6 @@ async function getPosts (args = null){
       .catch(function(error) {
         console.log(error);
       }); 
-  }
-  
-  function noPost(){
-    html = '<p>No se encontraron resultados<p>';
-    arrOptions.push(html);
-    document.getElementById("posts").innerHTML = arrOptions.join('');
-    arrOptions = []; 
   }
 
   async function removePost(id_post){

@@ -9,6 +9,7 @@ const modeController = require("../controllers/modeController");
 const reviewController = require("../controllers/reviewController");
 const utils = require("../controllers/utils");
 const applicationController = require("../controllers/applicationController");
+const rewardController = require("../controllers/rewardController");
 const { ipcRenderer }= require("electron");
 const { rmSync } = require("original-fs");
 
@@ -45,6 +46,10 @@ var app = angular.module("myApp", ["ngRoute"]);
             templateUrl : "section/config.html",
             controller: "configCtrl"
         })
+        .when("/store", {
+          templateUrl : "section/store.html",
+          controller: "storeCtrl"
+      })
         .when("/loading", {
             templateUrl : "section/loadng.html"
         });
@@ -139,18 +144,7 @@ var app = angular.module("myApp", ["ngRoute"]);
 
         gameController.getAllGames().then(
             function(response){
-                var games = [];
-
-                for (var i=0, n = response.length; i < n; i++) { // looping over the options
-                    var game = {
-                        img:  response[i].img,
-                        name: response[i].name,
-                      };
-
-                      games.push(game);
-                }
-
-                $scope.games = games;
+                $scope.games = response;
                 $scope.$applyAsync();
             }
         )
@@ -286,6 +280,17 @@ var app = angular.module("myApp", ["ngRoute"]);
     }
 
     }]);
+
+    app.controller('storeCtrl', ['$scope', function($scope) {
+
+      rewardController.getAllRewards().then(
+        function(response){
+            $scope.rewards = response;
+            $scope.$applyAsync();
+        }
+    )
+
+      }]);
 
     window.onload = function() { 
   

@@ -23,7 +23,7 @@
     </div>
     
     <div class="col-xs-12 col-sm-12 col-md-3 col">
-        <button type="submit" class="btn btn-post col-12" ng-click="btnSearchPost(gameSelected, platformSelected, modeSelected)" >Buscar</button>
+        <button type="submit" class="btn btn-green col-12" ng-click="btnSearchPost(gameSelected, platformSelected, modeSelected)" >Buscar</button>
     </div>
      
   </div>
@@ -61,7 +61,7 @@
             <p class="col">{{post.description}}</p>
         </div>
         <br>
-        <button type="submit" class="col-sm-12  col-lg-12 btn btn-post" ng-click="btnSubmitApplication(post.id_post)">Unirse</button>
+        <button type="submit" class="col-sm-12  col-lg-12 btn btn-green" ng-click="btnSubmitApplication(post.id_post)">Unirse</button>
       </div>
 
       <p ng-show="!posts[0]">No se encontraron resultados</p>

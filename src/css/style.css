@@ -166,12 +166,12 @@ h5{font-weight: 400}
     cursor: pointer;
 }
 
-.btn-post {
+.btn-green {
     background-color: #1ded8c;
     color: #fff;
 }
 
-.btn-post:hover {
+.btn-green:hover {
     background-color: green;
 }
 
@@ -211,3 +211,9 @@ input::file-selector-button {
 button.active {
 	background-color: #0eaa61 !important;
   }
+
+  .flex-container {
+	display: flex;
+  }
+
+  

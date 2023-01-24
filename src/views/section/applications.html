@@ -5,11 +5,11 @@
       <div class="form-row mb-5">
 
         <div class="col-auto col-md-6 col-sm-6">
-          <button type="submit" class="btn btn-post col-12" ng-click="showSentApp()">Enviadas</button>
+          <button type="submit" class="btn btn-green col-12" ng-click="showSentApp()">Enviadas</button>
         </div>
 
         <div class="col-auto col-md-6 col-sm-6">
-          <button type="submit" class="btn btn-post col-12" ng-click="showReceivedApp()">Recibidas</button>
+          <button type="submit" class="btn btn-green col-12" ng-click="showReceivedApp()">Recibidas</button>
         </div>
      
       </div>
@@ -71,7 +71,7 @@
               
             <br>
               <div class="col-auto col-md-6 col-sm-6" ng-show="{{user.applications.status == 'pending'}}">
-                <button type="submit" class="btn btn-post col-12" ng-click="changeStatus(user.applications.id_application,  'accepted')">Aceptar</button>
+                <button type="submit" class="btn btn-green col-12" ng-click="changeStatus(user.applications.id_application,  'accepted')">Aceptar</button>
               </div>
       
               <div class="col-auto col-md-6 col-sm-6" ng-show="{{user.applications.status == 'pending'}}">

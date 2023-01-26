@@ -11,7 +11,7 @@ const utils = require("../controllers/utils");
 const applicationController = require("../controllers/applicationController");
 const rewardController = require("../controllers/rewardController");
 const { ipcRenderer }= require("electron");
-const { rmSync } = require("original-fs");
+const { shell }= require("electron");
 
 var userSession;
 
@@ -288,7 +288,37 @@ var app = angular.module("myApp", ["ngRoute"]);
             $scope.rewards = response;
             $scope.$applyAsync();
         }
-    )
+      )
+    
+      $scope.btnBuy = async function(reward){
+        const url = "https://api.mercadopago.com/checkout/preferences";
+
+        const body = {
+          items: [
+            {
+              title: reward.name,
+              description: reward.description,
+              category_id: "reward",
+              quantity: 1,
+              unit_price: reward.price
+            }
+          ]
+        };
+    
+        axios.post(url, body, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
+          }
+        })
+        .then((res) => {
+          shell.openExternal(res.data.init_point)
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    
+      };
 
       }]);
 

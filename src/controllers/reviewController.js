@@ -1,3 +1,15 @@
+async function saveReview(data){
+  const url = process.env.SIDEKICK_API + 'reviews';
+
+  axios.post(url, data)
+  .then(() => {
+    popupController.alert("Calificacion enviada");
+  })
+  .catch(function(error) {
+    console.log(error);
+  }); 
+}
+
 async function getReviews (condition = null){
   return new Promise((resolve, reject) =>{
   var url = process.env.SIDEKICK_API + 'reviews';
@@ -32,6 +44,7 @@ async function getAvg (condition){
   }
 
   module.exports = {
+    saveReview,
     getReviews,
     getAvg  
   };

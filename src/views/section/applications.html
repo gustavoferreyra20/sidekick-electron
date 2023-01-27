@@ -80,7 +80,7 @@
 
             <div class="col-12" ng-show="{{user.applications.status == 'accepted'}}">
               <br>
-              <button type="submit" class="btn btn-primary col-12" ng-click="rateUser(user.id_user)">Calificar</button>
+              <a href="#!rate/?id_user={{user.id_user}}&id_post={{post.id_post}}&id_application={{user.applications.id_application}}" class="btn btn-primary col-12">Calificar</a>
             </div>
 
             </div>

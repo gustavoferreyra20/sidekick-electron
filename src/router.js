@@ -52,7 +52,11 @@ var app = angular.module("myApp", ["ngRoute"]);
       })
         .when("/loading", {
             templateUrl : "section/loadng.html"
-        });
+        })
+        .when("/rate", {
+          templateUrl : "section/rate.html",
+          controller: "rateCtrl"
+      });
     });
 
     app.controller('homeCtrl', ['$scope', function($scope) {
@@ -137,6 +141,7 @@ var app = angular.module("myApp", ["ngRoute"]);
              
             })  
           };  
+          
     
     }]);
 
@@ -324,6 +329,17 @@ var app = angular.module("myApp", ["ngRoute"]);
 
       }]);
 
+    app.controller('rateCtrl', ['$scope', '$route', function($scope, $route) {
+      $scope.newReview = function(review){
+        review.id_user = GetParameterValues("id_user");
+        review.id_post = GetParameterValues("id_post");
+        review.id_writerUser = userSession.id_user;
+        reviewController.saveReview(review)
+        .then(applicationController.setStatus( GetParameterValues("id_application"), "reviewed"))
+        .then(window.location.href = "#!applications")
+       };  
+      }]);
+
     window.onload = function() { 
   
           const navImages = document.querySelectorAll('.nav-item');
@@ -335,4 +351,16 @@ var app = angular.module("myApp", ["ngRoute"]);
                 });
             }
 
-        }        
+        } 
+        
+        function GetParameterValues(param) {
+          var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+          for (var i = 0; i < url.length; i++) {
+              var urlparam = url[i].split('=');
+      
+              if (urlparam[0] == param) {
+      
+                  return urlparam[1];
+              }
+          }
+      }

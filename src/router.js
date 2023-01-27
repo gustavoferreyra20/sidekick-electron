@@ -298,11 +298,13 @@ var app = angular.module("myApp", ["ngRoute"]);
             {
               title: reward.name,
               description: reward.description,
+              picture_url: "http://www.myapp.com/myimage.jpg",
               category_id: "reward",
               quantity: 1,
               unit_price: reward.price
             }
-          ]
+          ],
+          //notification_url: process.env.SIDEKICK_API + 'payments'
         };
     
         axios.post(url, body, {

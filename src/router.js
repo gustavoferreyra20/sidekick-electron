@@ -8,7 +8,6 @@ const tokenController = require("../controllers/tokenController");
 const modeController = require("../controllers/modeController");
 const reviewController = require("../controllers/reviewController");
 const utils = require("../controllers/utils");
-const applicationController = require("../controllers/applicationController");
 const rewardController = require("../controllers/rewardController");
 const { ipcRenderer }= require("electron");
 const { shell }= require("electron");
@@ -131,12 +130,13 @@ var app = angular.module("myApp", ["ngRoute"]);
           };
           
           $scope.btnSubmitApplication = function(id_post){
-            applicationController.getApplications({id_post: id_post, id_user: userSession.id_user})
+            postController.getApplications({id_post: id_post, id_user: userSession.id_user, type: 'sended'})
             .then((res) => {
               if(res[0]){
                 popupController.alert("Ya existe una solicitud pendiente");
               }else{
-                applicationController.saveApplication({id_post: id_post, id_user: userSession.id_user});     
+                postController.addApplication({id_post: id_post, id_user: userSession.id_user})
+                .then(popupController.alert("Solicitud enviada"));     
               }
              
             })  
@@ -240,36 +240,27 @@ var app = angular.module("myApp", ["ngRoute"]);
 
     app.controller('applicationCtrl', ['$scope', function($scope) {
 
-    showSentApp();
+      showReceivedApp();
 
     $scope.showSentApp = function(){showSentApp()};
 
     $scope.showReceivedApp = function(){showReceivedApp()}; 
 
-    $scope.changeStatus = function(id_application, status){
-
-      applicationController.setStatus(id_application, status)
+    $scope.changeStatus = function(id_user, id_post, status){
+      postController.addApplication({id_user: id_user, id_post: id_post, status: status})
       .then(showReceivedApp());
     }; 
 
     function showSentApp(){
-      applicationController.getApplications({id_user: userSession.id_user}).then(function(res){
-        for (let i = 0; i < res.length; i++) { // looping over the options
-          postController.getPosts({id_post: res[i].id_post}).then(function(response){
-            res[i].post = response[0];
-              if(i + 1 ==  res.length ){
-                $scope.applications = res;
-                $scope.posts = [];
-                $scope.$applyAsync();
-              } 
-          });       
-        }  
+      postController.getApplications({id_user: userSession.id_user, type: 'sended'}).then(function(apps){
+        $scope.applications = apps;
+        $scope.posts = [];
+        $scope.$applyAsync();
     });
     }
 
     function showReceivedApp(){
-      applicationController.getApplicationsByUsersPosts(userSession.id_user).then(function(posts){
-
+      postController.getApplications({id_user: userSession.id_user, type: 'received'}).then(function(posts){
         $scope.posts = posts;
         $scope.applications = [];
         $scope.$applyAsync();
@@ -277,7 +268,7 @@ var app = angular.module("myApp", ["ngRoute"]);
     }
 
     $scope.btnCancelApplication = function(id_post){
-      popupController.confirm("Seguro desea eliminar la solicitud?", function (){ (applicationController.removeApplication(id_post, userSession.id_user).then(showSentApp()))})
+      popupController.confirm("Seguro desea eliminar la solicitud?", function (){ (postController.removeApplication(id_post, userSession.id_user).then(showSentApp()))})
     }
 
     $scope.btnDeletePost = function(id_post){
@@ -336,7 +327,7 @@ var app = angular.module("myApp", ["ngRoute"]);
         review.id_writerUser = userSession.id_user
         if (review.reward != undefined) review.reward = review.reward.id_reward;
         reviewController.saveReview(review)
-        //.then(applicationController.setStatus( GetParameterValues("id_application"), "reviewed"))
+        .then(postController.addApplication( {id_user: review.id_user, id_post: review.id_post, status: 'reviewed'}))
         .then(function(){if (review.reward != undefined) rewardController.useReward(review.reward)})
         .then(popupController.alert("Calificacion enviada")) 
         .then(window.location.href = "#!applications"); 

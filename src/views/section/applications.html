@@ -20,11 +20,11 @@
           <div class="row justify-content-start px-3">
   
             <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 pl-0">
-              <h2>{{app.post.title}}</h2>
+              <h2>{{app.title}}</h2>
               </div>
       
               <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4  text-right">
-              <h2>{{app.post.actualUsers}} / {{app.post.requiredUsers}}</h2>
+              <h2>{{app.actualUsers}} / {{app.requiredUsers}}</h2>
           
               </div>
             </div>  
@@ -33,7 +33,7 @@
           <div class="line"></div>
             
           <br>
-          <button type="submit" class="col-sm-12  col-lg-12 btn btn-danger" ng-click="btnCancelApplication(app.id_post)"  ng-show="app.status == 'pending'">Cancelar</button>
+          <button type="submit" class="col-sm-12  col-lg-12 btn btn-danger" ng-click="btnCancelApplication(app.id_post)"  ng-show="app.applications.status == 'pending'">Cancelar</button>
 
           <p ng-show="app.status == 'rejected'">Solicitud rechazada</p>
 
@@ -71,11 +71,11 @@
               
             <br>
               <div class="col-auto col-md-6 col-sm-6" ng-show="{{user.applications.status == 'pending'}}">
-                <button type="submit" class="btn btn-green col-12" ng-click="changeStatus(user.applications.id_application,  'accepted')">Aceptar</button>
+                <button type="submit" class="btn btn-green col-12" ng-click="changeStatus(user.id_user, post.id_post, 'accepted')">Aceptar</button>
               </div>
       
               <div class="col-auto col-md-6 col-sm-6" ng-show="{{user.applications.status == 'pending'}}">
-                <button type="submit" class="btn btn-danger col-12" ng-click="changeStatus(user.applications.id_application, 'rejected')">Rechazar</button>
+                <button type="submit" class="btn btn-danger col-12" ng-click="changeStatus(user.id_user, post.id_post, 'rejected')">Rechazar</button>
               </div>
 
             <div class="col-12" ng-show="{{user.applications.status == 'accepted'}}">

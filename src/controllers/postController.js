@@ -68,9 +68,58 @@ async function getPosts (args = null){
     });; 
   }
 
+async function getApplications(args){
+  return new Promise((resolve, reject) =>{
+    var url = process.env.SIDEKICK_API + 'posts/join?';
+    const params = new URLSearchParams(args)
+
+    axios.get(url + params)
+    .then((res) => {
+      resolve(res.data)
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+  })
+}
+
+async function saveApplication(data){
+  const url = process.env.SIDEKICK_API + 'posts/join';
+
+  axios.post(url, data)
+  .then(() => {
+    popupController.alert("Solicitud enviada");
+  })
+  .catch(function(error) {
+    console.log(error);
+  }); 
+}
+
+async function removeApplication(id_post, id_user){
+  const url = process.env.SIDEKICK_API + 'applications/bo?id_post='+ id_post + '&id_user='+ id_user;
+  await axios.delete(url)
+  .catch(function(error) {
+    console.log(error);
+  });; 
+}
+
+async function addApplication(args){
+  const url = process.env.SIDEKICK_API + 'posts/join?';
+  const params = new URLSearchParams(args)
+
+  await axios.put(url + params)
+  .catch(function(error) {
+    console.log(error);
+  }); 
+}
+
   module.exports = {
     getPosts,
     loadPosts,
     savePost,
-    removePost  
+    removePost ,
+    getApplications,
+    saveApplication,
+    removeApplication,
+    addApplication 
   };

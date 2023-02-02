@@ -1,13 +1,16 @@
 async function saveReview(data){
-  const url = process.env.SIDEKICK_API + 'reviews';
+  return new Promise((resolve, reject) =>{
+    const url = process.env.SIDEKICK_API + 'reviews';
 
-  axios.post(url, data)
-  .then(() => {
-    popupController.alert("Calificacion enviada");
-  })
-  .catch(function(error) {
-    console.log(error);
-  }); 
+    axios.post(url, data)
+    .then((res) => {
+      resolve(res.data);
+    })
+    .catch(function(error) {
+      console.log(error);
+    }); 
+    })
+  
 }
 
 async function getReviews (condition = null){

@@ -21,8 +21,22 @@
                         <br>
                     </div>
 
+                    <button class="btn btn-block btn-primary" type="button" ng-click="btnAddReward()">Premiar</button>
+              <br>
+                    <div class="d-flex rewards">
+                        <div class="p-2 text-center" ng-repeat="reward in rewards">
+                                <img data-ng-src={{reward.img}} class="img-fluid" alt={{reward.name}} >
+                                <p>{{reward.description}}</p>
+                                <button type="button" class="btn btn-green" ng-click="btnSelectReward(form, reward)">Seleccionar</button>
+                        </div>
+                        <div class="p-2 text-center" ng-show="form.reward">
+                            <img data-ng-src={{form.reward.img}} class="img-fluid" alt={{form.reward.name}} >
+                            <p>{{form.reward.description}}</p>
+                            <button type="button" class="btn btn-danger" ng-click="btnDeleteReward(form)">Eliminar</button>
+                    </div>
                     <button class="btn btn-block btn-primary" id="newReview" >Calificar</button>
                     </form>
                 </div>
             </div>      
     </div>
+

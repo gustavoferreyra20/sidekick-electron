@@ -212,4 +212,10 @@ button.active {
 	background-color: #0eaa61 !important;
   }
 
+  .rewards {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around; /* ADJUSTMENT */
+  }
+
   

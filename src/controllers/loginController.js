@@ -1,6 +1,6 @@
-const userController = require('../../controllers/userController');
-const popupController = require('../../controllers/popupController');
-const tokenController = require("../../controllers/tokenController");
+const userController = require('../../../controllers/userController');
+const popupController = require('../../../controllers/popupController');
+const tokenController = require("../../../controllers/tokenController");
 const axios = require("axios");
 
 let email; 
@@ -34,19 +34,23 @@ window.onload = function() {
       email: email.value
     }
     existentUser = await userController.getUser(conditions)
-    saveUserImage(file)
+
     if(existentUser.length > 0){
       popupController.alert("Usuario existente")
     }else if(password.value.length < 8){
       popupController.alert("Contraseña demasiado corta")
-    } else {
+    } else if ( file.files[0]) {
       saveUserImage(file).then((res) =>{
         return newUser = {name:userName.value, email:email.value, description:description.value, password:password.value, img:res.path }
       }).then((res) =>{
         userController.saveUser(res)
         .then(popupController.action("Usuario registrado con exito", function (){ (location.reload())}))
-      })
-    } 
+      }) 
+    } else {
+      newUser = {name:userName.value, email:email.value, description:description.value, password:password.value}
+      userController.saveUser(newUser)
+      .then(popupController.action("Usuario registrado con exito", function (){ (location.reload())}))
+    }
   })
 
   btnToogle.onclick = function(e){

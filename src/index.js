@@ -26,7 +26,7 @@ async function mainWindow() {
     })
     
     Menu.setApplicationMenu(mainMenu);
-    window.loadFile("views/index.html");
+    window.loadFile("index.html");
 
   }
   
@@ -43,7 +43,7 @@ async function mainWindow() {
 
    const mainMenu = Menu.buildFromTemplate(templateMenu);
    Menu.setApplicationMenu(mainMenu);
-   winlogin.loadFile('views/section/login.html')
+   winlogin.loadFile('app/components/login/login.html')
 
   }
 
@@ -61,7 +61,7 @@ async function mainWindow() {
 
    const mainMenu = Menu.buildFromTemplate(templateMenu);
    Menu.setApplicationMenu(mainMenu);
-   winload.loadFile('views/section/loading.html')
+   winload.loadFile('app/components/loading/loading.html')
 
    winload.webContents.on('did-finish-load', () => {
     winload.webContents.send('userSession', userSession)

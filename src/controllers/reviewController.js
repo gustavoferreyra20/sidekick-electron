@@ -1,7 +1,7 @@
 async function saveReview(data){
   return new Promise((resolve, reject) =>{
     const url = process.env.SIDEKICK_API + 'reviews';
-
+console.log(data)
     axios.post(url, data)
     .then((res) => {
       resolve(res.data);

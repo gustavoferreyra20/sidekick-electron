@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+  <title>SideKick</title>
+  <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+  	<!-- Angular links -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script> 
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/popupS.css">
+
+</head>
+<body>
+
+	<!-- Navigation Bar-->
+	<nav-dir></nav-dir>
+  
+  <div id="content" ui-view></div>
+  
+  <div id="rightSection">
+    <h4 class="d-flex justify-content-center mt-2">Popular Games</h4>
+    <hr class="hr-main">
+    <div class="games-grid" id="games" ng-controller="gameCtrl">
+      <img data-ng-src={{game.img}} class="img-fluid" alt={{game.name}}  ng-repeat="game in games">
+      
+    </div>
+  </div>
+  </div>
+
+
+  	<!-- Angular Modules -->
+	<script type="text/javascript" src="app/app.module.js"></script>
+	<script type="text/javascript" src="app/app.routes.js"></script>
+	<script type="text/javascript" src="app/components/home/homeCtrl.js"></script>
+  <script type="text/javascript" src="app/components/applications/applicationCtrl.js"></script>
+  <script type="text/javascript" src="app/components/config/configCtrl.js"></script>
+  <script type="text/javascript" src="app/components/games/gameCtrl.js"></script>
+  <script type="text/javascript" src="app/components/newPost/newPCtrl.js"></script>
+  <script type="text/javascript" src="app/components/profile/profileCtrl.js"></script>
+  <script type="text/javascript" src="app/components/rate/rateCtrl.js"></script>
+  <script type="text/javascript" src="app/components/store/storeCtrl.js"></script>
+  <script type="text/javascript" src="app/components/loading/loadingCtrl.js"></script>
+  <script type="text/javascript" src="app/shared/navigation-sidebar/navbarDirective.js"></script>
+	<script type="text/javascript" src="app/shared/navigation-sidebar/navbarService.js"></script>
+
+</body>
+</html>

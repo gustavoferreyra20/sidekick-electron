@@ -61,7 +61,7 @@
   
             <div class="row justify-content-start px-3 pl-0">
               <div class="col-sm-3 col-lg-2 col-xl-1 text-right">
-                <img class="user-img fit-image" src="../img/icons/profile.png">
+                <img class="user-img fit-image" src="assets/img/icons/profile.png">
             </div>
             
               <h2>{{user.name}}</h2>
@@ -78,9 +78,9 @@
                 <button type="submit" class="btn btn-danger col-12" ng-click="changeStatus(user.id_user, post.id_post, 'rejected')">Rechazar</button>
               </div>
 
-            <div class="col-12" ng-show="{{user.applications.status == 'accepted'}}">
+            <div class="col-12" ng-show="{{user.applications.status == 'accepted'}}" ui-sref="rate({id_user: user.id_user, id_post: post.id_post})">
               <br>
-              <a href="#!rate/?id_user={{user.id_user}}&id_post={{post.id_post}}&id_application={{user.applications.id_application}}" class="btn btn-primary col-12">Calificar</a>
+              <a href="" class="btn btn-primary col-12">Calificar</a>
             </div>
 
             </div>

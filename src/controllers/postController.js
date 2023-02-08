@@ -96,7 +96,7 @@ async function saveApplication(data){
 }
 
 async function removeApplication(id_post, id_user){
-  const url = process.env.SIDEKICK_API + 'applications/bo?id_post='+ id_post + '&id_user='+ id_user;
+  const url = process.env.SIDEKICK_API + 'posts/join?id_post='+ id_post + '&id_user='+ id_user;
   await axios.delete(url)
   .catch(function(error) {
     console.log(error);

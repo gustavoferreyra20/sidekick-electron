@@ -1,0 +1,43 @@
+   <div class="row justify-content-center">
+            <div class="card bloque">
+                <div class="card-body page active">
+                    <form id="rateForm" method="POST" ng-submit="newReview(form)">
+                        <h1 class="text-center pb-4">Calificar usuario</h1>
+                    
+                    <div class="form-group">
+                        <label for="abilityScore" class="col-12 pl-0">Habilidad:</label>
+                        <input  id="abilityScore" name="abilityScore" type="range" class="form-range col-12 p-0" min="0" max="100" id="abilityScore" ng-model="form.abilityScore" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="karmaScore" class="col-12 pl-0">Karma:</label>
+                        <input  id="karmaScore" name="karmaScore" type="range" class="form-range col-12 pl-0" min="0" max="100" id="karmaScore" ng-model="form.karmaScore" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comment">Comentario:</label>
+                        <textarea id="comment" name="comment" rows="4" maxlength="280" class="col-12 p-0" ng-model="form.comment" placeholder="Escriba que te parecio el jugador"></textarea>
+                        <br>
+                    </div>
+
+                    <button class="btn btn-block btn-primary" type="button" ng-click="btnAddReward()">Premiar</button>
+                    <br>
+                          <div class="d-flex rewards">
+                              <div class="p-2 text-center" ng-repeat="reward in rewards">
+                                      <img data-ng-src={{reward.img}} class="img-fluid" alt={{reward.name}} >
+                                      <p>{{reward.description}}</p>
+                                      <button type="button" class="btn btn-green" ng-click="btnSelectReward(form, reward)">Seleccionar</button>
+                              </div>
+                              <div class="p-2 text-center" ng-show="form.reward">
+                                  <img data-ng-src={{form.reward.img}} class="img-fluid" alt={{form.reward.name}} >
+                                  <p>{{form.reward.description}}</p>
+                                  <button type="button" class="btn btn-danger" ng-click="btnDeleteReward(form)">Eliminar</button>
+                          </div>
+
+                        <button class="btn btn-block btn-primary" id="newReview" >Calificar</button>
+                    </div>
+                </div>
+            </div>      
+    </div>
+
+

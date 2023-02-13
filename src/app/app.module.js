@@ -1,15 +1,20 @@
 var app = angular.module("myApp",   [
     'myAppHomeCtrl',
-    'myAppGameCtrl',
+    'myAppgameCtrl',
+    'myAppGameService',
     'myAppNewPCtrl',
+    'myAppPostService',
     'myAppApplicationCtrl',
     'myAppProfileCtrl',
     'myAppConfigCtrl',
     'myAppStoreCtrl',
     'myAppRateCtrl',
-    'myAppLoadingCtrl',
     'myAppRouter',
     'myAppNavbarDirective',
-    'myAppNavbarService'
+    'myAppNavbarService',
+    'myAppModeService',
+    'myAppPlatformService',
+    'myAppReviewService',
+    'myAppRewardService'
 ]);
 

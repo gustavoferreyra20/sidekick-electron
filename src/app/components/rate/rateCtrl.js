@@ -1,4 +1,4 @@
-angular.module('myAppRateCtrl', []).controller('rateCtrl', ['$scope', '$stateParams', function($scope, $stateParams){
+angular.module('myAppRateCtrl', []).controller('rateCtrl', ['$scope', '$stateParams', 'posts', 'reviews', 'rewards', function($scope, $stateParams, posts, reviews, rewards){
 
     $scope.newReview = function(review){
      // console.log(form)
@@ -6,9 +6,9 @@ angular.module('myAppRateCtrl', []).controller('rateCtrl', ['$scope', '$statePar
         review.id_post = $stateParams.id_post;
         review.id_writerUser = userSession.id_user
         if (review.reward != undefined) review.reward = review.reward.id_reward;
-        reviewController.saveReview(review)
-        .then(postController.addApplication( {id_user: review.id_user, id_post: review.id_post, status: 'reviewed'}))
-        .then(function(){if (review.reward != undefined) rewardController.useReward(review.reward)})
+        reviews.save(review)
+        .then(posts.addApplication( {id_user: review.id_user, id_post: review.id_post, status: 'reviewed'}))
+        .then(function(){if (review.reward != undefined) rewards.use(review.reward)})
         .then(popupController.alert("Calificacion enviada")) 
         .then(window.location.href = "#!applications");  
        };
@@ -31,7 +31,7 @@ angular.module('myAppRateCtrl', []).controller('rateCtrl', ['$scope', '$statePar
        }; 
 
        function showRewards(){
-        rewardController.getUsersRewards(userSession.id_user).then(
+        rewards.getByUser(userSession.id_user).then(
           function(response){
               $scope.rewards = response;
               $scope.$applyAsync();

@@ -1,6 +1,6 @@
-angular.module('myAppNewPCtrl', []).controller('newPCtrl', ['$scope', function($scope){
+angular.module('myAppNewPCtrl', []).controller('newPCtrl', ['$scope', 'games', 'posts', 'modes', 'platforms', function($scope, games, posts, modes, platforms){
   
-    gameController.getOptions(false).then(function(response){
+  games.getOptions(false).then(function(response){
         $scope.gameOptions = response;
         $scope.gameSelected = $scope.gameOptions[0];
         
@@ -8,7 +8,7 @@ angular.module('myAppNewPCtrl', []).controller('newPCtrl', ['$scope', function($
         $scope.$applyAsync();
       });
 
-      modeController.getOptions(false).then(function(response){
+      modes.getOptions(false).then(function(response){
         $scope.modeOptions = response;
         $scope.modeSelected = $scope.modeOptions[0];
         
@@ -18,7 +18,7 @@ angular.module('myAppNewPCtrl', []).controller('newPCtrl', ['$scope', function($
       $scope.setPlatforms = function(arg = null){
         game = (arg != null) ? arg.value : null;
 
-        platformController.getOptions(game, false).then(function(response){
+        platforms.getOptions(game, false).then(function(response){
           $scope.platformOptions = response;
           $scope.platformSelected = $scope.platformOptions[0];
           
@@ -31,7 +31,6 @@ angular.module('myAppNewPCtrl', []).controller('newPCtrl', ['$scope', function($
        form.game = game;
        form.platform = platform;
        form.mode = mode;
-       console.log(typeof form)
-       //postController.savePost(form);
+       posts.save(form);
       };  
 }]);

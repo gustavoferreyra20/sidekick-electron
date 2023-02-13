@@ -1,4 +1,4 @@
-angular.module('myAppApplicationCtrl', []).controller('applicationCtrl', ['$scope', function($scope){
+angular.module('myAppApplicationCtrl', []).controller('applicationCtrl', ['$scope', 'posts', function($scope, posts){
   
     showReceivedApp();
 
@@ -7,12 +7,12 @@ angular.module('myAppApplicationCtrl', []).controller('applicationCtrl', ['$scop
     $scope.showReceivedApp = function(){showReceivedApp()}; 
 
     $scope.changeStatus = function(id_user, id_post, status){
-      postController.addApplication({id_user: id_user, id_post: id_post, status: status})
+      posts.addApplication({id_user: id_user, id_post: id_post, status: status})
       .then(showReceivedApp());
     }; 
 
     function showSentApp(){
-      postController.getApplications({id_user: userSession.id_user, type: 'sended'}).then(function(apps){
+      posts.getApplications({id_user: userSession.id_user, type: 'sended'}).then(function(apps){
         $scope.applications = apps;
         $scope.posts = [];
         $scope.$applyAsync();
@@ -20,7 +20,7 @@ angular.module('myAppApplicationCtrl', []).controller('applicationCtrl', ['$scop
     }
 
     function showReceivedApp(){
-      postController.getApplications({id_user: userSession.id_user, type: 'received'}).then(function(posts){
+      posts.getApplications({id_user: userSession.id_user, type: 'received'}).then(function(posts){
         $scope.posts = posts;
         $scope.applications = [];
         $scope.$applyAsync();
@@ -28,10 +28,10 @@ angular.module('myAppApplicationCtrl', []).controller('applicationCtrl', ['$scop
     }
 
     $scope.btnCancelApplication = function(id_post){
-      popupController.confirm("Seguro desea eliminar la solicitud?", function (){ (postController.removeApplication(id_post, userSession.id_user).then(showSentApp()))})
+      popupController.confirm("Seguro desea eliminar la solicitud?", function (){ (posts.removeApplication(id_post, userSession.id_user).then(showSentApp()))})
     }
 
     $scope.btnDeletePost = function(id_post){
-      popupController.confirm("Seguro desea eliminar el post?", function (){ (postController.removePost(id_post).then(showReceivedApp()))})
+      popupController.confirm("Seguro desea eliminar el post?", function (){ (posts.removePost(id_post).then(showReceivedApp()))})
     }
 }]);

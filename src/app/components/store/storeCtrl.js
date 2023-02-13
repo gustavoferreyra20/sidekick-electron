@@ -1,6 +1,6 @@
-angular.module('myAppStoreCtrl', []).controller('storeCtrl', ['$scope', function($scope){
+angular.module('myAppStoreCtrl', []).controller('storeCtrl', ['$scope', 'rewards', function($scope, rewards){
   
-    rewardController.getAllRewards().then(
+  rewards.getAll().then(
         function(response){
             $scope.rewards = response;
             $scope.$applyAsync();

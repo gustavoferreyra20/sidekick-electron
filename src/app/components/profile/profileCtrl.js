@@ -1,9 +1,9 @@
-angular.module('myAppProfileCtrl', []).controller('profileCtrl', ['$scope', function($scope){
+angular.module('myAppProfileCtrl', []).controller('profileCtrl', ['$scope', 'reviews', function($scope, reviews){
   
     userController.getUser({id_user: userSession.id_user}).then(
         function(user) {
             
-            reviewController.getAvg({id_user: user[0].id_user}).then(
+          reviews.getAvg({id_user: user[0].id_user}).then(
                 function(response) {
 
                   var profile = {
@@ -21,7 +21,7 @@ angular.module('myAppProfileCtrl', []).controller('profileCtrl', ['$scope', func
         }
       )
 
-    reviewController.getReviews({id_user: userSession.id_user}).then(
+      reviews.getAll({id_user: userSession.id_user}).then(
       function(reviews){
         $scope.reviews = reviews;
         $scope.$applyAsync();

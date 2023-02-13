@@ -1,14 +1,22 @@
-angular.module('myAppHomeCtrl', ['myAppGameCtrl']).controller('homeCtrl', ['$scope', function($scope){
-    postController.getPosts().then(
+angular.module('myAppHomeCtrl', ['myAppgameCtrl']).controller('homeCtrl', ['$scope', 'posts', 'modes', 'games', 'platforms',function($scope, posts, modes, games, platforms){
+    posts.getAll().then(
         function(response){
-            postController.loadPosts(response).then(function(posts){
+          posts.load(response).then(function(posts){
                 $scope.posts = posts;
                 $scope.$applyAsync();
             })
         }
       )
 
-      modeController.getOptions(true).then(function(response){
+      games.getOptions(false).then(function(response){
+        $scope.gameOptions = response;
+        $scope.gameSelected = $scope.gameOptions[0];
+        
+        $scope.setPlatforms();
+        $scope.$applyAsync();
+      });
+
+      modes.getOptions(true).then(function(response){
         $scope.modeOptions = response;
         $scope.modeSelected = $scope.modeOptions[0];
         
@@ -24,7 +32,7 @@ angular.module('myAppHomeCtrl', ['myAppGameCtrl']).controller('homeCtrl', ['$sco
           game = arg;
         }
 
-        platformController.getOptions(game, true).then(function(response){
+        platforms.getOptions(game, true).then(function(response){
           $scope.platformOptions = response;
           $scope.platformSelected = $scope.platformOptions[0];
           
@@ -48,9 +56,9 @@ angular.module('myAppHomeCtrl', ['myAppGameCtrl']).controller('homeCtrl', ['$sco
           params.id_mode = mode.value;
         }
 
-        postController.getPosts(params).then(
+        posts.getAll(params).then(
           function(response){
-              postController.loadPosts(response).then(function(response){
+              posts.load(response).then(function(response){
                   $scope.posts = response;
                   $scope.$applyAsync();
               })
@@ -60,12 +68,12 @@ angular.module('myAppHomeCtrl', ['myAppGameCtrl']).controller('homeCtrl', ['$sco
       };
       
       $scope.btnSubmitApplication = function(id_post){
-        postController.getApplications({id_post: id_post, id_user: userSession.id_user, type: 'sended'})
+        posts.getApplications({id_post: id_post, id_user: userSession.id_user, type: 'sended'})
         .then((res) => {
           if(res[0]){
             popupController.alert("Ya existe una solicitud pendiente");
           }else{
-            postController.addApplication({id_post: id_post, id_user: userSession.id_user})
+            posts.addApplication({id_post: id_post, id_user: userSession.id_user})
             .then(popupController.alert("Solicitud enviada"));     
           }
          

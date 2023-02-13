@@ -1,14 +1,8 @@
 const axios = require("axios");
 const userController = require('./controllers/userController');
 const popupController = require('./controllers/popupController');
-const gameController = require("./controllers/gameController");
-const postController = require("./controllers/postController");
-const platformController = require("./controllers/platformController");
 const tokenController = require("./controllers/tokenController");
-const modeController = require("./controllers/modeController");
-const reviewController = require("./controllers/reviewController");
-const utils = require("./controllers/utils");
-const rewardController = require("./controllers/rewardController");
+const utils = require("./assets/scripts/utils");
 const { ipcRenderer }= require("electron");
 const { shell }= require("electron");
 

@@ -1,4 +1,4 @@
-angular.module('myAppApplicationCtrl', []).controller('applicationCtrl', ['$scope', 'posts', function($scope, posts){
+angular.module('myAppApplicationCtrl', []).controller('applicationCtrl', ['$scope', 'posts', 'popups', function($scope, posts, popups){
   
     showReceivedApp();
 
@@ -10,6 +10,8 @@ angular.module('myAppApplicationCtrl', []).controller('applicationCtrl', ['$scop
       posts.addApplication({id_user: id_user, id_post: id_post, status: status})
       .then(showReceivedApp());
     }; 
+
+    $scope.showTerms = function(){popups.alert('Lorem')}; 
 
     function showSentApp(){
       posts.getApplications({id_user: userSession.id_user, type: 'sended'}).then(function(apps){
@@ -28,10 +30,10 @@ angular.module('myAppApplicationCtrl', []).controller('applicationCtrl', ['$scop
     }
 
     $scope.btnCancelApplication = function(id_post){
-      popupController.confirm("Seguro desea eliminar la solicitud?", function (){ (posts.removeApplication(id_post, userSession.id_user).then(showSentApp()))})
+      popups.confirm("Seguro desea eliminar la solicitud?", function (){ (posts.removeApplication(id_post, userSession.id_user).then(showSentApp()))})
     }
 
     $scope.btnDeletePost = function(id_post){
-      popupController.confirm("Seguro desea eliminar el post?", function (){ (posts.removePost(id_post).then(showReceivedApp()))})
+      popups.confirm("Seguro desea eliminar el post?", function (){ (posts.remove(id_post).then(showReceivedApp()))})
     }
 }]);

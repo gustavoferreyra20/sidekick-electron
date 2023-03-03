@@ -30,45 +30,6 @@ async function mainWindow() {
 
   }
   
-  function loginWindow () {
-    winlogin = new BrowserWindow({
-     /*width: 400,
-     height: 630,
-     resizable: false,*/
-     webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false
-    },
-   })
-
-   const mainMenu = Menu.buildFromTemplate(templateMenu);
-   Menu.setApplicationMenu(mainMenu);
-   winlogin.loadFile('app/components/login/login.html')
-
-  }
-
-  async function loadingWindow () {
-    var userSession = await getCookie('userSession')
-    winload = new BrowserWindow({
-/*      width: 400,
-     height: 630,
-     resizable: false, */
-     webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false
-    },
-   })
-
-   const mainMenu = Menu.buildFromTemplate(templateMenu);
-   Menu.setApplicationMenu(mainMenu);
-   winload.loadFile('app/components/loading/loading.html')
-
-   winload.webContents.on('did-finish-load', () => {
-    winload.webContents.send('userSession', userSession)
-  })
-
-  }
-  
   const templateMenu = [
     {
         label: 'Devtools',
@@ -87,24 +48,17 @@ async function mainWindow() {
 
   ipcMain.handle('login', async (event, args) => {
     createCookie(args)
-    await mainWindow()
-    winlogin.close()
-  });
-
-  ipcMain.handle('noCookie', (event, args) => {
-    loginWindow()
-    winload.close()
+    var userSession = await getCookie('userSession')
+    window.webContents.send('userSession-data', userSession)
   });
 
   ipcMain.handle('authUser', async (event, args) => { 
     await mainWindow()
-    winload.close()
   });
 
   ipcMain.handle('logout', (event, args) => {  
-    session.defaultSession.cookies.remove('http://localhost/', 'jwt')
-    .then(() => {
-      loginWindow()
+    session.defaultSession.clearStorageData({storages: ['cookies']})
+    .then((res) => {
       window.close()
     }, (error) => {
       console.error(error)
@@ -138,4 +92,4 @@ async function mainWindow() {
     })
     
   }
-app.whenReady().then(loadingWindow);
+app.whenReady().then(mainWindow);

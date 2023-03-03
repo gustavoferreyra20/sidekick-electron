@@ -1,6 +1,6 @@
 angular.module('myAppRewardService', [])
 
-.factory('rewards', function(){
+.factory('rewards', [function(){
 	return {
 		getAll: async function(args = null){
             return new Promise((resolve, reject) =>{
@@ -44,4 +44,4 @@ angular.module('myAppRewardService', [])
                 })
 		}
 	};
-});
+}]);

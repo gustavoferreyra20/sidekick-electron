@@ -1,6 +1,6 @@
 angular.module('myAppPlatformService', [])
 
-.factory('platforms', function(){
+.factory('platforms', [function(){
 	return {
 		getAll: async function(args = null){
             return new Promise((resolve, reject) =>{
@@ -52,4 +52,4 @@ angular.module('myAppPlatformService', [])
               })
 		}
 	};
-});
+}]);

@@ -1,4 +1,4 @@
-angular.module('myAppRateCtrl', []).controller('rateCtrl', ['$scope', '$stateParams', 'posts', 'reviews', 'rewards', function($scope, $stateParams, posts, reviews, rewards){
+angular.module('myAppRateCtrl', []).controller('rateCtrl', ['$scope', '$stateParams', 'posts', 'reviews', 'rewards', 'popups', function($scope, $stateParams, posts, reviews, rewards, popups){
 
     $scope.newReview = function(review){
      // console.log(form)
@@ -9,8 +9,8 @@ angular.module('myAppRateCtrl', []).controller('rateCtrl', ['$scope', '$statePar
         reviews.save(review)
         .then(posts.addApplication( {id_user: review.id_user, id_post: review.id_post, status: 'reviewed'}))
         .then(function(){if (review.reward != undefined) rewards.use(review.reward)})
-        .then(popupController.alert("Calificacion enviada")) 
-        .then(window.location.href = "#!applications");  
+        .then(popups.alert("Calificacion enviada")) 
+        .then(window.location.href = "#/applications");  
        };
        
        $scope.btnAddReward = function(){

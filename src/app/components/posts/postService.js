@@ -1,6 +1,6 @@
 angular.module('myAppPostService', [])
 
-.factory('posts', ['games', 'modes', 'platforms', 'reviews', function(games, modes, platforms, reviews){
+.factory('posts', ['games', 'modes', 'platforms', 'reviews', 'users', 'popups', function(games, modes, platforms, reviews, users, popups){
 	return {
 		getAll: async function(args = null){
             return new Promise((resolve, reject) =>{
@@ -21,7 +21,7 @@ angular.module('myAppPostService', [])
     load: async function(posts){
         for (var i=0, n = posts.length; i < n; i++) { // looping over the options
 
-            user = await userController.getUser({id_user: posts[i].id_user});
+            user = await users.get({id_user: posts[i].id_user});
             reviewStats = await reviews.getAvg({id_user: user[0].id_user});
             posts[i].abilityScore = (reviewStats[0].abilityScore === undefined ) ? 0 : Math.round(reviewStats[0].abilityScore);
             posts[i].karmaScore = (reviewStats[0].karmaScore === undefined ) ? 0 : Math.round(reviewStats[0].karmaScore);
@@ -52,7 +52,7 @@ angular.module('myAppPostService', [])
   
         axios.post(url, data)
         .then(() => {
-          popupController.action("Anuncio creado con exito", function (){ (location.reload())})
+          popups.action("Anuncio creado con exito", function (){ (location.reload())})
         })
         .catch(function(error) {
           console.log(error);
@@ -84,7 +84,7 @@ angular.module('myAppPostService', [])
 
           axios.post(url, data)
           .then(() => {
-            popupController.alert("Solicitud enviada");
+            popups.alert("Solicitud enviada");
           })
           .catch(function(error) {
             console.log(error);

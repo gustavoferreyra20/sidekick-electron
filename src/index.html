@@ -16,26 +16,31 @@
 
 </head>
 <body>
+  <!-- Navigation Bar -->
+  <div ng-controller="userCtrl">
+    <nav-dir ng-if="checkSession()"></nav-dir>
+  </div>
 
-	<!-- Navigation Bar-->
-	<nav-dir></nav-dir>
-  
-  <div id="content" ui-view></div>
-  
-  <div id="rightSection">
-    <h4 class="d-flex justify-content-center mt-2">Popular Games</h4>
-    <hr class="hr-main">
-    <div class="games-grid" id="games" ng-controller="gameCtrl">
-      <img data-ng-src={{game.img}} class="img-fluid" alt={{game.name}}  ng-repeat="game in games">
-      
+  <div id="content" ui-view ></div>
+
+  <div ng-controller="userCtrl">
+    <div id="rightSection" ng-if="checkSession()">
+      <h4 class="d-flex justify-content-center mt-2">Popular Games</h4>
+      <hr class="hr-main">
+      <div class="games-grid" id="games" ng-controller="gameCtrl">
+        <img data-ng-src={{game.img}} class="img-fluid" alt={{game.name}}  ng-repeat="game in games">
+        
+      </div>
     </div>
   </div>
-  </div>
-
 
   	<!-- Angular Modules -->
 	<script type="text/javascript" src="app/app.module.js"></script>
 	<script type="text/javascript" src="app/app.routes.js"></script>
+  <script type="text/javascript" src="app/components/login/loginCtrl.js"></script>
+  <script type="text/javascript" src="app/components/registration/registrationCtrl.js"></script>
+  <script type="text/javascript" src="app/components/users/userService.js"></script>
+  <script type="text/javascript" src="app/components/users/userCtrl.js"></script>
 	<script type="text/javascript" src="app/components/home/homeCtrl.js"></script>
   <script type="text/javascript" src="app/components/applications/applicationCtrl.js"></script>
   <script type="text/javascript" src="app/components/config/configCtrl.js"></script>
@@ -46,13 +51,13 @@
   <script type="text/javascript" src="app/components/profile/profileCtrl.js"></script>
   <script type="text/javascript" src="app/components/rate/rateCtrl.js"></script>
   <script type="text/javascript" src="app/components/store/storeCtrl.js"></script>
-  <script type="text/javascript" src="app/components/loading/loadingCtrl.js"></script>
   <script type="text/javascript" src="app/shared/navigation-sidebar/navbarDirective.js"></script>
 	<script type="text/javascript" src="app/shared/navigation-sidebar/navbarService.js"></script>
   <script type="text/javascript" src="app/components/modes/modeService.js"></script>
   <script type="text/javascript" src="app/components/platforms/platformService.js"></script>
   <script type="text/javascript" src="app/components/reviews/reviewService.js"></script>
   <script type="text/javascript" src="app/components/rewards/rewardService.js"></script>
-
+  <script type="text/javascript" src="app/components/tokens/tokenService.js"></script>
+  <script type="text/javascript" src="app/components/popups/popupService.js"></script>
 </body>
 </html>

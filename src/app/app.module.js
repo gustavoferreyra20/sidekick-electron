@@ -1,4 +1,8 @@
 var app = angular.module("myApp",   [
+    'myAppLoginCtrl',
+    'myAppRegistrationCtrl',
+    'myAppUserService',
+    'myAppUserCtrl',
     'myAppHomeCtrl',
     'myAppgameCtrl',
     'myAppGameService',
@@ -15,6 +19,8 @@ var app = angular.module("myApp",   [
     'myAppModeService',
     'myAppPlatformService',
     'myAppReviewService',
-    'myAppRewardService'
+    'myAppRewardService',
+    'myAppTokenService',
+    'myAppPopupService'
 ]);
 

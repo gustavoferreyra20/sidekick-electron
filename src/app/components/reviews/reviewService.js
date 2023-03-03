@@ -1,6 +1,6 @@
 angular.module('myAppReviewService', [])
 
-.factory('reviews', function(){
+.factory('reviews', [function(){
 	return {
 		getAll: async function(args = null){
             return new Promise((resolve, reject) =>{
@@ -48,4 +48,4 @@ angular.module('myAppReviewService', [])
                 })
 		}
 	};
-});
+}]);

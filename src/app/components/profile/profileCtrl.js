@@ -1,6 +1,6 @@
-angular.module('myAppProfileCtrl', []).controller('profileCtrl', ['$scope', 'reviews', function($scope, reviews){
+angular.module('myAppProfileCtrl', []).controller('profileCtrl', ['$scope', 'reviews', 'users', function($scope, reviews, users){
   
-    userController.getUser({id_user: userSession.id_user}).then(
+  users.get({id_user: userSession.id_user}).then(
         function(user) {
             
           reviews.getAvg({id_user: user[0].id_user}).then(

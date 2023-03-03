@@ -1,6 +1,6 @@
 angular.module('myAppGameService', [])
 
-.factory('games', function(){
+.factory('games', [function(){
 	return {
 		getAll: async function(){
 			return new Promise((resolve, reject) =>{
@@ -51,5 +51,5 @@ angular.module('myAppGameService', [])
                 })
 		}
 	};
-});
+}]);
 

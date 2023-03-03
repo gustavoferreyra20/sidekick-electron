@@ -1,6 +1,6 @@
 angular.module('myAppModeService', [])
 
-.factory('modes', function(){
+.factory('modes', [function(){
 	return {
 		getAll: async function(args = null){
             return new Promise((resolve, reject) =>{
@@ -38,4 +38,4 @@ angular.module('myAppModeService', [])
             return options;
 		}
 	};
-});
+}]);

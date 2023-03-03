@@ -1,4 +1,4 @@
-angular.module('myAppHomeCtrl', ['myAppgameCtrl']).controller('homeCtrl', ['$scope', 'posts', 'modes', 'games', 'platforms',function($scope, posts, modes, games, platforms){
+angular.module('myAppHomeCtrl', ['myAppgameCtrl']).controller('homeCtrl', ['$scope', 'posts', 'modes', 'games', 'platforms', 'popups', function($scope, posts, modes, games, platforms, popups){
     posts.getAll().then(
         function(response){
           posts.load(response).then(function(posts){
@@ -71,10 +71,10 @@ angular.module('myAppHomeCtrl', ['myAppgameCtrl']).controller('homeCtrl', ['$sco
         posts.getApplications({id_post: id_post, id_user: userSession.id_user, type: 'sended'})
         .then((res) => {
           if(res[0]){
-            popupController.alert("Ya existe una solicitud pendiente");
+            popups.alert("Ya existe una solicitud pendiente");
           }else{
             posts.addApplication({id_post: id_post, id_user: userSession.id_user})
-            .then(popupController.alert("Solicitud enviada"));     
+            .then(popups.alert("Solicitud enviada"));     
           }
          
         })  

@@ -16,6 +16,7 @@ body {
 	background-color: #494649;
 	color: white;
 }
+
 #menu {
 	width: 70px;
 	background-color: #3e3c3d;
@@ -25,7 +26,8 @@ body {
 	left: 0;
 	bottom: 0;
 }
-#menu li{
+
+#menu li {
 	flex-direction: row;
 	margin: 10px 10px;
 }
@@ -40,18 +42,21 @@ body {
 	bottom: 0;
 }
 
-ul, li {
-    display:inline
+ul,
+li {
+	display: inline
 }
 
-li.right{
-    float: right;
+li.right {
+	float: right;
 }
-#content{
+
+.content {
 	margin-left: 80px;
 	margin-right: 200px;
 }
-.card{
+
+.card {
 	box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, .2);
 	background-color: #494649;
 	margin: 20px;
@@ -59,22 +64,22 @@ li.right{
 
 }
 
-.nav-item.current{
-    border-radius: 50px;
-    -webkit-box-shadow: 2px 2px 5px 0px #1ded8c;
-    -moz-box-shadow: 2px 2px 5px 0px #1ded8c;
-    box-shadow: 2px 2px 5px 0px #1ded8c;
+.nav-item.current {
+	border-radius: 50px;
+	-webkit-box-shadow: 2px 2px 5px 0px #1ded8c;
+	-moz-box-shadow: 2px 2px 5px 0px #1ded8c;
+	box-shadow: 2px 2px 5px 0px #1ded8c;
 }
 
 .nav-item:hover {
 	border-radius: 50px;
-    -webkit-box-shadow: 2px 2px 5px 0px #1ded8c;
-    -moz-box-shadow: 2px 2px 5px 0px #1ded8c;
-    box-shadow: 2px 2px 5px 0px #1ded8c;
-  }
+	-webkit-box-shadow: 2px 2px 5px 0px #1ded8c;
+	-moz-box-shadow: 2px 2px 5px 0px #1ded8c;
+	box-shadow: 2px 2px 5px 0px #1ded8c;
+}
 
-.hr-main{
-	border: 0; 
+.hr-main {
+	border: 0;
 	height: 1px;
 	background: #1ded8c;
 	margin-left: 50px;
@@ -84,22 +89,27 @@ li.right{
 
 }
 
-  .backg-primary {
+.backg-primary {
 	background-color: #494649;
-  }
+}
 
-.liveplay-img{
+.liveplay-img {
 	height: 128px;
 	width: 128px;
 	margin: 10px;
 	position: absolute;
 }
 
-.page{display: none;}
-.page.active {display: block;}
+.page {
+	display: none;
+}
+
+.page.active {
+	display: block;
+}
 
 
-.onlinefriends-img{
+.onlinefriends-img {
 	height: 128px;
 	width: 128px;
 	margin: 10px;
@@ -119,33 +129,58 @@ li.right{
 	border-top: 16px solid #1ded8c;
 	-webkit-animation: spin 2s linear infinite;
 	animation: spin 2s linear infinite;
-  }
-  
-  /* Safari */
-  @-webkit-keyframes spin {
-	0% { -webkit-transform: rotate(0deg); }
-	100% { -webkit-transform: rotate(360deg); }
-  }
-  
-  @keyframes spin {
-	0% { transform: rotate(0deg); }
-	100% { transform: rotate(360deg); }
-  }
+}
 
-  textarea {
+/* Safari */
+@-webkit-keyframes spin {
+	0% {
+		-webkit-transform: rotate(0deg);
+	}
+
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+textarea {
 	resize: none;
-  }
+}
 
-  .games-grid img{
+.games-grid img {
 	padding: 10px;
-  }
+}
 
 
-.product-image{width: 100%}
-.dot{height: 7px;width: 7px;margin-left: 6px;margin-right: 6px;margin-top: 3px;background-color: #1ded8c;border-radius: 50%;display: inline-block}
-h5{font-weight: 400}
+.product-image {
+	width: 100%
+}
 
-.post{
+.dot {
+	height: 7px;
+	width: 7px;
+	margin-left: 6px;
+	margin-right: 6px;
+	margin-top: 3px;
+	background-color: #1ded8c;
+	border-radius: 50%;
+	display: inline-block
+}
+
+h5 {
+	font-weight: 400
+}
+
+.post {
 	background-color: #3e3c3d;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	margin-bottom: 20px;
@@ -154,68 +189,59 @@ h5{font-weight: 400}
 
 
 .line {
-    height: 1px;
-    background-color: #1ded8c;
-    width: 100%;
-    margin: 15px 0px;
+	height: 1px;
+	background-color: #1ded8c;
+	width: 100%;
+	margin: 15px 0px;
 }
 
 
 .user-img {
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.btn-green {
-    background-color: #1ded8c;
-    color: #fff;
-}
-
-.btn-green:hover {
-    background-color: green;
+	border-radius: 50%;
+	cursor: pointer;
 }
 
 .image-bg {
-    width: 100px;
+	width: 100px;
 	object-fit: cover;
 }
 
 .fit-image {
-    object-fit: cover;
-    width: 100%;
+	object-fit: cover;
+	width: 100%;
 }
 
 
 .postGame {
 	width: auto;
 	padding-right: 10px;
-	height:fit-content;
+	height: fit-content;
 	float: left;
-  }    
-  
-  .rightContent img{
+}
+
+.rightContent img {
 	padding-bottom: 10px;
 
-  }
+}
 
 input::file-selector-button {
-    color: white;
+	color: white;
 	background-color: #007bff;
 	border-color: #007bff;
 	padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: 0.25rem;
+	font-size: 1rem;
+	line-height: 1.5;
+	border-radius: 0.25rem;
 }
 
 button.active {
 	background-color: #0eaa61 !important;
-  }
+}
 
-  .rewards {
+.rewards {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-around; /* ADJUSTMENT */
-  }
+	justify-content: space-around;
+	/* ADJUSTMENT */
+}
 
-  

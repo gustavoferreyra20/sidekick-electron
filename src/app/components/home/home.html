@@ -1,70 +1,78 @@
-<div>
+<div class="content">
   <h1 class="d-flex justify-content-center">Live plays</h1>
   <hr class="hr-main">
   <div class="container mt-5 mb-5">
 
     <form ng-model="search">
-  
+
       <div class="form-row">
 
-          <div class="form-group col-md-3">
-            <select class="custom-select" ng-model="gameSelected" required ng-options="option as option.name for option in gameOptions track by option.value" ng-change="setPlatforms(gameSelected)">
-        </select>
-      </div>
-    
         <div class="form-group col-md-3">
-          <select class="custom-select" ng-model="platformSelected" required ng-options="option as option.name for option in platformOptions track by option.value">
-            </select>
-          </div>
-
-      <div class="form-group col-md-3">
-        <select class="custom-select" ng-model="modeSelected" required ng-options="option as option.name for option in modeOptions track by option.value">
+          <select class="custom-select" ng-model="gameSelected" required
+            ng-options="option as option.name for option in gameOptions track by option.value"
+            ng-change="setPlatforms(gameSelected)">
           </select>
-    </div>
-    
-    <div class="col-xs-12 col-sm-12 col-md-3 col">
-        <button type="submit" class="btn btn-green col-12" ng-click="btnSearchPost(gameSelected, platformSelected, modeSelected)" >Buscar</button>
-    </div>
-     
-  </div>
+        </div>
+
+        <div class="form-group col-md-3">
+          <select class="custom-select" ng-model="platformSelected" required
+            ng-options="option as option.name for option in platformOptions track by option.value">
+          </select>
+        </div>
+
+        <div class="form-group col-md-3">
+          <select class="custom-select" ng-model="modeSelected" required
+            ng-options="option as option.name for option in modeOptions track by option.value">
+          </select>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-3 col">
+          <button type="submit" class="btn btn-success col-12"
+            ng-click="btnSearchPost(gameSelected, platformSelected, modeSelected)">Buscar</button>
+        </div>
+
+      </div>
 
     </form>
-    
+
     <div id="posts">
 
       <div class="container-fluid mx-auto p-3 post" ng-repeat="post in posts">
 
         <div class="row justify-content-start px-3">
-  
-        <div class="col-sm-3 col-lg-2 col-xl-1 text-right">
-              <img class="user-img fit-image" data-ng-src="assets/img/icons/profile.png">
+
+          <div class="col-sm-3 col-lg-2 col-xl-1 text-right">
+            <img class="user-img fit-image" data-ng-src="assets/img/icons/profile.png">
           </div>
-  
+
           <div class="col-sm-7 col-lg-8 col-xl-9 text-left">
-          <div class="mt-1 mb-1 spec-1">
-            <span>{{post.userName}}</span>
-            <br></span><span>{{post.mode}}</span><span class="dot"></span><span>{{post.platform}}</span><span class="dot"></span>
-            <span>Habilidad: </span><span id="ability">{{post.abilityScore}}</span><span class="dot"></span><span>Karma: <span id="karma">{{post.karmaScore}}</span><br></span>
+            <div class="mt-1 mb-1 spec-1">
+              <span>{{post.userName}}</span>
+              <br></span><span>{{post.mode}}</span><span class="dot"></span><span>{{post.platform}}</span><span
+                class="dot"></span>
+              <span>Habilidad: </span><span id="ability">{{post.abilityScore}}</span><span
+                class="dot"></span><span>Karma: <span id="karma">{{post.karmaScore}}</span><br></span>
+            </div>
           </div>
-        </div>
           <div class="col-sm-2 text-right">
-          <h2>{{post.actualUsers}} / {{post.requiredUsers}}</h2>
-      
+            <h2>{{post.actualUsers}} / {{post.requiredUsers}}</h2>
+
           </div>
         </div>
-  
+
         <div class="line"></div>
-          
+
         <div class="row ml-auto">
-        <h2 class="col-12">{{post.title}}</h2>
-            <img class="img-responsive rounded product-image postGame" alt={{post.gameName}} data-ng-src={{post.gameImg}}>
-            <p class="col">{{post.description}}</p>
+          <h2 class="col-12">{{post.title}}</h2>
+          <img class="img-responsive rounded product-image postGame" alt={{post.gameName}} data-ng-src={{post.gameImg}}>
+          <p class="col">{{post.description}}</p>
         </div>
         <br>
-        <button type="submit" class="col-sm-12  col-lg-12 btn btn-green" ng-click="btnSubmitApplication(post.id_post)">Unirse</button>
+        <button type="submit" class="col-sm-12  col-lg-12 btn btn-success"
+          ng-click="btnSubmitApplication(post.id_post)">Unirse</button>
       </div>
 
       <p ng-show="!posts[0]">No se encontraron resultados</p>
     </div>
-    
-</div>
+
+  </div>

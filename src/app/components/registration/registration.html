@@ -1,47 +1,55 @@
-<div class="card-body" id="registrationDiv" > 
-    <form id="registrationForm" method="POST" ng-submit="register(form)">
-        <h1 class="text-center pb-4">Registrar usuario</h1>
-        <div class="form-group">
-            <label for="userName">Nombre</label>
-            <input type="text" class="form-control" name="userName"
-                placeholder="Ingrese su nombre" value="" required ng-model="form.name">
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+            <div class="card-body" id="registrationDiv">
+                <form id="registrationForm" method="POST" ng-submit="register(form)">
+                    <h1 class="text-center pb-4">Registrar usuario</h1>
+                    <div class="form-group">
+                        <label for="userName">Nombre</label>
+                        <input type="text" class="form-control" name="userName" placeholder="Ingrese su nombre" value=""
+                            required ng-model="form.name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" name="email" placeholder="Ingrese su email" value=""
+                            required ng-model="form.email">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Choose a profile picture:</label><br>
+
+                        <input type="file" name="file" accept="image/png, image/jpeg" id="file" ng-model="form.file">
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Contanos un poco sobre vos</label>
+                        <textarea class="form-control" id="description" name="description" rows="3" maxlength="280"
+                            ng-model="form.description"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" class="form-control" name="password" placeholder="**********" value=""
+                            required ng-model="form.password">
+                        <p id="imagenHelp" class="form-text text-muted">Su contraseña debe contener <b
+                                class="text-danger">8</b> caracteres como mímimo.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="checkbox" name="terms" id="terms" required> Aceptar términos y condiciones <br>
+                        <a href="" class="text-decoration-none" ng-click="showTerms()">Ver términos y condiciones</a>
+
+                    </div>
+                    <button id="registration" class="btn btn-block btn-success">Registrarse</button>
+                </form>
+                <form>
+                    <br>
+                    <h2 class="text-center pb-4">Ya tienes una cuenta?</h2>
+                    <button class="btn btn-block btn-success" ui-sref="login" id="toggle">Iniciar sesión</button>
+                </form>
+            </div>
         </div>
-        
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" name="email"
-                placeholder="Ingrese su email" value="" required ng-model="form.email">
-        </div>
-
-        <div  class="form-group">         
-            <label >Choose a profile picture:</label><br>
-
-            <input type="file" name="file" accept="image/png, image/jpeg" id="file" ng-model="form.file">
-        
-          </div>
-
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Contanos un poco sobre vos</label>
-            <textarea class="form-control" id="description" name="description" rows="3" maxlength="280" ng-model="form.description"></textarea>
-          </div>
-          
-        <div class="form-group">
-        <label for="password">Contraseña</label>
-            <input type="password" class="form-control" name="password"
-                placeholder="**********" value="" required ng-model="form.password">
-                <p id="imagenHelp" class="form-text text-muted">Su contraseña debe contener <b class="text-danger">8</b> caracteres como mímimo.</p>
-        </div>
-
-        <div class="form-group">
-            <input type="checkbox" name="terms" id="terms" required> Aceptar términos y condiciones <br>
-                <a href="" class="text-decoration-none" ng-click="showTerms()">Ver términos y condiciones</a>
-
-        </div>
-        <button id="registration" class="btn btn-block btn-primary" >Registrarse</button>
-    </form>
-    <form>
-        <br>
-        <h2 class="text-center pb-4">Ya tienes una cuenta?</h2>
-        <button class="btn btn-block btn-primary" ui-sref="login" id="toggle" >Iniciar sesión</button>
-        </form>
+    </div>
 </div>

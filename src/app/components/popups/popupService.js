@@ -6,7 +6,7 @@ angular.module('myAppPopupService', [])
             popup.window({
               mode: "alert",
               additionalButtonHolderClass: 'form-group',
-              additionalButtonOkClass: "btn btn-block btn-primary",
+              additionalButtonOkClass: "btn btn-block btn-success",
               content: "<div class= form-group>" + msg + "</div>"
           });
           },
@@ -14,7 +14,7 @@ angular.module('myAppPopupService', [])
             popup.window({
               mode: "alert",
               additionalButtonHolderClass: 'form-group',
-              additionalButtonOkClass: "btn btn-block btn-primary",
+              additionalButtonOkClass: "btn btn-block btn-success",
               content: "<div class= form-group>" + msg + "</div>",
               onSubmit: function(){
                 action() 
@@ -28,7 +28,7 @@ angular.module('myAppPopupService', [])
           popup.confirm({
             window: "confirm",
             additionalButtonHolderClass: 'form-group',
-            additionalButtonOkClass: "btn btn-block btn-primary",
+            additionalButtonOkClass: "btn btn-block btn-success",
             additionalButtonCancelClass: "btn btn-block btn-danger",
             content: "<div class= form-group>" + msg + "</div>",
             labelOk:     'Si',

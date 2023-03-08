@@ -1,18 +1,20 @@
-<h1 class="d-flex justify-content-center">Resalta a los mejores jugadores</h1>
-<hr class="hr-main">
+<div class="content">
+    <h1 class="d-flex justify-content-center">Resalta a los mejores jugadores</h1>
+    <hr class="hr-main">
 
 
-<div class="container mt-5 mb-5">
+    <div class="container mt-5 mb-5">
 
-            
-            <div class="mt-5 mb-5">                
-                <div class="d-flex rewards">
-                    <div class="p-4 text-center" ng-repeat="reward in rewards">
-                            <img data-ng-src={{reward.img}} class="img-fluid" alt={{reward.name}} >
-                            <h2>$ {{reward.price}}</h2>
-                            <p>{{reward.description}}</p>
-                            <button type="button" class="btn btn-green" ng-click="btnBuy(reward)">Comprar</button>
-                    </div>
-                  </div>
+
+        <div class="mt-5 mb-5">
+            <div class="d-flex rewards">
+                <div class="p-4 text-center" ng-repeat="reward in rewards">
+                    <img data-ng-src={{reward.img}} class="img-fluid" alt={{reward.name}}>
+                    <h2>$ {{reward.price}}</h2>
+                    <p>{{reward.description}}</p>
+                    <button type="button" class="btn btn-success" ng-click="btnBuy(reward)">Comprar</button>
+                </div>
+            </div>
         </div>
     </div>
+</div>

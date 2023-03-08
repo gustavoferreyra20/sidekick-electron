@@ -21,11 +21,16 @@ angular.module('myAppUserService', [])
             axios.get(url)
             .then((res) => {
                 // create the cookie
-                let userSession = res.data[0];
-                tokens.create(userSession.id_user).then((response) => {
-                  userSession.token = response;
-                  ipcRenderer.invoke("login", userSession)
-                })
+                if(res.data.length > 0){
+                  let userSession = res.data[0];
+                  tokens.create(userSession.id_user).then((response) => {
+                    userSession.token = response;
+                    ipcRenderer.invoke("login", userSession)
+                  })
+                }else{
+                  popups.alert("Usuario y/o contraseña incorrectas")
+                }
+
             })
             .catch(function(error) {
               console.log(error);

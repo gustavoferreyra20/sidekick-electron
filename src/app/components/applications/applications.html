@@ -1,94 +1,103 @@
-    <h1 class="d-flex justify-content-center">Solicitudes pendientes</h1>
-    <hr class="hr-main">
-    <div class="container mt-5 mb-5">
-      
-      <div class="form-row mb-5">
+<div class="content">
+  <h1 class="d-flex justify-content-center">Solicitudes pendientes</h1>
+  <hr class="hr-main">
+  <div class="container mt-5 mb-5">
 
-        <div class="col-auto col-md-6 col-sm-6">
-          <button type="submit" class="btn btn-green col-12" ng-click="showSentApp()">Enviadas</button>
-        </div>
+    <div class="form-row mb-5">
 
-        <div class="col-auto col-md-6 col-sm-6">
-          <button type="submit" class="btn btn-green col-12" ng-click="showReceivedApp()">Recibidas</button>
-        </div>
-     
+      <div class="col-auto col-md-6 col-sm-6">
+        <button type="submit" class="btn btn-success col-12" ng-click="showSentApp()">Enviadas</button>
       </div>
 
-  
-        <div class="container-fluid mx-auto p-3 post" ng-repeat="app in applications">
-  
-          <div class="row justify-content-start px-3">
-  
-            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 pl-0">
-              <h2>{{app.title}}</h2>
-              </div>
-      
-              <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4  text-right">
-              <h2>{{app.actualUsers}} / {{app.requiredUsers}}</h2>
-          
-              </div>
-            </div>  
-  
-    
-          <div class="line"></div>
-            
-          <br>
-          <button type="submit" class="col-sm-12  col-lg-12 btn btn-danger" ng-click="btnCancelApplication(app.id_post)"  ng-show="app.applications.status == 'pending'">Cancelar</button>
+      <div class="col-auto col-md-6 col-sm-6">
+        <button type="submit" class="btn btn-success col-12" ng-click="showReceivedApp()">Recibidas</button>
+      </div>
 
-          <p ng-show="app.status == 'rejected'">Solicitud rechazada</p>
+    </div>
 
-          <p ng-show="app.status == 'accepted'">Solicitud aceptada</p>
 
+    <div class="container-fluid mx-auto p-3 post" ng-repeat="app in applications">
+
+      <div class="row justify-content-start px-3">
+
+        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 pl-0">
+          <h2>{{app.title}}</h2>
         </div>
 
-        <div class="container-fluid mx-auto p-3 post" ng-repeat="post in posts">
-  
-          <div class="row justify-content-start px-3">
-  
-            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 pl-0">
-              <h2>{{post.title}}</h2>
-              </div>
-      
-              <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4  text-right">
-              <h2>{{post.actualUsers}} / {{post.requiredUsers}}</h2>
-          
-              </div>
-            </div>  
-    
-          <div class="line"></div>
-            
-          <div class="container-fluid mx-auto p-3 post" ng-repeat="user in post.users" ng-show="{{user.applications.status !== 'rejected'}}">
-  
-            <div class="row justify-content-start px-3 pl-0">
-              <div class="col-sm-3 col-lg-2 col-xl-1 text-right">
-                <img class="user-img fit-image" src="assets/img/icons/profile.png">
-            </div>
-            
-              <h2>{{user.name}}</h2>
-    
-      
-            <div class="line"></div>
-              
-            <br>
-              <div class="col-auto col-md-6 col-sm-6" ng-show="{{user.applications.status == 'pending'}}">
-                <button type="submit" class="btn btn-green col-12" ng-click="changeStatus(user.id_user, post.id_post, 'accepted')">Aceptar</button>
-              </div>
-      
-              <div class="col-auto col-md-6 col-sm-6" ng-show="{{user.applications.status == 'pending'}}">
-                <button type="submit" class="btn btn-danger col-12" ng-click="changeStatus(user.id_user, post.id_post, 'rejected')">Rechazar</button>
-              </div>
+        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4  text-right">
+          <h2>{{app.actualUsers}} / {{app.requiredUsers}}</h2>
 
-            <div class="col-12" ng-show="{{user.applications.status == 'accepted'}}" ui-sref="rate({id_user: user.id_user, id_post: post.id_post})">
-              <br>
-              <a href="" class="btn btn-primary col-12">Calificar</a>
-            </div>
+        </div>
+      </div>
 
-            </div>
+
+      <div class="line"></div>
+
+      <br>
+      <button type="submit" class="col-sm-12  col-lg-12 btn btn-danger" ng-click="btnCancelApplication(app.id_post)"
+        ng-show="app.applications.status == 'pending'">Cancelar</button>
+
+      <p ng-show="app.status == 'rejected'">Solicitud rechazada</p>
+
+      <p ng-show="app.status == 'accepted'">Solicitud aceptada</p>
+
+    </div>
+
+    <div class="container-fluid mx-auto p-3 post" ng-repeat="post in posts">
+
+      <div class="row justify-content-start px-3">
+
+        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 pl-0">
+          <h2>{{post.title}}</h2>
+        </div>
+
+        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4  text-right">
+          <h2>{{post.actualUsers}} / {{post.requiredUsers}}</h2>
+
+        </div>
+      </div>
+
+      <div class="line"></div>
+
+      <div class="container-fluid mx-auto p-3 post" ng-repeat="user in post.users"
+        ng-show="{{user.applications.status !== 'rejected'}}">
+
+        <div class="row justify-content-start px-3 pl-0">
+          <div class="col-sm-3 col-lg-2 col-xl-1 text-right">
+            <img class="user-img fit-image" src="assets/img/icons/profile.png">
           </div>
 
-          <button type="submit" class="col-sm-12  col-lg-12 btn btn-danger" ng-click="btnDeletePost(post.id_post)">Eliminar post</button>
-        </div>
+          <h2>{{user.name}}</h2>
 
-        <p ng-show="!posts[0] && !applications[0]">No se encontraron criticas</p>
-  
-      
+
+          <div class="line"></div>
+
+          <br>
+          <div class="col-auto col-md-6 col-sm-6" ng-show="{{user.applications.status == 'pending'}}">
+            <button type="submit" class="btn btn-success col-12"
+              ng-click="changeStatus(user.id_user, post.id_post, 'accepted')">Aceptar</button>
+          </div>
+
+          <div class="col-auto col-md-6 col-sm-6" ng-show="{{user.applications.status == 'pending'}}">
+            <button type="submit" class="btn btn-danger col-12"
+              ng-click="changeStatus(user.id_user, post.id_post, 'rejected')">Rechazar</button>
+          </div>
+
+          <div class="col-12" ng-show="{{user.applications.status == 'accepted'}}"
+            ui-sref="rate({id_user: user.id_user, id_post: post.id_post})">
+            <br>
+            <a href="" class="btn btn-success col-12">Calificar</a>
+          </div>
+
+        </div>
+      </div>
+
+      <button type="submit" class="col-sm-12  col-lg-12 btn btn-danger" ng-click="btnDeletePost(post.id_post)">Eliminar
+        post</button>
+    </div>
+
+    <p ng-show="!posts[0] && !applications[0]">No se encontraron criticas</p>
+
+
+
+  </div>

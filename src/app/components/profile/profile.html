@@ -1,61 +1,65 @@
-<div>
-    <h1 class="d-flex justify-content-center">User profile</h1>
-    <hr class="hr-main">
-    <div class="container mt-5 mb-5">
+<div class="content">
+  <h1 class="d-flex justify-content-center">User profile</h1>
+  <hr class="hr-main">
+  <div class="container mt-5 mb-5">
 
-        <div class="container-fluid mx-auto p-3 post" >
+    <div class="container-fluid mx-auto p-3 post">
 
-            <div class="row justify-content-start px-3">
-      
-            <div class="col-sm-3 col-lg-2 col-xl-1 text-right">
-                  <img class="user-img fit-image" src="assets/img/icons/profile.png">
-              </div>
-      
-              <div class="col-sm-7 col-lg-8 col-xl-9 text-left">
-              <div class="mt-1 mb-1 spec-1">
-                <span>{{profile.name}}</span><br></span><span>Habilidad: </span><span id="ability">{{profile.ability}}</span><span class="dot"></span><span>Karma: <span id="karma"></span>{{profile.karma}}<br></span>
-              </div>
-            </div>
-              <div class="col-sm-2 text-right">
-              <h2>star</h2>
-          
-              </div>
-            </div>
-      
-            <div class="line"></div>
-              
-            <div class="row ml-auto">
-              <p id="description">{{profile.description}}</p>
-            </div>
-            <br>
-            <button type="submit" class="col-sm-12  col-lg-12 btn btn-green">Editar</button>
+      <div class="row justify-content-start px-3">
+
+        <div class="col-sm-3 col-lg-2 col-xl-1 text-right">
+          <img class="user-img fit-image" src="assets/img/icons/profile.png">
+        </div>
+
+        <div class="col-sm-7 col-lg-8 col-xl-9 text-left">
+          <div class="mt-1 mb-1 spec-1">
+            <span>{{profile.name}}</span><br></span><span>Habilidad: </span><span
+              id="ability">{{profile.ability}}</span><span class="dot"></span><span>Karma: <span
+                id="karma"></span>{{profile.karma}}<br></span>
           </div>
+        </div>
+        <div class="col-sm-2 text-right">
+          <h2>star</h2>
 
-          <div class="container-fluid mx-auto p-3 post" ng-repeat="review in reviews">
-  
-            <div class="row justify-content-start px-3">
-    
-              <div class="col-sm-3 col-lg-2 col-xl-1 text-right">
-                <img class="user-img fit-image" src="assets/img/icons/profile.png">
-            </div>
+        </div>
+      </div>
 
-              <div class="col-sm-7 col-lg-8 col-xl-9 text-left">
-                <div class="mt-1 mb-1 spec-1">
-                  <span>{{review.user.name}}</span><br></span><span>Habilidad: </span><span id="ability">{{review.abilityScore}}</span><span class="dot"></span><span>Karma: <span id="karma"></span>{{review.karmaScore}}<br></span>
-                </div>
-              </div>
-            
-              <div class="line"></div>
-              
-              <div>
-                <p id="description">{{review.comment}}</p>
-              </div>
+      <div class="line"></div>
 
-                </div>
-              </div> 
-              
-              <p ng-show="!reviews[0]">No se encontraron criticas</p>
-          </div>
+      <div class="row ml-auto">
+        <p id="description">{{profile.description}}</p>
+      </div>
+      <br>
+      <button type="submit" class="col-sm-12  col-lg-12 btn btn-success">Editar</button>
     </div>
 
+    <div class="container-fluid mx-auto p-3 post" ng-repeat="review in reviews">
+
+      <div class="row justify-content-start px-3">
+
+        <div class="col-sm-3 col-lg-2 col-xl-1 text-right">
+          <img class="user-img fit-image" src="assets/img/icons/profile.png">
+        </div>
+
+        <div class="col-sm-7 col-lg-8 col-xl-9 text-left">
+          <div class="mt-1 mb-1 spec-1">
+            <span>{{review.user.name}}</span><br></span><span>Habilidad: </span><span
+              id="ability">{{review.abilityScore}}</span><span class="dot"></span><span>Karma: <span
+                id="karma"></span>{{review.karmaScore}}<br></span>
+          </div>
+        </div>
+
+        <div class="line"></div>
+
+        <div>
+          <p id="description">{{review.comment}}</p>
+        </div>
+
+      </div>
+    </div>
+
+    <p ng-show="!reviews[0]">No se encontraron criticas</p>
   </div>
+</div>
+
+</div>

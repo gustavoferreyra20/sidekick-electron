@@ -2,46 +2,51 @@
 <html ng-app="myApp">
 
 <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>SideKick</title>
   <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
-  	<!-- Angular links -->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script> 
-  
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- Angular links -->
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
+  <script type="text/javascript"
+    src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.js"></script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/popupS.css">
 
 </head>
+
 <body>
   <!-- Navigation Bar -->
   <div ng-controller="userCtrl">
     <nav-dir ng-if="checkSession()"></nav-dir>
   </div>
 
-  <div id="content" ui-view ></div>
+  <div ui-view></div>
 
   <div ng-controller="userCtrl">
     <div id="rightSection" ng-if="checkSession()">
       <h4 class="d-flex justify-content-center mt-2">Popular Games</h4>
       <hr class="hr-main">
       <div class="games-grid" id="games" ng-controller="gameCtrl">
-        <img data-ng-src={{game.img}} class="img-fluid" alt={{game.name}}  ng-repeat="game in games">
-        
+        <img data-ng-src={{game.img}} class="img-fluid" alt={{game.name}} ng-repeat="game in games">
+
       </div>
     </div>
   </div>
 
-  	<!-- Angular Modules -->
-	<script type="text/javascript" src="app/app.module.js"></script>
-	<script type="text/javascript" src="app/app.routes.js"></script>
+  <!-- Angular Modules -->
+  <script type="text/javascript" src="app/app.module.js"></script>
+  <script type="text/javascript" src="app/app.routes.js"></script>
   <script type="text/javascript" src="app/components/login/loginCtrl.js"></script>
   <script type="text/javascript" src="app/components/registration/registrationCtrl.js"></script>
   <script type="text/javascript" src="app/components/users/userService.js"></script>
   <script type="text/javascript" src="app/components/users/userCtrl.js"></script>
-	<script type="text/javascript" src="app/components/home/homeCtrl.js"></script>
+  <script type="text/javascript" src="app/components/home/homeCtrl.js"></script>
   <script type="text/javascript" src="app/components/applications/applicationCtrl.js"></script>
   <script type="text/javascript" src="app/components/config/configCtrl.js"></script>
   <script type="text/javascript" src="app/components/games/gameCtrl.js"></script>
@@ -52,7 +57,7 @@
   <script type="text/javascript" src="app/components/rate/rateCtrl.js"></script>
   <script type="text/javascript" src="app/components/store/storeCtrl.js"></script>
   <script type="text/javascript" src="app/shared/navigation-sidebar/navbarDirective.js"></script>
-	<script type="text/javascript" src="app/shared/navigation-sidebar/navbarService.js"></script>
+  <script type="text/javascript" src="app/shared/navigation-sidebar/navbarService.js"></script>
   <script type="text/javascript" src="app/components/modes/modeService.js"></script>
   <script type="text/javascript" src="app/components/platforms/platformService.js"></script>
   <script type="text/javascript" src="app/components/reviews/reviewService.js"></script>
@@ -60,4 +65,5 @@
   <script type="text/javascript" src="app/components/tokens/tokenService.js"></script>
   <script type="text/javascript" src="app/components/popups/popupService.js"></script>
 </body>
+
 </html>

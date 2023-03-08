@@ -8,7 +8,7 @@ angular.module('myAppApplicationCtrl', []).controller('applicationCtrl', ['$scop
 
     $scope.changeStatus = function(id_user, id_post, status){
       posts.addApplication({id_user: id_user, id_post: id_post, status: status})
-      .then(showReceivedApp());
+      .then(showReceivedApp);
     }; 
 
     $scope.showTerms = function(){popups.alert('Lorem')}; 

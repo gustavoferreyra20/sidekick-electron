@@ -47,7 +47,9 @@
 
           <div class="col-sm-7 col-lg-8 col-xl-9 text-left">
             <div class="mt-1 mb-1 spec-1">
-              <span>{{post.userName}}</span>
+
+              <a ui-sref="profile({id_user: post.id_user})"><h2>{{post.userName}}</h2></a>
+
               <br></span><span>{{post.mode}}</span><span class="dot"></span><span>{{post.platform}}</span><span
                 class="dot"></span>
               <span>Habilidad: </span><span id="ability">{{post.abilityScore}}</span><span

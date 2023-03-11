@@ -46,7 +46,7 @@ app.config(async function($stateProvider, $urlRouterProvider) {
                 controller: "applicationCtrl"
             })
             .state("profile", {
-                url: '/profile',
+                url: '/profile?id_user',
                 templateUrl : "app/components/profile/profile.html",
                 controller: "profileCtrl"
             })

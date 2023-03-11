@@ -13,7 +13,7 @@
 
         <div class="col-sm-7 col-lg-8 col-xl-9 text-left">
           <div class="mt-1 mb-1 spec-1">
-            <span>{{profile.name}}</span><br></span><span>Habilidad: </span><span
+            <h2>{{profile.name}}</h2><span>Habilidad: </span><span
               id="ability">{{profile.ability}}</span><span class="dot"></span><span>Karma: <span
                 id="karma"></span>{{profile.karma}}<br></span>
           </div>
@@ -30,7 +30,7 @@
         <p id="description">{{profile.description}}</p>
       </div>
       <br>
-      <button type="submit" class="col-sm-12  col-lg-12 btn btn-success">Editar</button>
+      <button type="submit" class="col-sm-12  col-lg-12 btn btn-success" ng-if="profile.isCurrentUser">Editar</button>
     </div>
 
     <div class="container-fluid mx-auto p-3 post" ng-repeat="review in reviews">
@@ -43,7 +43,8 @@
 
         <div class="col-sm-7 col-lg-8 col-xl-9 text-left">
           <div class="mt-1 mb-1 spec-1">
-            <span>{{review.user.name}}</span><br></span><span>Habilidad: </span><span
+            <a ui-sref="profile({id_user: review.user.id_user})"><h2>{{review.user.name}}</h2></a>
+            <span>Habilidad: </span><span
               id="ability">{{review.abilityScore}}</span><span class="dot"></span><span>Karma: <span
                 id="karma"></span>{{review.karmaScore}}<br></span>
           </div>

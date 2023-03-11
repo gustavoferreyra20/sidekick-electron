@@ -52,7 +52,7 @@ angular.module('myAppPostService', [])
   
         axios.post(url, data)
         .then(() => {
-          popups.action("Anuncio creado con exito", function (){ (location.reload())})
+          popups.function("Anuncio creado con exito", function (){ (location.reload())})
         })
         .catch(function(error) {
           console.log(error);

@@ -79,7 +79,8 @@ app.config(async function($stateProvider, $urlRouterProvider) {
             window.location.href = "#/home";
             
             const navImages = document.querySelectorAll('.nav-item');
-
+            navImages[0].classList.add('current');
+            
               for (let i = 0; i < navImages.length; i++) {
                   
                   navImages[i].addEventListener("click", function() {

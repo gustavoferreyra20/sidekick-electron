@@ -30,10 +30,10 @@ angular.module('myAppApplicationCtrl', []).controller('applicationCtrl', ['$scop
     }
 
     $scope.btnCancelApplication = function(id_post){
-      popups.confirm("Seguro desea eliminar la solicitud?", function (){ (posts.removeApplication(id_post, userSession.id_user).then(showSentApp()))})
+      popups.confirm("Seguro desea eliminar la solicitud?", function (){ (posts.removeApplication(id_post, userSession.id_user).then(showSentApp))})
     }
 
     $scope.btnDeletePost = function(id_post){
-      popups.confirm("Seguro desea eliminar el post?", function (){ (posts.remove(id_post).then(showReceivedApp()))})
+      popups.confirm("Seguro desea eliminar el post?", function (){ (posts.remove(id_post).then(showReceivedApp))})
     }
 }]);

@@ -1,29 +1,29 @@
 angular.module('myAppRegistrationCtrl', []).controller('registrationCtrl', ['$scope', 'users', 'popups', function($scope, users, popups){
     $scope.register = function(form){
-        users.login(form)
-    
+          
         let conditions = {
           email: form.email
         }
         
         users.get(conditions)
         .then(function(existentUser){
-          if(existentUser.length > 0){
+          if(form.password.length < 8){
+            popups.alert("Contraseña demasiado corta")  
+          }else if(existentUser.length > 0){
             popups.alert("Usuario existente")
-          }else if(form.password.length < 8){
-            popups.alert("Contraseña demasiado corta")
           } else if ( file.files[0]) {
             saveImage(file).then((res) =>{
               return newUser = {name:form.name, email:form.email, description:form.description, password:form.password, img:res.path }
             }).then((res) =>{
               users.save(res)
-              .then(popups.action("Usuario registrado con exito", function (){ (location.reload())}))
+              .then(popups.function("Usuario registrado con exito", function (){ (location.reload())}))
             }) 
           } else {
             newUser = form;
             users.save(newUser)
-            .then(popups.action("Usuario registrado con exito", function (){ (location.reload())}))
+            .then(popups.function("Usuario registrado con exito", function (){ (location.reload())}))
           }
+
         }) 
 
        }; 

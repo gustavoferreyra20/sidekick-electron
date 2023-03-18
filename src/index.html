@@ -33,7 +33,7 @@
       <h4 class="d-flex justify-content-center mt-2">Popular Games</h4>
       <hr class="hr-main">
       <div class="games-grid" id="games" ng-controller="gameCtrl">
-        <img data-ng-src={{game.img}} class="img-fluid" alt={{game.name}} ng-repeat="game in games">
+        <img crossorigin="anonymous" data-ng-src="http://localhost:3000/api/images/{{game.img}}" class="img-fluid" alt={{game.name}} ng-repeat="game in games">
 
       </div>
     </div>

@@ -66,7 +66,7 @@
 
         <div class="row ml-auto">
           <h2 class="col-12">{{post.title}}</h2>
-          <img class="img-responsive rounded product-image postGame" alt={{post.gameName}} data-ng-src={{post.gameImg}}>
+          <img class="img-responsive rounded product-image postGame" alt={{post.gameName}} crossorigin="anonymous" data-ng-src="http://localhost:3000/api/images/{{post.gameImg}}">
           <p class="col">{{post.description}}</p>
         </div>
         <br>

@@ -64,10 +64,13 @@
 
         <div class="row justify-content-start px-3 pl-0">
           <div class="col-sm-3 col-lg-2 col-xl-1 text-right">
-            <img class="user-img fit-image" src="assets/img/icons/profile.png">
+            <img class="user-img fit-image" crossorigin="anonymous"
+              data-ng-src="http://localhost:3000/api/images/{{user.img}}">
           </div>
 
-          <a ui-sref="profile({id_user: user.id_user})"><h2>{{user.name}}</h2></a>
+          <a ui-sref="profile({id_user: user.id_user})">
+            <h2>{{user.name}}</h2>
+          </a>
 
 
           <div class="line"></div>

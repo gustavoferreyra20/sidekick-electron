@@ -199,6 +199,8 @@ h5 {
 .user-img {
 	border-radius: 50%;
 	cursor: pointer;
+	height: 102px;
+    width: 102px;
 }
 
 .image-bg {

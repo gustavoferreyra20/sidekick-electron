@@ -10,10 +10,11 @@ angular.module('myAppProfileCtrl', []).controller('profileCtrl', ['$scope', 'rev
 
           var profile = {
             name: user[0].name,
-            description: user.description,
+            description: user[0].description,
             ability: (response[0].abilityScore === undefined) ? 0 : Math.round(response[0].abilityScore),
             karma: (response[0].karmaScore === undefined) ? 0 : Math.round(response[0].karmaScore),
-            isCurrentUser: $stateParams.id_user === undefined
+            isCurrentUser: $stateParams.id_user === undefined,
+            img: user[0].img
           };
 
           $scope.profile = profile;

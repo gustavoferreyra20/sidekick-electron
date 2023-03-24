@@ -7,20 +7,21 @@
 
       <div class="row justify-content-start px-3">
 
-        <div class="col-sm-3 col-lg-2 col-xl-1 text-right">
+        <div class="col-lg-auto col-md-3 col-md-3 col-sm-4 text-left">
           <img class="user-img fit-image" crossorigin="anonymous"
             data-ng-src="http://localhost:3000/api/images/{{profile.img}}">
         </div>
 
-        <div class="col-sm-7 col-lg-8 col-xl-9 text-left">
-          <div class="mt-1 mb-1 spec-1">
-            <h2>{{profile.name}}</h2><span>Habilidad: </span><span id="ability">{{profile.ability}}</span><span
-              class="dot"></span><span>Karma: <span id="karma"></span>{{profile.karma}}<br></span>
+        <div class="col text-left">
+          <div class="d-flex flex-wrap align-items-center">
+            <span>
+              <h2>{{profile.name}}</h2><span>Habilidad: </span><span id="ability">{{profile.ability}}</span><span
+                class="dot"></span><span>Karma: <span id="karma"></span>{{profile.karma}}<br></span>
+            </span>
+            <span class="text-right ml-auto">
+              <h2>star</h2>
+            </span>
           </div>
-        </div>
-        <div class="col-sm-2 text-right">
-          <h2>star</h2>
-
         </div>
       </div>
 
@@ -37,12 +38,12 @@
 
       <div class="row justify-content-start px-3">
 
-        <div class="col-sm-3 col-lg-2 col-xl-1 text-right">
+        <div class="col-lg-auto col-md-3 col-md-3 col-sm-4">
           <img class="user-img fit-image" crossorigin="anonymous"
             data-ng-src="http://localhost:3000/api/images/{{review.user.img}}">
         </div>
 
-        <div class="col-sm-7 col-lg-8 col-xl-9 text-left">
+        <div class="col text-left">
           <div class="mt-1 mb-1 spec-1">
             <a ui-sref="profile({id_user: review.user.id_user})">
               <h2>{{review.user.name}}</h2>

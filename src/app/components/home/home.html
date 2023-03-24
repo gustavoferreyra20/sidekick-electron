@@ -26,7 +26,7 @@
           </select>
         </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-3 col">
+        <div class="col-md-3">
           <button type="submit" class="btn btn-success col-12"
             ng-click="btnSearchPost(gameSelected, platformSelected, modeSelected)">Buscar</button>
         </div>
@@ -41,24 +41,29 @@
 
         <div class="row justify-content-start px-3">
 
-          <div class="col-sm-3 col-lg-2 col-xl-1 text-right">
-            <img class="user-img fit-image" crossorigin="anonymous" data-ng-src="http://localhost:3000/api/images/{{post.userImg}}">
+          <div class="col-lg-auto col-md-3 col-md-3 col-sm-4">
+            <img class="user-img fit-image" crossorigin="anonymous"
+              data-ng-src="http://localhost:3000/api/images/{{post.userImg}}">
           </div>
 
-          <div class="col-sm-7 col-lg-8 col-xl-9 text-left">
+          <div class="col text-left">
             <div class="mt-1 mb-1 spec-1">
-
-              <a ui-sref="profile({id_user: post.id_user})"><h2>{{post.userName}}</h2></a>
-
-              <br></span><span>{{post.mode}}</span><span class="dot"></span><span>{{post.platform}}</span><span
+              <div class="d-flex flex-wrap align-items-center">
+                <span>
+                  <a ui-sref="profile({id_user: post.id_user})">
+                    <h2>{{post.userName}}</h2>
+                  </a>
+                </span>
+                <span class="text-right ml-auto">
+                  <h2>{{post.actualUsers}} / {{post.requiredUsers}}</h2>
+                </span>
+              </div>
+              <br>
+              </span><span>{{post.mode}}</span><span class="dot"></span><span>{{post.platform}}</span><span
                 class="dot"></span>
               <span>Habilidad: </span><span id="ability">{{post.abilityScore}}</span><span
                 class="dot"></span><span>Karma: <span id="karma">{{post.karmaScore}}</span><br></span>
             </div>
-          </div>
-          <div class="col-sm-2 text-right">
-            <h2>{{post.actualUsers}} / {{post.requiredUsers}}</h2>
-
           </div>
         </div>
 
@@ -66,7 +71,8 @@
 
         <div class="row ml-auto">
           <h2 class="col-12">{{post.title}}</h2>
-          <img class="img-responsive rounded product-image postGame" alt={{post.gameName}} crossorigin="anonymous" data-ng-src="http://localhost:3000/api/images/{{post.gameImg}}">
+          <img class="img-responsive rounded product-image postGame" alt={{post.gameName}} crossorigin="anonymous"
+            data-ng-src="http://localhost:3000/api/images/{{post.gameImg}}">
           <p class="col">{{post.description}}</p>
         </div>
         <br>

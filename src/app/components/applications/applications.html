@@ -62,16 +62,17 @@
       <div class="container-fluid mx-auto p-3 post" ng-repeat="user in post.users"
         ng-show="{{user.applications.status !== 'rejected'}}">
 
-        <div class="row justify-content-start px-3 pl-0">
-          <div class="col-sm-3 col-lg-2 col-xl-1 text-right">
+        <div class="row justify-content-start px-3">
+          <div class="col-lg-auto col-md-3 col-md-3 col-sm-4 text-left">
             <img class="user-img fit-image" crossorigin="anonymous"
               data-ng-src="http://localhost:3000/api/images/{{user.img}}">
           </div>
 
-          <a ui-sref="profile({id_user: user.id_user})">
-            <h2>{{user.name}}</h2>
-          </a>
-
+          <div class="col text-left">
+            <a ui-sref="profile({id_user: user.id_user})">
+              <h2>{{user.name}}</h2>
+            </a>
+          </div>
 
           <div class="line"></div>
 

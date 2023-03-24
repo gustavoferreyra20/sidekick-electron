@@ -1,32 +1,50 @@
-angular.module('myAppRegistrationCtrl', []).controller('registrationCtrl', ['$scope', 'users', 'popups', function ($scope, users, popups) {
-  $scope.register = function (form) {
+angular.module('myAppRegistrationCtrl', []).controller('registrationCtrl', ['$scope', 'users', 'popups', 'contact_inf', function ($scope, users, popups, contact_inf) {
 
-    let conditions = {
-      email: form.email
-    }
+  $scope.btnRegister = function (form) {
 
-    users.get(conditions)
-      .then(function (existentUser) {
-        if (form.password.length < 8) {
-          popups.alert("Contraseña demasiado corta")
-        } else if (existentUser.length > 0) {
-          popups.alert("Usuario existente")
-        } else if (file.files[0]) {
-          saveImage(file).then((res) => {
-            return newUser = { name: form.name, email: form.email, description: form.description, password: form.password, img: `profiles/${res.filename}` }
-          }).then((res) => {
-            users.save(res)
-              .then(popups.function("Usuario registrado con exito", function () { (location.reload()) }))
-          })
-        } else {
-          newUser = form;
-          users.save(newUser)
-            .then(popups.function("Usuario registrado con exito", function () { (location.reload()) }))
+    /*     let conditions = {
+          email: form.email
         }
-
-      })
-
+    
+        users.get(conditions)
+          .then(function (existentUser) {
+            if (form.password.length < 8) {
+              popups.alert("Contraseña demasiado corta")
+            } else if (existentUser.length > 0) {
+              popups.alert("Usuario existente")
+            } else if (file.files[0]) {
+              saveImage(file).then((res) => {
+                return newUser = { name: form.name, email: form.email, description: form.description, password: form.password, img: `profiles/${res.filename}` }
+              }).then((res) => {
+                users.save(res)
+                  .then(popups.function("Usuario registrado con exito", function () { (location.reload()) }))
+              })
+            } else {
+              newUser = form;
+              users.save(newUser)
+                .then(popups.function("Usuario registrado con exito", function () { (location.reload()) }))
+            }
+    
+          }) */
+    console.log($scope.contact_inf_list)
   };
+
+  $scope.btnAddAccount = function () {
+    $scope.contact_inf_list.push({ contact_account: $scope.contactOptions[0], account: '' });
+    $scope.$applyAsync();
+  }
+
+  $scope.btnRemoveLast = function () {
+    $scope.contact_inf_list.pop();
+    $scope.$applyAsync();
+  }
+
+  contact_inf.getAll().then(function (response) {
+    $scope.contactOptions = response;
+    $scope.contact_inf_list = [{ contact_account: $scope.contactOptions[0], account: '' }];
+
+    $scope.$applyAsync();
+  })
 }]);
 
 async function saveImage(file) {

@@ -2,31 +2,30 @@ angular.module('myAppRegistrationCtrl', []).controller('registrationCtrl', ['$sc
 
   $scope.btnRegister = function (form) {
 
-    /*     let conditions = {
-          email: form.email
+    let conditions = {
+      email: form.email
+    }
+
+    users.get(conditions)
+      .then(function (existentUser) {
+
+        if (form.password.length < 8) {
+          popups.alert("Contraseña demasiado corta")
+        } else if (existentUser.length > 0) {
+          popups.alert("Usuario existente")
+        } else if (file.files[0]) {
+          saveImage(file).then((res) => {
+            form.img = `profiles/${res.filename}`;
+            return form;
+          }).then((newUser) => {
+            saveUser(newUser);
+          })
+        } else {
+          newUser = form;
+          saveUser(newUser);
         }
-    
-        users.get(conditions)
-          .then(function (existentUser) {
-            if (form.password.length < 8) {
-              popups.alert("Contraseña demasiado corta")
-            } else if (existentUser.length > 0) {
-              popups.alert("Usuario existente")
-            } else if (file.files[0]) {
-              saveImage(file).then((res) => {
-                return newUser = { name: form.name, email: form.email, description: form.description, password: form.password, img: `profiles/${res.filename}` }
-              }).then((res) => {
-                users.save(res)
-                  .then(popups.function("Usuario registrado con exito", function () { (location.reload()) }))
-              })
-            } else {
-              newUser = form;
-              users.save(newUser)
-                .then(popups.function("Usuario registrado con exito", function () { (location.reload()) }))
-            }
-    
-          }) */
-    console.log($scope.contact_inf_list)
+
+      })
   };
 
   $scope.btnAddAccount = function () {
@@ -45,6 +44,19 @@ angular.module('myAppRegistrationCtrl', []).controller('registrationCtrl', ['$sc
 
     $scope.$applyAsync();
   })
+
+  async function saveUser(user) {
+    users.save(user)
+      .then(function (id_createdUser) {
+        return users.addContact_inf_list({ id_user: id_createdUser, contact_inf_list: $scope.contact_inf_list });
+      })
+      .then(function () {
+        popups.function("Usuario registrado con exito", function () { (location.reload()) });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 }]);
 
 async function saveImage(file) {

@@ -60,17 +60,6 @@ angular.module('myAppPostService', [])
             });
         })
       },
-      saveApplication: async function (data) {
-        const url = process.env.SIDEKICK_API + 'posts/join';
-
-        axios.post(url, data)
-          .then(() => {
-            popups.alert("Solicitud enviada");
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      },
       removeApplication: async function (id_post, id_user) {
         const url = process.env.SIDEKICK_API + 'posts/join?id_post=' + id_post + '&id_user=' + id_user;
         await axios.delete(url)

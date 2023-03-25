@@ -27,7 +27,7 @@
                 <br>
                 <div class="d-flex rewards">
                     <div class="p-2 text-center" ng-repeat="reward in rewards">
-                        <img data-ng-src={{reward.img}} class="img-fluid" alt={{reward.name}}>
+                        <img crossorigin="anonymous" data-ng-src="http://localhost:3000/api/images/{{reward.img}}" class="img-fluid" alt={{reward.name}}>
                         <p>{{reward.description}}</p>
                         <button type="button" class="btn btn-success"
                             ng-click="btnSelectReward(form, reward)">Seleccionar</button>

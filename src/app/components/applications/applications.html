@@ -34,12 +34,12 @@
       <div class="line"></div>
 
       <br>
-      <button type="submit" class="col-sm-12  col-lg-12 btn btn-danger" ng-click="btnCancelApplication(app.id_post)"
-        ng-show="app.applications.status == 'pending'">Cancelar</button>
+      <p ng-show="app.applications.status == 'rejected'">Solicitud rechazada</p>
 
-      <p ng-show="app.status == 'rejected'">Solicitud rechazada</p>
+      <p ng-show="app.applications.status == 'accepted'">Solicitud aceptada</p>
 
-      <p ng-show="app.status == 'accepted'">Solicitud aceptada</p>
+      <button type="submit" class="col-sm-12  col-lg-12 btn btn-danger"
+        ng-click="btnCancelApplication(app.id_post)">Cancelar</button>
 
     </div>
 
@@ -60,7 +60,7 @@
       <div class="line"></div>
 
       <div class="container-fluid mx-auto p-3 post" ng-repeat="user in post.users"
-        ng-show="user.applications.status !== 'rejected' && user.applications.status !== 'removed'">
+        ng-show="user.applications.status !== 'rejected'">
 
         <div class="row justify-content-start px-3">
           <div class="col-lg-auto col-md-3 col-md-3 col-sm-4 text-left">
@@ -69,9 +69,9 @@
           </div>
 
           <div class="col text-left">
-            <a ui-sref="profile({id_user: user.id_user})">
-              <h2>{{user.name}}</h2>
-            </a>
+
+            <h2><a ui-sref="profile({id_user: user.id_user})">{{user.name}}</a></h2>
+
           </div>
 
           <div class="line"></div>
@@ -100,7 +100,7 @@
           </div>
 
           <div class="col-auto col-md-6 col-sm-6" ng-if="user.applications.status == 'accepted'"
-            ng-click="changeStatus(user.id_user, post.id_post, 'removed')">
+            ng-click="changeStatus(user.id_user, post.id_post, 'rejected')">
             <br>
             <a href="" class="btn btn-danger col-12">Eliminar</a>
           </div>

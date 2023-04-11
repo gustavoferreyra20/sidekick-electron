@@ -67,7 +67,7 @@ ipcMain.handle('logout', (event, args) => {
 
 function createCookie(args) {
   const cookie = {
-    url: 'http://localhost/',
+    url: 'http://192.168.1.82/',
     name: 'userSession',
     value: JSON.stringify(args),
     expirationDate: 99999999999999

@@ -11,8 +11,6 @@ angular.module('myAppApplicationCtrl', []).controller('applicationCtrl', ['$scop
       .then(showReceivedApp);
   };
 
-  $scope.showTerms = function () { popups.alert('Lorem') };
-
   function showSentApp() {
     posts.getApplications({ id_user: userSession.id_user, type: 'sended' }).then(function (apps) {
       $scope.applications = apps;

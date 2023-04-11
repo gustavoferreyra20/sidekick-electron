@@ -1,5 +1,7 @@
 angular.module('myAppRegistrationCtrl', []).controller('registrationCtrl', ['$scope', 'users', 'popups', 'contact_inf', function ($scope, users, popups, contact_inf) {
 
+  $scope.showTerms = function () { popups.alert('Lorem') };
+  
   $scope.btnRegister = function (form) {
 
     let conditions = {

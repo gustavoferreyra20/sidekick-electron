@@ -13,7 +13,7 @@ VERDE CLARO		::	#1ded8c
 body {
 	font-family: 'Alegreya Sans', sans-serif;
 	overflow-x: hidden;
-	background-color: #494649;
+	background-color: #535053;
 	color: white;
 }
 
@@ -200,7 +200,7 @@ h5 {
 	border-radius: 50%;
 	cursor: pointer;
 	height: 102px;
-    width: 102px;
+	width: 102px;
 }
 
 .image-bg {
@@ -246,6 +246,13 @@ button.active {
 	/* ADJUSTMENT */
 }
 
-.post a{
+.post a {
 	color: white;
+}
+
+.is-required:after {
+	content: '*';
+	margin-left: 3px;
+	color: red;
+	font-weight: bold;
 }

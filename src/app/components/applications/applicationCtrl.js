@@ -1,4 +1,6 @@
 angular.module('myAppApplicationCtrl', []).controller('applicationCtrl', ['$scope', 'posts', 'popups', function ($scope, posts, popups) {
+  
+  $scope.SIDEKICK_API = process.env.SIDEKICK_API;
 
   showReceivedApp();
 

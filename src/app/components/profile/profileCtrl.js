@@ -1,5 +1,7 @@
 angular.module('myAppProfileCtrl', []).controller('profileCtrl', ['$scope', 'reviews', 'users', '$stateParams', function ($scope, reviews, users, $stateParams) {
 
+  $scope.SIDEKICK_API = process.env.SIDEKICK_API;
+  
   var id_profile = ($stateParams.id_user === undefined) ? userSession.id_user : $stateParams.id_user;
 
   users.get({ id_user: id_profile }).then(

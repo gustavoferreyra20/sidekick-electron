@@ -1,4 +1,7 @@
 angular.module('myAppHomeCtrl', ['myAppgameCtrl']).controller('homeCtrl', ['$scope', 'posts', 'modes', 'games', 'platforms', 'popups', function ($scope, posts, modes, games, platforms, popups) {
+
+  $scope.SIDEKICK_API = process.env.SIDEKICK_API;
+
   posts.getAll().then(
     function (response) {
       $scope.posts = response;

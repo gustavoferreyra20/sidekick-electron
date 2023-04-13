@@ -2,6 +2,7 @@
   <h1 class="d-flex justify-content-center">Games</h1>
   <hr class="hr-main">
   <div class="games-grid" id="games">
-    <img crossorigin="anonymous" data-ng-src="http://192.168.1.82:3000/api/images/{{game.img}}" class="img-fluid" alt={{game.name}} ng-repeat="game in games">
+    <img crossorigin="anonymous" data-ng-src="{{SIDEKICK_API}}images/{{game.img}}" class="img-fluid" alt={{game.name}}
+      ng-repeat="game in games">
   </div>
 </div>

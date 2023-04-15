@@ -27,7 +27,7 @@
                         <label for="contact" class="is-required">Contacto</label>
                         <br>
                         <div class="d-flex pb-4" ng-repeat="contact_inf in contact_inf_list track by $index">
-                            <select class="custom-select col-3" name="platform" ng-model="contact_inf.contact_account"
+                            <select class="custom-select col-3" name="platform" ng-model="contact_inf.platform"
                                 required
                                 ng-options="option as option.name for option in contactOptions track by option.id_contact_inf">
                             </select>

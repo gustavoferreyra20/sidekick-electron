@@ -31,7 +31,7 @@ angular.module('myAppRegistrationCtrl', []).controller('registrationCtrl', ['$sc
   };
 
   $scope.btnAddAccount = function () {
-    $scope.contact_inf_list.push({ contact_account: $scope.contactOptions[0], account: '' });
+    $scope.contact_inf_list.push({ platform: $scope.contactOptions[0], account: '' });
     $scope.$applyAsync();
   }
 
@@ -42,7 +42,7 @@ angular.module('myAppRegistrationCtrl', []).controller('registrationCtrl', ['$sc
 
   contact_inf.getAll().then(function (response) {
     $scope.contactOptions = response;
-    $scope.contact_inf_list = [{ contact_account: $scope.contactOptions[0], account: '' }];
+    $scope.contact_inf_list = [{ platform: $scope.contactOptions[0], account: '' }];
 
     $scope.$applyAsync();
   })

@@ -59,20 +59,28 @@ angular.module('myAppUserService', [])
           });
       },
       isAuthenticated: async function (token) {
-        const url = process.env.SIDEKICK_API + 'tokens?session=' + token.session + '&token=' + token.token
+        const url = process.env.SIDEKICK_API + 'tokens?token=' + token
 
-        axios.get(url)
-          .then((res) => {
-            if (res.data.length > 0) {
-              ipcRenderer.invoke("authUser", token)
+        try {
+          const response = await axios.get(url)
+          if (response.data.length > 0) {
+            const dbToken = response.data[0];
+            const currentDate = new Date();
+            const expirationDate = new Date(dbToken.expiration_date);
+
+            if (currentDate < expirationDate) {
+              ipcRenderer.invoke("authUser", dbToken);
             } else {
-              //Cookie expired in database
-              ipcRenderer.invoke("noCookie")
+              // Token expired in database
+              ipcRenderer.invoke("noCookie");
             }
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+          } else {
+            // Token not found in database
+            ipcRenderer.invoke("noCookie");
+          }
+        } catch (error) {
+          console.log(error);
+        }
       },
       logout: async function (token) {
         tokens.delete(token)

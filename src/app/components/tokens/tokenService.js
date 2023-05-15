@@ -4,18 +4,18 @@ angular.module('myAppTokenService', [])
 	return {
 		create: async function(id){
             return new Promise((resolve, reject) =>{
-                const session = crypto.randomBytes(20).toString('hex');
-                const userToken = jwt.sign({id:id}, process.env.JWT_SECRET);
+                const token = crypto.randomBytes(20).toString('hex');
                 const expire = new Date(Date.now()+process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000);
                 const url = process.env.SIDEKICK_API + 'tokens';
                
-                let token = {
-                  session: session,
-                  token: userToken,
-                  expire: expire.toISOString().slice(0, 10)
+                let data = {
+                  id_user: id,
+                  token: token,
+                  expiration_date: expire.toISOString().slice(0, 10),
+                  platform: "electron"
                 }
-            
-                axios.post(url, token)
+
+                axios.post(url, data)
                 .then(() => {
                     resolve(token)
                 })
@@ -25,8 +25,8 @@ angular.module('myAppTokenService', [])
             })
                 
 		},
-    delete: async function(args){
-        const url = process.env.SIDEKICK_API + 'tokens/bo?session='+ args.session + '&token='+ args.token;
+    delete: async function(token){
+        const url = process.env.SIDEKICK_API + 'tokens/bo?token='+ token;
         await axios.delete(url)
         .catch(function(error) {
           console.log(error);

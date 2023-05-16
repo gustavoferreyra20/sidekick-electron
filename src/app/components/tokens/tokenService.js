@@ -25,8 +25,8 @@ angular.module('myAppTokenService', [])
             })
                 
 		},
-    delete: async function(token){
-        const url = process.env.SIDEKICK_API + 'tokens/bo?token='+ token;
+    delete: async function(id_user, token){
+        const url = process.env.SIDEKICK_API + 'tokens/bo?id_user=' + id_user + '&token='+ token;
         await axios.delete(url)
         .catch(function(error) {
           console.log(error);

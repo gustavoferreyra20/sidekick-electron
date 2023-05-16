@@ -82,8 +82,8 @@ angular.module('myAppUserService', [])
           console.log(error);
         }
       },
-      logout: async function (token) {
-        tokens.delete(token)
+      logout: async function () {
+        tokens.delete(userSession.id_user, userSession.token)
       }
     }
   }])

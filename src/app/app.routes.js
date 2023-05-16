@@ -75,7 +75,7 @@ app.config(async function ($stateProvider, $urlRouterProvider) {
 ipcRenderer.on('userSession-data', async (event, cookie) => {
 
     if (cookie[0]) {
-        const url = process.env.SIDEKICK_API + 'tokens/bo?token=' + JSON.parse(cookie[0].value).token;
+        const url = process.env.SIDEKICK_API + 'tokens/bo?id_user=' + JSON.parse(cookie[0].value).id_user + '&token=' + JSON.parse(cookie[0].value).token;
 
         axios.get(url)
             .then(function (response) {

@@ -2,18 +2,18 @@ angular.module('myAppApplicationCtrl', []).controller('applicationCtrl', ['$scop
   
   $scope.SIDEKICK_API = process.env.SIDEKICK_API;
 
-  showReceivedApp();
+  showReceivedApps();
 
-  $scope.showSentApp = function () { showSentApp() };
+  $scope.showSendedApps = function () { showSendedApps() };
 
-  $scope.showReceivedApp = function () { showReceivedApp() };
+  $scope.showReceivedApps = function () { showReceivedApps() };
 
   $scope.changeStatus = function (id_user, id_post, status) {
     posts.addApplication({ id_user: id_user, id_post: id_post, status: status })
-      .then(showReceivedApp);
+      .then(showReceivedApps);
   };
 
-  function showSentApp() {
+  function showSendedApps() {
     posts.getApplications({ id_user: userSession.id_user, type: 'sended' }).then(function (apps) {
       $scope.applications = apps;
       $scope.posts = [];
@@ -21,7 +21,7 @@ angular.module('myAppApplicationCtrl', []).controller('applicationCtrl', ['$scop
     });
   }
 
-  function showReceivedApp() {
+  function showReceivedApps() {
     posts.getApplications({ id_user: userSession.id_user, type: 'received' }).then(function (posts) {
       $scope.posts = posts;
       $scope.applications = [];
@@ -30,10 +30,10 @@ angular.module('myAppApplicationCtrl', []).controller('applicationCtrl', ['$scop
   }
 
   $scope.btnCancelApplication = function (id_post) {
-    popups.confirm("Seguro desea eliminar la solicitud?", function () { (posts.removeApplication(id_post, userSession.id_user).then(showSentApp)) })
+    popups.confirm("Seguro desea eliminar la solicitud?", function () { (posts.removeApplication(id_post, userSession.id_user).then(showSendedApps)) })
   }
 
   $scope.btnDeletePost = function (id_post) {
-    popups.confirm("Seguro desea eliminar el post?", function () { (posts.remove(id_post).then(showReceivedApp)) })
+    popups.confirm("Seguro desea eliminar el post?", function () { (posts.remove(id_post).then(showReceivedApps)) })
   }
 }]);

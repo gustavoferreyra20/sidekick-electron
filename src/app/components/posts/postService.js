@@ -4,10 +4,10 @@ angular.module('myAppPostService', [])
     return {
       getAll: async function (args = null) {
         return new Promise((resolve, reject) => {
-          const params = new URLSearchParams(args)
           var url = process.env.SIDEKICK_API + 'posts';
 
           if (args !== null) {
+            const params = new URLSearchParams(args);
             url = url + '/bo?' + params;
           }
 

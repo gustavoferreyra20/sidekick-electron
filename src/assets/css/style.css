@@ -18,6 +18,9 @@ body {
 	color: white;
 }
 
+body .col-12 {
+	padding-left: 0;
+}
 #menu {
 	width: 70px;
 	background-color: #3e3c3d;

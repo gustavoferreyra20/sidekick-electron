@@ -65,7 +65,7 @@ app.config(async function ($stateProvider, $urlRouterProvider) {
             templateUrl: "app/components/loading/loading.html"
         })
         .state("rate", {
-            url: '/rate?id_user&id_post',
+            url: '/rate?id_user&id_post&id_application',
             templateUrl: "app/components/rate/rate.html",
             controller: "rateCtrl"
         });
@@ -75,13 +75,14 @@ app.config(async function ($stateProvider, $urlRouterProvider) {
 ipcRenderer.on('userSession-data', async (event, cookie) => {
 
     if (cookie[0]) {
-        const url = process.env.SIDEKICK_API + 'tokens/bo?id_user=' + JSON.parse(cookie[0].value).id_user + '&token=' + JSON.parse(cookie[0].value).token;
+        const cookieData = JSON.parse(cookie[0].value);
+
+        const url = process.env.SIDEKICK_API + 'tokens/' + cookieData.tokenData.id_token;
 
         axios.get(url)
             .then(function (response) {
-                if (response.data.length > 0) {
-                    const dbToken = response.data[0];
-
+                if (response) {
+                    const dbToken = response.data;
                     if (isTokenValid(dbToken)) {
                         redirectToHomePage(cookie[0].value);
                         setNavImages();

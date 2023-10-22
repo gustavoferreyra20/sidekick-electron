@@ -47,9 +47,9 @@ const templateMenu = [
   }]
 
 ipcMain.handle('login', async (event, args) => {
-  createCookie(args)
-  var userSession = await getCookie('userSession')
-  window.webContents.send('userSession-data', userSession)
+  createCookie(args);
+  var userSession = await getCookie('userSession');
+  window.webContents.send('userSession-data', userSession);
 });
 
 ipcMain.handle('authUser', async (event, args) => {
@@ -66,6 +66,7 @@ ipcMain.handle('logout', (event, args) => {
 });
 
 function createCookie(args) {
+
   const cookie = {
     url: process.env.SERVER_COOKIE,
     name: 'userSession',

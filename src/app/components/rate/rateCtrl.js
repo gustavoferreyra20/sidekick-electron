@@ -1,33 +1,46 @@
-angular.module('myAppRateCtrl', []).controller('rateCtrl', ['$scope', '$stateParams', 'posts', 'reviews', 'rewards', 'popups', function ($scope, $stateParams, posts, reviews, rewards, popups) {
+angular.module('myAppRateCtrl', []).controller('rateCtrl', ['$scope', '$stateParams', 'posts', 'reviews', 'rewards', 'popups', 'users', function ($scope, $stateParams, posts, reviews, rewards, popups, users) {
 
   $scope.SIDEKICK_API = process.env.SIDEKICK_API;
 
   $scope.newReview = function (review) {
-    review.id_user = $stateParams.id_user;
     review.id_post = $stateParams.id_post;
-    review.id_writerUser = userSession.id_user
+
+
     if (review.reward != undefined) review.reward = review.reward.id_reward;
-    reviews.save(review)
-      .then(posts.addApplication({ id_user: review.id_user, id_post: review.id_post, status: 'reviewed' }))
-      .then(function () { if (review.reward != undefined) rewards.use(review.reward) })
+
+    users.addReview($stateParams.id_user, review)
+      .then(posts.updateApplication(review.id_post, $stateParams.id_application, 'reviewed'))
+      .then(function (res) {
+
+        if (review.reward != undefined) {
+          reviews.addReward(res.reviewId, review.reward)
+        }
+
+      })
       .then(popups.alert("Calificacion enviada"))
       .then(window.location.href = "#/applications");
   };
 
-  $scope.btnAddReward = function () {
-    showRewards()
+  $scope.btnAddReward = function (form) {
+    if (!$scope.rewards && !form.reward) {
+      showRewards();
+    } else {
+      $scope.rewards = null;
+      $scope.$applyAsync();
+    }
   };
 
   $scope.btnSelectReward = function (form, reward) {
     form.reward = reward;
-    $scope.rewards = [];
+    $scope.rewards = null;
     $scope.$applyAsync();
     return form
   };
 
   $scope.btnDeleteReward = function (form) {
-    form.reward = '';
-    showRewards();
+    form.reward = null;
+    $scope.rewards = $scope.stockedRewards;
+    $scope.$applyAsync();
     return form;
   };
 
@@ -36,11 +49,17 @@ angular.module('myAppRateCtrl', []).controller('rateCtrl', ['$scope', '$statePar
   };
 
   function showRewards() {
-    rewards.getByUser(userSession.id_user).then(
-      function (response) {
-        $scope.rewards = response;
-        $scope.$applyAsync();
-      }
-    )
+    if ($scope.stockedRewards) {
+      $scope.rewards = $scope.stockedRewards;
+      $scope.$applyAsync();
+    } else {
+      users.getRewards(userSession.id_user).then(
+        function (response) {
+          $scope.rewards = response;
+          $scope.stockedRewards = response;
+          $scope.$applyAsync();
+        }
+      )
+    }
   }
 }]);

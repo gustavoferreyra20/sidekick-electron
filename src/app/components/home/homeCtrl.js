@@ -1,4 +1,4 @@
-angular.module('myAppHomeCtrl', ['myAppgameCtrl']).controller('homeCtrl', ['$scope', 'posts', 'modes', 'games', 'platforms', 'popups', function ($scope, posts, modes, games, platforms, popups) {
+angular.module('myAppHomeCtrl', ['myAppgameCtrl']).controller('homeCtrl', ['$scope', 'posts', 'modes', 'games', 'platforms', 'popups', 'users', function ($scope, posts, modes, games, platforms, popups, users) {
 
   $scope.SIDEKICK_API = process.env.SIDEKICK_API;
 
@@ -9,7 +9,7 @@ angular.module('myAppHomeCtrl', ['myAppgameCtrl']).controller('homeCtrl', ['$sco
     }
   )
 
-  games.getOptions(false).then(function (response) {
+  games.getOptions(true).then(function (response) {
     $scope.gameOptions = response;
     $scope.gameSelected = $scope.gameOptions[0];
 
@@ -67,15 +67,14 @@ angular.module('myAppHomeCtrl', ['myAppgameCtrl']).controller('homeCtrl', ['$sco
   };
 
   $scope.btnSubmitApplication = function (id_post) {
-    posts.getApplications({ id_post: id_post, id_user: userSession.id_user, type: 'sended' })
+    users.getApplications('sent')
       .then((res) => {
-        if (res[0]) {
+        if (res.some((item) => item.id_post === id_post)) {
           popups.alert("Ya existe una solicitud pendiente");
         } else {
-          posts.addApplication({ id_post: id_post, id_user: userSession.id_user })
-            .then(popups.alert("Solicitud enviada"));
+          posts.addApplication(id_post)
+            .then(() => popups.alert("Solicitud enviada"));
         }
-
       })
   };
 

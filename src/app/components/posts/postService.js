@@ -8,7 +8,7 @@ angular.module('myAppPostService', [])
 
           if (args !== null) {
             const params = new URLSearchParams(args);
-            url = url + '/bo?' + params;
+            url = url + '?' + params;
           }
 
           axios.get(url)
@@ -40,7 +40,7 @@ angular.module('myAppPostService', [])
           });
       },
       remove: async function (id_post) {
-        const url = process.env.SIDEKICK_API + 'posts/bo?id_post=' + id_post;
+        const url = process.env.SIDEKICK_API + 'posts/' + id_post;
         await axios.delete(url)
           .catch(function (error) {
             console.log(error);
@@ -60,18 +60,39 @@ angular.module('myAppPostService', [])
             });
         })
       },
-      removeApplication: async function (id_post, id_user) {
-        const url = process.env.SIDEKICK_API + 'posts/join?id_post=' + id_post + '&id_user=' + id_user;
+      getApplications: async function (args) {
+        return new Promise((resolve, reject) => {
+          var url = process.env.SIDEKICK_API + 'posts/join?';
+          const params = new URLSearchParams(args)
+
+          axios.get(url + params)
+            .then((res) => {
+              resolve(res.data)
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        })
+      },
+      removeApplication: async function (id_post, id_application) {
+        const url = process.env.SIDEKICK_API + 'posts/' + id_post + '/applications/' + id_application;
         await axios.delete(url)
           .catch(function (error) {
             console.log(error);
           });;
       },
-      addApplication: async function (args) {
-        const url = process.env.SIDEKICK_API + 'posts/join?';
-        const params = new URLSearchParams(args)
+      addApplication: async function (id_post) {
+        const url = process.env.SIDEKICK_API + 'posts/' + id_post + '/applications/' + userSession.id_user;
 
-        await axios.put(url + params)
+        await axios.post(url)
+          .catch(function (error) {
+            console.log(error);
+          });
+      },
+      updateApplication: async function (id_post, id_application, status) {
+        const url = process.env.SIDEKICK_API + 'posts/' + id_post + '/applications/' + id_application + '?status=' + status;
+
+        await axios.put(url)
           .catch(function (error) {
             console.log(error);
           });

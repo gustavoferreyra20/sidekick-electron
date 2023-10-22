@@ -23,7 +23,8 @@
                     <br>
                 </div>
 
-                <button class="btn btn-block btn-success" type="button" ng-click="btnAddReward()">Premiar</button>
+                <button class="btn btn-block btn-success" type="button" ng-disabled="form.reward"
+                    ng-click="btnAddReward(form)">Premiar</button>
                 <br>
                 <div class="d-flex rewards">
                     <div class="p-2 text-center" ng-repeat="reward in rewards">
@@ -34,11 +35,12 @@
                             ng-click="btnSelectReward(form, reward)">Seleccionar</button>
                     </div>
                     <div class="p-2 text-center" ng-show="form.reward">
-                        <img data-ng-src={{form.reward.img}} class="img-fluid" alt={{form.reward.name}}>
+                        <img crossorigin="anonymous" data-ng-src={{SIDEKICK_API}}images/{{form.reward.img}}
+                            class="img-fluid" alt={{form.reward.name}}>
                         <p>{{form.reward.description}}</p>
                         <button type="button" class="btn btn-danger" ng-click="btnDeleteReward(form)">Eliminar</button>
                     </div>
-                    <div ng-show="rewards == 0" class="text-center pb-4">
+                    <div ng-show="rewards == 0 && !form.reward && !stockedRewards" class="text-center pb-4">
                         <p>No tienes ninguna medalla, quieres comprar alguna?</p>
                         <button class="btn btn-success" type="button" ng-click="btnGoToStore()">Comprar</button>
                     </div>

@@ -2,12 +2,76 @@ angular.module('myAppUserService', [])
 
   .factory('users', ['tokens', 'popups', function (tokens, popups) {
     return {
-      get: async function (condition) {
+      get: async function (id_user) {
         return new Promise((resolve, reject) => {
-          const url = process.env.SIDEKICK_API + 'users/bo?';
-          const params = new URLSearchParams(condition)
+          const url = process.env.SIDEKICK_API + 'users/' + id_user;
 
-          axios.get(url + params)
+          axios.get(url)
+            .then((res) => {
+              resolve(res.data)
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        })
+      },
+      getApplications: async function (type) {
+        return new Promise((resolve, reject) => {
+          var url = process.env.SIDEKICK_API + 'users/' + userSession.id_user + '/applications?type=' + type;
+
+          axios.get(url)
+            .then((res) => {
+              resolve(res.data)
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        })
+      },
+      getReviews: async function (id_user) {
+        return new Promise((resolve, reject) => {
+          var url = process.env.SIDEKICK_API + 'users/' + id_user + '/reviews';
+
+          axios.get(url)
+            .then((res) => {
+              resolve(res.data)
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        })
+      },
+      addReview: async function (id_user, data) {
+        return new Promise((resolve, reject) => {
+          const url = process.env.SIDEKICK_API + 'users/' + id_user + '/reviews/' + userSession.id_user;
+
+          axios.post(url, data)
+            .then((res) => {
+              resolve(res.data);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        })
+      },
+      getStats: async function (id_user) {
+        return new Promise((resolve, reject) => {
+          var url = process.env.SIDEKICK_API + 'users/' + id_user + '/stats';
+
+          axios.get(url)
+            .then((res) => {
+              resolve(res.data)
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        })
+      },
+      getRewards: async function (id_user) {
+        return new Promise((resolve, reject) => {
+          var url = process.env.SIDEKICK_API + 'users/' + id_user + '/rewards';
+
+          axios.get(url)
             .then((res) => {
               resolve(res.data)
             })
@@ -17,19 +81,27 @@ angular.module('myAppUserService', [])
         })
       },
       login: async function (obj) {
-        const url = process.env.SIDEKICK_API + 'users/bo?email=' + obj.email + '&password=' + obj.password
-        axios.get(url)
+        const url = process.env.SIDEKICK_API + 'users/login';
+
+        let data = {
+          email: obj.email,
+          password: obj.password,
+        };
+
+        axios.post(url, data)
           .then((res) => {
             // create the cookie
-            if (res.data.length > 0) {
-              let userSession = res.data[0];
+            if (res.data) {
+              let userSession = res.data;
+
               tokens.create(userSession.id_user).then((response) => {
-                userSession.token = response;
+                userSession.tokenData = response;
+
                 ipcRenderer.invoke("login", userSession)
               })
             } else {
               popups.alert("Usuario y/o contraseña incorrectas")
-            }
+            };
 
           })
           .catch(function (error) {
@@ -83,7 +155,7 @@ angular.module('myAppUserService', [])
         }
       },
       logout: async function () {
-        tokens.delete(userSession.id_user, userSession.token)
+        tokens.delete(userSession.tokenData.id_token);
       }
     }
   }])

@@ -2,14 +2,9 @@ angular.module('myAppModeService', [])
 
   .factory('modes', [function () {
     return {
-      getAll: async function (args = null) {
+      getAll: async function () {
         return new Promise((resolve, reject) => {
           var url = process.env.SIDEKICK_API + 'modes';
-
-          if (args !== null) {
-            const params = new URLSearchParams(args);
-            url = url + '/bo?' + params;
-          }
 
           axios.get(url)
             .then((res) => {

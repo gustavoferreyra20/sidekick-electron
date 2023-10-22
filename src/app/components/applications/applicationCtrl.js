@@ -1,20 +1,20 @@
-angular.module('myAppApplicationCtrl', []).controller('applicationCtrl', ['$scope', 'posts', 'popups', function ($scope, posts, popups) {
-  
+angular.module('myAppApplicationCtrl', []).controller('applicationCtrl', ['$scope', 'posts', 'popups', 'users', function ($scope, posts, popups, users) {
+
   $scope.SIDEKICK_API = process.env.SIDEKICK_API;
 
   showReceivedApps();
 
-  $scope.showSendedApps = function () { showSendedApps() };
+  $scope.showSentApps = function () { showSentApps() };
 
   $scope.showReceivedApps = function () { showReceivedApps() };
 
-  $scope.changeStatus = function (id_user, id_post, status) {
-    posts.addApplication({ id_user: id_user, id_post: id_post, status: status })
+  $scope.changeStatus = function (id_post, id_application, status) {
+    posts.updateApplication(id_post, id_application, status)
       .then(showReceivedApps);
   };
 
-  function showSendedApps() {
-    posts.getApplications({ id_user: userSession.id_user, type: 'sended' }).then(function (apps) {
+  function showSentApps() {
+    users.getApplications('sent').then(function (apps) {
       $scope.applications = apps;
       $scope.posts = [];
       $scope.$applyAsync();
@@ -22,15 +22,15 @@ angular.module('myAppApplicationCtrl', []).controller('applicationCtrl', ['$scop
   }
 
   function showReceivedApps() {
-    posts.getApplications({ id_user: userSession.id_user, type: 'received' }).then(function (posts) {
+    users.getApplications('received').then(function (posts) {
       $scope.posts = posts;
       $scope.applications = [];
       $scope.$applyAsync();
     })
   }
 
-  $scope.btnCancelApplication = function (id_post) {
-    popups.confirm("Seguro desea eliminar la solicitud?", function () { (posts.removeApplication(id_post, userSession.id_user).then(showSendedApps)) })
+  $scope.btnCancelApplication = function (id_post, id_application, app) {
+    popups.confirm("Seguro desea eliminar la solicitud?", function () { (posts.removeApplication(id_post, id_application).then(showSentApps)) })
   }
 
   $scope.btnDeletePost = function (id_post) {

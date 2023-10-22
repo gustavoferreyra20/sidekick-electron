@@ -1,15 +1,10 @@
 angular.module('myAppPlatformService', [])
 
-  .factory('platforms', [function () {
+  .factory('platforms', ['games', function (games) {
     return {
-      getAll: async function (args = null) {
+      getAll: async function () {
         return new Promise((resolve, reject) => {
           var url = process.env.SIDEKICK_API + 'platforms';
-
-          if (args !== null) {
-            const params = new URLSearchParams(args)
-            url = url + '/bo?' + params;
-          }
 
           axios.get(url)
             .then((res) => {
@@ -23,7 +18,7 @@ angular.module('myAppPlatformService', [])
       getOptions: async function (game = null, any = false) {
 
         var options = []
-        var platforms = (game === null) ? await this.getAll() : await this.getByGame(game);
+        var platforms = (game === null) ? await this.getAll() : await games.getPlatforms(game);
 
         if (any) {
           options.push({ value: "any", name: "Cualquier plataforma" });
@@ -37,19 +32,5 @@ angular.module('myAppPlatformService', [])
 
         return options;
       },
-      getByGame: async function (id_game) {
-
-        return new Promise((resolve, reject) => {
-          const url = process.env.SIDEKICK_API + 'platforms/join?id_game=' + id_game;
-
-          axios.get(url)
-            .then((res) => {
-              resolve(res.data)
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-        })
-      }
     };
   }]);

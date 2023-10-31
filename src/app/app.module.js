@@ -22,6 +22,7 @@ var app = angular.module("myApp",   [
     'myAppRewardService',
     'myAppPopupService',
     'myAppContact_infService',
-    'myAppAuthService'
+    'myAppAuthService',
+    'myAppPaymentService'
 ]);
 

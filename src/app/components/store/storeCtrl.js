@@ -1,4 +1,4 @@
-angular.module('myAppStoreCtrl', []).controller('storeCtrl', ['$scope', 'rewards', function ($scope, rewards) {
+angular.module('myAppStoreCtrl', []).controller('storeCtrl', ['$scope', 'rewards', 'payments', function ($scope, rewards, payments) {
 
   $scope.SIDEKICK_API = process.env.SIDEKICK_API;
 
@@ -10,34 +10,11 @@ angular.module('myAppStoreCtrl', []).controller('storeCtrl', ['$scope', 'rewards
   )
 
   $scope.btnBuy = async function (reward) {
-    const url = "https://api.mercadopago.com/checkout/preferences";
-
-    const body = {
-      items: [
-        {
-          title: reward.name,
-          description: reward.description,
-          picture_url: "http://www.myapp.com/myimage.jpg",
-          category_id: "reward",
-          quantity: 1,
-          unit_price: reward.price
-        }
-      ],
-      //notification_url: process.env.SIDEKICK_API + 'payments'
-    };
-
-    axios.post(url, body, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
-      }
-    })
-      .then((res) => {
-        shell.openExternal(res.data.init_point)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    try {
+      payments.newPayment(reward).then((res) => shell.openExternal(res.init_point));
+    } catch (error) {
+      console.error(error);
+    }
 
   };
 }]);

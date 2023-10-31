@@ -5,6 +5,7 @@ var jwt = require('jsonwebtoken');
 var popup = require('popups');
 const { ipcRenderer } = require("electron");
 const { shell } = require("electron");
+const { resolve } = require("path");
 
 var userSession;
 
@@ -72,55 +73,20 @@ app.config(async function ($stateProvider, $urlRouterProvider) {
 
 });
 
-ipcRenderer.on('userSession-data', async (event, cookie) => {
-
-    if (cookie[0]) {
-        const cookieData = JSON.parse(cookie[0].value);
-
-        const url = process.env.SIDEKICK_API + 'tokens/' + cookieData.tokenData.id_token;
-
-        axios.get(url)
-            .then(function (response) {
-                if (response) {
-                    const dbToken = response.data;
-                    if (isTokenValid(dbToken)) {
-                        redirectToHomePage(cookie[0].value);
-                        setNavImages();
-                    } else {
-                        redirectToLoginPage();
-                    }
-                } else {
-                    redirectToLoginPage();
-                }
-            }).catch(function (error) {
-                console.log(error);
-            });
-
+ipcRenderer.on('userSession-data', async (event, args) => {
+    if (Array.isArray(args) && args.length > 0) {
+        let data = JSON.parse(args[0].value);
+        redirectToHomePage(data);
+    } else if (typeof args === 'object' && args.token) {
+        redirectToHomePage({ id: args.id, token: args.token });
     } else {
         redirectToLoginPage();
     }
-})
+});
 
-function isTokenValid(dbToken) {
-    const currentDate = new Date();
-    const expirationDate = new Date(dbToken.expiration_date);
-    return currentDate < expirationDate;
-}
-
-function redirectToHomePage(cookie_value) {
-    userSession = JSON.parse(cookie_value);
+function redirectToHomePage(args) {
+    userSession = args;
     window.location.href = "#/home";
-}
-function setNavImages() {
-    const navImages = document.querySelectorAll('.nav-item');
-    navImages[0].classList.add('current');
-
-    for (let i = 0; i < navImages.length; i++) {
-        navImages[i].addEventListener("click", function () {
-            Array.from(navImages, navImage => navImage.classList.remove('current'));
-            navImages[i].classList.add('current');
-        });
-    }
 }
 
 function redirectToLoginPage() {

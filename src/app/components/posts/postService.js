@@ -1,6 +1,8 @@
 angular.module('myAppPostService', [])
 
   .factory('posts', ['popups', function (popups) {
+    const AuthStr = 'Bearer '.concat(userSession.token);
+
     return {
       getAll: async function (args = null) {
         return new Promise((resolve, reject) => {
@@ -11,7 +13,7 @@ angular.module('myAppPostService', [])
             url = url + '?' + params;
           }
 
-          axios.get(url)
+          axios.get(url, { headers: { Authorization: AuthStr } })
             .then((res) => {
               resolve(res.data);
             })
@@ -21,7 +23,7 @@ angular.module('myAppPostService', [])
       save: async function (post) {
         const url = process.env.SIDEKICK_API + 'posts';
         let data = {
-          id_user: userSession.id_user,
+          id_user: userSession.id,
           id_game: post.game.value,
           id_platform: post.platform.value,
           id_mode: post.mode.value,
@@ -31,7 +33,7 @@ angular.module('myAppPostService', [])
           description: (post.description != null) ? post.description : ''
         }
 
-        axios.post(url, data)
+        axios.post(url, data, { headers: { Authorization: AuthStr } })
           .then(() => {
             popups.function("Anuncio creado con exito", function () { (location.reload()) })
           })
@@ -41,7 +43,7 @@ angular.module('myAppPostService', [])
       },
       remove: async function (id_post) {
         const url = process.env.SIDEKICK_API + 'posts/' + id_post;
-        await axios.delete(url)
+        await axios.delete(url, { headers: { Authorization: AuthStr } })
           .catch(function (error) {
             console.log(error);
           });;
@@ -51,7 +53,7 @@ angular.module('myAppPostService', [])
           var url = process.env.SIDEKICK_API + 'posts/join?';
           const params = new URLSearchParams(args)
 
-          axios.get(url + params)
+          axios.get(url + params, { headers: { Authorization: AuthStr } })
             .then((res) => {
               resolve(res.data)
             })
@@ -65,7 +67,7 @@ angular.module('myAppPostService', [])
           var url = process.env.SIDEKICK_API + 'posts/join?';
           const params = new URLSearchParams(args)
 
-          axios.get(url + params)
+          axios.get(url + params, { headers: { Authorization: AuthStr } })
             .then((res) => {
               resolve(res.data)
             })
@@ -76,15 +78,15 @@ angular.module('myAppPostService', [])
       },
       removeApplication: async function (id_post, id_application) {
         const url = process.env.SIDEKICK_API + 'posts/' + id_post + '/applications/' + id_application;
-        await axios.delete(url)
+        await axios.delete(url, { headers: { Authorization: AuthStr } })
           .catch(function (error) {
             console.log(error);
           });;
       },
       addApplication: async function (id_post) {
-        const url = process.env.SIDEKICK_API + 'posts/' + id_post + '/applications/' + userSession.id_user;
+        const url = process.env.SIDEKICK_API + 'posts/' + id_post + '/applications/' + userSession.id;
 
-        await axios.post(url)
+        await axios.post(url, { headers: { Authorization: AuthStr } })
           .catch(function (error) {
             console.log(error);
           });
@@ -92,7 +94,7 @@ angular.module('myAppPostService', [])
       updateApplication: async function (id_post, id_application, status) {
         const url = process.env.SIDEKICK_API + 'posts/' + id_post + '/applications/' + id_application + '?status=' + status;
 
-        await axios.put(url)
+        await axios.put(url, { headers: { Authorization: AuthStr } })
           .catch(function (error) {
             console.log(error);
           });

@@ -5,8 +5,9 @@ angular.module('myAppPlatformService', [])
       getAll: async function () {
         return new Promise((resolve, reject) => {
           var url = process.env.SIDEKICK_API + 'platforms';
+          const AuthStr = 'Bearer '.concat(userSession.token);
 
-          axios.get(url)
+          axios.get(url, { headers: { Authorization: AuthStr } })
             .then((res) => {
               resolve(res.data)
             })

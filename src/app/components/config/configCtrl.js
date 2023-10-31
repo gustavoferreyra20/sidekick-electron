@@ -1,8 +1,6 @@
-angular.module('myAppConfigCtrl', []).controller('configCtrl', ['$scope', 'users', function ($scope, users) {
+angular.module('myAppConfigCtrl', []).controller('configCtrl', ['$scope', function ($scope) {
 
   $scope.btnLogout = function () {
-
-    users.logout()
-      .then(ipcRenderer.invoke("logout"))
+    ipcRenderer.invoke("logout");
   };
 }]);

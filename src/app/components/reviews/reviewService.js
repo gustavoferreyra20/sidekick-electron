@@ -5,8 +5,9 @@ angular.module('myAppReviewService', [])
       addReward: async function (id_review, id_reward) {
         return new Promise((resolve, reject) => {
           const url = process.env.SIDEKICK_API + 'reviews/' + id_review + '/rewards/' + id_reward;
+          const AuthStr = 'Bearer '.concat(userSession.token);
 
-          axios.post(url)
+          axios.post(url, { headers: { Authorization: AuthStr } })
             .then((res) => {
               resolve(res.data);
             })

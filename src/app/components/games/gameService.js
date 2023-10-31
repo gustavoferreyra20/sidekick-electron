@@ -1,12 +1,14 @@
 angular.module('myAppGameService', [])
 
   .factory('games', [function () {
+    const AuthStr = 'Bearer '.concat(userSession.token);
+
     return {
       getAll: async function () {
         return new Promise((resolve, reject) => {
           const url = process.env.SIDEKICK_API + 'games';
 
-          axios.get(url)
+          axios.get(url, { headers: { Authorization: AuthStr } })
             .then((res) => {
               resolve(res.data)
             })
@@ -40,7 +42,7 @@ angular.module('myAppGameService', [])
         return new Promise((resolve, reject) => {
           const url = process.env.SIDEKICK_API + 'games/' + id_game + '/platforms';
 
-          axios.get(url)
+          axios.get(url, { headers: { Authorization: AuthStr } })
             .then((res) => {
               resolve(res.data)
             })

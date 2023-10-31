@@ -1,6 +1,6 @@
-angular.module('myAppLoginCtrl', []).controller('loginCtrl', ['$scope', 'users', function($scope, users){
+angular.module('myAppLoginCtrl', []).controller('loginCtrl', ['$scope', 'auth', function($scope, auth){
   $scope.login = function(form){
-    users.login(form)
+    auth.login(form)
    };  
 }]);
 

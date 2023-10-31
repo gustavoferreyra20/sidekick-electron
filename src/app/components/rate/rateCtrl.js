@@ -53,7 +53,7 @@ angular.module('myAppRateCtrl', []).controller('rateCtrl', ['$scope', '$statePar
       $scope.rewards = $scope.stockedRewards;
       $scope.$applyAsync();
     } else {
-      users.getRewards(userSession.id_user).then(
+      users.getRewards(userSession.id).then(
         function (response) {
           $scope.rewards = response;
           $scope.stockedRewards = response;

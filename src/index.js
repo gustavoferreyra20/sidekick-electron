@@ -7,7 +7,7 @@ require('electron-reload')(__dirname);
 let window;
 
 async function mainWindow() {
-  var userSession = await getCookie('userSession')
+  var cookie = await getCookie('userSession')
   window = new BrowserWindow({
     //autoHideMenuBar: true,
     minHeight: 500,
@@ -17,12 +17,11 @@ async function mainWindow() {
       contextIsolation: false,
     },
   });
-
   const mainMenu = Menu.buildFromTemplate(templateMenu);
   window.webContents.openDevTools()
 
   window.webContents.on('did-finish-load', () => {
-    window.webContents.send('userSession-data', userSession)
+    window.webContents.send('userSession-data', cookie)
   })
 
   Menu.setApplicationMenu(mainMenu);
@@ -47,9 +46,8 @@ const templateMenu = [
   }]
 
 ipcMain.handle('login', async (event, args) => {
-  createCookie(args);
-  var userSession = await getCookie('userSession');
-  window.webContents.send('userSession-data', userSession);
+  await createCookie(args);
+  window.webContents.send('userSession-data', args);
 });
 
 ipcMain.handle('authUser', async (event, args) => {
@@ -66,12 +64,14 @@ ipcMain.handle('logout', (event, args) => {
 });
 
 function createCookie(args) {
+  // Calculate the expiration date in milliseconds (7 days)
+  const expirationDate = new Date().getTime() + 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
 
   const cookie = {
     url: process.env.SERVER_COOKIE,
     name: 'userSession',
     value: JSON.stringify(args),
-    expirationDate: 99999999999999
+    expirationDate: expirationDate / 1000, // Convert to seconds
   }
 
   session.defaultSession.cookies.set(cookie)

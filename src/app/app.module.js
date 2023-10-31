@@ -20,8 +20,8 @@ var app = angular.module("myApp",   [
     'myAppPlatformService',
     'myAppReviewService',
     'myAppRewardService',
-    'myAppTokenService',
     'myAppPopupService',
-    'myAppContact_infService'
+    'myAppContact_infService',
+    'myAppAuthService'
 ]);
 

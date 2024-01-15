@@ -1,4 +1,4 @@
-angular.module('myAppProfileCtrl', []).controller('profileCtrl', ['$scope', 'reviews', 'users', '$stateParams', function ($scope, reviews, users, $stateParams) {
+angular.module('myAppProfileCtrl', []).controller('profileCtrl', ['$scope', 'users', '$stateParams', function ($scope, users, $stateParams) {
 
   $scope.SIDEKICK_API = process.env.SIDEKICK_API;
 

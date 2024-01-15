@@ -4,9 +4,9 @@ angular.module('myAppPaymentService', [])
         const AuthStr = 'Bearer '.concat(userSession.token);
 
         return {
-            newPayment: async function (reward) {
+            newPaymentMP: async function (reward) {
                 return new Promise((resolve, reject) => {
-                    const url = process.env.SIDEKICK_API + 'payment';
+                    const url = process.env.SIDEKICK_API + 'payments/mp';
 
                     axios.post(url, reward, { headers: { Authorization: AuthStr } })
                         .then(function (response) {

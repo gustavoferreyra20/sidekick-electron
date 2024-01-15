@@ -1,5 +1,5 @@
 const { app, BrowserWindow, ipcMain, Menu, session } = require("electron");
-const axios = require("axios");
+
 
 require('dotenv').config();
 require('electron-reload')(__dirname);

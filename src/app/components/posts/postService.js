@@ -48,34 +48,6 @@ angular.module('myAppPostService', [])
             console.log(error);
           });;
       },
-      getApplications: async function (args) {
-        return new Promise((resolve, reject) => {
-          var url = process.env.SIDEKICK_API + 'posts/join?';
-          const params = new URLSearchParams(args)
-
-          axios.get(url + params, { headers: { Authorization: AuthStr } })
-            .then((res) => {
-              resolve(res.data)
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-        })
-      },
-      getApplications: async function (args) {
-        return new Promise((resolve, reject) => {
-          var url = process.env.SIDEKICK_API + 'posts/join?';
-          const params = new URLSearchParams(args)
-
-          axios.get(url + params, { headers: { Authorization: AuthStr } })
-            .then((res) => {
-              resolve(res.data)
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-        })
-      },
       removeApplication: async function (id_post, id_application) {
         const url = process.env.SIDEKICK_API + 'posts/' + id_post + '/applications/' + id_application;
         await axios.delete(url, { headers: { Authorization: AuthStr } })
@@ -84,9 +56,9 @@ angular.module('myAppPostService', [])
           });;
       },
       addApplication: async function (id_post) {
-        const url = process.env.SIDEKICK_API + 'posts/' + id_post + '/applications/' + userSession.id;
+        const url = process.env.SIDEKICK_API + 'posts/' + id_post + '/applications';
 
-        await axios.post(url, { headers: { Authorization: AuthStr } })
+        await axios.post(url, null, { headers: { Authorization: AuthStr } })
           .catch(function (error) {
             console.log(error);
           });
@@ -94,7 +66,7 @@ angular.module('myAppPostService', [])
       updateApplication: async function (id_post, id_application, status) {
         const url = process.env.SIDEKICK_API + 'posts/' + id_post + '/applications/' + id_application + '?status=' + status;
 
-        await axios.put(url, { headers: { Authorization: AuthStr } })
+        await axios.put(url, null, { headers: { Authorization: AuthStr } })
           .catch(function (error) {
             console.log(error);
           });

@@ -4,12 +4,14 @@ angular.module('myAppRateCtrl', []).controller('rateCtrl', ['$scope', '$statePar
 
   $scope.newReview = function (review) {
     review.id_post = $stateParams.id_post;
+    id_user = $stateParams.id_user;
+    id_application = $stateParams.id_application;
 
 
     if (review.reward != undefined) review.reward = review.reward.id_reward;
 
-    users.addReview($stateParams.id_user, review)
-      .then(posts.updateApplication(review.id_post, $stateParams.id_application, 'reviewed'))
+    users.addReview(id_user, review)
+      .then(posts.updateApplication(review.id_post, id_application, 'reviewed'))
       .then(function (res) {
 
         if (review.reward != undefined) {

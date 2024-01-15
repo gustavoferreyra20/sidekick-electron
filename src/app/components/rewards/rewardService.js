@@ -2,7 +2,7 @@ angular.module('myAppRewardService', [])
 
   .factory('rewards', [function () {
     return {
-      getAll: async function (args = null) {
+      getAll: async function () {
         return new Promise((resolve, reject) => {
           const url = process.env.SIDEKICK_API + 'rewards';
           const AuthStr = 'Bearer '.concat(userSession.token);

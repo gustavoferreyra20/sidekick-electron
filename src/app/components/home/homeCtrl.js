@@ -1,7 +1,7 @@
-angular.module('myAppHomeCtrl', ['myAppGameCtrl']).controller('homeCtrl', ['$scope', 'posts', 'modes', 'games', 'platforms', 'popups', 'users', function ($scope, posts, modes, games, platforms, popups, users) {
+angular.module('myAppHomeCtrl', ['myAppGameCtrl']).controller('homeCtrl', ['$scope', 'notificationStateService', 'posts', 'modes', 'games', 'platforms', 'popups', 'users', function ($scope, notificationStateService, posts, modes, games, platforms, popups, users) {
 
   $scope.SIDEKICK_API = process.env.SIDEKICK_API;
-
+  $scope.hasNotifications = notificationStateService.hasNotifications();
   posts.getAll().then(
     function (response) {
       $scope.posts = response;

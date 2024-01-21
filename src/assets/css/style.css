@@ -21,6 +21,7 @@ body {
 body .col-12 {
 	padding-left: 0;
 }
+
 #menu {
 	width: 70px;
 	background-color: #3e3c3d;
@@ -259,4 +260,9 @@ button.active {
 	margin-left: 3px;
 	color: red;
 	font-weight: bold;
+}
+
+#notification-tab .dot {
+	position: absolute;
+	margin-left: -5px;
 }

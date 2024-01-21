@@ -3,7 +3,8 @@ angular.module('myAppNotificationsCtrl', []).controller('notificationsCtrl', ['$
   $scope.SIDEKICK_API = process.env.SIDEKICK_API;
 
   showNotifications();
-
+  removeDot();
+  
   function showNotifications() {
     notifications.getAll().then(
       function (response) {
@@ -14,6 +15,14 @@ angular.module('myAppNotificationsCtrl', []).controller('notificationsCtrl', ['$
     )
   }
 
+  function removeDot() {
+    var notificationTab = document.getElementById('notification-tab');
+    var existingDot = document.getElementById('notification-dot');
+
+    if (existingDot) {
+      notificationTab.removeChild(existingDot);
+    }
+  }
 
   $scope.btnDeleteNotification = function (id_notification) {
     var index = -1;

@@ -1,8 +1,11 @@
-<nav role="navigation"> 
-
-    <ul id="menu" class="navbar-nav mr-0" >
-      <li class="nav-item" ng-repeat="value in menuItems">
-        <a ui-sref="{{value.title}}"><img data-ng-src="assets/img/icons/{{value.img}}.png" alt="{{value.img}}" style="width:50px;height:50px;"></a>
-      </li>   
-    </ul>
-  </nav>
+<nav role="navigation">
+  <ul id="menu" class="navbar-nav mr-0">
+    <li class="nav-item" ng-repeat="value in menuItems">
+      <a ui-sref="{{value.title}}">
+        <div class="image-container" ng-attr-id="{{value.img === 'notifications' ? 'notification-tab' : undefined}}">
+          <img data-ng-src="assets/img/icons/{{value.img}}.png" alt="{{value.img}}" style="width:50px;height:50px;">
+        </div>
+      </a>
+    </li>
+  </ul>
+</nav>

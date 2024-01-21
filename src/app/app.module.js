@@ -6,6 +6,7 @@ var app = angular.module("myApp",   [
     'myAppHomeCtrl',
     'myAppNotificationsCtrl',
     'myAppNotificationService',
+    'myAppNotificationStateService',
     'myAppGameCtrl',
     'myAppGameService',
     'myAppNewPCtrl',

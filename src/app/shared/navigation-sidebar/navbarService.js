@@ -9,7 +9,7 @@ angular.module('myAppNavbarService', [])
 				img: 'home'
 			},{
 				title: 'notifications',
-				img: 'plays'
+				img: 'notifications'
 			},{
 				title: 'games',
 				img: 'plays'

@@ -1,0 +1,27 @@
+<div class="content">
+  <h1 class="d-flex justify-content-center">Notifications</h1>
+  <hr class="hr-main">
+
+  <div class="container mt-5 mb-5">
+
+    <div id="notifications">
+
+      <div class="container-fluid mx-auto p-3 post" ng-repeat="notification in notifications">
+
+        <div class="row justify-content-start px-3">
+      
+          <div class="col text-left">
+            <div class="mt-1 mb-1 spec-1">
+              <span><span id="message">{{notification.message}}</span><br>
+              <span>Created At: </span><span id="createdAt">{{notification.createdAt | date:'medium'}}</span><br>
+            </div>
+          </div>
+      
+          <div class="col text-right">
+            <button class="btn btn-danger" ng-click="btnDeleteNotification(notification.id_notification)">Delete</button>
+          </div>
+      
+        </div>
+      </div>
+    </div>
+  </div>

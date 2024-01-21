@@ -31,6 +31,11 @@ app.config(async function ($stateProvider, $urlRouterProvider) {
             templateUrl: "app/components/home/home.html",
             controller: "homeCtrl"
         })
+        .state("notifications", {
+            url: '/notifications',
+            templateUrl: "app/components/notifications/notifications.html",
+            controller: "notificationsCtrl"
+        })
         .state("games", {
             url: '/games',
             templateUrl: "app/components/games/games.html",

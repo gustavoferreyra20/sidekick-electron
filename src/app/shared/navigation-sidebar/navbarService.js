@@ -8,6 +8,9 @@ angular.module('myAppNavbarService', [])
 				title: 'home',
 				img: 'home'
 			},{
+				title: 'notifications',
+				img: 'plays'
+			},{
 				title: 'games',
 				img: 'plays'
 			},{

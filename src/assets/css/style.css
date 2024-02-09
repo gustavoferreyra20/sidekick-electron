@@ -2,6 +2,8 @@
 
 /* PALETA DE COLORES
 
+BLANCO			::  #E7E9EA
+NEGRO			::  #020202
 GRIS OSCURO		::	#3e3c3d
 GRIS			::	#494649
 GRIS CLARO		::	#535053
@@ -14,8 +16,8 @@ VERDE CLARO		::	#1ded8c
 body {
 	font-family: 'Alegreya Sans', sans-serif;
 	overflow-x: hidden;
-	background-color: #535053;
-	color: white;
+	background-color: #020202;
+	color: #E7E9EA;
 }
 
 body .col-12 {
@@ -24,7 +26,8 @@ body .col-12 {
 
 #menu {
 	width: 70px;
-	background-color: #3e3c3d;
+	background-color: #020202;
+	border-right: 1px solid #3e3c3d;
 	position: fixed;
 	z-index: 1;
 	top: 0;
@@ -39,7 +42,8 @@ body .col-12 {
 
 #rightSection {
 	width: 200px;
-	background-color: #3e3c3d;
+	background-color: #020202;
+	border-left: 1px solid #3e3c3d;
 	position: fixed;
 	text-align: center;
 	top: 0;
@@ -63,7 +67,8 @@ li.right {
 
 .card {
 	box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, .2);
-	background-color: #494649;
+	border: 1px solid #3e3c3d;
+	background-color: #020202;
 	margin: 20px;
 	margin-bottom: 0px !important;
 
@@ -186,7 +191,7 @@ h5 {
 }
 
 .post {
-	background-color: #3e3c3d;
+	border: 1px solid #3e3c3d;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	margin-bottom: 20px;
 }
@@ -265,4 +270,43 @@ button.active {
 #notification-tab .dot {
 	position: absolute;
 	margin-left: -5px;
+}
+
+.contactInf-container {
+	gap: 8px;
+	display: flex;
+	flex-direction: column;
+}
+
+.contactInf {
+	display: flex;
+	justify-content: flex-start;
+	gap: 8px;
+	align-items: center;
+}
+
+.contactInf-img {
+	width: 45px;
+}
+
+.center-self {
+	align-self: center;
+}
+
+.form-group .custom-imput {
+	background-color: #020202;
+	color: #E7E9EA;
+}
+
+.form-group .custom-imput:focus {
+	border-color: #0eaa61;
+	box-shadow: none;
+}
+
+.form-group .custom-imput:focus-visible {
+	outline: none;
+}
+
+.gray-text {
+	color: #535053 !important;
 }

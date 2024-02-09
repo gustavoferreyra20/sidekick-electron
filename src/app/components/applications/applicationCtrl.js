@@ -13,6 +13,13 @@ angular.module('myAppApplicationCtrl', []).controller('applicationCtrl', ['$scop
       .then(showReceivedApps);
   };
 
+  $scope.contact = function (id_user) {
+    users.getContactInf(id_user).then(function (contactInf) {
+      popups.contactInf(contactInf);
+    })
+  };
+
+
   function showSentApps() {
     users.getApplications('sent').then(function (apps) {
       $scope.applications = apps;

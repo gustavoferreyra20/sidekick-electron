@@ -6,11 +6,13 @@
     <div class="form-row mb-5">
 
       <div class="col-auto col-md-6 col-sm-6">
-        <button type="submit" class="btn btn-success col-12" ng-click="showSentApps()">Enviadas</button>
+        <button type="submit" class="btn btn-success col-12" ng-click="showSentApps()"
+          ng-class="{ 'selected': applications.length > 0 }">Enviadas</button>
       </div>
 
       <div class="col-auto col-md-6 col-sm-6">
-        <button type="submit" class="btn btn-success col-12" ng-click="showReceivedApps()">Recibidas</button>
+        <button type="submit" class="btn btn-success col-12" ng-click="showReceivedApps()"
+          ng-class="{ 'selected': posts.length > 0 }">Recibidas</button>
       </div>
 
     </div>
@@ -34,12 +36,24 @@
       <div class="line"></div>
 
       <br>
-      <p ng-show="app.applications.status == 'rejected'">Solicitud rechazada</p>
 
-      <p ng-show="app.applications.status == 'accepted'">Solicitud aceptada</p>
+      <div ng-if="app.applications.status == 'rejected' || app.applications.status == 'accepted'">
+        <p ng-show="app.applications.status == 'rejected'">Solicitud rechazada</p>
+        <p ng-show="app.applications.status == 'accepted'">Solicitud aceptada</p>
+      </div>
 
-      <button type="submit" class="col-sm-12  col-lg-12 btn btn-danger"
-        ng-click="btnCancelApplication(app.id_post, app.applications.id_application)">Cancelar</button>
+      <div class="row">
+        <div class="col-sm-12 col-md-12 text-center mb-2" ng-if="app.applications.status == 'accepted'"
+          ng-click="contact(app.id_user)">
+
+          <a href="" class="btn btn-success w-100">Contactar</a>
+        </div>
+
+        <div class="col-sm-12 col-md-12 text-center mb-2">
+          <button type="submit" class="btn btn-danger btn-block"
+            ng-click="btnCancelApplication(app.id_post, app.applications.id_application)">Cancelar</button>
+        </div>
+      </div>
 
     </div>
 
@@ -90,6 +104,12 @@
           <div class="col-auto col-md-6 col-sm-6" ng-if="user.applications.status == 'pending'">
             <button type="submit" class="btn btn-danger col-12"
               ng-click="changeStatus(post.id_post, user.applications.id_application, 'rejected')">Rechazar</button>
+          </div>
+
+          <div class="col-auto col-md-12 col-sm-12" ng-if="user.applications.status == 'accepted'"
+            ng-click="contact(user.id_user)">
+            <br>
+            <a href="" class=" btn btn-success col-12">Contactar</a>
           </div>
 
           <div class="col-auto col-md-6 col-sm-6" ng-if="user.applications.status == 'accepted'"

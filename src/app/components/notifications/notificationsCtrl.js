@@ -1,10 +1,12 @@
 angular.module('myAppNotificationsCtrl', []).controller('notificationsCtrl', ['$scope', 'notifications', function ($scope, notifications) {
+  const utils = require("./assets/scripts/utils");
 
+  $scope.utils = utils;
   $scope.SIDEKICK_API = process.env.SIDEKICK_API;
 
   showNotifications();
   removeDot();
-  
+
   function showNotifications() {
     notifications.getAll().then(
       function (response) {

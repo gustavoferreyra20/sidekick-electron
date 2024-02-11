@@ -1,4 +1,4 @@
-angular.module('myAppNotificationsCtrl', []).controller('notificationsCtrl', ['$scope', 'notifications', function ($scope, notifications) {
+angular.module('myAppNotificationsCtrl', []).controller('notificationsCtrl', ['$scope', 'notifications', 'users', function ($scope, notifications, users) {
   const utils = require("./assets/scripts/utils");
 
   $scope.utils = utils;
@@ -8,7 +8,7 @@ angular.module('myAppNotificationsCtrl', []).controller('notificationsCtrl', ['$
   removeDot();
 
   function showNotifications() {
-    notifications.getAll().then(
+    users.getNotifications(userSession.id).then(
       function (response) {
         $scope.notifications = response;
         notifications.bulkUpdate("read");

@@ -1,10 +1,10 @@
 angular.module('myAppNotificationStateService', [])
-    .service('notificationStateService', ['notifications', '$http', '$q', '$interval', function (notifications, $http, $q, $interval) {
+    .service('notificationStateService', ['notifications', '$http', '$q', '$interval', 'users', function (notifications, $http, $q, $interval, users) {
         var hasNotifications = false;
 
         // Function to check for new notifications
         var checkNotifications = function () {
-            notifications.getAll()
+            users.getNotifications(userSession.id)
                 .then(function (response) {
                     hasNotifications = response.filter(notification => notification.status === 'unread').length > 0;
 

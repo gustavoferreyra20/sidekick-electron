@@ -58,6 +58,20 @@ angular.module('myAppUserService', [])
             });
         })
       },
+      getNotifications: async function (id_user) {
+        return new Promise((resolve, reject) => {
+          var url = process.env.SIDEKICK_API + 'users/' + id_user + '/notifications';
+          const AuthStr = 'Bearer '.concat(userSession.token);
+
+          axios.get(url, { headers: { Authorization: AuthStr } })
+            .then((res) => {
+              resolve(res.data)
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        })
+      },
       getContactInf: async function (id_user) {
         return new Promise((resolve, reject) => {
           var url = process.env.SIDEKICK_API + 'users/' + id_user + '/contact_inf';

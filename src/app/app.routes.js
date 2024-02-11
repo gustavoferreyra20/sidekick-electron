@@ -21,6 +21,11 @@ app.config(async function ($stateProvider, $urlRouterProvider) {
             templateUrl: "app/components/login/login.html",
             controller: "loginCtrl"
         })
+        .state("forgotPassword", {
+            url: '/forgotPassword',
+            templateUrl: "app/components/forgotPassword/forgotPassword.html",
+            controller: "forgotPasswordCtrl"
+        })
         .state("registration", {
             url: '/registration',
             templateUrl: "app/components/registration/registration.html",

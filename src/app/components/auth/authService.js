@@ -39,11 +39,24 @@ angular.module('myAppAuthService', [])
                         .catch(function (error) {
                             if (error.response && error.response.status === 400) {
                                 popups.alert("Usuario existente")
-                              } else {
+                            } else {
                                 console.log(error);
-                              }
+                            }
                         });
                 });
+            },
+            resetPassword: async function (data) {
+                return new Promise((resolve, reject) => {
+                    const url = process.env.SIDEKICK_API + 'auth/resetPassword';
+
+                    axios.post(url, data)
+                        .then((res) => {
+                            resolve(res.data)
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                })
             }
         }
     }])

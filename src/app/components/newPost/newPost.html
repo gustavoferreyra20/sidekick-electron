@@ -7,14 +7,14 @@
 
                 <div class="form-group">
                     <label for="title">Título:</label>
-                    <input type="text" class="form-control custom-imput" name="title" id="title" placeholder="Ingrese el título"
+                    <input type="text" class="form-control custom-input" name="title" id="title" placeholder="Ingrese el título"
                         value="" maxlength="45" required ng-model="form.title">
                 </div>
 
                 <div class="form-group">
                     <label for="games">Juegos:</label>
                     <br>
-                    <select class="custom-select custom-imput" ng-model="gameSelected" required
+                    <select class="custom-select custom-input" ng-model="gameSelected" required
                         ng-options="option as option.name for option in gameOptions track by option.value"
                         ng-change="setPlatforms(gameSelected)">
                     </select>
@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <label for="platform">Plataforma:</label>
                     <br>
-                    <select class="custom-select custom-imput" ng-model="platformSelected" required
+                    <select class="custom-select custom-input" ng-model="platformSelected" required
                         ng-options="option as option.name for option in platformOptions track by option.value">
                     </select>
                     <br>
@@ -33,7 +33,7 @@
                 <div class="form-group">
                     <label for="platform">Modo de juego:</label>
                     <br>
-                    <select class="custom-select custom-imput" ng-model="modeSelected" required
+                    <select class="custom-select custom-input" ng-model="modeSelected" required
                         ng-options="option as option.name for option in modeOptions track by option.value">
                     </select>
                 </div>
@@ -41,7 +41,7 @@
                 <div class="form-group">
                     <label for="usersRequire">Usuarios requeridos:</label>
                     <br>
-                    <select class="custom-select custom-imput" id="usersRequire" ng-model="form.userRequire"
+                    <select class="custom-select custom-input" id="usersRequire" ng-model="form.userRequire"
                         ng-init="form.userRequire='1'">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -52,7 +52,7 @@
 
                 <div class="form-group ">
                     <label for="description">Descripcion del anuncio:</label>
-                    <textarea id="description" class="custom-imput w-100" name="description" rows="4" maxlength="280" class="col-12"
+                    <textarea id="description" class="custom-input w-100" name="description" rows="4" maxlength="280" class="col-12"
                         ng-model="form.description" placeholder="Description"></textarea>
                     <br>
                 </div>

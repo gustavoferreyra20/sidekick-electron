@@ -293,17 +293,17 @@ button.active {
 	align-self: center;
 }
 
-.form-group .custom-imput {
+.form-group .custom-input {
 	background-color: #020202;
 	color: #E7E9EA;
 }
 
-.form-group .custom-imput:focus {
+.form-group .custom-input:focus {
 	border-color: #0eaa61;
 	box-shadow: none;
 }
 
-.form-group .custom-imput:focus-visible {
+.form-group .custom-input:focus-visible {
 	outline: none;
 }
 
@@ -312,10 +312,11 @@ button.active {
 }
 
 input[type="file"] {
-    display: none;
+	display: none;
 }
+
 .custom-file-upload {
-    display: inline-block;
-    padding: 6px 12px;
-    cursor: pointer;
+	display: inline-block;
+	padding: 6px 12px;
+	cursor: pointer;
 }

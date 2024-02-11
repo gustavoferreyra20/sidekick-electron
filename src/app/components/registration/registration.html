@@ -6,13 +6,13 @@
                     <h1 class="text-center pb-4">Registrar usuario</h1>
                     <div class="form-group">
                         <label for="userName" class="is-required">Nombre</label>
-                        <input type="text" class="form-control custom-imput" name="userName"
+                        <input type="text" class="form-control custom-input" name="userName"
                             placeholder="Ingrese su nombre" value="" ng-model="form.name" required>
                     </div>
 
                     <div class="form-group">
                         <label for="email" class="is-required">Email</label>
-                        <input type="email" class="form-control custom-imput" name="email"
+                        <input type="email" class="form-control custom-input" name="email"
                             placeholder="Ingrese su email" value="" ng-model="form.email" required>
                     </div>
 
@@ -29,11 +29,11 @@
                         <label for="contact" class="is-required">Contacto</label>
                         <br>
                         <div class="d-flex pb-4" ng-repeat="contact_inf in contact_inf_list track by $index">
-                            <select class="custom-select col-3 custom-imput" name="platform"
+                            <select class="custom-select col-3 custom-input" name="platform"
                                 ng-model="contact_inf.platform" required
                                 ng-options="option as option.name for option in contactOptions track by option.id_contact_inf">
                             </select>
-                            <input type="text" class="form-control col-9 custom-imput" name="id"
+                            <input type="text" class="form-control col-9 custom-input" name="id"
                                 placeholder="Ingrese su cuenta o id" value="" required ng-model="contact_inf.account">
                         </div>
                         <div class="d-flex flex-column justify-content-around align-items-end">
@@ -47,13 +47,13 @@
 
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Contanos un poco sobre vos</label>
-                        <textarea class="form-control custom-imput w-100" id="description" name="description" rows="3"
+                        <textarea class="form-control custom-input w-100" id="description" name="description" rows="3"
                             maxlength="280" ng-model="form.description"></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="password" class="is-required">Contraseña</label>
-                        <input type="password" class="form-control custom-imput" name="password"
+                        <input type="password" class="form-control custom-input" name="password"
                             placeholder="**********" value="" ng-model="form.password" required>
                         <p id="imagenHelp" class="form-text">Su contraseña debe contener <b class="text-danger">8</b>
                             caracteres como mímimo.</p>

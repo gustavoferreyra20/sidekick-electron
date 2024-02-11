@@ -16,6 +16,20 @@ angular.module('myAppUserService', [])
             });
         })
       },
+      update: async function (id_user, data) {
+        return new Promise((resolve, reject) => {
+          const url = process.env.SIDEKICK_API + 'users/' + id_user;
+          const AuthStr = 'Bearer '.concat(userSession.token);
+
+          axios.put(url, data, { headers: { Authorization: AuthStr } })
+            .then((res) => {
+              resolve(res.data)
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        })
+      },
       getApplications: async function (type) {
         return new Promise((resolve, reject) => {
           var url = process.env.SIDEKICK_API + 'users/' + userSession.id + '/applications?type=' + type;
@@ -110,6 +124,24 @@ angular.module('myAppUserService', [])
           .catch(function (error) {
             console.log(error);
           });
+      },
+      checkPassword: async function (id_user, password) {
+        return new Promise((resolve, reject) => {
+          var url = process.env.SIDEKICK_API + 'users/' + id_user + '/checkPassword';
+          const data = {
+            password: password
+          };
+
+          const AuthStr = 'Bearer '.concat(userSession.token);
+
+          axios.post(url, data, { headers: { Authorization: AuthStr } })
+            .then((res) => {
+              resolve(res.data.match);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        })
       }
     }
   }])

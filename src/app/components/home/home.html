@@ -8,20 +8,20 @@
       <div class="form-row">
 
         <div class="form-group col-md-3">
-          <select class="custom-select custom-imput" ng-model="gameSelected" required
+          <select class="custom-select custom-input" ng-model="gameSelected" required
             ng-options="option as option.name for option in gameOptions track by option.value"
             ng-change="setPlatforms(gameSelected)">
           </select>
         </div>
 
         <div class="form-group col-md-3">
-          <select class="custom-select custom-imput" ng-model="platformSelected" required
+          <select class="custom-select custom-input" ng-model="platformSelected" required
             ng-options="option as option.name for option in platformOptions track by option.value">
           </select>
         </div>
 
         <div class="form-group col-md-3">
-          <select class="custom-select custom-imput" ng-model="modeSelected" required
+          <select class="custom-select custom-input" ng-model="modeSelected" required
             ng-options="option as option.name for option in modeOptions track by option.value">
           </select>
         </div>

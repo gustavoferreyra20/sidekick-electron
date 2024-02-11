@@ -1,6 +1,6 @@
 angular.module('myAppPopupService', [])
 
-  .factory('popups', [function () {
+  .factory('popups', ['$q', function ($q) {
     return {
       alert: function (msg) {
         popup.window({
@@ -62,6 +62,24 @@ angular.module('myAppPopupService', [])
           content: content,
         });
 
+      },
+      prompt: function (content) {
+        let defer = $q.defer();
+        popup.alert({
+          additionalButtonHolderClass: 'form-group',
+          additionalButtonOkClass: "btn btn-block btn-success",
+          additionalButtonCancelClass: "btn btn-block btn-danger",
+          content: content,
+          labelOk: 'Aceptar',
+          labelCancel: 'Cancelar',
+          onSubmit: function (value) {
+            defer.resolve(value);
+          },
+          onClose: function () {
+            defer.resolve(null);
+          }
+        });
+        return defer.promise;
       }
     }
   }])

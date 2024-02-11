@@ -9,16 +9,17 @@ let window;
 async function mainWindow() {
   var cookie = await getCookie('userSession')
   window = new BrowserWindow({
-    //autoHideMenuBar: true,
-    minHeight: 500,
+    autoHideMenuBar: true,
+    minHeight: 600,
     minWidth: 700,
+    icon: "icon.ico",
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
     },
   });
   const mainMenu = Menu.buildFromTemplate(templateMenu);
-  window.webContents.openDevTools()
+  //window.webContents.openDevTools()
 
   window.webContents.on('did-finish-load', () => {
     window.webContents.send('userSession-data', cookie)

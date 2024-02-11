@@ -30,6 +30,35 @@ angular.module('myAppProfileCtrl', []).controller('profileCtrl', ['$scope', 'use
   users.getReviews(id_profile).then(
     function (reviews) {
       $scope.reviews = reviews;
+
+      // Initialize an object to store the rewards count
+      let rewardsCount = {};
+
+      // Iterate through the reviews array
+      reviews.forEach(review => {
+        // Iterate through the rewards of each review
+        review.rewards.forEach(reward => {
+          // Check if the reward's img exists in rewardsCount
+          if (rewardsCount.hasOwnProperty(reward.img)) {
+            // Increment the count if the reward already exists
+            rewardsCount[reward.img]++;
+          } else {
+            // Initialize the count to 1 if the reward is encountered for the first time
+            rewardsCount[reward.img] = 1;
+          }
+        });
+      });
+
+      // Initialize an array to store the result
+      let totalRewards = [];
+
+      // Iterate through the rewardsCount object and push each reward and its count to totalRewards
+      for (let reward in rewardsCount) {
+        totalRewards.push({ img: reward, amount: rewardsCount[reward] });
+      }
+
+      // Assign the total rewards to $scope
+      $scope.totalRewards = totalRewards;
       $scope.$applyAsync();
     }
   )

@@ -17,8 +17,11 @@
               <h2>{{profile.name}}</h2><span>Habilidad: </span><span id="ability">{{profile.ability}}</span><span
                 class="dot"></span><span>Karma: <span id="karma"></span>{{profile.karma}}<br></span>
             </span>
-            <span class="text-right ml-auto">
-              <h2>star</h2>
+            <span class="text-right ml-auto d-flex">
+              <div ng-repeat="reward in totalRewards">
+                <img crossorigin="anonymous" data-ng-src="{{SIDEKICK_API}}images/{{reward.img}}" class="img-fluid">
+                <h3>{{reward.amount}}</h3>
+              </div>
             </span>
           </div>
         </div>

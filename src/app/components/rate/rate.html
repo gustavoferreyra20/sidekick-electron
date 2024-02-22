@@ -41,7 +41,7 @@
                         <p>{{form.reward.description}}</p>
                         <button type="button" class="btn btn-danger" ng-click="btnDeleteReward(form)">Eliminar</button>
                     </div>
-                    <div ng-show="rewards == 0 && !form.reward && !stockedRewards" class="text-center pb-4">
+                    <div ng-show="rewards.length === 0 && !form.reward" class="text-center pb-4">
                         <p>No tienes ninguna medalla, quieres comprar alguna?</p>
                         <button class="btn btn-success" type="button" ng-click="btnGoToStore()">Comprar</button>
                     </div>

@@ -24,8 +24,9 @@ angular.module('myAppRateCtrl', []).controller('rateCtrl', ['$scope', '$statePar
   };
 
   $scope.btnAddReward = function (form) {
+
     if (!$scope.rewards && !form.reward) {
-      showRewards();
+      showRewards(form);
     } else {
       $scope.rewards = null;
       $scope.$applyAsync();
@@ -50,7 +51,7 @@ angular.module('myAppRateCtrl', []).controller('rateCtrl', ['$scope', '$statePar
     window.location.href = "#/store"
   };
 
-  function showRewards() {
+  function showRewards(form) {
     if ($scope.stockedRewards) {
       $scope.rewards = $scope.stockedRewards;
       $scope.$applyAsync();

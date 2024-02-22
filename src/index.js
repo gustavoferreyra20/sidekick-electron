@@ -19,7 +19,7 @@ async function mainWindow() {
     },
   });
   const mainMenu = Menu.buildFromTemplate(templateMenu);
-  //window.webContents.openDevTools()
+  window.webContents.openDevTools()
 
   window.webContents.on('did-finish-load', () => {
     window.webContents.send('userSession-data', cookie)

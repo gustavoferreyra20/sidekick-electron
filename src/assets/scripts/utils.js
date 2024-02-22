@@ -6,9 +6,9 @@ function capitalizeFirstLetter(str) {
   return capitalized;
 }
 
-function calculateTimeElapsed(createdAt) {
+function calculateTimeElapsed(createdat) {
   var currentDate = new Date();
-  var receivedDate = new Date(createdAt);
+  var receivedDate = new Date(createdat);
 
   var timeDiff = Math.abs(currentDate.getTime() - receivedDate.getTime());
   var minutes = Math.floor(timeDiff / 60000); // Convert milliseconds to minutes

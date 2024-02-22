@@ -7,15 +7,12 @@ angular.module('myAppForgotPasswordCtrl', []).controller('forgotPasswordCtrl', [
 
         auth.resetPassword(data).then(
             function (response) {
-                console.log(response);
-                popups.function("Revisa tu casilla de correo", function () {
+                popups.function("si el correo coincide te llegara un email", function () {
                     window.location.href = "#/login";
                 });
-                // Handle the response as needed (e.g., display success message)
             },
             function (error) {
                 console.error('Error resetting password:', error);
-                // Handle the error (e.g., display error message)
             }
         );
     };

@@ -37,10 +37,10 @@ angular.module('myAppAuthService', [])
                             resolve(response.data);
                         })
                         .catch(function (error) {
-                            if (error.response && error.response.status === 400) {
+                            if (error.response && error.response.status === 409) {
                                 popups.alert("Usuario existente")
-                            } else {
-                                console.log(error);
+                            } else if (error.response && error.response.status === 400) {
+                                popups.alert("Formato de email invalido")
                             }
                         });
                 });

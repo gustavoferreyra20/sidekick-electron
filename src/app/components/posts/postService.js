@@ -27,8 +27,8 @@ angular.module('myAppPostService', [])
           id_game: post.game.value,
           id_platform: post.platform.value,
           id_mode: post.mode.value,
-          requiredUsers: post.userRequire,
-          actualUsers: 0,
+          requiredusers: post.userRequire,
+          actualusers: 0,
           title: post.title,
           description: (post.description != null) ? post.description : ''
         }

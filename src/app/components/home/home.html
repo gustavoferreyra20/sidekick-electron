@@ -55,14 +55,14 @@
                   </a>
                 </span>
                 <span class="text-right ml-auto">
-                  <h2>{{post.actualUsers}} / {{post.requiredUsers}}</h2>
+                  <h2>{{post.actualusers}} / {{post.requiredusers}}</h2>
                 </span>
               </div>
 
               </span><span>{{post.mode}}</span><span class="dot"></span><span>{{post.platform}}</span><span
                 class="dot"></span>
-              <span>Habilidad: </span><span id="ability">{{post.abilityScore}}</span><span
-                class="dot"></span><span>Karma: <span id="karma">{{post.karmaScore}}</span><br></span>
+              <span>Habilidad: </span><span id="ability">{{post.abilityscore}}</span><span
+                class="dot"></span><span>Karma: <span id="karma">{{post.karmascore}}</span><br></span>
 
               <span class="gray-text">{{ utils.calculateTimeElapsed(post.date) }}</span><br>
             </div>
@@ -79,10 +79,10 @@
         </div>
         <br>
         <button type="submit" class="col-sm-12  col-lg-12 btn btn-success" ng-click="btnSubmitApplication(post.id_post)"
-          ng-if="post.actualUsers < post.requiredUsers">Unirse</button>
+          ng-if="post.actualusers < post.requiredusers">Unirse</button>
 
         <button type="submit" class="col-sm-12  col-lg-12 btn btn-warning" disabled
-          ng-if="post.actualUsers == post.requiredUsers">Post completo</button>
+          ng-if="post.actualusers == post.requiredusers">Post completo</button>
       </div>
 
       <p ng-show="!posts[0]">No se encontraron resultados</p>

@@ -27,7 +27,7 @@
         </div>
 
         <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4  text-right">
-          <h2>{{app.actualUsers}} / {{app.requiredUsers}}</h2>
+          <h2>{{app.actualusers}} / {{app.requiredusers}}</h2>
 
         </div>
       </div>
@@ -66,7 +66,7 @@
         </div>
 
         <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4  text-right">
-          <h2>{{post.actualUsers}} / {{post.requiredUsers}}</h2>
+          <h2>{{post.actualusers}} / {{post.requiredusers}}</h2>
 
         </div>
       </div>
@@ -91,13 +91,13 @@
 
           <br>
           <div class="col-auto col-md-6 col-sm-6"
-            ng-if="user.applications.status == 'pending' && post.actualUsers < post.requiredUsers">
+            ng-if="user.applications.status == 'pending' && post.actualusers < post.requiredusers">
             <button type="submit" class="btn btn-success col-12"
               ng-click="changeStatus(post.id_post, user.applications.id_application,'accepted')">Aceptar</button>
           </div>
 
           <div class="col-auto col-md-6 col-sm-6"
-            ng-if="user.applications.status == 'pending' && post.actualUsers == post.requiredUsers">
+            ng-if="user.applications.status == 'pending' && post.actualusers == post.requiredusers">
             <button type="submit" class="btn btn-warning col-12" disabled>Post completo</button>
           </div>
 

@@ -43,7 +43,8 @@
 
           <div class="col-lg-auto col-md-3 col-md-3 col-sm-4">
             <img class="user-img fit-image" crossorigin="anonymous"
-              data-ng-src="{{SIDEKICK_API}}images/{{post.userImg}}">
+              data-ng-src="{{SIDEKICK_API}}images/{{post.userImg}}"
+              onerror="this.onerror=null; this.src='https://sidekick-server-nine.vercel.app/api/images/profiles/default.png';">
           </div>
 
           <div class="col text-left">

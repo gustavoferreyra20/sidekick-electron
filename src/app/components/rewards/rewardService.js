@@ -4,7 +4,7 @@ angular.module('myAppRewardService', [])
     return {
       getAll: async function () {
         return new Promise((resolve, reject) => {
-          const url = process.env.SIDEKICK_API + 'rewards';
+          const url = 'https://sidekick-server-nine.vercel.app/api/rewards';
           const AuthStr = 'Bearer '.concat(userSession.token);
 
           axios.get(url, { headers: { Authorization: AuthStr } })

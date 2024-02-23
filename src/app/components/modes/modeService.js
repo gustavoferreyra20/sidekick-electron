@@ -4,7 +4,7 @@ angular.module('myAppModeService', [])
     return {
       getAll: async function () {
         return new Promise((resolve, reject) => {
-          var url = process.env.SIDEKICK_API + 'modes';
+          var url = 'https://sidekick-server-nine.vercel.app/api/modes';
           const AuthStr = 'Bearer '.concat(userSession.token);
 
           axios.get(url, { headers: { Authorization: AuthStr } })

@@ -6,7 +6,7 @@ angular.module('myAppGameService', [])
     return {
       getAll: async function () {
         return new Promise((resolve, reject) => {
-          const url = process.env.SIDEKICK_API + 'games';
+          const url = 'https://sidekick-server-nine.vercel.app/api/games';
 
           axios.get(url, { headers: { Authorization: AuthStr } })
             .then((res) => {
@@ -40,7 +40,7 @@ angular.module('myAppGameService', [])
       },
       getPlatforms: async function (id_game) {
         return new Promise((resolve, reject) => {
-          const url = process.env.SIDEKICK_API + 'games/' + id_game + '/platforms';
+          const url = 'https://sidekick-server-nine.vercel.app/api/games/' + id_game + '/platforms';
 
           axios.get(url, { headers: { Authorization: AuthStr } })
             .then((res) => {

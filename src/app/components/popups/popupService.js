@@ -42,7 +42,7 @@ angular.module('myAppPopupService', [])
         let content = "<div class='form-group contactInf-container'>";
 
         contactInf.forEach(contact => {
-          let iconHtml = `<img class='contactInf-img fit-image' crossorigin='anonymous' src='${process.env.SIDEKICK_API}images/${contact.img}'>`;
+          let iconHtml = `<img class='contactInf-img fit-image' crossorigin='anonymous' src='https://sidekick-server-nine.vercel.app/api/images/${contact.img}'>`;
           let nickname = contact.users_contact_inf.nickname || "No nickname"; // Fallback if nickname is empty
 
           content += `

@@ -26,7 +26,7 @@ async function mainWindow() {
   })
 
   Menu.setApplicationMenu(mainMenu);
-  window.loadFile("index.html");
+  window.loadFile("src/index.html");
 
 }
 
@@ -69,7 +69,7 @@ function createCookie(args) {
   const expirationDate = new Date().getTime() + 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
 
   const cookie = {
-    url: process.env.SERVER_COOKIE,
+    url:  'https://sidekick-server-nine.vercel.app/',
     name: 'userSession',
     value: JSON.stringify(args),
     expirationDate: expirationDate / 1000, // Convert to seconds

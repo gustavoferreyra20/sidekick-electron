@@ -29,14 +29,14 @@
                 <br>
                 <div class="d-flex rewards">
                     <div class="p-2 text-center" ng-repeat="reward in rewards">
-                        <img crossorigin="anonymous" data-ng-src="{{SIDEKICK_API}}images/{{reward.img}}"
+                        <img crossorigin="anonymous" data-ng-src="https://sidekick-server-nine.vercel.app/api/images/{{reward.img}}"
                             class="img-fluid" alt={{reward.name}}>
                         <p>{{reward.description}}</p>
                         <button type="button" class="btn btn-success"
                             ng-click="btnSelectReward(form, reward)">Seleccionar</button>
                     </div>
                     <div class="p-2 text-center" ng-show="form.reward">
-                        <img crossorigin="anonymous" data-ng-src={{SIDEKICK_API}}images/{{form.reward.img}}
+                        <img crossorigin="anonymous" data-ng-src=https://sidekick-server-nine.vercel.app/api/images/{{form.reward.img}}
                             class="img-fluid" alt={{form.reward.name}}>
                         <p>{{form.reward.description}}</p>
                         <button type="button" class="btn btn-danger" ng-click="btnDeleteReward(form)">Eliminar</button>

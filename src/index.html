@@ -33,7 +33,7 @@
       <h4 class="d-flex justify-content-center mt-2">Popular Games</h4>
 
       <div class="games-grid" id="games" ng-controller="gameCtrl">
-        <img crossorigin="anonymous" data-ng-src="{{SIDEKICK_API}}images/{{game.img}}" class="img-fluid"
+        <img crossorigin="anonymous" data-ng-src="https://sidekick-server-nine.vercel.app/api/images/{{game.img}}" class="img-fluid"
           alt={{game.name}} ng-repeat="game in games">
 
       </div>

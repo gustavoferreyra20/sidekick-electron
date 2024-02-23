@@ -4,7 +4,7 @@ angular.module('myAppContact_infService', [])
     return {
       getAll: async function () {
         return new Promise((resolve, reject) => {
-          var url = process.env.SIDEKICK_API + 'contact_inf';
+          var url = 'https://sidekick-server-nine.vercel.app/api/contact_inf';
 
           axios.get(url)
             .then((res) => {

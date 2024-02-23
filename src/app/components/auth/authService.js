@@ -4,7 +4,7 @@ angular.module('myAppAuthService', [])
         return {
 
             login: async function (obj) {
-                const url = process.env.SIDEKICK_API + 'auth/login';
+                const url = 'https://sidekick-server-nine.vercel.app/api/auth/login';
 
                 let data = {
                     email: obj.email,
@@ -30,7 +30,7 @@ angular.module('myAppAuthService', [])
             },
             register: async function (obj) {
                 return new Promise((resolve, reject) => {
-                    const url = process.env.SIDEKICK_API + 'auth/register';
+                    const url = 'https://sidekick-server-nine.vercel.app/api/auth/register';
 
                     axios.post(url, obj)
                         .then(function (response) {
@@ -47,7 +47,7 @@ angular.module('myAppAuthService', [])
             },
             resetPassword: async function (data) {
                 return new Promise((resolve, reject) => {
-                    const url = process.env.SIDEKICK_API + 'auth/resetPassword';
+                    const url = 'https://sidekick-server-nine.vercel.app/api/auth/resetPassword';
 
                     axios.post(url, data)
                         .then((res) => {

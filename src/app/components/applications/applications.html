@@ -78,7 +78,8 @@
 
         <div class="row justify-content-start px-3">
           <div class="col-lg-auto col-md-3 col-md-3 col-sm-4 text-left">
-            <img class="user-img fit-image" crossorigin="anonymous" data-ng-src="https://sidekick-server-nine.vercel.app/api/images/{{user.img}}"               onerror="this.onerror=null; this.src='https://sidekick-server-nine.vercel.app/api/images/profiles/default.png';">
+            <img class="user-img fit-image" crossorigin="anonymous"
+              data-ng-src="https://sidekick-server-nine.vercel.app/api/images/{{user.img}}">
 
           </div>
 
@@ -116,7 +117,7 @@
           <div class="col-auto col-md-6 col-sm-6" ng-if="user.applications.status == 'accepted'"
             ui-sref="rate({id_user: user.id_user, id_post: post.id_post, id_application: user.applications.id_application})">
             <br>
-            <a href="" class="btn btn-success col-12">Calificar</a>
+            <a href="" class="btn btn-info col-12">Calificar</a>
           </div>
 
           <div class="col-auto col-md-6 col-sm-6" ng-if="user.applications.status == 'accepted'"

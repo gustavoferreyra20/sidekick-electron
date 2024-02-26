@@ -71,8 +71,10 @@ angular.module('myAppHomeCtrl', ['myAppGameCtrl']).controller('homeCtrl', ['$sco
   $scope.btnSubmitApplication = function (id_post) {
     users.getApplications('sent')
       .then((res) => {
-        if (res.some((item) => item.id_post === id_post)) {
-          popups.alert("Ya existe una solicitud pendiente");
+        if (res.some((item) => item.id_user === userSession.id)) {
+          popups.alert("No puedes unirte a tus posts");
+        } else if (res.some((item) => item.id_post === id_post)) {
+          popups.alert("Ya existe una solicitud");
         } else {
           posts.addApplication(id_post)
             .then(() => popups.alert("Solicitud enviada"));

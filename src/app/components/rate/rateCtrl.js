@@ -11,7 +11,7 @@ angular.module('myAppRateCtrl', []).controller('rateCtrl', ['$scope', '$statePar
     if (review.reward != undefined) review.reward = review.reward.id_reward;
 
     users.addReview(id_user, review)
-      .then(posts.updateApplication(review.id_post, id_application, 'reviewed'))
+      .then(posts.updateApplication(review.id_post, id_application, 'complete'))
       .then(function (res) {
 
         if (review.reward != undefined) {

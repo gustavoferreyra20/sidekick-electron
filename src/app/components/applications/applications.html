@@ -37,9 +37,11 @@
 
       <br>
 
-      <div ng-if="app.applications.status == 'rejected' || app.applications.status == 'accepted'">
+      <div
+        ng-if="app.applications.status == 'rejected' || app.applications.status == 'accepted'  || app.applications.status == 'complete'">
         <p ng-show="app.applications.status == 'rejected'">Solicitud rechazada</p>
         <p ng-show="app.applications.status == 'accepted'">Solicitud aceptada</p>
+        <p ng-show="app.applications.status == 'complete'">Partida finalizada</p>
       </div>
 
       <div class="row">

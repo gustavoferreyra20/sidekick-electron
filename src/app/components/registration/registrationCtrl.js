@@ -3,8 +3,14 @@ angular.module('myAppRegistrationCtrl', []).controller('registrationCtrl', ['$sc
   $scope.showTerms = function () { popups.alert('Al usar nuestro servicio, aceptas cumplir con nuestros términos y condiciones. Esto incluye el respeto a la privacidad y el cumplimiento de las leyes aplicables. Nos reservamos el derecho de realizar cambios en cualquier momento. Gracias por tu comprensión y cooperación.') };
 
   $scope.btnRegister = function (form) {
+
+    if (form.password !== form.passwordConfirm) {
+      popups.alert("Las contraseñas no coinciden. Por favor, verifica que sean iguales.");
+      return; // Do not proceed: passwords must match
+    }
+
     if (form.password.length < 8) {
-      popups.alert("Contraseña demasiado corta");
+      popups.alert("La contraseña debe tener al menos 8 caracteres.");
       return; // Don't proceed if the password is too short
     }
 

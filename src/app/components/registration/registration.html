@@ -53,10 +53,42 @@
 
                     <div class="form-group">
                         <label for="password" class="is-required">Contraseña</label>
-                        <input type="password" class="form-control custom-input" name="password"
-                            placeholder="**********" value="" ng-model="form.password" required>
-                        <p id="imagenHelp" class="form-text">Su contraseña debe contener <b class="text-danger">8</b>
-                            caracteres como mímimo.</p>
+                        <div class="input-group">
+                            <input type="{{showPassword1 ? 'text' : 'password'}}"
+                                   class="form-control custom-input"
+                                   name="password"
+                                   placeholder="**********"
+                                   ng-model="form.password"
+                                   required>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" ng-click="showPassword1 = !showPassword1">
+                                    <i class="fa" ng-class="showPassword1 ? 'fa-eye-slash' : 'fa-eye'"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p id="imagenHelp" class="form-text">
+                            Su contraseña debe contener <b class="text-danger">8</b> caracteres como mínimo.
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="passwordConfirm" class="is-required">Repetir Contraseña</label>
+                        <div class="input-group">
+                            <input type="{{showPassword2 ? 'text' : 'password'}}"
+                                   class="form-control custom-input"
+                                   name="passwordConfirm"
+                                   placeholder="**********"
+                                   ng-model="form.passwordConfirm"
+                                   required>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" ng-click="showPassword2 = !showPassword2">
+                                    <i class="fa" ng-class="showPassword2 ? 'fa-eye-slash' : 'fa-eye'"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p id="imagenHelpConfirm" class="form-text">
+                            Reingrese la misma contraseña.
+                        </p>
                     </div>
 
                     <div class="form-group">

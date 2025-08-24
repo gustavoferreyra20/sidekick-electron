@@ -53,18 +53,17 @@
 
                     <div class="form-group">
                         <label for="password" class="is-required">Contraseña</label>
-                        <div class="input-group">
+                        <div class="position-relative">
                             <input type="{{showPasswords ? 'text' : 'password'}}"
                                    class="form-control custom-input"
                                    name="password"
                                    placeholder="**********"
                                    ng-model="form.password"
                                    required>
-                            <div class="input-group-append">
-                                <button type="button" class="btn btn-outline-secondary" ng-click="showPasswords = !showPasswords">
-                                    <i class="fa" ng-class="showPasswords ? 'fa-eye-slash' : 'fa-eye'"></i>
-                                </button>
-                            </div>
+                            <i class="fa password-toggle-icon"
+                               ng-class="showPasswords ? 'fa-eye-slash' : 'fa-eye'"
+                               ng-click="showPasswords = !showPasswords">
+                            </i>
                         </div>
                         <p id="imagenHelp" class="form-text">
                             Su contraseña debe contener <b class="text-danger">8</b> caracteres como mínimo.
@@ -73,18 +72,17 @@
 
                     <div class="form-group">
                         <label for="passwordConfirm" class="is-required">Repetir Contraseña</label>
-                        <div class="input-group">
+                        <div class="position-relative">
                             <input type="{{showPasswords ? 'text' : 'password'}}"
                                    class="form-control custom-input"
                                    name="passwordConfirm"
                                    placeholder="**********"
                                    ng-model="form.passwordConfirm"
                                    required>
-                            <div class="input-group-append">
-                                <button type="button" class="btn btn-outline-secondary" ng-click="showPasswords = !showPasswords">
-                                    <i class="fa" ng-class="showPasswords ? 'fa-eye-slash' : 'fa-eye'"></i>
-                                </button>
-                            </div>
+                            <i class="fa password-toggle-icon"
+                               ng-class="showPasswords ? 'fa-eye-slash' : 'fa-eye'"
+                               ng-click="showPasswords = !showPasswords">
+                            </i>
                         </div>
                     </div>
 

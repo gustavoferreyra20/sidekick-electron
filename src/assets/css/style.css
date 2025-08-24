@@ -323,3 +323,12 @@ input[type="file"] {
 	padding: 6px 12px;
 	cursor: pointer;
 }
+
+.password-toggle-icon {
+	position: absolute;
+	right: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	cursor: pointer;
+	color: #888;
+}

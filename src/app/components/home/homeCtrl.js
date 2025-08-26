@@ -70,7 +70,7 @@ angular.module('myAppHomeCtrl', ['myAppGameCtrl']).controller('homeCtrl', ['$sco
 
   $scope.btnSubmitApplication = async function (postId, postOwnerId) {
     try {
-      console.log(userSession.id, postOwnerId);
+      
       if (userSession.id === postOwnerId) {
         return popups.alert("No puedes unirte a tus propios posts");
       }

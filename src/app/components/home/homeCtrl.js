@@ -68,18 +68,26 @@ angular.module('myAppHomeCtrl', ['myAppGameCtrl']).controller('homeCtrl', ['$sco
 
   };
 
-  $scope.btnSubmitApplication = function (id_post) {
-    users.getApplications('sent')
-      .then((res) => {
-        if (res.some((item) => item.id_user === userSession.id)) {
-          popups.alert("No puedes unirte a tus posts");
-        } else if (res.some((item) => item.id_post === id_post)) {
-          popups.alert("Ya existe una solicitud");
-        } else {
-          posts.addApplication(id_post)
-            .then(() => popups.alert("Solicitud enviada"));
-        }
-      })
+  $scope.btnSubmitApplication = async function (postId, postOwnerId) {
+    try {
+      console.log(userSession.id, postOwnerId);
+      if (userSession.id === postOwnerId) {
+        return popups.alert("No puedes unirte a tus propios posts");
+      }
+
+      const applications = await users.getApplications('sent');
+
+      if (applications.some(app => app.id_post === postId)) {
+        return popups.alert("Ya existe una solicitud para este post");
+      }
+
+      await posts.addApplication(postId);
+      popups.alert("Solicitud enviada correctamente");
+
+    } catch (error) {
+      console.error("Error al enviar la solicitud:", error);
+      popups.alert("Ocurrió un error al enviar la solicitud");
+    }
   };
 
 }]);

@@ -78,8 +78,13 @@
           <p class="col">{{post.description}}</p>
         </div>
         <br>
-        <button type="submit" class="col-sm-12  col-lg-12 btn btn-success" ng-click="btnSubmitApplication(post.id_post)"
-          ng-if="post.actualusers < post.requiredusers">Unirse</button>
+        <button type="submit"
+                class="col-sm-12 col-lg-12 btn btn-success"
+                ng-click="btnSubmitApplication(post.id_post, post.id_user)"
+                ng-if="post.actualusers < post.requiredusers">
+          Unirse
+        </button>
+
 
         <button type="submit" class="col-sm-12  col-lg-12 btn btn-warning" disabled
           ng-if="post.actualusers == post.requiredusers">Post completo</button>
@@ -89,3 +94,4 @@
     </div>
 
   </div>
+</div>

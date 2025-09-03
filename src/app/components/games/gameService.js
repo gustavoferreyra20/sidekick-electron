@@ -1,12 +1,11 @@
-angular.module('myAppGameService', [])
-
-  .factory('games', [function () {
+angular.module('myAppGameService', ['myApp'])
+  .factory('games', ['API_BASE_URL', function (API_BASE_URL) {
     const AuthStr = 'Bearer '.concat(userSession.token);
 
     return {
       getAll: async function () {
         return new Promise((resolve, reject) => {
-          const url = 'https://sidekick-server-nine.vercel.app/api/games';
+          const url = API_BASE_URL + '/games';
 
           axios.get(url, { headers: { Authorization: AuthStr } })
             .then((res) => {
@@ -40,7 +39,7 @@ angular.module('myAppGameService', [])
       },
       getPlatforms: async function (id_game) {
         return new Promise((resolve, reject) => {
-          const url = 'https://sidekick-server-nine.vercel.app/api/games/' + id_game + '/platforms';
+          const url = API_BASE_URL + '/games/' + id_game + '/platforms';
 
           axios.get(url, { headers: { Authorization: AuthStr } })
             .then((res) => {

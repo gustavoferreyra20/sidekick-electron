@@ -9,7 +9,7 @@
 
         <div class="col-lg-auto col-md-3 col-md-3 col-sm-4 text-left">
           <img class="user-img fit-image" crossorigin="anonymous"
-            data-ng-src="https://sidekick-server-nine.vercel.app/api/images/{{profile.img}}">
+            data-ng-src="{{API_BASE_URL}}/images/{{profile.img}}">
         </div>
 
         <div class="col text-left">
@@ -21,7 +21,7 @@
             <span class="text-right ml-auto d-flex">
               <div ng-repeat="reward in totalRewards">
                 <img crossorigin="anonymous"
-                  data-ng-src="https://sidekick-server-nine.vercel.app/api/images/{{reward.img}}" class="img-fluid">
+                  data-ng-src="{{API_BASE_URL}}/images/{{reward.img}}" class="img-fluid">
                 <h3>{{reward.amount}}</h3>
               </div>
             </span>
@@ -43,7 +43,7 @@
 
         <div class="col-lg-auto col-md-3 col-md-3 col-sm-4">
           <img class="user-img fit-image" crossorigin="anonymous"
-            data-ng-src="https://sidekick-server-nine.vercel.app/api/images/{{review.user.img}}">
+            data-ng-src="{{API_BASE_URL}}/images/{{review.user.img}}">
         </div>
 
         <div class="col text-left">

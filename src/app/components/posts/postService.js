@@ -1,12 +1,11 @@
-angular.module('myAppPostService', [])
-
-  .factory('posts', ['popups', function (popups) {
+angular.module('myAppPostService', ['myApp'])
+  .factory('posts', ['API_BASE_URL', 'popups', function (API_BASE_URL, popups) {
     const AuthStr = 'Bearer '.concat(userSession.token);
 
     return {
       getAll: async function (args = null) {
         return new Promise((resolve, reject) => {
-          var url = 'https://sidekick-server-nine.vercel.app/api/posts';
+          var url = API_BASE_URL + '/posts';
 
           if (args !== null) {
             const params = new URLSearchParams(args);
@@ -21,7 +20,7 @@ angular.module('myAppPostService', [])
 
       },
       save: async function (post) {
-        const url = 'https://sidekick-server-nine.vercel.app/api/posts';
+        const url = API_BASE_URL + '/posts';
         let data = {
           id_user: userSession.id,
           id_game: post.game.value,
@@ -42,21 +41,21 @@ angular.module('myAppPostService', [])
           });
       },
       remove: async function (id_post) {
-        const url = 'https://sidekick-server-nine.vercel.app/api/posts/' + id_post;
+      const url = API_BASE_URL + '/posts/' + id_post;
         await axios.delete(url, { headers: { Authorization: AuthStr } })
           .catch(function (error) {
             console.log(error);
           });
       },
       removeApplication: async function (id_post, id_application) {
-        const url = 'https://sidekick-server-nine.vercel.app/api/posts/' + id_post + '/applications/' + id_application;
+      const url = API_BASE_URL + '/posts/' + id_post + '/applications/' + id_application;
         await axios.delete(url, { headers: { Authorization: AuthStr } })
           .catch(function (error) {
             console.log(error);
           });
       },
       addApplication: async function (id_post) {
-        const url = 'https://sidekick-server-nine.vercel.app/api/posts/' + id_post + '/applications';
+      const url = API_BASE_URL + '/posts/' + id_post + '/applications';
 
         await axios.post(url, null, { headers: { Authorization: AuthStr } })
           .catch(function (error) {
@@ -64,7 +63,7 @@ angular.module('myAppPostService', [])
           });
       },
       updateApplication: async function (id_post, id_application, status) {
-        const url = 'https://sidekick-server-nine.vercel.app/api/posts/' + id_post + '/applications/' + id_application + '?status=' + status;
+      const url = API_BASE_URL + '/posts/' + id_post + '/applications/' + id_application + '?status=' + status;
 
         await axios.put(url, null, { headers: { Authorization: AuthStr } })
           .catch(function (error) {

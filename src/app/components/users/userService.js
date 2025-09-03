@@ -1,10 +1,9 @@
-angular.module('myAppUserService', [])
-
-  .factory('users', ['popups', function (popups) {
+angular.module('myAppUserService', ['myApp'])
+  .factory('users', ['API_BASE_URL', 'popups', function (API_BASE_URL, popups) {
     return {
       get: async function (id_user) {
         return new Promise((resolve, reject) => {
-          const url = 'https://sidekick-server-nine.vercel.app/api/users/' + id_user;
+          const url = API_BASE_URL + '/users/' + id_user;
           const AuthStr = 'Bearer '.concat(userSession.token);
 
           axios.get(url, { headers: { Authorization: AuthStr } })
@@ -18,7 +17,7 @@ angular.module('myAppUserService', [])
       },
       update: async function (id_user, data) {
         return new Promise((resolve, reject) => {
-          const url = 'https://sidekick-server-nine.vercel.app/api/users/' + id_user;
+          const url = API_BASE_URL + '/users/' + id_user;
           const AuthStr = 'Bearer '.concat(userSession.token);
 
           axios.put(url, data, { headers: { Authorization: AuthStr } })
@@ -32,7 +31,7 @@ angular.module('myAppUserService', [])
       },
       getApplications: async function (type) {
         return new Promise((resolve, reject) => {
-          var url = 'https://sidekick-server-nine.vercel.app/api/users/' + userSession.id + '/applications?type=' + type;
+          var url = API_BASE_URL + '/users/' + userSession.id + '/applications?type=' + type;
           const AuthStr = 'Bearer '.concat(userSession.token);
 
           axios.get(url, { headers: { Authorization: AuthStr } })
@@ -46,7 +45,7 @@ angular.module('myAppUserService', [])
       },
       getReviews: async function (id_user) {
         return new Promise((resolve, reject) => {
-          var url = 'https://sidekick-server-nine.vercel.app/api/users/' + id_user + '/reviews';
+          var url = API_BASE_URL + '/users/' + id_user + '/reviews';
           const AuthStr = 'Bearer '.concat(userSession.token);
 
           axios.get(url, { headers: { Authorization: AuthStr } })
@@ -60,7 +59,7 @@ angular.module('myAppUserService', [])
       },
       getNotifications: async function (id_user) {
         return new Promise((resolve, reject) => {
-          var url = 'https://sidekick-server-nine.vercel.app/api/users/' + id_user + '/notifications';
+          var url = API_BASE_URL + '/users/' + id_user + '/notifications';
           const AuthStr = 'Bearer '.concat(userSession.token);
 
           axios.get(url, { headers: { Authorization: AuthStr } })
@@ -74,7 +73,7 @@ angular.module('myAppUserService', [])
       },
       getContactInf: async function (id_user) {
         return new Promise((resolve, reject) => {
-          var url = 'https://sidekick-server-nine.vercel.app/api/users/' + id_user + '/contact_inf';
+          var url = API_BASE_URL + '/users/' + id_user + '/contact_inf';
           const AuthStr = 'Bearer '.concat(userSession.token);
 
           axios.get(url, { headers: { Authorization: AuthStr } })
@@ -88,7 +87,7 @@ angular.module('myAppUserService', [])
       },
       addReview: async function (id_user, data) {
         return new Promise((resolve, reject) => {
-          const url = 'https://sidekick-server-nine.vercel.app/api/users/' + id_user + '/reviews';
+          const url = API_BASE_URL + '/users/' + id_user + '/reviews';
           const AuthStr = 'Bearer '.concat(userSession.token);
 
           axios.post(url, data, { headers: { Authorization: AuthStr } })
@@ -102,7 +101,7 @@ angular.module('myAppUserService', [])
       },
       getStats: async function (id_user) {
         return new Promise((resolve, reject) => {
-          var url = 'https://sidekick-server-nine.vercel.app/api/users/' + id_user + '/stats';
+          var url = API_BASE_URL + '/users/' + id_user + '/stats';
           const AuthStr = 'Bearer '.concat(userSession.token);
 
           axios.get(url, { headers: { Authorization: AuthStr } })
@@ -116,7 +115,7 @@ angular.module('myAppUserService', [])
       },
       getRewards: async function (id_user) {
         return new Promise((resolve, reject) => {
-          var url = 'https://sidekick-server-nine.vercel.app/api/users/' + id_user + '/rewards';
+          var url = API_BASE_URL + '/users/' + id_user + '/rewards';
           const AuthStr = 'Bearer '.concat(userSession.token);
 
           axios.get(url, { headers: { Authorization: AuthStr } })
@@ -129,7 +128,7 @@ angular.module('myAppUserService', [])
         })
       },
       addContact_inf_list: async function (id_user, id_contact_inf, nickname) {
-        var url = 'https://sidekick-server-nine.vercel.app/api/auth/' + id_user + '/contact_inf/' + id_contact_inf;
+  var url = API_BASE_URL + '/auth/' + id_user + '/contact_inf/' + id_contact_inf;
         const data = {
           nickname: nickname
         };
@@ -141,7 +140,7 @@ angular.module('myAppUserService', [])
       },
       checkPassword: async function (id_user, password) {
         return new Promise((resolve, reject) => {
-          var url = 'https://sidekick-server-nine.vercel.app/api/users/' + id_user + '/checkPassword';
+          var url = API_BASE_URL + '/users/' + id_user + '/checkPassword';
           const data = {
             password: password
           };

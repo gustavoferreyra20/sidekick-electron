@@ -1,10 +1,9 @@
-angular.module('myAppModeService', [])
-
-  .factory('modes', [function () {
+angular.module('myAppModeService', ['myApp'])
+  .factory('modes', ['API_BASE_URL', function (API_BASE_URL) {
     return {
       getAll: async function () {
         return new Promise((resolve, reject) => {
-          var url = 'https://sidekick-server-nine.vercel.app/api/modes';
+          var url = API_BASE_URL + '/modes';
           const AuthStr = 'Bearer '.concat(userSession.token);
 
           axios.get(url, { headers: { Authorization: AuthStr } })

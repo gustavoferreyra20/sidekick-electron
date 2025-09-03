@@ -35,7 +35,7 @@
       <h4 class="d-flex justify-content-center mt-2">Popular Games</h4>
 
       <div class="games-grid" id="games" ng-controller="gameCtrl">
-        <img crossorigin="anonymous" data-ng-src="https://sidekick-server-nine.vercel.app/api/images/{{game.img}}" class="img-fluid"
+        <img crossorigin="anonymous" data-ng-src="{{API_BASE_URL}}/images/{{game.img}}" class="img-fluid"
           alt={{game.name}} ng-repeat="game in games">
 
       </div>
@@ -72,6 +72,8 @@
   <script type="text/javascript" src="app/components/contact_inf/contact_infService.js"></script>
   <script type="text/javascript" src="app/components/auth/authService.js"></script>
   <script type="text/javascript" src="app/components/payment/paymentService.js"></script>
+
+    <script type="text/javascript" src="app/config.js"></script>
 </body>
 
 </html>

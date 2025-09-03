@@ -80,7 +80,7 @@ angular.module('myAppRegistrationCtrl', []).controller('registrationCtrl', ['$sc
 
 async function saveImage(file, id_user) {
   return new Promise((resolve, reject) => {
-    const url = 'https://sidekick-server-nine.vercel.app/api/images/' + id_user;
+    const url = API_BASE_URL + '/images/' + id_user;
     const formData = new FormData();
     formData.append("file", file.files[0]);
     formData.append("userId", id_user);

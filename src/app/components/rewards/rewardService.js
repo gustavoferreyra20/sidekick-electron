@@ -1,10 +1,9 @@
-angular.module('myAppRewardService', [])
-
-  .factory('rewards', [function () {
+angular.module('myAppRewardService', ['myApp'])
+  .factory('rewards', ['API_BASE_URL', function (API_BASE_URL) {
     return {
       getAll: async function () {
         return new Promise((resolve, reject) => {
-          const url = 'https://sidekick-server-nine.vercel.app/api/rewards';
+          const url = API_BASE_URL + '/rewards';
           const AuthStr = 'Bearer '.concat(userSession.token);
 
           axios.get(url, { headers: { Authorization: AuthStr } })

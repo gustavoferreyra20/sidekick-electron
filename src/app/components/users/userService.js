@@ -1,8 +1,8 @@
 angular.module('myAppUserService', ['myApp'])
-  .factory('users', ['API_BASE_URL', 'popups', function (API_BASE_URL, popups) {
+  .factory('users', ['API_BASE_URL', function (API_BASE_URL) {
     return {
       get: async function (id_user) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           const url = API_BASE_URL + '/users/' + id_user;
           const AuthStr = 'Bearer '.concat(userSession.token);
 
@@ -16,7 +16,7 @@ angular.module('myAppUserService', ['myApp'])
         })
       },
       update: async function (id_user, data) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           const url = API_BASE_URL + '/users/' + id_user;
           const AuthStr = 'Bearer '.concat(userSession.token);
 
@@ -30,7 +30,7 @@ angular.module('myAppUserService', ['myApp'])
         })
       },
       getApplications: async function (type) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           var url = API_BASE_URL + '/users/' + userSession.id + '/applications?type=' + type;
           const AuthStr = 'Bearer '.concat(userSession.token);
 
@@ -44,7 +44,7 @@ angular.module('myAppUserService', ['myApp'])
         })
       },
       getReviews: async function (id_user) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           var url = API_BASE_URL + '/users/' + id_user + '/reviews';
           const AuthStr = 'Bearer '.concat(userSession.token);
 
@@ -58,7 +58,7 @@ angular.module('myAppUserService', ['myApp'])
         })
       },
       getNotifications: async function (id_user) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           var url = API_BASE_URL + '/users/' + id_user + '/notifications';
           const AuthStr = 'Bearer '.concat(userSession.token);
 
@@ -72,7 +72,7 @@ angular.module('myAppUserService', ['myApp'])
         })
       },
       getContactInf: async function (id_user) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           var url = API_BASE_URL + '/users/' + id_user + '/contact_inf';
           const AuthStr = 'Bearer '.concat(userSession.token);
 
@@ -86,7 +86,7 @@ angular.module('myAppUserService', ['myApp'])
         })
       },
       addReview: async function (id_user, data) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           const url = API_BASE_URL + '/users/' + id_user + '/reviews';
           const AuthStr = 'Bearer '.concat(userSession.token);
 
@@ -100,7 +100,7 @@ angular.module('myAppUserService', ['myApp'])
         })
       },
       getStats: async function (id_user) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           var url = API_BASE_URL + '/users/' + id_user + '/stats';
           const AuthStr = 'Bearer '.concat(userSession.token);
 
@@ -114,7 +114,7 @@ angular.module('myAppUserService', ['myApp'])
         })
       },
       getRewards: async function (id_user) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           var url = API_BASE_URL + '/users/' + id_user + '/rewards';
           const AuthStr = 'Bearer '.concat(userSession.token);
 
@@ -139,7 +139,7 @@ angular.module('myAppUserService', ['myApp'])
           });
       },
       checkPassword: async function (id_user, password) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           var url = API_BASE_URL + '/users/' + id_user + '/checkPassword';
           const data = {
             password: password

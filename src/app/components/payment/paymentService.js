@@ -5,7 +5,7 @@ angular.module('myAppPaymentService', [])
 
         return {
             newPaymentMP: async function (reward) {
-                return new Promise((resolve, reject) => {
+                return new Promise((resolve) => {
                     const url = 'https://sidekick-server-nine.vercel.app/api/payments/mp';
 
                     axios.post(url, reward, { headers: { Authorization: AuthStr } })

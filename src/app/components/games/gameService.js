@@ -4,7 +4,7 @@ angular.module('myAppGameService', ['myApp'])
 
     return {
       getAll: async function () {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           const url = API_BASE_URL + '/games';
 
           axios.get(url, { headers: { Authorization: AuthStr } })
@@ -17,7 +17,7 @@ angular.module('myAppGameService', ['myApp'])
         })
       },
       getOptions: async function (any = false) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
 
           this.getAll().then(function (games) {
             var options = []
@@ -38,7 +38,7 @@ angular.module('myAppGameService', ['myApp'])
         })
       },
       getPlatforms: async function (id_game) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           const url = API_BASE_URL + '/games/' + id_game + '/platforms';
 
           axios.get(url, { headers: { Authorization: AuthStr } })

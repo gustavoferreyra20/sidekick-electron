@@ -51,7 +51,7 @@ angular.module('myAppRateCtrl', []).controller('rateCtrl', ['$scope', '$statePar
     window.location.href = "#/store"
   };
 
-  function showRewards(form) {
+  function showRewards() {
     if ($scope.stockedRewards) {
       $scope.rewards = $scope.stockedRewards;
       $scope.$applyAsync();

@@ -2,7 +2,7 @@ angular.module('myAppRewardService', ['myApp'])
   .factory('rewards', ['API_BASE_URL', function (API_BASE_URL) {
     return {
       getAll: async function () {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           const url = API_BASE_URL + '/rewards';
           const AuthStr = 'Bearer '.concat(userSession.token);
 

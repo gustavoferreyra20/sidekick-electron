@@ -3,7 +3,7 @@ angular.module('myAppPlatformService', ['myApp'])
   .factory('platforms', ['API_BASE_URL', 'games', function (API_BASE_URL, games) {
     return {
       getAll: async function () {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           var url = API_BASE_URL + '/platforms';
           const AuthStr = 'Bearer '.concat(userSession.token);
   

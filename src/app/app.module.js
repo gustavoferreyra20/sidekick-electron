@@ -1,4 +1,4 @@
-var app = angular.module("myApp", [
+angular.module("myApp", [
     'myAppLoginCtrl',
     'myAppRegistrationCtrl',
     'myAppUserService',

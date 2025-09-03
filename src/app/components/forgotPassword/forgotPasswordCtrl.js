@@ -6,7 +6,7 @@ angular.module('myAppForgotPasswordCtrl', []).controller('forgotPasswordCtrl', [
         };
 
         auth.resetPassword(data).then(
-            function (response) {
+            function () {
                 popups.function("si el correo coincide te llegara un email", function () {
                     window.location.href = "#/login";
                 });

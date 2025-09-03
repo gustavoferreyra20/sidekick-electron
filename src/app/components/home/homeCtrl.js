@@ -1,5 +1,4 @@
 angular.module('myAppHomeCtrl', ['myAppGameCtrl']).controller('homeCtrl', ['$scope', 'notificationStateService', 'posts', 'modes', 'games', 'platforms', 'popups', 'users', function ($scope, notificationStateService, posts, modes, games, platforms, popups, users) {
-  const utils = require("./assets/scripts/utils");
 
   $scope.utils = utils;
   $scope.SIDEKICK_API = process.env.SIDEKICK_API;

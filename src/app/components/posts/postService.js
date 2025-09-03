@@ -4,7 +4,7 @@ angular.module('myAppPostService', ['myApp'])
 
     return {
       getAll: async function (args = null) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           var url = API_BASE_URL + '/posts';
 
           if (args !== null) {

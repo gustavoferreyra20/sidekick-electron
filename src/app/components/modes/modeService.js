@@ -2,7 +2,7 @@ angular.module('myAppModeService', ['myApp'])
   .factory('modes', ['API_BASE_URL', function (API_BASE_URL) {
     return {
       getAll: async function () {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           var url = API_BASE_URL + '/modes';
           const AuthStr = 'Bearer '.concat(userSession.token);
 

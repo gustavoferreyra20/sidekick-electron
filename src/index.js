@@ -1,8 +1,9 @@
 const { app, BrowserWindow, ipcMain, Menu, session } = require("electron");
+const dotenv = require('dotenv');
+const electronReload = require('electron-reload');
 
-
-require('dotenv').config();
-require('electron-reload')(__dirname);
+dotenv.config();
+electronReload(__dirname);
 
 let window;
 
@@ -51,13 +52,13 @@ ipcMain.handle('login', async (event, args) => {
   window.webContents.send('userSession-data', args);
 });
 
-ipcMain.handle('authUser', async (event, args) => {
+ipcMain.handle('authUser', async () => {
   await mainWindow()
 });
 
-ipcMain.handle('logout', (event, args) => {
+ipcMain.handle('logout', () => {
   session.defaultSession.clearStorageData({ storages: ['cookies'] })
-    .then((res) => {
+    .then(() => {
       window.close()
     }, (error) => {
       console.error(error)
@@ -84,7 +85,7 @@ function createCookie(args) {
 }
 
 function getCookie(cookieName) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     session.defaultSession.cookies.get({ name: cookieName })
       .then((cookies) => {
         resolve(cookies)

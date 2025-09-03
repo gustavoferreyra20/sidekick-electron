@@ -46,14 +46,14 @@ angular.module('myAppPostService', [])
         await axios.delete(url, { headers: { Authorization: AuthStr } })
           .catch(function (error) {
             console.log(error);
-          });;
+          });
       },
       removeApplication: async function (id_post, id_application) {
         const url = 'https://sidekick-server-nine.vercel.app/api/posts/' + id_post + '/applications/' + id_application;
         await axios.delete(url, { headers: { Authorization: AuthStr } })
           .catch(function (error) {
             console.log(error);
-          });;
+          });
       },
       addApplication: async function (id_post) {
         const url = 'https://sidekick-server-nine.vercel.app/api/posts/' + id_post + '/applications';

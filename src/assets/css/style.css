@@ -167,7 +167,14 @@ textarea {
 }
 
 .games-grid img {
+	border-radius: 12px;
 	padding: 10px;
+	transition: transform 0.3s;
+	cursor: pointer;
+}
+
+.games-grid img:hover {
+	transform: scale(1.05);
 }
 
 
@@ -191,9 +198,10 @@ h5 {
 }
 
 .post {
-	border: 1px solid #3e3c3d;
+	border: 1px solid #2C2C2E;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	margin-bottom: 20px;
+	border-radius: 12px;
 }
 
 
@@ -297,8 +305,10 @@ button.active {
 }
 
 .form-group .custom-input {
-	background-color: #020202;
+	background-color: #1C1C1E;
 	color: #E7E9EA;
+	border: 1px solid #2C2C2E;
+	border-radius: 12px;
 }
 
 .form-group .custom-input:focus {
@@ -331,4 +341,82 @@ input[type="file"] {
 	transform: translateY(-50%);
 	cursor: pointer;
 	color: #888;
+}
+#forgotPasswordLink {
+	color: #2196F3;
+	text-decoration: underline;
+	font-weight: 500;
+	cursor: pointer;
+	transition: color 0.2s;
+	display: block;
+	text-align: center;
+	margin: 10px auto;
+}
+#forgotPasswordLink:hover {
+	color: #1976D2;
+}
+.btn {
+	border-radius: 16px;
+}
+.col-md-3 .btn i {
+	margin-right: 8px;
+}
+.btn i {
+	margin-right: 8px;
+	vertical-align: middle;
+}
+.notification-box {
+	background-color: #1C1C1E;
+	border-radius: 12px;
+	padding: 15px;
+	margin-bottom: 20px;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+	color: #E5E5EA;
+}
+.notification-box #message {
+	font-weight: 500;
+	color: #FFFFFF;
+}
+.notification-box .gray-text {
+	font-size: 0.85rem;
+	color: #A1A1AA;
+}
+.notification-box:hover {
+	background-color: #2C2C2E;
+}
+.new-post-card {
+	max-width: 600px;
+	min-width: 300px;
+	width: 100%;
+	margin: 40px;
+	padding: 25px;
+	border-radius: 12px;
+}
+.description {
+	max-width: 100%;
+	white-space: normal;
+	overflow-wrap: break-word;
+	word-break: break-all;
+}
+textarea {
+  padding: 12px 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #575757 transparent;
+  font-size: 16px;
+}
+
+textarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+textarea::-webkit-scrollbar-thumb {
+  background-color: #575757;
+  border-radius: 3px;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+  background-color: #888;
 }

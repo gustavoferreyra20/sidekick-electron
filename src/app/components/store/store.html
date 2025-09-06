@@ -12,7 +12,9 @@
                     <img crossorigin="anonymous" data-ng-src="{{API_BASE_URL}}/images/{{reward.img}}" class="img-fluid" alt={{reward.name}}>
                     <h2>$ {{reward.price}}</h2>
                     <p>{{reward.description}}</p>
-                    <button type="button" class="btn btn-success" ng-click="btnBuy(reward)">Comprar</button>
+                    <button type="button" class="btn btn-success" ng-click="btnBuy(reward)">
+                        <i class="fas fa-shopping-cart"></i>Comprar
+                    </button>
                 </div>
             </div>
         </div>

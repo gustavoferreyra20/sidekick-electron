@@ -1,5 +1,5 @@
 <div class="row justify-content-center content">
-    <div class="card bloque">
+    <div class="card new-post-card">
         <div class="card-body " id="newPostDiv">
             <form id="newPostForm" method="POST"
                 ng-submit="createPost(form, gameSelected, platformSelected, modeSelected)">
@@ -51,14 +51,14 @@
                 </div>
 
                 <div class="form-group ">
-                    <label for="description">Descripcion del anuncio:</label>
                     <textarea id="description" class="custom-input w-100" name="description" rows="4" maxlength="280" class="col-12"
-                        ng-model="form.description" placeholder="Description"></textarea>
+                        ng-model="form.description" placeholder="Descripción del anuncio"></textarea>
                     <br>
                 </div>
 
-
-                <button class="btn btn-block btn-success" id="newPost">Crear anuncio</button>
+                <button class="btn btn-block btn-success" id="newPost">
+                    <i class="fas fa-plus"></i> Crear anuncio
+                </button>
             </form>
         </div>
     </div>

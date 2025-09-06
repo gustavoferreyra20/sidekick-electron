@@ -1,5 +1,5 @@
 <div class="row justify-content-center content">
-    <div class="card bloque">
+    <div class="card new-post-card">
         <div class="card-body ">
             <form id="rateForm" method="POST" ng-submit="newReview(form)">
                 <h1 class="text-center pb-4">Calificar usuario</h1>
@@ -25,7 +25,7 @@
                 </div>
 
                 <button class="btn btn-block btn-success" type="button" ng-disabled="form.reward"
-                    ng-click="btnAddReward(form)">Premiar</button>
+                    ng-click="btnAddReward(form)"><i class="fas fa-trophy"></i>Premiar</button>
                 <br>
                 <div class="d-flex rewards">
                     <div class="p-2 text-center" ng-repeat="reward in rewards">
@@ -33,22 +33,22 @@
                             class="img-fluid" alt={{reward.name}}>
                         <p>{{reward.description}}</p>
                         <button type="button" class="btn btn-success"
-                            ng-click="btnSelectReward(form, reward)">Seleccionar</button>
+                            ng-click="btnSelectReward(form, reward)"><i class="fas fa-check"></i>Seleccionar</button>
                     </div>
                     <div class="p-2 text-center" ng-show="form.reward">
                         <img crossorigin="anonymous" data-ng-src={{API_BASE_URL}}/images/{{form.reward.img}}
                             class="img-fluid" alt={{form.reward.name}}>
                         <p>{{form.reward.description}}</p>
-                        <button type="button" class="btn btn-danger" ng-click="btnDeleteReward(form)">Eliminar</button>
+                        <button type="button" class="btn btn-danger" ng-click="btnDeleteReward(form)"><i class="fas fa-trash"></i>Eliminar</button>
                     </div>
                     <div ng-show="rewards.length === 0 && !form.reward" class="text-center pb-4">
                         <p>No tienes ninguna medalla, quieres comprar alguna?</p>
-                        <button class="btn btn-success" type="button" ng-click="btnGoToStore()">Comprar</button>
+                        <button class="btn btn-success" type="button" ng-click="btnGoToStore()"><i class="fas fa-shopping-cart"></i>Comprar</button>
                     </div>
 
 
                 </div>
-                <button class="btn btn-block btn-success" id="newReview">Calificar</button>
+                <button class="btn btn-block btn-info" id="newReview"><i class="fas fa-paper-plane"></i>Enviar calificación</button>
         </div>
     </div>
 </div>

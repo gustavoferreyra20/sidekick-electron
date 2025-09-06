@@ -1,30 +1,35 @@
 <div class="content">
-  <h1 class="d-flex justify-content-center">Notifications</h1>
-  <hr class="hr-main">
+    <h1 class="d-flex justify-content-center">Notificaciones</h1>
+    <hr class="hr-main">
 
-  <div class="container mt-5 mb-5">
+    <div class="container mt-5 mb-5">
 
-    <div id="notifications">
+        <div id="notifications">
 
-      <div class="container-fluid mx-auto p-3 post" ng-repeat="notification in notifications">
+            <div class="container-fluid mx-auto p-3 post notification-box"
+                 ng-repeat="notification in notifications">
 
-        <div class="row justify-content-start px-3">
+                <div class="row justify-content-start px-3">
 
-          <div class="col text-left">
-            <div class="mt-1 mb-1 spec-1">
-              <span><span id="message">{{notification.message}}</span><br>
-                <span class="gray-text">{{ utils.calculateTimeElapsed(notification.createdat) }}</span><br>
+                    <div class="col text-left">
+                        <div class="mt-1 mb-1 spec-1">
+                            <span id="message">{{notification.message}}</span><br>
+                            <span class="gray-text">{{ utils.calculateTimeElapsed(notification.createdat) }}</span><br>
+                        </div>
+                    </div>
+
+                    <div class="col text-right center-self">
+                        <button class="btn btn-danger btn-icon"
+                                ng-click="btnDeleteNotification(notification.id_notification)">
+                            <i class="fas fa-trash align-middle me-1"></i>Eliminar
+                        </button>
+                    </div>
+
+                </div>
             </div>
-          </div>
 
-          <div class="col text-right center-self">
-            <button class="btn btn-danger"
-              ng-click="btnDeleteNotification(notification.id_notification)">Eliminar</button>
-          </div>
-
+            <p ng-show="!notifications[0]">No se encontraron notificaciones</p>
         </div>
-      </div>
-
-      <p ng-show="!notifications[0]">No se encontraron notificaciones</p>
     </div>
-  </div>
+
+</div>

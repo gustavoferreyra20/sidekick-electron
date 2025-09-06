@@ -21,7 +21,7 @@ angular.module('myAppModeService', ['myApp'])
         var modes = await this.getAll();
 
         if (any) {
-          options.push({ value: "any", name: "Cualquier mode" });
+          options.push({ value: "any", name: "Cualquier modo" });
         }
 
         for (var i = 0, n = modes.length; i < n; i++) { // looping over the options

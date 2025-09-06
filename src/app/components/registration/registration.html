@@ -17,7 +17,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Elegir foto de perfil:</label><br>
+                        <label>Foto de perfil:</label><br>
                         <label class="custom-file-upload btn btn-block btn-success col-12">
                             <input type="file" name="file" accept="image/png, image/jpeg" id="file"
                                 ng-model="form.file">Seleccionar foto
@@ -26,15 +26,23 @@
                     </div>
 
                     <div class="form-group">
+                        <textarea class="custom-input w-100" id="description" name="description" rows="3"
+                                  maxlength="280" ng-model="form.description" placeholder="Contanos un poco sobre vos..."></textarea>
+                    </div>
+
+                    <div class="form-group">
                         <label for="contact" class="is-required">Contacto</label>
                         <br>
-                        <div class="d-flex pb-4" ng-repeat="contact_inf in contact_inf_list track by $index">
-                            <select class="custom-select col-3 custom-input" name="platform"
-                                ng-model="contact_inf.platform" required
-                                ng-options="option as option.name for option in contactOptions track by option.id_contact_inf">
+
+                        <div class="d-flex pb-4" ng-repeat="contact_inf in contact_inf_list track by $index" style="gap: 10px;">
+                            <select class="custom-select custom-input" name="platform"
+                                    ng-model="contact_inf.platform" required
+                                    ng-options="option as option.name for option in contactOptions track by option.id_contact_inf"
+                                    style="flex: 1;">
                             </select>
-                            <input type="text" class="form-control col-9 custom-input" name="id"
-                                placeholder="Ingrese su cuenta o id" value="" required ng-model="contact_inf.account">
+                            <input type="text" class="form-control custom-input" name="id"
+                                   placeholder="Ingrese su cuenta o id" value="" required ng-model="contact_inf.account"
+                                   style="flex: 2;">
                         </div>
                         <div class="d-flex flex-column justify-content-around align-items-end">
                             <button class="btn btn-block btn-success col-12" type="button"
@@ -42,13 +50,6 @@
                             <button class="btn btn-block btn-danger col-12" type="button" ng-click="btnRemoveLast()"
                                 ng-if="contact_inf_list.length > 1">Eliminar último</button>
                         </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Contanos un poco sobre vos</label>
-                        <textarea class="form-control custom-input w-100" id="description" name="description" rows="3"
-                            maxlength="280" ng-model="form.description"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -87,8 +88,8 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="checkbox" name="terms" id="terms" required> Aceptar términos y condiciones <br>
-                        <a href="" class="text-decoration-none" ng-click="showTerms()">Ver términos y condiciones</a>
+                        <a href="" class="text-decoration-none" ng-click="showTerms()">Ver términos y condiciones</a><br>
+                        <input type="checkbox" name="terms" id="terms" required> Aceptar términos y condiciones
                     </div>
 
                     <button id="registration" class="btn btn-block btn-success">Registrarse</button>

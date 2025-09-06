@@ -398,25 +398,32 @@ input[type="file"] {
 	overflow-wrap: break-word;
 	word-break: break-all;
 }
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+::-webkit-scrollbar-track {
+	background: transparent;
+	margin: 8px 0;
+}
+::-webkit-scrollbar-thumb {
+	background: rgba(100, 100, 100, 0.3);
+	border-radius: 20px;
+	transition: background 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: rgba(100, 100, 100, 0.6);
+}
 textarea {
-  padding: 12px 10px;
-  scrollbar-width: thin;
-  scrollbar-color: #575757 transparent;
-  font-size: 16px;
+	padding: 12px 10px;
+	font-size: 16px;
+	overflow: auto;
 }
-
-textarea::-webkit-scrollbar {
-  width: 6px;
+.preview-img {
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	cursor: pointer;
 }
-
-textarea::-webkit-scrollbar-track {
-  background: transparent;
-}
-textarea::-webkit-scrollbar-thumb {
-  background-color: #575757;
-  border-radius: 3px;
-}
-
-textarea::-webkit-scrollbar-thumb:hover {
-  background-color: #888;
+.preview-img:hover {
+	transform: scale(1.05);
+	box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }

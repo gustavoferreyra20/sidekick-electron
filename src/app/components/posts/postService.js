@@ -19,7 +19,7 @@ angular.module('myAppPostService', ['myApp'])
         })
 
       },
-      save: async function (post) {
+      save: async function(post) {
         const url = API_BASE_URL + '/posts';
         let data = {
           id_user: userSession.id,
@@ -30,15 +30,8 @@ angular.module('myAppPostService', ['myApp'])
           actualusers: 0,
           title: post.title,
           description: (post.description != null) ? post.description : ''
-        }
-
-        axios.post(url, data, { headers: { Authorization: AuthStr } })
-          .then(() => {
-            popups.function("Anuncio creado con exito", function () { (location.reload()) })
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+        };
+        return axios.post(url, data, { headers: { Authorization: AuthStr } });
       },
       remove: async function (id_post) {
       const url = API_BASE_URL + '/posts/' + id_post;

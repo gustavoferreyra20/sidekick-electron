@@ -12,21 +12,23 @@ angular.module('myAppAuthService', [])
                 };
 
                 axios.post(url, data)
-                    .then((res) => {
-                        // create the cookie
-                        if (res.data) {
-                            let userSession = res.data;
-
-                            ipcRenderer.invoke("login", userSession);
-                        } else {
-                            popups.alert("Usuario y/o contraseña incorrectas")
-                        };
-
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                        popups.alert("Usuario y/o contraseña incorrectas")
-                    });
+                  .then((res) => {
+                      // create the cookie
+                      if (res.data) {
+                          let userSession = res.data;
+                          ipcRenderer.invoke("login", userSession);
+                      } else {
+                          popups.alert("Usuario y/o contraseña incorrectas");
+                      }
+                  })
+                  .catch(function (error) {
+                      console.log(error);
+                      if (error.response && error.response.status === 403) {
+                          popups.alert("¡Casi listo! Revisa tu correo para activar tu cuenta y comenzar a usar la aplicación");
+                      } else {
+                          popups.alert("Usuario y/o contraseña incorrectas");
+                      }
+                  });
             },
             register: async function (obj) {
                 return new Promise((resolve) => {

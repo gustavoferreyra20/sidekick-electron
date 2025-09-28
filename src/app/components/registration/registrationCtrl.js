@@ -32,7 +32,7 @@ angular.module('myAppRegistrationCtrl', []).controller('registrationCtrl', ['$sc
 
       saveImagePromise
         .then(function () {
-          popups.function("Usuario registrado con éxito", function () {
+          popups.function("¡Usuario registrado con éxito! Revisa tu correo electrónico para activar tu cuenta", function () {
             location.reload();
           });
         })
@@ -50,7 +50,7 @@ angular.module('myAppRegistrationCtrl', []).controller('registrationCtrl', ['$sc
           return Promise.all(contactInfoPromises);
         })
         .then(function () {
-          popups.function("Usuario registrado con éxito", function () {
+          popups.function("¡Usuario registrado con éxito! Revisa tu correo electrónico para activar tu cuenta", function () {
             location.reload();
           });
         })

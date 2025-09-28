@@ -12,7 +12,15 @@ angular.module('myAppStoreCtrl', ['myApp']).controller('storeCtrl', ['$scope', '
 
   $scope.btnBuy = async function (reward) {
     try {
-      payments.newPaymentMP(reward).then((res) => shell.openExternal(res.init_point));
+      const paymentBody = {
+        id_reward: reward.id_reward,
+        id_user: userSession.id,
+        name: reward.name,
+        description: reward.description,
+        price: reward.price,
+        img: reward.img
+      };
+      payments.newPaymentMP(paymentBody).then((res) => shell.openExternal(res.init_point));
     } catch (error) {
       console.error(error);
     }

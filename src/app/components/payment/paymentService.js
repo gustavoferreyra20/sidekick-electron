@@ -4,10 +4,10 @@ angular.module('myAppPaymentService', [])
         const AuthStr = 'Bearer '.concat(userSession.token);
 
         return {
-            newPaymentMP: async function (paymentBody) {
+            newPaymentMP: async function (id_reward) {
                 return new Promise((resolve) => {
                     const url = 'https://sidekick-server-nine.vercel.app/api/payments/mp';
-                    console.log('Making payment request:', paymentBody);
+                    const paymentBody = { id_reward };
 
                     axios.post(url, paymentBody, { headers: { Authorization: AuthStr } })
                         .then(function (response) {

@@ -3,13 +3,13 @@ angular.module('myAppGameService', ['myApp'])
     const AuthStr = 'Bearer '.concat(userSession.token);
 
     return {
-      getAll: async function () {
+      getAll: async function (limit = 10, offset = 0, sortBy = 'updated_at', sortOrder = 'desc') {
         return new Promise((resolve) => {
-          const url = API_BASE_URL + '/games';
+          const url = API_BASE_URL + `/games/igdb?limit=${limit}&offset=${offset}&sortBy=${sortBy}&sortOrder=${sortOrder}`;
 
           axios.get(url, { headers: { Authorization: AuthStr } })
             .then((res) => {
-              resolve(res.data)
+              resolve(res.data.games)
             })
             .catch(function (error) {
               console.log(error);
@@ -27,7 +27,7 @@ angular.module('myAppGameService', ['myApp'])
 
             for (var i = 0, n = games.length; i < n; i++) { // looping over the options
               if (games[i]) {
-                options.push({ value: games[i].id_game, name: utils.capitalizeFirstLetter(games[i].name) });
+                options.push({ value: games[i].id, name: utils.capitalizeFirstLetter(games[i].name) });
               }
             }
 

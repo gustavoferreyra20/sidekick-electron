@@ -49,6 +49,8 @@ body .col-12 {
 	top: 0;
 	right: 0;
 	bottom: 0;
+	display: flex;
+	flex-direction: column;
 }
 
 ul,
@@ -164,6 +166,16 @@ li.right {
 
 textarea {
 	resize: none;
+}
+
+.games-grid {
+	flex: 1;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.games-grid::-webkit-scrollbar {
+	display: none;
 }
 
 .games-grid img {

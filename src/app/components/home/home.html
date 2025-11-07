@@ -61,7 +61,7 @@
                 </span>
               </div>
 
-              </span><span>{{post.mode}}</span><span class="dot"></span><span>{{post.platform}}</span><span
+              </span><span>{{post.modeName}}</span><span class="dot"></span><span>{{post.platformName}}</span><span
                 class="dot"></span>
               <span>Habilidad: </span><span id="ability">{{post.abilityscore}}</span><span
                 class="dot"></span><span>Karma: <span id="karma">{{post.karmascore}}</span><br></span>
@@ -76,7 +76,7 @@
         <div class="row ml-auto">
           <h2 class="col-12">{{post.title}}</h2>
           <img class="img-responsive rounded product-image postGame" alt={{post.gameName}} crossorigin="anonymous"
-            data-ng-src="https://sidekick-server-nine.vercel.app/api/images/{{post.gameImg}}">
+               data-ng-src="https://images.igdb.com/igdb/image/upload/t_cover_big/{{post.coverImage}}.jpg">
           <p class="col">{{post.description}}</p>
         </div>
         <br>

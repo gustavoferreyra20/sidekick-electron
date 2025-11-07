@@ -43,7 +43,9 @@ angular.module('myAppNewPCtrl', []).controller('newPCtrl', ['$scope', 'games', '
 
       let game = selectedGame.full;
 
-      $scope.gameModeOptions = game.game_modes || [];
+      // Exclude single player mode (id: 1)
+      $scope.gameModeOptions = (game.game_modes || []).filter(m => m.id !== 1);
+
       $scope.gameModeSelected = $scope.gameModeOptions[0] || null;
 
       $scope.$applyAsync();

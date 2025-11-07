@@ -4,8 +4,9 @@ angular.module('myAppNewPCtrl', []).controller('newPCtrl', ['$scope', 'games', '
   games.getOptions(false).then(function(response){
         $scope.gameOptions = response;
         $scope.gameSelected = $scope.gameOptions[0];
-        
-        $scope.setPlatforms();
+
+        $scope.setPlatforms($scope.gameSelected);
+        $scope.setGameModes($scope.gameSelected);
         $scope.$applyAsync();
       });
 
@@ -16,17 +17,37 @@ angular.module('myAppNewPCtrl', []).controller('newPCtrl', ['$scope', 'games', '
         $scope.$applyAsync();
       });
 
-      $scope.setPlatforms = function(arg = null){
-        game = (arg != null) ? arg.value : null;
+    $scope.setPlatforms = function(selectedGame) {
 
-        platforms.getOptions(game, false).then(function(response){
-          $scope.platformOptions = response;
-          $scope.platformSelected = $scope.platformOptions[0];
-          
-          $scope.$applyAsync();
-        }); 
-       
-      };
+      if (!selectedGame || !selectedGame.full) {
+        $scope.platformOptions = [];
+        $scope.platformSelected = null;
+        return;
+      }
+
+      let game = selectedGame.full;
+
+      $scope.platformOptions = game.platforms || [];
+      $scope.platformSelected = $scope.platformOptions[0] || null;
+
+      $scope.$applyAsync();
+    };
+
+
+    $scope.setGameModes = function(selectedGame) {
+      if (!selectedGame || !selectedGame.full) {
+        $scope.gameModeOptions = [];
+        $scope.gameModeSelected = null;
+        return;
+      }
+
+      let game = selectedGame.full;
+
+      $scope.gameModeOptions = game.game_modes || [];
+      $scope.gameModeSelected = $scope.gameModeOptions[0] || null;
+
+      $scope.$applyAsync();
+    };
 
   $scope.createPost = async function(form, game, platform, mode){
     form.game = game;

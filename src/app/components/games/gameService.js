@@ -27,7 +27,11 @@ angular.module('myAppGameService', ['myApp'])
 
             for (var i = 0, n = games.length; i < n; i++) { // looping over the options
               if (games[i]) {
-                options.push({ value: games[i].id, name: utils.capitalizeFirstLetter(games[i].name) });
+                options.push({
+                  value: games[i].id,
+                  name: utils.capitalizeFirstLetter(games[i].name),
+                  full: games[i]
+                });
               }
             }
 

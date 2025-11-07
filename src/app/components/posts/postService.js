@@ -24,8 +24,8 @@ angular.module('myAppPostService', ['myApp'])
         let data = {
           id_user: userSession.id,
           id_game: post.game.value,
-          id_platform: post.platform.value,
-          id_mode: post.mode.value,
+          id_platform: post.platform.id,
+          id_mode: post.mode.id,
           requiredusers: post.userRequire,
           actualusers: 0,
           title: post.title,

@@ -3,6 +3,7 @@ angular.module('myAppHomeCtrl', ['myAppGameCtrl']).controller('homeCtrl', ['$sco
   $scope.utils = utils;
   $scope.SIDEKICK_API = process.env.SIDEKICK_API;
   $scope.hasNotifications = notificationStateService.hasNotifications();
+  $scope.currentUserId = userSession.id;
   posts.getAll().then(
     function (response) {
       $scope.posts = response;

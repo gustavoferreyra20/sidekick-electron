@@ -80,19 +80,34 @@
           <p class="col">{{post.description}}</p>
         </div>
         <br>
-        <button type="submit"
-                class="col-sm-12 col-lg-12 btn btn-success"
-                ng-click="btnSubmitApplication(post.id_post, post.id_user)"
-                ng-if="post.actualusers < post.requiredusers">
-          <i class="fas fa-user-plus"></i> Unirse
-        </button>
+        <div class="post-buttons mt-2">
 
-        <button type="submit"
-                class="col-sm-12 col-lg-12 btn btn-warning"
-                disabled
-                ng-if="post.actualusers == post.requiredusers">
-          <i class="fas fa-lock"></i> Post completo
-        </button>
+          <!-- Si eres el creador del post -->
+          <button type="button"
+                  class="col-sm-12 col-lg-12 btn btn-info d-flex align-items-center justify-content-center"
+                  disabled
+                  ng-if="post.id_user == currentUserId">
+            <i class="fas fa-crown mr-2"></i> Creador
+          </button>
+
+          <!-- Si no eres el creador y hay cupos -->
+          <button type="button"
+                  class="col-sm-12 col-lg-12 btn btn-success d-flex align-items-center justify-content-center"
+                  ng-click="btnSubmitApplication(post.id_post, post.id_user)"
+                  ng-if="post.id_user != currentUserId && post.actualusers < post.requiredusers">
+            <i class="fas fa-user-plus mr-2"></i> Unirse
+          </button>
+
+          <!-- Si el post está completo y no eres el creador -->
+          <button type="button"
+                  class="col-sm-12 col-lg-12 btn btn-warning d-flex align-items-center justify-content-center"
+                  disabled
+                  ng-if="post.actualusers >= post.requiredusers && post.id_user != currentUserId">
+            <i class="fas fa-lock mr-2"></i> Post completo
+          </button>
+
+        </div>
+
       </div>
 
       <p ng-show="!posts[0]">No se encontraron resultados</p>

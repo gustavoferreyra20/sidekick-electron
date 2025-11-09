@@ -4,7 +4,7 @@ angular.module('myAppPlatformService', ['myApp'])
     return {
       getAll: async function () {
         return new Promise((resolve) => {
-          var url = API_BASE_URL + '/platforms';
+          var url = API_BASE_URL + '/platforms/igdb/search';
           const AuthStr = 'Bearer '.concat(userSession.token);
   
           axios.get(url, { headers: { Authorization: AuthStr } })
@@ -16,18 +16,24 @@ angular.module('myAppPlatformService', ['myApp'])
             });
         })
       },
-      getOptions: async function (game = null, any = false) {
+      getOptions: async function (game = null) {
   
         var options = []
-        var platforms = (game === null) ? await this.getAll() : await games.getPlatforms(game);
-  
-        if (any) {
-          options.push({ value: "any", name: "Cualquier plataforma" });
-        }
-  
+        var platforms;
+        
+        platforms = game.full.platforms;
+
+
         for (var i = 0, n = platforms.length; i < n; i++) { // looping over the options
           if (platforms[i]) {
-            options.push({ value: platforms[i].id_platform, name: utils.capitalizeFirstLetter(platforms[i].name) });
+            var platformId = platforms[i].id_platform || platforms[i].id;
+            var platformName = platforms[i].name;
+            
+            options.push({ 
+              value: platformId, 
+              name: utils.capitalizeFirstLetter(platformName),
+              id: platformId
+            });
           }
         }
   

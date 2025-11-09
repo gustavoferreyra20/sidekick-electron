@@ -11,53 +11,41 @@ angular.module('myAppHomeCtrl', ['myAppGameCtrl']).controller('homeCtrl', ['$sco
     }
   )
 
-  games.getOptions(true).then(function (response) {
+  games.getOptions().then(function (response) {
     $scope.gameOptions = response;
     $scope.gameSelected = $scope.gameOptions[0];
 
-    $scope.setPlatforms();
+    $scope.setPlatforms($scope.gameSelected);
     $scope.$applyAsync();
   });
 
-  modes.getOptions(true).then(function (response) {
+  modes.getOptions().then(function (response) {
     $scope.modeOptions = response;
     $scope.modeSelected = $scope.modeOptions[0];
 
     $scope.$applyAsync();
   });
 
-  $scope.setPlatforms = function (arg = null) {
-    var game;
-
-    if (arg != null) {
-      game = (arg.value != 'any') ? arg.value : null;
-    } else {
-      game = arg;
+  $scope.setPlatforms = function (selectedGame) {
+    if (!selectedGame || !selectedGame.full) {
+      $scope.platformOptions = [];
+      $scope.platformSelected = null;
+      return;
     }
 
-    platforms.getOptions(game, true).then(function (response) {
-      $scope.platformOptions = response;
-      $scope.platformSelected = $scope.platformOptions[0];
+    let game = selectedGame.full;
+    $scope.platformOptions = game.platforms || [];
+    $scope.platformSelected = $scope.platformOptions[0] || null;
 
-      $scope.$applyAsync();
-    });
-
+    $scope.$applyAsync();
   };
 
   $scope.btnSearchPost = function (game, platform, mode) {
     let params = {};
 
-    if (game.value != 'any') {
-      params.id_game = game.value;
-    }
-
-    if (platform.value != 'any') {
-      params.id_platform = platform.value;
-    }
-
-    if (mode.value != 'any') {
-      params.id_mode = mode.value;
-    }
+    params.id_game = game.value;
+    params.id_platform = platform.value || platform.id;
+    params.id_mode = mode.value;
 
     posts.getAll(params).then(
       function (response) {

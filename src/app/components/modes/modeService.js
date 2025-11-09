@@ -15,14 +15,10 @@ angular.module('myAppModeService', ['myApp'])
             });
         })
       },
-      getOptions: async function (any = false) {
+      getOptions: async function () {
 
         var options = []
         var modes = await this.getAll();
-
-        if (any) {
-          options.push({ value: "any", name: "Cualquier modo" });
-        }
 
         for (var i = 0, n = modes.length; i < n; i++) { // looping over the options
           if (modes[i]) {

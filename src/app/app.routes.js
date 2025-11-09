@@ -79,7 +79,12 @@ app.config(async function ($stateProvider, $urlRouterProvider) {
             url: '/rate?id_user&id_post&id_application',
             templateUrl: "app/components/rate/rate.html",
             controller: "rateCtrl"
-        });
+        })
+      .state('profile_edit', {
+          url: '/profile/edit',
+          templateUrl: 'app/components/profile/edit-profile.html',
+          controller: 'editProfileCtrl'
+      });
 
 });
 

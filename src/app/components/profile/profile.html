@@ -35,6 +35,12 @@
         <p class="description">{{profile.description}}</p>
       </div>
 
+      <button class="btn btn-success"
+              ui-sref="profile_edit"
+              ng-if="profile.isCurrentUser">
+        <i class="fas fa-pen"></i> Editar perfil
+      </button>
+
     </div>
 
     <div class="container-fluid mx-auto p-3 post" ng-repeat="review in reviews">

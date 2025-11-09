@@ -14,6 +14,7 @@ angular.module("myApp", [
     'myAppPostService',
     'myAppApplicationCtrl',
     'myAppProfileCtrl',
+    'myAppEditProfileCtrl',
     'myAppConfigCtrl',
     'myAppStoreCtrl',
     'myAppRateCtrl',

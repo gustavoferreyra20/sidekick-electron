@@ -27,7 +27,7 @@ async function mainWindow() {
   })
 
   Menu.setApplicationMenu(mainMenu);
-  window.loadFile("index.html");
+  window.loadFile("src/index.html");
 
 }
 

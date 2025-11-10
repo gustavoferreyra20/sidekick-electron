@@ -2,8 +2,33 @@
   <div class="card new-post-card">
     <div class="card-body">
 
+      <h1 class="text-center pb-4">Editar perfil</h1>
+
+      <div class="d-flex flex-column align-items-center mb-4">
+        <!-- Imagen actual o preview -->
+        <img ng-src="{{ previewSrc || user.photo_url }}"
+             alt="Foto de perfil"
+             class="rounded-circle shadow preview-img"
+             style="width: 150px; height: 150px; object-fit: cover; border: 2px solid #28a745;">
+
+        <!-- Botón seleccionar (estilo registro) -->
+        <label class="custom-file-upload btn btn-block btn-success col-12 mt-3" style="max-width: 240px;">
+          <input type="file"
+                 id="photo"
+                 accept="image/png, image/jpeg"
+                 onchange="angular.element(this).scope().previewFile(this.files[0])">
+          <i class="fas fa-upload mr-2"></i> Seleccionar foto
+        </label>
+
+        <!-- Botón eliminar (aparece si hay preview o si user tiene imagen) -->
+        <button class="btn btn-danger btn-sm mt-3"
+                ng-if="previewSrc || (!user.isDefaultPhoto && user.photo_url)"
+                ng-click="removePhoto()">
+          <i class="fas fa-trash-alt mr-1"></i> Eliminar foto
+        </button>
+      </div>
+
       <form ng-submit="save()">
-        <h1 class="text-center pb-4">Editar perfil</h1>
 
         <div class="form-group">
           <label for="name">Nombre:</label>

@@ -439,3 +439,32 @@ textarea {
 	transform: scale(1.05);
 	box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
+
+/* Searchable Dropdown Styles */
+.dropdown-menu {
+	max-height: 20rem;
+	overflow-y: auto;
+	background-color: #3e3c3d;
+	border: 1px solid #535053;
+}
+
+.dropdown-item {
+	color: #E7E9EA;
+	padding: 8px 16px;
+	cursor: pointer;
+	border: none;
+	background: none;
+	width: 100%;
+	text-align: left;
+}
+
+.dropdown-item:hover {
+	background-color: #11d077;
+	color: #020202;
+}
+
+.dropdown-header {
+	color: #E7E9EA;
+	font-size: 0.9rem;
+	padding: 8px 16px;
+}

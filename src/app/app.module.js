@@ -28,6 +28,7 @@ angular.module("myApp", [
     'myAppPopupService',
     'myAppContact_infService',
     'myAppAuthService',
-    'myAppPaymentService'
+    'myAppPaymentService',
+    'searchableDropdownDirective'
 ]);
 

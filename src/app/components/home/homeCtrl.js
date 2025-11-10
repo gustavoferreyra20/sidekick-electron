@@ -78,4 +78,9 @@ angular.module('myAppHomeCtrl', ['myAppGameCtrl']).controller('homeCtrl', ['$sco
     }
   };
 
+  // Callback for searchable dropdown
+  $scope.onGameSelect = function(selectedGame) {
+    $scope.setPlatforms(selectedGame);
+  };
+
 }]);

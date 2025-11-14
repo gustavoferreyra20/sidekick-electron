@@ -10,7 +10,7 @@ angular.module('searchableDropdownDirective', ['myAppGameService'])
       },
       template: `
         <div class="dropdown" ng-class="{'show': open}">
-          <button class="btn btn-secondary dropdown-toggle custom-input w-100" 
+          <button type="button" class="btn btn-secondary dropdown-toggle custom-input w-100" 
                   ng-click="toggle()">
               {{selectedOption.name || placeholder || 'Seleccionar'}}
           </button>
@@ -23,7 +23,7 @@ angular.module('searchableDropdownDirective', ['myAppGameService'])
               <div class="dropdown-header" ng-show="isLoading">
                   <i class="fas fa-spinner fa-spin"></i> Buscando...
               </div>
-              <button class="dropdown-item" 
+              <button type="button" class="dropdown-item" 
                       ng-repeat="option in options | filter:search" 
                       ng-click="select(option)"
                       ng-hide="isLoading">

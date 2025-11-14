@@ -4,6 +4,7 @@ angular.module('myAppHomeCtrl', ['myAppGameCtrl']).controller('homeCtrl', ['$sco
   $scope.SIDEKICK_API = process.env.SIDEKICK_API;
   $scope.hasNotifications = notificationStateService.hasNotifications();
   $scope.currentUserId = userSession.id;
+  $scope.hasSearched = false;
   posts.getAll().then(
     function (response) {
       $scope.posts = response;
@@ -46,14 +47,42 @@ angular.module('myAppHomeCtrl', ['myAppGameCtrl']).controller('homeCtrl', ['$sco
     params.id_game = game.value;
     params.id_platform = platform.value || platform.id;
     params.id_mode = mode.value;
-
     posts.getAll(params).then(
       function (response) {
         $scope.posts = response;
+        $scope.hasSearched = true;
         $scope.$applyAsync();
       }
     )
 
+  };
+
+  $scope.btnResetSearch = function () {
+    // Reset search state
+    $scope.hasSearched = false;
+    
+    // Get all posts again
+    posts.getAll().then(
+      function (response) {
+        $scope.posts = response;
+        $scope.$applyAsync();
+      }
+    );
+
+    // Reset game options and reload them
+    games.getOptions().then(function (response) {
+      $scope.gameOptions = response;
+      $scope.gameSelected = $scope.gameOptions[0];
+      $scope.setPlatforms($scope.gameSelected);
+      $scope.$applyAsync();
+    });
+
+    // Reset mode options
+    modes.getOptions().then(function (response) {
+      $scope.modeOptions = response;
+      $scope.modeSelected = $scope.modeOptions[0];
+      $scope.$applyAsync();
+    });
   };
 
   $scope.btnSubmitApplication = async function (postId, postOwnerId) {
@@ -81,6 +110,24 @@ angular.module('myAppHomeCtrl', ['myAppGameCtrl']).controller('homeCtrl', ['$sco
   // Callback for searchable dropdown
   $scope.onGameSelect = function(selectedGame) {
     $scope.setPlatforms(selectedGame);
+    // Show search button when game selection changes
+    if ($scope.hasSearched) {
+      $scope.hasSearched = false;
+    }
   };
+
+  // Watch for changes in platform selection
+  $scope.$watch('platformSelected', function(newValue, oldValue) {
+    if (newValue !== oldValue && $scope.hasSearched) {
+      $scope.hasSearched = false;
+    }
+  });
+
+  // Watch for changes in mode selection
+  $scope.$watch('modeSelected', function(newValue, oldValue) {
+    if (newValue !== oldValue && $scope.hasSearched) {
+      $scope.hasSearched = false;
+    }
+  });
 
 }]);

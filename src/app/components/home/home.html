@@ -32,8 +32,14 @@
 
         <div class="col-md-3">
           <button type="submit" class="btn btn-success col-12"
-                  ng-click="btnSearchPost(gameSelected, platformSelected, modeSelected)">
+                  ng-click="btnSearchPost(gameSelected, platformSelected, modeSelected)"
+                  ng-show="!hasSearched">
             <i class="fas fa-search"></i> Buscar
+          </button>
+          <button type="button" class="btn btn-secondary col-12"
+                  ng-click="btnResetSearch()"
+                  ng-show="hasSearched">
+            <i class="fas fa-undo"></i> Reiniciar
           </button>
         </div>
 

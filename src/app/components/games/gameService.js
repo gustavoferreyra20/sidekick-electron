@@ -16,6 +16,19 @@ angular.module('myAppGameService', ['myApp'])
             });
         })
       },
+      search: async function (limit = 10, offset = 0, sortBy = 'updated_at', sortOrder = 'desc', name = '') {
+        return new Promise((resolve) => {
+          const url = API_BASE_URL + `/games/igdb/search?limit=${limit}&offset=${offset}&sortBy=${sortBy}&sortOrder=${sortOrder}&name=${name}`;
+
+          axios.get(url, { headers: { Authorization: AuthStr } })
+            .then((res) => {
+              resolve(res.data.games)
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        })
+      },
       getOptions: async function (any = false) {
         return new Promise((resolve) => {
 

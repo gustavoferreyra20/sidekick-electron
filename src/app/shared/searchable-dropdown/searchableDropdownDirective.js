@@ -1,5 +1,5 @@
-angular.module('searchableDropdownDirective', [])
-  .directive('searchableDropdown', function() {
+angular.module('searchableDropdownDirective', ['myAppGameService'])
+  .directive('searchableDropdown', ['games', function(games) {
     return {
       restrict: 'E',
       scope: {
@@ -20,13 +20,23 @@ angular.module('searchableDropdownDirective', [])
                      ng-model="search" 
                      placeholder="Buscar...">
               <div class="dropdown-divider"></div>
+              <div class="dropdown-header" ng-show="isLoading">
+                  <i class="fas fa-spinner fa-spin"></i> Buscando...
+              </div>
               <button class="dropdown-item" 
                       ng-repeat="option in options | filter:search" 
-                      ng-click="select(option)">
+                      ng-click="select(option)"
+                      ng-hide="isLoading">
                   {{option.name}}
               </button>
-              <div class="dropdown-header" ng-show="(options | filter:search).length === 0">
-                  No se encontraron resultados
+              <div class="dropdown-header" ng-show="!isLoading && search && search.length >= 3 && (options | filter:search).length === 0">
+                  No se encontraron resultados para "{{search}}"
+              </div>
+              <div class="dropdown-header" ng-show="!isLoading && search && search.length > 0 && search.length < 3">
+                  Escribe al menos 3 caracteres para buscar
+              </div>
+              <div class="dropdown-header" ng-show="!isLoading && (!search || search.length === 0) && (!options || options.length === 0)">
+                  Escribe para buscar opciones
               </div>
           </div>
         </div>
@@ -34,6 +44,7 @@ angular.module('searchableDropdownDirective', [])
       link: function(scope, element) {
         scope.open = false;
         scope.search = '';
+        scope.isLoading = false;
 
         scope.select = function(option) {
           scope.selectedOption = option;
@@ -49,6 +60,72 @@ angular.module('searchableDropdownDirective', [])
           if (!scope.open) scope.search = '';
         };
 
+        var searchTimeout;
+        var currentRequestId = 0;
+        
+        scope.performSearch = function(searchTerm) {
+          if (!searchTerm || searchTerm.length < 3) {
+            return;
+          }
+
+          currentRequestId++;
+          var thisRequestId = currentRequestId;
+
+          scope.isLoading = true;
+          
+          games.search(10, 0, 'updated_at', 'desc', searchTerm)
+            .then(function(response) {
+              // Always reset loading if this is the most recent request
+              if (thisRequestId === currentRequestId) {
+                scope.isLoading = false;
+                
+                // Only update options if search term still matches
+                if (scope.search === searchTerm) {
+                  scope.options = response.map(function(game) {
+                    return {
+                      value: game.id,
+                      name: game.name,
+                      full: game
+                    };
+                  });
+                }
+                scope.$applyAsync();
+              }
+            })
+            .catch(function(error) {
+              // Always reset loading if this is the most recent request
+              if (thisRequestId === currentRequestId) {
+                scope.isLoading = false;
+                
+                // Only show error if search term still matches
+                if (scope.search === searchTerm) {
+                  console.log('Error searching games:', error);
+                }
+                scope.$applyAsync();
+              }
+            });
+        };
+
+        // Watch for changes in search input with debouncing
+        scope.$watch('search', function(newValue, oldValue) {
+          // Clear previous timeout
+          if (searchTimeout) {
+            clearTimeout(searchTimeout);
+          }
+
+          // Reset loading if search is cleared or less than 3 characters
+          if (!newValue || newValue.length < 3) {
+            scope.isLoading = false;
+          }
+
+          if (newValue && newValue !== oldValue) {
+            // Debounce: wait 500ms after user stops typing
+            searchTimeout = setTimeout(function() {
+              scope.performSearch(newValue);
+            }, 500);
+          }
+        });
+
         // Close on outside click
         document.addEventListener('click', function(event) {
           if (scope.open && !element[0].contains(event.target)) {
@@ -58,4 +135,4 @@ angular.module('searchableDropdownDirective', [])
         });
       }
     };
-  });
+  }]);

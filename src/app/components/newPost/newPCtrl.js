@@ -35,7 +35,6 @@ angular.module('myAppNewPCtrl', ['searchableDropdownDirective']).controller('new
 
 
     $scope.setGameModes = function(selectedGame) {
-      console.log(selectedGame);
       if (!selectedGame || !selectedGame.full) {
         $scope.gameModeOptions = [];
         $scope.gameModeSelected = null;

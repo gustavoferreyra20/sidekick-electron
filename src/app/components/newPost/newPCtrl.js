@@ -1,4 +1,4 @@
-angular.module('myAppNewPCtrl', []).controller('newPCtrl', ['$scope', 'games', 'posts', 'modes', 'platforms', 'popups',
+angular.module('myAppNewPCtrl', ['searchableDropdownDirective']).controller('newPCtrl', ['$scope', 'games', 'posts', 'modes', 'platforms', 'popups',
   function($scope, games, posts, modes, platforms, popups){
   
   games.getOptions(false).then(function(response){
@@ -35,6 +35,7 @@ angular.module('myAppNewPCtrl', []).controller('newPCtrl', ['$scope', 'games', '
 
 
     $scope.setGameModes = function(selectedGame) {
+      console.log(selectedGame);
       if (!selectedGame || !selectedGame.full) {
         $scope.gameModeOptions = [];
         $scope.gameModeSelected = null;
@@ -66,4 +67,11 @@ angular.module('myAppNewPCtrl', []).controller('newPCtrl', ['$scope', 'games', '
       popups.alert("Ocurrió un error al crear el anuncio");
     }
   };
+
+  // Callback for searchable dropdown
+  $scope.onGameSelect = function(selectedGame) {
+    $scope.setPlatforms(selectedGame);
+    $scope.setGameModes(selectedGame);
+  };
+
 }]);

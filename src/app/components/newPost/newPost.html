@@ -14,12 +14,12 @@
                 <div class="form-group">
                     <label for="games">Juegos:</label>
                     <br>
-                    <select class="custom-select custom-input"
-                            ng-model="gameSelected"
-                            required
-                            ng-options="option as option.name for option in gameOptions track by option.value"
-                            ng-change="setPlatforms(gameSelected); setGameModes(gameSelected)">
-                    </select>
+                    <searchable-dropdown 
+                        options="gameOptions"
+                        selected-option="gameSelected"
+                        on-select="onGameSelect(selectedOption)"
+                        placeholder="Selecciona un juego">
+                    </searchable-dropdown>
                     <br>
                 </div>
 

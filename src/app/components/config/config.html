@@ -2,7 +2,9 @@
     <div class="card p-3 new-post-card">
         <div class="card-body" id="configDiv">
             <h1 class="text-center pb-4">Configuración</h1>
-            <button class="btn btn-block btn-success" ng-click="btnChangePassword()">Cambiar contraseña</button>
+            <button class="btn btn-block btn-success" ui-sref="changePassword">
+                Cambiar contraseña
+            </button>
             <button class="btn btn-block btn-danger" ng-click="btnLogout()">
                 <i class="fas fa-sign-out-alt"></i> Cerrar sesión
             </button>

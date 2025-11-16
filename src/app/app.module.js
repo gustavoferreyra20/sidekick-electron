@@ -29,6 +29,7 @@ angular.module("myApp", [
     'myAppContact_infService',
     'myAppAuthService',
     'myAppPaymentService',
-    'searchableDropdownDirective'
+    'searchableDropdownDirective',
+    'myAppChangePasswordCtrl'
 ]);
 

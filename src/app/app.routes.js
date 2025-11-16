@@ -84,6 +84,11 @@ app.config(async function ($stateProvider, $urlRouterProvider) {
           url: '/profile/edit',
           templateUrl: 'app/components/profile/edit-profile.html',
           controller: 'editProfileCtrl'
+      })
+      .state('changePassword', {
+          url: '/change-password',
+          templateUrl: 'app/components/config/changePassword.html',
+          controller: 'changePasswordCtrl'
       });
 
 });

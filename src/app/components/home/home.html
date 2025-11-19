@@ -18,15 +18,19 @@
 
         <div class="form-group col-md-3">
           <select class="custom-select custom-input" ng-model="platformSelected" required
-            ng-options="option as option.name for option in platformOptions track by option.value">
+                  ng-options="option as option.name for option in platformOptions track by option.id">
             <option value="" disabled ng-show="!gameSelected">Selecciona un juego primero</option>
             <option value="" disabled ng-show="gameSelected && platformOptions.length === 0">No hay plataformas disponibles</option>
           </select>
         </div>
 
         <div class="form-group col-md-3">
-          <select class="custom-select custom-input" ng-model="modeSelected" required
-            ng-options="option as option.name for option in modeOptions track by option.value">
+          <select class="custom-select custom-input"
+                  ng-model="modeSelected"
+                  required
+                  ng-options="option as option.name for option in modeOptions track by option.id">
+            <option value="" disabled ng-show="!gameSelected">Selecciona un juego primero</option>
+            <option value="" disabled ng-show="gameSelected && modeOptions.length === 0">No hay modos disponibles</option>
           </select>
         </div>
 

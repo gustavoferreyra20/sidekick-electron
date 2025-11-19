@@ -17,13 +17,7 @@ angular.module('myAppHomeCtrl', ['myAppGameCtrl']).controller('homeCtrl', ['$sco
     $scope.gameSelected = $scope.gameOptions[0];
 
     $scope.setPlatforms($scope.gameSelected);
-    $scope.$applyAsync();
-  });
-
-  modes.getOptions().then(function (response) {
-    $scope.modeOptions = response;
-    $scope.modeSelected = $scope.modeOptions[0];
-
+    $scope.setModes($scope.gameSelected);
     $scope.$applyAsync();
   });
 
@@ -41,12 +35,28 @@ angular.module('myAppHomeCtrl', ['myAppGameCtrl']).controller('homeCtrl', ['$sco
     $scope.$applyAsync();
   };
 
+  $scope.setModes = function (selectedGame) {
+    if (!selectedGame || !selectedGame.full) {
+      $scope.modeOptions = [];
+      $scope.modeSelected = null;
+      return;
+    }
+
+    let game = selectedGame.full;
+
+    // Excluir modo single-player
+    $scope.modeOptions = (game.game_modes || []).filter(m => m.id !== 1);
+    $scope.modeSelected = $scope.modeOptions[0] || null;
+
+    $scope.$applyAsync();
+  };
+
   $scope.btnSearchPost = function (game, platform, mode) {
     let params = {};
 
-    params.id_game = game.value;
-    params.id_platform = platform.value || platform.id;
-    params.id_mode = mode.value;
+    params.id_game = game?.full?.id;
+    params.id_platform = platform?.id;
+    params.id_mode = mode?.id;
     posts.getAll(params).then(
       function (response) {
         $scope.posts = response;
@@ -60,34 +70,27 @@ angular.module('myAppHomeCtrl', ['myAppGameCtrl']).controller('homeCtrl', ['$sco
   $scope.btnResetSearch = function () {
     // Reset search state
     $scope.hasSearched = false;
-    
-    // Get all posts again
-    posts.getAll().then(
-      function (response) {
-        $scope.posts = response;
-        $scope.$applyAsync();
-      }
-    );
 
-    // Reset game options and reload them
+    // Reset game options
     games.getOptions().then(function (response) {
       $scope.gameOptions = response;
       $scope.gameSelected = $scope.gameOptions[0];
+
       $scope.setPlatforms($scope.gameSelected);
+      $scope.setModes($scope.gameSelected);
       $scope.$applyAsync();
     });
 
-    // Reset mode options
-    modes.getOptions().then(function (response) {
-      $scope.modeOptions = response;
-      $scope.modeSelected = $scope.modeOptions[0];
+    // Get all posts again
+    posts.getAll().then(function (response) {
+      $scope.posts = response;
       $scope.$applyAsync();
     });
   };
 
   $scope.btnSubmitApplication = async function (postId, postOwnerId) {
     try {
-      
+
       if (userSession.id === postOwnerId) {
         return popups.alert("No puedes unirte a tus propios posts");
       }
@@ -108,23 +111,23 @@ angular.module('myAppHomeCtrl', ['myAppGameCtrl']).controller('homeCtrl', ['$sco
   };
 
   // Callback for searchable dropdown
-  $scope.onGameSelect = function(selectedGame) {
+  $scope.onGameSelect = function (selectedGame) {
     $scope.setPlatforms(selectedGame);
-    // Show search button when game selection changes
+    $scope.setModes(selectedGame);
     if ($scope.hasSearched) {
       $scope.hasSearched = false;
     }
   };
 
   // Watch for changes in platform selection
-  $scope.$watch('platformSelected', function(newValue, oldValue) {
+  $scope.$watch('platformSelected', function (newValue, oldValue) {
     if (newValue !== oldValue && $scope.hasSearched) {
       $scope.hasSearched = false;
     }
   });
 
   // Watch for changes in mode selection
-  $scope.$watch('modeSelected', function(newValue, oldValue) {
+  $scope.$watch('modeSelected', function (newValue, oldValue) {
     if (newValue !== oldValue && $scope.hasSearched) {
       $scope.hasSearched = false;
     }

@@ -18,76 +18,76 @@ app.config(async function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state("login", {
             url: '/login',
-            templateUrl: "app/components/login/login.html",
+            templateUrl: "app/views/auth/login.html",
             controller: "loginCtrl"
         })
         .state("forgotPassword", {
             url: '/forgotPassword',
-            templateUrl: "app/components/forgotPassword/forgotPassword.html",
+            templateUrl: "app/views/auth/forgotPassword.html",
             controller: "forgotPasswordCtrl"
         })
         .state("registration", {
             url: '/registration',
-            templateUrl: "app/components/registration/registration.html",
+            templateUrl: "app/views/auth/registration.html",
             controller: "registrationCtrl"
         })
         .state("home", {
             url: '/home',
-            templateUrl: "app/components/home/home.html",
+            templateUrl: "app/views/home/home.html",
             controller: "homeCtrl"
         })
         .state("notifications", {
             url: '/notifications',
-            templateUrl: "app/components/notifications/notifications.html",
+            templateUrl: "app/views/notifications/notifications.html",
             controller: "notificationsCtrl"
         })
         .state("games", {
             url: '/games',
-            templateUrl: "app/components/games/games.html",
+            templateUrl: "app/views/games/games.html",
             controller: "gameCtrl"
         })
         .state("newPost", {
             url: '/newPost',
-            templateUrl: "app/components/newPost/newPost.html",
+            templateUrl: "app/views/posts/newPost.html",
             controller: "newPCtrl"
         })
         .state("applications", {
             url: '/applications',
-            templateUrl: "app/components/applications/applications.html",
+            templateUrl: "app/views/applications/applications.html",
             controller: "applicationCtrl"
         })
         .state("profile", {
             url: '/profile?id_user',
-            templateUrl: "app/components/profile/profile.html",
+            templateUrl: "app/views/profile/profile.html",
             controller: "profileCtrl"
         })
         .state("config", {
             url: '/config',
-            templateUrl: "app/components/config/config.html",
+            templateUrl: "app/views/config/config.html",
             controller: "configCtrl"
         })
         .state("store", {
             url: '/store',
-            templateUrl: "app/components/store/store.html",
+            templateUrl: "app/views/store/store.html",
             controller: "storeCtrl"
         })
         .state("loading", {
             url: '/loading',
-            templateUrl: "app/components/loading/loading.html"
+            templateUrl: "app/views/loading/loading.html"
         })
         .state("rate", {
             url: '/rate?id_user&id_post&id_application',
-            templateUrl: "app/components/rate/rate.html",
+            templateUrl: "app/views/rate/rate.html",
             controller: "rateCtrl"
         })
       .state('profile_edit', {
           url: '/profile/edit',
-          templateUrl: 'app/components/profile/edit-profile.html',
+          templateUrl: 'app/views/profile/edit-profile.html',
           controller: 'editProfileCtrl'
       })
       .state('changePassword', {
           url: '/change-password',
-          templateUrl: 'app/components/config/changePassword.html',
+          templateUrl: 'app/views/config/changePassword.html',
           controller: 'changePasswordCtrl'
       });
 

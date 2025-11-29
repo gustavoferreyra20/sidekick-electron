@@ -44,46 +44,101 @@ Aplicación de escritorio desarrollada con AngularJS y Electron diseñada para c
 
 ## 💻 Estructura del Proyecto
 ```
-├── src/ # Código fuente de la aplicación
-│ ├── index.html # Archivo HTML principal
-│ ├── index.js # Proceso principal de Electron
-│ ├── app/ # Módulos y componentes AngularJS
-│ │ ├── config.js # Configuración global y constantes
-│ │ ├── session.js # Gestión de sesión del usuario
-│ │ ├── app.module.js # Definición del módulo principal AngularJS
-│ │ ├── app.routes.js # Configuración de rutas
-│ │ ├── components/ # Componentes de la aplicación
-│ │ │ ├── auth/ # Autenticación
-│ │ │ │ ├── authService.js
-│ │ │ ├── login/ # Inicio de sesión
-│ │ │ │ ├── loginCtrl.js
-│ │ │ ├── forgotPassword/ # Recuperación de contraseña
-│ │ │ │ ├── forgotPasswordCtrl.js
-│ │ │ ├── registration/ # Registro de usuarios
-│ │ │ │ ├── registrationCtrl.js
-│ │ │ ├── home/ # Pantalla principal
-│ │ │ │ ├── homeCtrl.js
-│ │ │ ├── profile/ # Perfil de usuario
-│ │ │ │ ├── profileCtrl.js
-│ │ │ ├── game/ # Vista de detalle de juego
-│ │ │ │ ├── gameCtrl.js
-│ │ │ ├── search/ # Búsqueda de juegos
-│ │ │ │ ├── searchCtrl.js
-│ │ │ ├── navbar/ # Barra de navegación
-│ │ │ │ ├── navbarDirective.js
-│ │ │ ├── footer/ # Pie de página
-│ │ │ │ ├── footerDirective.js
-│ │ │ ├── editProfile/ # Edición de perfil
-│ │ │ │ ├── editProfileCtrl.js
-│ ├── assets/ # Recursos estáticos
-│ │ ├── css/
-│ │ │ ├── style.css # Estilos principales
-│ │ │ ├── popupS.css # Estilos de pop-ups
-│ │ ├── scripts/
-│ │ │ ├── utils.js # Funciones utilitarias
-├── .env # Variables de entorno
-├── package.json # Dependencias y scripts
-└── README.md # Documentación del proyecto
+├── src/                               # Código fuente principal
+│   ├── index.html                     # HTML principal (renderer)
+│   ├── index.js                       # Proceso principal de Electron
+│   │
+│   ├── app/                           # AngularJS (renderer)
+│   │   ├── app.module.js              # Módulo principal
+│   │   ├── app.routes.js              # Configuración de rutas
+│   │   ├── config.js                  # Configuración global
+│   │   ├── session.js                 # Gestión de sesión
+│   │
+│   │   ├── controllers/               # Controllers agrupados por features
+│   │   │   ├── applications/
+│   │   │   │   └── applicationCtrl.js
+│   │   │   ├── auth/
+│   │   │   │   ├── forgotPasswordCtrl.js
+│   │   │   │   ├── loginCtrl.js
+│   │   │   │   └── registrationCtrl.js
+│   │   │   ├── config/
+│   │   │   │   ├── changePasswordCtrl.js
+│   │   │   │   └── configCtrl.js
+│   │   │   ├── games/
+│   │   │   │   └── gameCtrl.js
+│   │   │   ├── home/
+│   │   │   │   └── homeCtrl.js
+│   │   │   ├── notifications/
+│   │   │   │   └── notificationsCtrl.js
+│   │   │   ├── posts/
+│   │   │   │   └── newPCtrl.js
+│   │   │   ├── profile/
+│   │   │   │   ├── editProfileCtrl.js
+│   │   │   │   └── profileCtrl.js
+│   │   │   ├── rate/
+│   │   │   │   └── rateCtrl.js
+│   │   │   ├── store/
+│   │   │   │   └── storeCtrl.js
+│   │   │   └── users/
+│   │   │       └── userCtrl.js
+│   │
+│   │   ├── services/                  # Servicios centralizados
+│   │   │   ├── authService.js
+│   │   │   ├── contact_infService.js
+│   │   │   ├── gameService.js
+│   │   │   ├── modeService.js
+│   │   │   ├── notificationService.js
+│   │   │   ├── notificationStateService.js
+│   │   │   ├── paymentService.js
+│   │   │   ├── platformService.js
+│   │   │   ├── popupService.js
+│   │   │   ├── postService.js
+│   │   │   ├── reviewService.js
+│   │   │   ├── rewardService.js
+│   │   │   └── userService.js
+│   │
+│   │   ├── shared/                     # Componentes reutilizables
+│   │   │   ├── navigation-sidebar/
+│   │   │   └── searchable-dropdown/
+│   │
+│   │   ├── views/                      # Templates HTML por features
+│   │   │   ├── applications/
+│   │   │   │   └── applications.html
+│   │   │   ├── auth/
+│   │   │   │   ├── forgotPassword.html
+│   │   │   │   ├── login.html
+│   │   │   │   └── registration.html
+│   │   │   ├── config/
+│   │   │   │   ├── changePassword.html
+│   │   │   │   └── config.html
+│   │   │   ├── games/
+│   │   │   │   └── games.html
+│   │   │   ├── home/
+│   │   │   │   └── home.html
+│   │   │   ├── loading/
+│   │   │   │   └── loading.html
+│   │   │   ├── notifications/
+│   │   │   │   └── notifications.html
+│   │   │   ├── posts/
+│   │   │   │   └── newPost.html
+│   │   │   ├── profile/
+│   │   │   │   ├── edit-profile.html
+│   │   │   │   └── profile.html
+│   │   │   ├── rate/
+│   │   │   │   └── rate.html
+│   │   │   └── store/
+│   │   │       └── store.html
+│   │
+│   ├── assets/                        # Recursos estáticos
+│   │   ├── css/
+│   │   │   ├── style.css
+│   │   │   └── popupS.css
+│   │   └── scripts/
+│   │       └── utils.js
+│
+├── .env
+├── package.json
+└── README.md
 ```
 
 ## 📌 Requisitos Previos

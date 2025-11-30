@@ -2,7 +2,13 @@
   <h1 class="d-flex justify-content-center">Juegos</h1>
   <hr class="hr-main">
   <div class="games-grid" id="games">
-    <img crossorigin="anonymous" data-ng-src="https://images.igdb.com/igdb/image/upload/t_cover_big/{{game.cover.image_id}}.jpg" class="img-fluid" alt="{{game.name}}"
-      ng-repeat="game in games">
+    <img
+        crossorigin="anonymous"
+        ng-repeat="game in games"
+        ng-if="game.cover && game.cover.image_id"
+        data-ng-src="https://images.igdb.com/igdb/image/upload/t_cover_big/{{game.cover.image_id}}.jpg"
+        class="img-fluid"
+        alt="{{game.name}}"
+    >
   </div>
 </div>

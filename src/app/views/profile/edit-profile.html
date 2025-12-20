@@ -1,67 +1,70 @@
-<div class="row justify-content-center content" ng-controller="editProfileCtrl">
-  <div class="card new-post-card">
-    <div class="card-body">
+<div class="content">
+  <h1 class="d-flex justify-content-center">Editar perfil</h1>
+  <hr class="hr-main">
 
-      <h1 class="text-center pb-4">Editar perfil</h1>
+  <div class="row justify-content-center" ng-controller="editProfileCtrl">
+    <div class="card new-post-card">
+      <div class="card-body">
 
-      <div class="d-flex flex-column align-items-center mb-4">
-        <!-- Imagen actual o preview -->
-        <img ng-src="{{ previewSrc || user.photo_url }}"
-             alt="Foto de perfil"
-             class="rounded-circle shadow preview-img"
-             style="width: 150px; height: 150px; object-fit: cover; border: 2px solid #28a745;">
+        <div class="d-flex flex-column align-items-center mb-4">
+          <!-- Imagen actual o preview -->
+          <img ng-src="{{ previewSrc || user.photo_url }}"
+               alt="Foto de perfil"
+               class="rounded-circle shadow preview-img"
+               style="width: 150px; height: 150px; object-fit: cover; border: 2px solid #28a745;">
 
-        <!-- Botón seleccionar (estilo registro) -->
-        <label class="custom-file-upload btn btn-block btn-success col-12 mt-3" style="max-width: 240px;">
-          <input type="file"
-                 id="photo"
-                 accept="image/png, image/jpeg"
-                 onchange="angular.element(this).scope().previewFile(this.files[0])">
-          <i class="fas fa-upload mr-2"></i> Seleccionar foto
-        </label>
+          <!-- Botón seleccionar (estilo registro) -->
+          <label class="custom-file-upload btn btn-block btn-success col-12 mt-3" style="max-width: 240px;">
+            <input type="file"
+                   id="photo"
+                   accept="image/png, image/jpeg"
+                   onchange="angular.element(this).scope().previewFile(this.files[0])">
+            <i class="fas fa-upload mr-2"></i> Seleccionar foto
+          </label>
 
-        <!-- Botón eliminar (aparece si hay preview o si user tiene imagen) -->
-        <button class="btn btn-danger btn-sm mt-3"
-                ng-if="previewSrc || (!user.isDefaultPhoto && user.photo_url)"
-                ng-click="removePhoto()">
-          <i class="fas fa-trash-alt mr-1"></i> Eliminar foto
-        </button>
+          <!-- Botón eliminar (aparece si hay preview o si user tiene imagen) -->
+          <button class="btn btn-danger btn-sm mt-3"
+                  ng-if="previewSrc || (!user.isDefaultPhoto && user.photo_url)"
+                  ng-click="removePhoto()">
+            <i class="fas fa-trash-alt mr-1"></i> Eliminar foto
+          </button>
+        </div>
+
+        <form ng-submit="save()">
+
+          <div class="form-group">
+            <label for="name">Nombre:</label>
+            <input type="text"
+                   class="form-control custom-input"
+                   id="name"
+                   placeholder="Ingrese su nombre"
+                   maxlength="45"
+                   required
+                   ng-model="user.name">
+          </div>
+
+          <div class="form-group">
+            <label for="description">Descripción:</label>
+            <textarea id="description"
+                      class="custom-input w-100"
+                      rows="4"
+                      maxlength="280"
+                      ng-model="user.description"
+                      placeholder="Descripción del perfil"></textarea>
+          </div>
+
+          <button class="btn btn-block btn-success" type="submit">
+            <i class="fas fa-save"></i> Guardar cambios
+          </button>
+
+          <button class="btn btn-block btn-danger mt-2"
+                  ui-sref="profile">
+            Cancelar
+          </button>
+
+        </form>
+
       </div>
-
-      <form ng-submit="save()">
-
-        <div class="form-group">
-          <label for="name">Nombre:</label>
-          <input type="text"
-                 class="form-control custom-input"
-                 id="name"
-                 placeholder="Ingrese su nombre"
-                 maxlength="45"
-                 required
-                 ng-model="user.name">
-        </div>
-
-        <div class="form-group">
-          <label for="description">Descripción:</label>
-          <textarea id="description"
-                    class="custom-input w-100"
-                    rows="4"
-                    maxlength="280"
-                    ng-model="user.description"
-                    placeholder="Descripción del perfil"></textarea>
-        </div>
-
-        <button class="btn btn-block btn-success" type="submit">
-          <i class="fas fa-save"></i> Guardar cambios
-        </button>
-
-        <button class="btn btn-block btn-danger mt-2"
-                ui-sref="profile">
-          Cancelar
-        </button>
-
-      </form>
-
     </div>
   </div>
 </div>

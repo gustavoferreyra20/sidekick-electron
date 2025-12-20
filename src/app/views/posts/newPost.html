@@ -1,70 +1,74 @@
-<div class="row justify-content-center content">
+<div class="content">
+  <h1 class="d-flex justify-content-center">Crear anuncio</h1>
+  <hr class="hr-main">
+
+  <div class="row justify-content-center">
     <div class="card new-post-card">
-        <div class="card-body " id="newPostDiv">
-            <form id="newPostForm" method="POST" novalidate
-                ng-submit="createPost(form, gameSelected, platformSelected, gameModeSelected)">
-                <h1 class="text-center pb-4">Crear anuncio</h1>
+      <div class="card-body " id="newPostDiv">
+        <form id="newPostForm" method="POST" novalidate
+              ng-submit="createPost(form, gameSelected, platformSelected, gameModeSelected)">
 
-                <div class="form-group">
-                    <label for="title">Título:</label>
-                    <input type="text" class="form-control custom-input" name="title" id="title" placeholder="Ingrese el título"
-                        value="" maxlength="45" required ng-model="form.title">
-                </div>
+          <div class="form-group">
+            <label for="title">Título:</label>
+            <input type="text" class="form-control custom-input" name="title" id="title" placeholder="Ingrese el título"
+                   value="" maxlength="45" required ng-model="form.title">
+          </div>
 
-                <div class="form-group">
-                    <label for="games">Juegos:</label>
-                    <br>
-                    <searchable-dropdown 
-                        options="gameOptions"
-                        selected-option="gameSelected"
-                        on-select="onGameSelect(selectedOption)"
-                        placeholder="Selecciona un juego">
-                    </searchable-dropdown>
-                </div>
+          <div class="form-group">
+            <label for="games">Juegos:</label>
+            <br>
+            <searchable-dropdown
+                options="gameOptions"
+                selected-option="gameSelected"
+                on-select="onGameSelect(selectedOption)"
+                placeholder="Selecciona un juego">
+            </searchable-dropdown>
+          </div>
 
-                <div class="form-group">
-                    <label for="platform">Plataforma:</label>
-                    <br>
-                    <select class="custom-select custom-input"
-                            ng-model="platformSelected"
-                            required
-                            ng-options="option as option.name for option in platformOptions track by option.id">
-                    </select>
-                    <br>
-                </div>
+          <div class="form-group">
+            <label for="platform">Plataforma:</label>
+            <br>
+            <select class="custom-select custom-input"
+                    ng-model="platformSelected"
+                    required
+                    ng-options="option as option.name for option in platformOptions track by option.id">
+            </select>
+            <br>
+          </div>
 
-                <div class="form-group">
-                    <label for="platform">Modo de juego:</label>
-                    <br>
-                    <select class="custom-select custom-input"
-                            ng-model="gameModeSelected"
-                            ng-options="option as option.name for option in gameModeOptions track by option.id"
-                            required>
-                    </select>
-                </div>
+          <div class="form-group">
+            <label for="platform">Modo de juego:</label>
+            <br>
+            <select class="custom-select custom-input"
+                    ng-model="gameModeSelected"
+                    ng-options="option as option.name for option in gameModeOptions track by option.id"
+                    required>
+            </select>
+          </div>
 
-                <div class="form-group">
-                    <label for="usersRequire">Usuarios requeridos:</label>
-                    <br>
-                    <select class="custom-select custom-input" id="usersRequire" ng-model="form.userRequire"
-                        ng-init="form.userRequire='1'">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                    <br>
-                </div>
+          <div class="form-group">
+            <label for="usersRequire">Usuarios requeridos:</label>
+            <br>
+            <select class="custom-select custom-input" id="usersRequire" ng-model="form.userRequire"
+                    ng-init="form.userRequire='1'">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+            <br>
+          </div>
 
-                <div class="form-group ">
-                    <textarea id="description" class="custom-input w-100" name="description" rows="4" maxlength="280" class="col-12"
-                        ng-model="form.description" placeholder="Descripción del anuncio"></textarea>
-                    <br>
-                </div>
+          <div class="form-group ">
+                    <textarea id="description" class="custom-input w-100" name="description" rows="4" maxlength="280"
+                              ng-model="form.description" placeholder="Descripción del anuncio"></textarea>
+            <br>
+          </div>
 
-                <button class="btn btn-block btn-success" id="newPost">
-                    <i class="fas fa-plus"></i> Crear anuncio
-                </button>
-            </form>
-        </div>
+          <button class="btn btn-block btn-success" id="newPost">
+            <i class="fas fa-plus"></i> Crear anuncio
+          </button>
+        </form>
+      </div>
     </div>
+  </div>
 </div>

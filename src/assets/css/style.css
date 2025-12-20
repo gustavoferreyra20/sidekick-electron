@@ -172,6 +172,10 @@ textarea {
 	flex: 1;
 	overflow-y: auto;
 	overflow-x: hidden;
+
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .games-grid::-webkit-scrollbar {

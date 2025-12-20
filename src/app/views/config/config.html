@@ -1,13 +1,17 @@
-<div class="row justify-content-center content">
+<div class="content">
+  <h1 class="d-flex justify-content-center">Configuración</h1>
+  <hr class="hr-main">
+
+  <div class="row justify-content-center">
     <div class="card p-3 new-post-card">
-        <div class="card-body" id="configDiv">
-            <h1 class="text-center pb-4">Configuración</h1>
-            <button class="btn btn-block btn-success" ui-sref="changePassword">
-                Cambiar contraseña
-            </button>
-            <button class="btn btn-block btn-danger" ng-click="btnLogout()">
-                <i class="fas fa-sign-out-alt"></i> Cerrar sesión
-            </button>
-        </div>
+      <div class="card-body" id="configDiv">
+        <button class="btn btn-block btn-success" ui-sref="changePassword">
+          Cambiar contraseña
+        </button>
+        <button class="btn btn-block btn-danger" ng-click="btnLogout()">
+          <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+        </button>
+      </div>
     </div>
+  </div>
 </div>

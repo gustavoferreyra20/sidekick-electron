@@ -46,6 +46,16 @@ app.config(async function ($stateProvider, $urlRouterProvider) {
             templateUrl: "app/views/games/games.html",
             controller: "gameCtrl"
         })
+        .state("posts", {
+            url: "/posts",
+            templateUrl: "app/views/posts/posts.html",
+            controller: "postListCtrl"
+        })
+      .state("editPost", {
+          url: "/posts/edit/:id_post",
+          templateUrl: "app/views/posts/newPost.html",
+          controller: "newPCtrl"
+      })
         .state("newPost", {
             url: '/newPost',
             templateUrl: "app/views/posts/newPost.html",

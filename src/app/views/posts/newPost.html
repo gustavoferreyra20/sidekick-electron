@@ -5,10 +5,10 @@
   <div class="row justify-content-center">
     <div class="card new-post-card">
       <div class="card-body " id="newPostDiv">
-        <form id="newPostForm" method="POST" novalidate
-              ng-submit="createPost(form, gameSelected, platformSelected, gameModeSelected)">
+        <form id="newPostForm" method="POST"
+              ng-submit="submit(form, gameSelected, platformSelected, gameModeSelected)">
 
-          <div class="form-group">
+        <div class="form-group">
             <label for="title">Título:</label>
             <input type="text" class="form-control custom-input" name="title" id="title" placeholder="Ingrese el título"
                    value="" maxlength="45" required ng-model="form.title">
@@ -17,12 +17,22 @@
           <div class="form-group">
             <label for="games">Juegos:</label>
             <br>
-            <searchable-dropdown
-                options="gameOptions"
-                selected-option="gameSelected"
-                on-select="onGameSelect(selectedOption)"
-                placeholder="Selecciona un juego">
-            </searchable-dropdown>
+
+            <div ng-if="!isEdit">
+              <searchable-dropdown
+                  options="gameOptions"
+                  selected-option="gameSelected"
+                  on-select="onGameSelect(selectedOption)"
+                  placeholder="Selecciona un juego">
+              </searchable-dropdown>
+            </div>
+
+            <div ng-if="isEdit">
+              <input type="text"
+                     class="form-control custom-input"
+                     ng-model="form.gameName"
+                     disabled>
+            </div>
           </div>
 
           <div class="form-group">
@@ -65,7 +75,14 @@
           </div>
 
           <button class="btn btn-block btn-success" id="newPost">
-            <i class="fas fa-plus"></i> Crear anuncio
+            <i class="fas" ng-class="isEdit ? 'fa-save' : 'fa-plus'"></i>
+            {{ isEdit ? 'Guardar cambios' : 'Crear anuncio' }}
+          </button>
+
+
+          <button class="btn btn-block btn-danger mt-2"
+                  ui-sref="posts">
+            <i class="fas fa-arrow-left"></i> Cancelar
           </button>
         </form>
       </div>

@@ -14,7 +14,7 @@ angular.module('myAppNavbarService', [])
 				title: 'games',
 				img: 'plays'
 			},{
-				title: 'newPost',
+				title: 'posts',
 				img: 'plus'
 			},{
 				title: 'applications',

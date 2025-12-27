@@ -54,19 +54,21 @@ angular.module('myAppGameService', ['myApp'])
 
         })
       },
-      getPlatforms: async function (id_game) {
+      getById: async function (id_game) {
         return new Promise((resolve) => {
-          const url = API_BASE_URL + '/games/' + id_game + '/platforms';
+          const url = API_BASE_URL + `/games/igdb?limit=1&offset=0&id=${id_game}`;
 
           axios.get(url, { headers: { Authorization: AuthStr } })
             .then((res) => {
-              resolve(res.data)
+              const games = res.data.games || [];
+              resolve(games[0] || null);
             })
             .catch(function (error) {
               console.log(error);
+              resolve(null);
             });
-        })
-      }
+        });
+      },
     };
   }]);
 

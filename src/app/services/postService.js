@@ -19,6 +19,16 @@ angular.module('myAppPostService', ['myApp'])
         })
 
       },
+      getByUser: async function (id_user) {
+        return new Promise((resolve) => {
+          const url = API_BASE_URL + '/posts/user/' + id_user;
+
+          axios.get(url, { headers: { Authorization: AuthStr } })
+            .then((res) => {
+              resolve(res.data);
+            });
+        });
+      },
       save: async function(post) {
         const url = API_BASE_URL + '/posts';
         let data = {
@@ -32,6 +42,24 @@ angular.module('myAppPostService', ['myApp'])
           description: (post.description != null) ? post.description : ''
         };
         return axios.post(url, data, { headers: { Authorization: AuthStr } });
+      },
+      update: async function (id_post, post) {
+        const url = API_BASE_URL + '/posts/' + id_post;
+
+        const data = {
+          title: post.title,
+          description: (post.description != null) ? post.description : '',
+          id_platform: post.platform.id,
+          id_mode: post.mode.id,
+          requiredusers: post.userRequire
+        };
+
+        return axios.put(url, data, { headers: { Authorization: AuthStr } });
+      },
+      getSingle: async function (id_post) {
+        const url = API_BASE_URL + '/posts/' + id_post;
+        const res = await axios.get(url, { headers: { Authorization: AuthStr } });
+        return res.data;
       },
       remove: async function (id_post) {
       const url = API_BASE_URL + '/posts/' + id_post;

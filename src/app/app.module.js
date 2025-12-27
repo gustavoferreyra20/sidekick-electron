@@ -30,6 +30,7 @@ angular.module("myApp", [
     'myAppAuthService',
     'myAppPaymentService',
     'searchableDropdownDirective',
-    'myAppChangePasswordCtrl'
+    'myAppChangePasswordCtrl',
+    'myAppPostListCtrl'
 ]);
 

@@ -56,7 +56,7 @@ angular.module('myAppGameService', ['myApp'])
       },
       getById: async function (id_game) {
         return new Promise((resolve) => {
-          const url = API_BASE_URL + `/games/igdb?limit=1&offset=0&id=${id_game}`;
+          const url = API_BASE_URL + `/games/igdb/search?id=${id_game}`;
 
           axios.get(url, { headers: { Authorization: AuthStr } })
             .then((res) => {

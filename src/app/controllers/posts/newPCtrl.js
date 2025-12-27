@@ -35,6 +35,7 @@ angular.module('myAppNewPCtrl', ['searchableDropdownDirective'])
       };
 
       $scope.onGameSelect = function(selectedGame) {
+        $scope.gameSelected = selectedGame;
         $scope.setPlatforms(selectedGame);
         $scope.setGameModes(selectedGame);
       };

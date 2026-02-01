@@ -3,18 +3,17 @@ angular.module('myAppGameService', ['myApp'])
     const AuthStr = 'Bearer '.concat(userSession.token);
 
     return {
-      getAll: async function (limit = 10, offset = 0, sortBy = 'updated_at', sortOrder = 'desc') {
+      getAll: function (limit = 10, offset = 0, sortBy = 'updated_at', sortOrder = 'desc') {
         return new Promise((resolve) => {
           const url = API_BASE_URL + `/games/igdb?limit=${limit}&offset=${offset}&sortBy=${sortBy}&sortOrder=${sortOrder}`;
 
-          axios.get(url, { headers: { Authorization: AuthStr } })
-            .then((res) => {
-              resolve(res.data.games)
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-        })
+          axios.get(url, {
+            headers: { Authorization: AuthStr },
+            timeout: 3000
+          })
+            .then(res => resolve(res.data.games || []))
+            .catch(() => resolve([]));
+        });
       },
       search: async function (limit = 10, offset = 0, sortBy = 'updated_at', sortOrder = 'desc', name = '') {
         return new Promise((resolve) => {

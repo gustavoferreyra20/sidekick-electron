@@ -13,10 +13,12 @@ angular.module('myAppApplicationCtrl', []).controller('applicationCtrl', ['$scop
       .then(showReceivedApps);
   };
 
-  $scope.contact = function (id_user) {
-    users.getContactInf(id_user).then(function (contactInf) {
-      popups.contactInf(contactInf);
-    })
+  $scope.contact = function(id_post) {
+    if (window.SidekickChat) {
+      window.SidekickChat.open(id_post);
+    } else {
+      console.error("Chat is not loaded");
+    }
   };
 
 

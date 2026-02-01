@@ -13,6 +13,7 @@
   "author": "Gustavo Ferreyra",
   "license": "ISC",
   "dependencies": {
+    "ably": "^2.17.0",
     "axios": "^1.1.3",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.1",

@@ -31,6 +31,7 @@ angular.module("myApp", [
     'myAppPaymentService',
     'searchableDropdownDirective',
     'myAppChangePasswordCtrl',
-    'myAppPostListCtrl'
+    'myAppPostListCtrl',
+    'myAppChatService'
 ]);
 

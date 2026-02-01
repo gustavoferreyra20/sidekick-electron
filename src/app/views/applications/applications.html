@@ -50,9 +50,10 @@
 
       <div class="row">
         <div class="col-sm-12 col-md-12 text-center mb-2" ng-if="app.applications.status == 'accepted'"
-          ng-click="contact(app.id_user)">
-
-          <a href="" class="btn btn-info w-100"><i class="fas fa-comment-alt"></i>Contactar</a>
+             ng-click="contact(app.id_post)">
+          <button type="button" class="btn btn-info col-12">
+            <i class="fas fa-comment-alt"></i> Contactar
+          </button>
         </div>
 
         <div class="col-sm-12 col-md-12 text-center mb-2">
@@ -115,9 +116,11 @@
           </div>
 
           <div class="col-auto col-md-12 col-sm-12" ng-if="user.applications.status == 'accepted'"
-            ng-click="contact(user.id_user)">
+            ng-click="contact(post.id_post)">
             <br>
-            <a href="" class="btn btn-info col-12"><i class="fas fa-comment-alt"></i>Contactar</a>
+            <button type="button" class="btn btn-info col-12">
+              <i class="fas fa-comment-alt"></i> Contactar
+            </button>
           </div>
 
           <div class="col-auto col-md-6 col-sm-6" ng-if="user.applications.status == 'accepted'"
@@ -135,8 +138,6 @@
         </div>
       </div>
 
-      <button type="submit" class="col-sm-12 col-lg-12 btn btn-danger" ng-click="btnDeletePost(post.id_post)">
-        <i class="fas fa-trash"></i>Eliminar post</button>
     </div>
 
     <p ng-show="!posts[0] && !applications[0]">No se encontraron solicitudes</p>

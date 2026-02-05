@@ -583,6 +583,9 @@ textarea {
 	color: rgba(255,255,255,0.90);
 	line-height: 1.25;
 	font-size: 13px;
+	overflow-wrap: anywhere;
+	white-space: normal;
+	word-break: break-word;
 }
 
 .sk-chat__meta {
@@ -642,4 +645,11 @@ textarea {
 
 .sk-chat__send:hover {
 	background: rgba(52,211,153,0.26);
+}
+
+.sk-chat__time{
+	margin-left: 6px;
+	font-size: 10px;
+	color: rgba(255,255,255,0.45);
+	font-weight: 400;
 }

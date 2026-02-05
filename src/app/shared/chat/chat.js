@@ -143,10 +143,25 @@ if (!(window.SidekickChat && window.SidekickChat.__initialized)) {
     el.className =
       "sk-chat__msg " + (isMe ? "sk-chat__msg--me" : "sk-chat__msg--other");
 
+    const date = m.created_at
+      ? new Date(m.created_at)
+      : new Date();
+
+    const time = date.toLocaleTimeString("es-AR", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+
     el.innerHTML = `
-      <div class="sk-chat__meta">${escapeHtml(safeName)}</div>
-      <div>${escapeHtml(safeText)}</div>
-    `;
+  <div class="sk-chat__meta">
+    ${escapeHtml(safeName)}
+    <span class="sk-chat__time">${time}</span>
+  </div>
+  <div class="sk-chat__text">
+    ${escapeHtml(safeText)}
+  </div>
+`;
 
     wrap.appendChild(el);
     wrap.scrollTop = wrap.scrollHeight;

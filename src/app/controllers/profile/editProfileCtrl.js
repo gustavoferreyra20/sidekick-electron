@@ -24,6 +24,12 @@ angular.module('myAppEditProfileCtrl', [])
       $scope.$applyAsync();
     });
 
+    // Fetch current AI review settings
+    users.getAIReview(id).then(aiReviewData => {
+      $scope.showAIReview = aiReviewData ? aiReviewData.show : true; // default to true if no record exists
+      $scope.$applyAsync();
+    });
+
 
     // Preview de imagen
     $scope.previewFile = function (file) {
@@ -73,7 +79,8 @@ angular.module('myAppEditProfileCtrl', [])
 
         await users.update(id, {
           name: $scope.user.name,
-          description: $scope.user.description
+          description: $scope.user.description,
+          show: $scope.showAIReview
         });
 
         // 2) Si borró la foto y no subió una nueva

@@ -53,6 +53,18 @@
                       placeholder="Descripción del perfil"></textarea>
           </div>
 
+          <div class="form-group">
+            <div class="custom-control custom-switch">
+              <input type="checkbox"
+                     class="custom-control-input"
+                     id="showAIReview"
+                     ng-model="showAIReview">
+              <label class="custom-control-label" for="showAIReview" style="cursor: pointer;">
+                Mostrar reseña generada por IA en mi perfil
+              </label>
+            </div>
+          </div>
+
           <button class="btn btn-block btn-success" type="submit">
             <i class="fas fa-save"></i> Guardar cambios
           </button>

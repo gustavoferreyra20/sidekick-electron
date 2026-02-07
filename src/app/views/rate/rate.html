@@ -34,15 +34,15 @@
           <div class="d-flex rewards">
             <div class="p-2 text-center" ng-repeat="reward in rewards">
               <img crossorigin="anonymous" data-ng-src="{{API_BASE_URL}}/images/{{reward.img}}"
-                   class="img-fluid" alt={{reward.name}}>
+                   class="img-fluid" alt="{{reward.name}}">
               <p>{{reward.description}}</p>
               <button type="button" class="btn btn-success"
                       ng-click="btnSelectReward(form, reward)"><i class="fas fa-check"></i>Seleccionar
               </button>
             </div>
             <div class="p-2 text-center" ng-show="form.reward">
-              <img crossorigin="anonymous" data-ng-src={{API_BASE_URL}}/images/{{form.reward.img}}
-                   class="img-fluid" alt={{form.reward.name}}>
+              <img crossorigin="anonymous" data-ng-src="{{API_BASE_URL}}/images/{{form.reward.img}}"
+                   class="img-fluid" alt="{{form.reward.name}}">
               <p>{{form.reward.description}}</p>
               <button type="button" class="btn btn-danger" ng-click="btnDeleteReward(form)"><i class="fas fa-trash"></i>Eliminar
               </button>

@@ -1,5 +1,6 @@
-angular.module('myAppRateCtrl', []).controller('rateCtrl', ['$scope', '$stateParams', '$state', 'posts', 'reviews', 'rewards', 'popups', 'users', function ($scope, $stateParams, $state, posts, reviews, rewards, popups, users) {
+angular.module('myAppRateCtrl', []).controller('rateCtrl', ['$scope', '$stateParams', '$state', 'posts', 'reviews', 'rewards', 'popups', 'users', 'API_BASE_URL', function ($scope, $stateParams, $state, posts, reviews, rewards, popups, users, API_BASE_URL) {
 
+  $scope.API_BASE_URL = API_BASE_URL;
   $scope.SIDEKICK_API = process.env.SIDEKICK_API;
 
   $scope.newReview = function (review) {

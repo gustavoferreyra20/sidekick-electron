@@ -1,4 +1,4 @@
-angular.module('myAppRateCtrl', []).controller('rateCtrl', ['$scope', '$stateParams', 'posts', 'reviews', 'rewards', 'popups', 'users', function ($scope, $stateParams, posts, reviews, rewards, popups, users) {
+angular.module('myAppRateCtrl', []).controller('rateCtrl', ['$scope', '$stateParams', '$state', 'posts', 'reviews', 'rewards', 'popups', 'users', function ($scope, $stateParams, $state, posts, reviews, rewards, popups, users) {
 
   $scope.SIDEKICK_API = process.env.SIDEKICK_API;
 
@@ -20,7 +20,9 @@ angular.module('myAppRateCtrl', []).controller('rateCtrl', ['$scope', '$statePar
 
       })
       .then(popups.alert("Calificacion enviada"))
-      .then(window.location.href = "#/applications");
+      .then(function() {
+        $state.go('applications', {}, { reload: true });
+      });
   };
 
   $scope.btnAddReward = function (form) {

@@ -7,15 +7,13 @@ angular.module('myAppProfileCtrl', ['myApp']).controller('profileCtrl', ['$scope
 
   users.get(id_profile).then(
     function (user) {
-
       users.getStats(id_profile).then(
-        function (response) {
-
+        function (stats) {
           var profile = {
             name: user.name,
             description: user.description,
-            ability: (response[0].abilityscore === undefined) ? 0 : Math.round(response[0].abilityscore),
-            karma: (response[0].karmascore === undefined) ? 0 : Math.round(response[0].karmascore),
+            ability: (stats[0].abilityscore === undefined) ? 0 : Math.round(stats[0].abilityscore),
+            karma: (stats[0].karmascore === undefined) ? 0 : Math.round(stats[0].karmascore),
             isCurrentUser: id_profile == userSession.id,
             img: user.img
           };
@@ -60,6 +58,17 @@ angular.module('myAppProfileCtrl', ['myApp']).controller('profileCtrl', ['$scope
 
       // Assign the total rewards to $scope
       $scope.totalRewards = totalRewards;
+      $scope.$applyAsync();
+    }
+  )
+
+  // Fetch AI review for the profile
+  users.getAIReview(id_profile).then(
+    function (aiReviewData) {
+      // Check if AI review exists and should be shown
+      if (aiReviewData && aiReviewData.show) {
+        $scope.aiReview = aiReviewData.ai_review;
+      }
       $scope.$applyAsync();
     }
   )

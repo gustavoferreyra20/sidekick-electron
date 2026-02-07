@@ -155,6 +155,24 @@ angular.module('myAppUserService', ['myApp'])
               console.log(error);
             });
         })
+      },
+      getAIReview: async function (id_user) {
+        return new Promise((resolve) => {
+          var url = API_BASE_URL + '/users/' + id_user + '/ai-review';
+          const AuthStr = 'Bearer '.concat(userSession.token);
+
+          axios.get(url, { headers: { Authorization: AuthStr } })
+            .then((res) => {
+              resolve(res.data);
+            })
+            .catch(function (error) {
+              // 404 is expected when user has no AI review record
+              if (error.response && error.response.status !== 404) {
+                console.log(error);
+              }
+              resolve(null);
+            });
+        })
       }
     }
   }])

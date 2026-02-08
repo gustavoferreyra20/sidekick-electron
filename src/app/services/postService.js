@@ -1,5 +1,5 @@
 angular.module('myAppPostService', ['myApp'])
-  .factory('posts', ['API_BASE_URL', 'popups', function (API_BASE_URL, popups) {
+  .factory('posts', ['API_BASE_URL', function (API_BASE_URL) {
     const AuthStr = 'Bearer '.concat(userSession.token);
 
     return {
@@ -62,34 +62,69 @@ angular.module('myAppPostService', ['myApp'])
         return res.data;
       },
       remove: async function (id_post) {
-      const url = API_BASE_URL + '/posts/' + id_post;
-        await axios.delete(url, { headers: { Authorization: AuthStr } })
-          .catch(function (error) {
-            console.log(error);
+        const url = API_BASE_URL + '/posts/' + id_post;
+        try {
+          const res = await axios.delete(url, {
+            headers: { Authorization: AuthStr }
           });
+          return res.data;
+        } catch (error) {
+          console.log(error);
+          throw error;
+        }
       },
       removeApplication: async function (id_post, id_application) {
-      const url = API_BASE_URL + '/posts/' + id_post + '/applications/' + id_application;
-        await axios.delete(url, { headers: { Authorization: AuthStr } })
-          .catch(function (error) {
-            console.log(error);
+        const url =
+          API_BASE_URL +
+          '/posts/' + id_post +
+          '/applications/' + id_application;
+
+        try {
+          const res = await axios.delete(url, {
+            headers: { Authorization: AuthStr }
           });
+          return res.data;
+        } catch (error) {
+          console.log(error);
+          throw error;
+        }
       },
       addApplication: async function (id_post) {
-      const url = API_BASE_URL + '/posts/' + id_post + '/applications';
+        const url =
+          API_BASE_URL +
+          '/posts/' + id_post +
+          '/applications';
 
-        await axios.post(url, null, { headers: { Authorization: AuthStr } })
-          .catch(function (error) {
-            console.log(error);
-          });
+        try {
+          const res = await axios.post(
+            url,
+            null,
+            { headers: { Authorization: AuthStr } }
+          );
+          return res.data;
+        } catch (error) {
+          console.log(error);
+          throw error;
+        }
       },
       updateApplication: async function (id_post, id_application, status) {
-      const url = API_BASE_URL + '/posts/' + id_post + '/applications/' + id_application + '?status=' + status;
+        const url =
+          API_BASE_URL +
+          '/posts/' + id_post +
+          '/applications/' + id_application +
+          '?status=' + status;
 
-        await axios.put(url, null, { headers: { Authorization: AuthStr } })
-          .catch(function (error) {
-            console.log(error);
-          });
+        try {
+          const res = await axios.put(
+            url,
+            null,
+            { headers: { Authorization: AuthStr } }
+          );
+          return res.data;
+        } catch (error) {
+          console.log(error);
+          throw error;
+        }
       }
     };
   }]);

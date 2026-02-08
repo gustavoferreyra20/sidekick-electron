@@ -39,13 +39,11 @@
 
       <div class="line"></div>
 
-      <br>
-
-      <div
-        ng-if="app.applications.status == 'rejected' || app.applications.status == 'accepted'  || app.applications.status == 'complete'">
-        <p ng-show="app.applications.status == 'rejected'">Solicitud rechazada</p>
-        <p ng-show="app.applications.status == 'accepted'">Solicitud aceptada</p>
-        <p ng-show="app.applications.status == 'complete'">Partida finalizada</p>
+      <div class="application-status mt-2">
+        <p ng-if="app.applications.status == 'pending'">Solicitud pendiente de aprobación</p>
+        <p ng-if="app.applications.status == 'rejected'">Solicitud rechazada</p>
+        <p ng-if="app.applications.status == 'accepted'">Solicitud aceptada</p>
+        <p ng-if="app.applications.status == 'complete'">Partida finalizada</p>
       </div>
 
       <div class="row">
@@ -56,9 +54,13 @@
           </button>
         </div>
 
-        <div class="col-sm-12 col-md-12 text-center mb-2">
-          <button type="submit" class="btn btn-danger btn-block"
-            ng-click="btnCancelApplication(app.id_post, app.applications.id_application)"><i class="fas fa-times"></i>Cancelar</button>
+        <div class="col-sm-12 col-md-12 text-center mb-2"
+             ng-if="app.applications.status === 'pending' || app.applications.status === 'accepted'">
+          <button type="button"
+                  class="btn btn-danger btn-block"
+                  ng-click="btnCancelApplication(app.id_post, app.applications.id_application)">
+            <i class="fas fa-times"></i> Cancelar
+          </button>
         </div>
       </div>
 
@@ -80,6 +82,8 @@
 
       <div class="line"></div>
 
+      <div class="post-status mt-2"><p>{{ getPostStatusLabel(post) }}</p></div>
+
       <div class="container-fluid mx-auto p-3 post" ng-repeat="user in post.users"
         ng-show="user.applications.status !== 'rejected'">
 
@@ -93,6 +97,18 @@
           <div class="col text-left ml-3">
 
             <h2><a ui-sref="profile({id_user: user.id_user})">{{user.name}}</a></h2>
+
+            <div class="user-status mt-1">
+              <p class="text-muted mb-0"
+                 ng-if="user.applications.status == 'accepted'">
+                Usuario aceptado
+              </p>
+
+              <p class="text-muted mb-0"
+                 ng-if="user.applications.status == 'complete'">
+                Usuario calificado
+              </p>
+            </div>
 
           </div>
 
@@ -115,14 +131,6 @@
               ng-click="changeStatus(post.id_post, user.applications.id_application, 'rejected')"><i class="fas fa-times"></i>Rechazar</button>
           </div>
 
-          <div class="col-auto col-md-12 col-sm-12" ng-if="user.applications.status == 'accepted'"
-            ng-click="contact(post.id_post)">
-            <br>
-            <button type="button" class="btn btn-info col-12">
-              <i class="fas fa-comment-alt"></i> Contactar
-            </button>
-          </div>
-
           <div class="col-auto col-md-6 col-sm-6" ng-if="user.applications.status == 'accepted'"
             ui-sref="rate({id_user: user.id_user, id_post: post.id_post, id_application: user.applications.id_application})">
             <br>
@@ -135,6 +143,14 @@
             <a href="" class="btn btn-danger col-12"><i class="fas fa-trash"></i>Eliminar</a>
           </div>
 
+        </div>
+      </div>
+
+      <div class="row" ng-if="(post.users | filter:{ applications:{ status:'accepted' } }).length > 0">
+        <div class="col-auto col-md-12 col-sm-12">
+          <button type="button" class="btn btn-info col-12" ng-click="contact(post.id_post)">
+            <i class="fas fa-comment-alt"></i> Contactar
+          </button>
         </div>
       </div>
 

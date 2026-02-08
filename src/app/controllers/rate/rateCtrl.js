@@ -5,24 +5,28 @@ angular.module('myAppRateCtrl', []).controller('rateCtrl', ['$scope', '$statePar
 
   $scope.newReview = function (review) {
     review.id_post = $stateParams.id_post;
-    id_user = $stateParams.id_user;
-    id_application = $stateParams.id_application;
 
+    var id_user = $stateParams.id_user;
+    var id_application = $stateParams.id_application;
 
-    if (review.reward != undefined) review.reward = review.reward.id_reward;
+    var rewardId = review.reward ? review.reward.id_reward : null;
+    if (rewardId) review.reward = rewardId;
 
     users.addReview(id_user, review)
-      .then(posts.updateApplication(review.id_post, id_application, 'complete'))
       .then(function (res) {
-
-        if (review.reward != undefined) {
-          reviews.addReward(res.reviewId, review.reward)
-        }
-
+        return posts.updateApplication(review.id_post, id_application, 'complete')
+          .then(function () { return res; });
       })
-      .then(popups.alert("Calificacion enviada"))
-      .then(function() {
-        $state.go('applications', {}, { reload: true });
+      .then(function (res) {
+        return rewardId ? reviews.addReward(res.reviewId, rewardId) : null;
+      })
+      .then(function () {
+        popups.alert("Calificacion enviada");
+        return $state.go('applications', {}, { reload: true });
+      })
+      .catch(function (err) {
+        console.error(err);
+        popups.alert("Error enviando calificación");
       });
   };
 

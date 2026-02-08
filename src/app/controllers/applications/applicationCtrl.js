@@ -38,6 +38,22 @@ angular.module('myAppApplicationCtrl', []).controller('applicationCtrl', ['$scop
     })
   }
 
+  $scope.getPostStatusLabel = function(post) {
+    const users = post.users || [];
+
+    const accepted = users.filter(u => u.applications?.status === 'accepted').length;
+    const complete = users.filter(u => u.applications?.status === 'complete').length;
+    const pending  = users.filter(u => u.applications?.status === 'pending').length;
+
+    const isFull = post.actualusers >= post.requiredusers;
+
+    if (isFull && complete > 0 && accepted === 0) return "Partida finalizada";
+    if (isFull && accepted > 0) return "Post completo";
+    if (!isFull && (accepted > 0 || complete > 0)) return "Partida en curso";
+    if (accepted === 0 && complete === 0 && pending > 0) return "Solicitudes pendientes";
+    return "Sin solicitudes activas";
+  };
+
   $scope.btnCancelApplication = function (id_post, id_application) {
     popups.confirm("Seguro desea eliminar la solicitud?", function () { (posts.removeApplication(id_post, id_application).then(showSentApps)) })
   }

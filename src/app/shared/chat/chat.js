@@ -1,5 +1,5 @@
 let chatDomBound = false;
-let myName = null;
+let myId = null;
 
 function escapeHtml(str) {
   return String(str ?? "")
@@ -133,11 +133,12 @@ if (!(window.SidekickChat && window.SidekickChat.__initialized)) {
 
     const safeName = String(m.user_name ?? "User");
     const safeText = String(m.message ?? "");
+    const msgUserId = m.id_user ?? null;
 
     const isMe =
-      myName &&
-      safeName &&
-      safeName.toLowerCase() === String(myName).toLowerCase();
+      myId != null &&
+      msgUserId != null &&
+      String(msgUserId) === String(myId);
 
     const el = document.createElement("div");
     el.className =
@@ -180,17 +181,12 @@ if (!(window.SidekickChat && window.SidekickChat.__initialized)) {
     }
   }
 
-  function ensureMyNameFromSession() {
+  function ensureMeFromSession() {
     const session = getSessionSafe();
     if (!session) return;
 
-    let nameFromToken = null;
-    if (session.token) {
-      const payload = decodeJwt(session.token);
-      nameFromToken = payload?.name || payload?.user_name || null;
-    }
-
-    myName = session.name ?? nameFromToken ?? myName ?? "User";
+    const payload = session.token ? decodeJwt(session.token) : null;
+    myId = payload?.id_user ?? session.id_user ?? myId ?? null;
   }
 
   async function fetchHistory(postId) {
@@ -305,7 +301,7 @@ if (!(window.SidekickChat && window.SidekickChat.__initialized)) {
 
     open: async (postId) => {
       ensureChatDOM();
-      ensureMyNameFromSession();
+      ensureMeFromSession();
 
       const nextPostId = Number(postId);
 
@@ -345,7 +341,7 @@ if (!(window.SidekickChat && window.SidekickChat.__initialized)) {
       if (!msg) return;
       if (!currentPostId) return;
 
-      ensureMyNameFromSession();
+      ensureMeFromSession();
 
       if (!ably || !channel) {
         setStatus("Conectando...");

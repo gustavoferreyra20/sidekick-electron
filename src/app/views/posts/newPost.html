@@ -1,5 +1,7 @@
 <div class="content">
-  <h1 class="d-flex justify-content-center">Crear anuncio</h1>
+  <h1 class="d-flex justify-content-center">
+    {{ isEdit ? 'Editar anuncio' : 'Crear anuncio' }}
+  </h1>
   <hr class="hr-main">
 
   <div class="row justify-content-center">
@@ -59,8 +61,11 @@
           <div class="form-group">
             <label for="usersRequire">Usuarios requeridos:</label>
             <br>
-            <select class="custom-select custom-input" id="usersRequire" ng-model="form.userRequire"
-                    ng-init="form.userRequire='1'">
+            <select class="custom-select custom-input"
+                    id="usersRequire"
+                    ng-model="form.userRequire"
+                    ng-init="form.userRequire='1'"
+                    ng-disabled="isEdit">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
